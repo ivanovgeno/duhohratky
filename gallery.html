@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie | Duhohratky</title>
+    <meta name="description" content="Galerie fotografií z Duhohratek - sensory play a Montessori aktivity pro děti.">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://duhohratky.cz/gallery.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF6B9D">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://duhohratky.cz/gallery.html">
+    <meta property="og:title" content="Galerie | Duhohrátky">
+    <meta property="og:description"
+        content="Galerie fotografií z Duhohratek - sensory play a Montessori aktivity pro děti.">
+    <meta property="og:image" content="https://duhohratky.cz/logo.png">
+    <meta property="og:locale" content="cs_CZ">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Galerie | Duhohrátky">
+    <meta name="twitter:description" content="Galerie fotografií z Duhohratek - sensory play a Montessori aktivity.">
+    <meta name="twitter:image" content="https://duhohratky.cz/logo.png">
+
+    <!-- Schema.org BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Domů",
+                "item": "https://duhohratky.cz/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Galerie",
+                "item": "https://duhohratky.cz/gallery.html"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Font Preloads -->
+    <link rel="preload" href="BadgerScript-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="Badger-Regular.ttf" as="font" type="font/ttf" crossorigin>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Critical CSS -->
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #FFF8F6 0%, #FFF5F0 50%, #FAF6F4 100%);
+            color: #4A3F3A;
+            line-height: 1.6;
+            overflow-x: hidden
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px)
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+    </style>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Floating Bubbles Background -->
+    <div class="bubbles-container" id="bubbles"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🌈</span>
+                <span class="logo-text">Duhohratky</span>
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Domů</a></li>
+                <li><a href="index.html#about" class="nav-link">O nás</a></li>
+                <li><a href="index.html#activities" class="nav-link">Aktivity</a></li>
+                <li><a href="gallery.html" class="nav-link active">Galerie</a></li>
+                <li><a href="tips.html" class="nav-link">Návody & Tipy</a></li>
+                <li><a href="index.html#reservation" class="nav-link nav-cta">Rezervace</a></li>
+                <li><a href="index.html#contact" class="nav-link">Kontakt</a></li>
+            </ul>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <span class="section-badge">📸 Galerie</span>
+            <h1 class="page-title">Nahlédněte do <span class="rainbow-text">našeho světa</span></h1>
+            <p class="page-description">Fotografie z našich aktivit, kreativních dílen a šťastných dětí</p>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="gallery-page">
+        <div class="container">
+            <!-- Filter Tabs -->
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">Vše</button>
+                <button class="filter-btn" data-filter="sensory">Sensory Play</button>
+                <button class="filter-btn" data-filter="creative">Kreativní tvoření</button>
+                <button class="filter-btn" data-filter="montessori">Montessori</button>
+                <button class="filter-btn" data-filter="party">Oslavy</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid-large">
+                <!-- Row 1 -->
+                <div class="gallery-item-large" data-category="sensory">
+                    <div class="gallery-placeholder" style="background: linear-gradient(135deg, #FFB6C1, #FF69B4);">
+                        <span>🫧</span>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Sensory Boxy</h3>
+                        <p>Objevování textur a materiálů</p>
+                    </div>
+                </div>
+                <div class="gallery-item-large" data-category="creative">
+                    <div class="gallery-placeholder" style="background: linear-gradient(135deg, #FFA07A, #FF6347);">
+                        <span>🎨</span>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Malování</h3>
+                        <p>Kreativní výtvarné techniky</p>
+                    </div>
+                </div>
+                <div class="gallery-item-large" data-category="montessori">
+                    <div class="gallery-placeholder" style="background: linear-gradient(135deg, #98D8C8, #66CDAA);">
+                        <span>📚</span>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Montessori pomůcky</h3>
+                        <p>Vzdělávání hrou</p>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="gallery-item-large" data-category="sensory">
+                    <div class="gallery-placeholder" style="background: linear-gradient(135deg, #87CEEB, #4682B4);">
+                        <span>💧</span>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Vodní hrátky</h3>
+                        <p>Experimenty s vodou</p>
+                    </div>
+                </div>
+                <div class="gallery-item-large" data-category="sensory">
+                    <div class="gallery-placeholder" style="background: linear-gradient(135deg, #90EE90, #32CD32);">
+                        <span>🌱</span>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Přírodniny</h3>
+                        <p>Práce s přírodními materiály</p>
+                    </div>
+                </div>
+                <div class="gallery-item-large" data-category="party">
+                    <div class="gallery-placeholder" style="background: linear-gradient(135deg, #DDA0DD, #BA55D3);">
+                        <span>🎂</span>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Narozeninové oslavy</h3>
+                        <p>Nezapomenutelné momenty</p>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="gallery-item-large" data-category="creative">
+                    <div class="gallery-placeholder" style="background: linear-gradient(135deg, #FFE066, #FFD700);">
+                        <span>✂️</span>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Koláže</h3>
+                        <p>Stříhání a lepení</p>
+                    </div>
+                </div>
+                <div class="gallery-item-large" data-category="montessori">
+                    <div class="gallery-placeholder" style="background: linear-gradient(135deg, #F0E68C, #DAA520);">
+                        <span>🧩</span>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Logické hry</h3>
+                        <p>Rozvoj myšlení</p>
+                    </div>
+                </div>
+                <div class="gallery-item-large" data-category="sensory">
+                    <div class="gallery-placeholder" style="background: linear-gradient(135deg, #E6E6FA, #9370DB);">
+                        <span>🪄</span>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Kinetický písek</h3>
+                        <p>Magická textura</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-card glass-card">
+                <h2>Chcete zažít tuto radost?</h2>
+                <p>Zarezervujte si termín a přijďte se pobavit s námi!</p>
+                <a href="index.html#reservation" class="btn btn-primary">
+                    <span>📅</span> Rezervovat termín
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">🌈</span>
+                        <span class="logo-text">Duhohratky</span>
+                    </a>
+                    <p>Sensory Play & Montessori pro šťastné děti</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Navigace</h4>
+                        <a href="index.html">Domů</a>
+                        <a href="index.html#about">O nás</a>
+                        <a href="index.html#activities">Aktivity</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Stránky</h4>
+                        <a href="gallery.html">Galerie</a>
+                        <a href="tips.html">Návody & Tipy</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Kontakt</h4>
+                        <a href="index.html#reservation">Rezervace</a>
+                        <a href="index.html#contact">Kontakt</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Duhohratky. Všechna práva vyhrazena.</p>
+                <p>Vytvořeno s 💕 pro děti</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src=\"script.js\" defer></script>
+    <script>
+        // Gallery Filter
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const items = document.querySelectorAll('.gallery-item-large');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filter = btn.dataset.filter;
+
+                    items.forEach(item => {
+                        if (filter === 'all' || item.dataset.category === filter) {
+                            item.style.display = 'block';
+                            item.style.animation = 'fadeIn 0.5s ease';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+# Robots.txt for Duhohrátky
+# https://duhohratky.cz
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://duhohratky.cz/sitemap.xml
+
+# Disallow admin pages
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css

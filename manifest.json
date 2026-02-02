@@ -1,0 +1,39 @@
+{
+    "name": "Duhohrátky - Sensory Play & Montessori",
+    "short_name": "Duhohrátky",
+    "description": "Kreativní sensory play a Montessori aktivity pro rozvoj dětí",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#FFF8F6",
+    "theme_color": "#FF6B9D",
+    "orientation": "portrait-primary",
+    "lang": "cs",
+    "icons": [
+        {
+            "src": "logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["education", "kids", "lifestyle"],
+    "screenshots": [],
+    "shortcuts": [
+        {
+            "name": "Rezervace",
+            "url": "/#reservation",
+            "description": "Rezervovat termín"
+        },
+        {
+            "name": "Galerie",
+            "url": "/gallery.html",
+            "description": "Prohlédnout galerii"
+        }
+    ]
+}

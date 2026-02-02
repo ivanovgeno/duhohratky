@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Font Test - Duhohrátky</title>
+    <style>
+        @font-face {
+            font-family: 'BadgerScript';
+            src: url('BadgerScript-Regular.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'BadgerScriptOTF';
+            src: url('BadgerScript-Regular.otf') format('opentype');
+        }
+
+        @font-face {
+            font-family: 'Badger';
+            src: url('Badger-Regular.ttf') format('truetype');
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: #f5f5f5;
+        }
+
+        .font-test {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .font-test h2 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .font-test .sample {
+            font-size: 48px;
+            color: #333;
+        }
+
+        .font1 {
+            font-family: 'BadgerScript', cursive;
+        }
+
+        .font2 {
+            font-family: 'BadgerScriptOTF', cursive;
+        }
+
+        .font3 {
+            font-family: 'Badger', cursive;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Výběr fontu - Duhohrátky</h1>
+    <p>Vyberte font, který nejlépe odpovídá logu:</p>
+
+    <div class="font-test">
+        <h2>Font 1: BadgerScript-Regular.ttf</h2>
+        <div class="sample font1">Duhohrátky</div>
+    </div>
+
+    <div class="font-test">
+        <h2>Font 2: BadgerScript-Regular.otf</h2>
+        <div class="sample font2">Duhohrátky</div>
+    </div>
+
+    <div class="font-test">
+        <h2>Font 3: Badger-Regular.ttf</h2>
+        <div class="sample font3">Duhohrátky</div>
+    </div>
+</body>
+
+</html>

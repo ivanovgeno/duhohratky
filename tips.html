@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Návody, Tipy & Triky | Duhohratky</title>
+    <meta name="description"
+        content="Návody, tipy a triky pro sensory play a Montessori aktivity doma. Inspirace pro rodiče.">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://duhohratky.cz/tips.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF6B9D">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://duhohratky.cz/tips.html">
+    <meta property="og:title" content="Návody, Tipy & Triky | Duhohrátky">
+    <meta property="og:description" content="Návody, tipy a triky pro sensory play a Montessori aktivity doma.">
+    <meta property="og:image" content="https://duhohratky.cz/logo.png">
+    <meta property="og:locale" content="cs_CZ">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Návody, Tipy & Triky | Duhohrátky">
+    <meta name="twitter:description" content="Návody, tipy a triky pro sensory play a Montessori aktivity doma.">
+    <meta name="twitter:image" content="https://duhohratky.cz/logo.png">
+
+    <!-- Schema.org BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Domů",
+                "item": "https://duhohratky.cz/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Návody & Tipy",
+                "item": "https://duhohratky.cz/tips.html"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Font Preloads -->
+    <link rel="preload" href="BadgerScript-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="Badger-Regular.ttf" as="font" type="font/ttf" crossorigin>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Critical CSS -->
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #FFF8F6 0%, #FFF5F0 50%, #FAF6F4 100%);
+            color: #4A3F3A;
+            line-height: 1.6;
+            overflow-x: hidden
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px)
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+    </style>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Floating Bubbles Background -->
+    <div class="bubbles-container" id="bubbles"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🌈</span>
+                <span class="logo-text">Duhohratky</span>
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Domů</a></li>
+                <li><a href="index.html#about" class="nav-link">O nás</a></li>
+                <li><a href="index.html#activities" class="nav-link">Aktivity</a></li>
+                <li><a href="gallery.html" class="nav-link">Galerie</a></li>
+                <li><a href="tips.html" class="nav-link active">Návody & Tipy</a></li>
+                <li><a href="index.html#reservation" class="nav-link nav-cta">Rezervace</a></li>
+                <li><a href="index.html#contact" class="nav-link">Kontakt</a></li>
+            </ul>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <span class="section-badge">💡 Inspirace</span>
+            <h1 class="page-title">Návody, <span class="rainbow-text">Tipy & Triky</span></h1>
+            <p class="page-description">Inspirace pro sensory play a Montessori aktivity, které můžete vyzkoušet i doma
+            </p>
+        </div>
+    </section>
+
+    <!-- Tips Categories -->
+    <section class="tips-section">
+        <div class="container">
+            <!-- Category: Sensory Play -->
+            <div class="tips-category">
+                <div class="category-header">
+                    <span class="category-icon">🫧</span>
+                    <h2>Sensory Play doma</h2>
+                </div>
+                <div class="tips-grid">
+                    <article class="tip-card glass-card" data-id="tip1">
+                        <div class="tip-image" style="background: linear-gradient(135deg, #FFB6C1, #FF69B4);">
+                            <span>🍚</span>
+                        </div>
+                        <div class="tip-content">
+                            <span class="tip-tag">Snadné</span>
+                            <h3>Barevná rýže</h3>
+                            <p>Jak vyrobit barevnou senzorickou rýži pro děti. Jednoduchý návod s potravinářským
+                                barvivem.</p>
+                            <div class="tip-meta">
+                                <span>⏱️ 15 min</span>
+                                <span>👶 1+ rok</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="tip-card glass-card" data-id="tip2">
+                        <div class="tip-image" style="background: linear-gradient(135deg, #87CEEB, #4682B4);">
+                            <span>🧊</span>
+                        </div>
+                        <div class="tip-content">
+                            <span class="tip-tag">Střední</span>
+                            <h3>Ledové překvapení</h3>
+                            <p>Zamrazte hračky do ledu a nechte děti je "zachránit" pomocí teplé vody nebo soli.</p>
+                            <div class="tip-meta">
+                                <span>⏱️ 4 hodiny</span>
+                                <span>👶 2+ roky</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="tip-card glass-card" data-id="tip3">
+                        <div class="tip-image" style="background: linear-gradient(135deg, #98D8C8, #66CDAA);">
+                            <span>🫧</span>
+                        </div>
+                        <div class="tip-content">
+                            <span class="tip-tag">Snadné</span>
+                            <h3>Domácí plastelína</h3>
+                            <p>Recept na bezpečnou domácí plastelínu z mouky, soli a potravinářského barviva.</p>
+                            <div class="tip-meta">
+                                <span>⏱️ 20 min</span>
+                                <span>👶 1+ rok</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Category: Montessori -->
+            <div class="tips-category">
+                <div class="category-header">
+                    <span class="category-icon">📚</span>
+                    <h2>Montessori aktivity</h2>
+                </div>
+                <div class="tips-grid">
+                    <article class="tip-card glass-card" data-id="tip4">
+                        <div class="tip-image" style="background: linear-gradient(135deg, #FFE066, #FFD700);">
+                            <span>🥄</span>
+                        </div>
+                        <div class="tip-content">
+                            <span class="tip-tag">Snadné</span>
+                            <h3>Přesýpání a přelévání</h3>
+                            <p>Jednoduchá aktivita pro rozvoj motoriky - přesýpání rýže nebo přelévání vody.</p>
+                            <div class="tip-meta">
+                                <span>⏱️ 10 min</span>
+                                <span>👶 18m+</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="tip-card glass-card" data-id="tip5">
+                        <div class="tip-image" style="background: linear-gradient(135deg, #DDA0DD, #BA55D3);">
+                            <span>🧦</span>
+                        </div>
+                        <div class="tip-content">
+                            <span class="tip-tag">Snadné</span>
+                            <h3>Párování ponožek</h3>
+                            <p>Praktická životní dovednost - nechte děti třídit a párovat ponožky podle barvy a vzoru.
+                            </p>
+                            <div class="tip-meta">
+                                <span>⏱️ 15 min</span>
+                                <span>👶 2+ roky</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="tip-card glass-card" data-id="tip6">
+                        <div class="tip-image" style="background: linear-gradient(135deg, #FFA07A, #FF6347);">
+                            <span>🔘</span>
+                        </div>
+                        <div class="tip-content">
+                            <span class="tip-tag">Střední</span>
+                            <h3>Zapínání knoflíků</h3>
+                            <p>Vyrobte si jednoduchou destičku pro nácvik zapínání knoflíků a zipů.</p>
+                            <div class="tip-meta">
+                                <span>⏱️ 30 min</span>
+                                <span>👶 3+ roky</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Category: Kreativní tvoření -->
+            <div class="tips-category">
+                <div class="category-header">
+                    <span class="category-icon">🎨</span>
+                    <h2>Kreativní tvoření</h2>
+                </div>
+                <div class="tips-grid">
+                    <article class="tip-card glass-card" data-id="tip7">
+                        <div class="tip-image" style="background: linear-gradient(135deg, #90EE90, #32CD32);">
+                            <span>🍂</span>
+                        </div>
+                        <div class="tip-content">
+                            <span class="tip-tag">Snadné</span>
+                            <h3>Otisk listů</h3>
+                            <p>Sbírejte listy a vytvářejte krásné otisky pomocí barev. Ideální podzimní aktivita.</p>
+                            <div class="tip-meta">
+                                <span>⏱️ 20 min</span>
+                                <span>👶 2+ roky</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="tip-card glass-card" data-id="tip8">
+                        <div class="tip-image" style="background: linear-gradient(135deg, #E6E6FA, #9370DB);">
+                            <span>🖐️</span>
+                        </div>
+                        <div class="tip-content">
+                            <span class="tip-tag">Snadné</span>
+                            <h3>Malování prsty</h3>
+                            <p>Jedlé barvy pro nejmenší - recept z jogurtu a potravinářského barviva.</p>
+                            <div class="tip-meta">
+                                <span>⏱️ 10 min</span>
+                                <span>👶 6m+</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="tip-card glass-card" data-id="tip9">
+                        <div class="tip-image" style="background: linear-gradient(135deg, #F0E68C, #DAA520);">
+                            <span>🧂</span>
+                        </div>
+                        <div class="tip-content">
+                            <span class="tip-tag">Střední</span>
+                            <h3>Solné malování</h3>
+                            <p>Namalujte lepidlem vzor, posypte solí a pak kápněte vodové barvy.</p>
+                            <div class="tip-meta">
+                                <span>⏱️ 30 min</span>
+                                <span>👶 3+ roky</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-card glass-card">
+                <div class="newsletter-content">
+                    <h2>📬 Chcete více tipů?</h2>
+                    <p>Přihlaste se k odběru novinek a dostávejte nové návody přímo do emailu.</p>
+                </div>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" placeholder="Váš email" required>
+                    <button type="submit" class="btn btn-primary">Odebírat</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-card glass-card">
+                <h2>Vyzkoušejte to s námi!</h2>
+                <p>Přijďte do Duhohratek a zažijte tyto aktivity pod vedením našich lektorů.</p>
+                <a href="index.html#reservation" class="btn btn-primary">
+                    <span>📅</span> Rezervovat termín
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">🌈</span>
+                        <span class="logo-text">Duhohratky</span>
+                    </a>
+                    <p>Sensory Play & Montessori pro šťastné děti</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Navigace</h4>
+                        <a href="index.html">Domů</a>
+                        <a href="index.html#about">O nás</a>
+                        <a href="index.html#activities">Aktivity</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Stránky</h4>
+                        <a href="gallery.html">Galerie</a>
+                        <a href="tips.html">Návody & Tipy</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Kontakt</h4>
+                        <a href="index.html#reservation">Rezervace</a>
+                        <a href="index.html#contact">Kontakt</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Duhohratky. Všechna práva vyhrazena.</p>
+                <p>Vytvořeno s 💕 pro děti</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src=\"script.js\" defer></script>
+</body>
+
+</html>
