@@ -456,7 +456,7 @@ function createBubbleSplash(bubble, container, colorClass) {
             background: ${color};
             border-radius: 50%;
             pointer-events: none;
-            z-index: 100;
+            z-index: 2000;
             box-shadow: 0 0 ${particleSize}px ${color};
             --end-x: ${endX}px;
             --end-y: ${endY}px;
