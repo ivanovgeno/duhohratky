@@ -2340,3 +2340,18 @@ section {
     box-shadow: 0 0 8px rgba(255, 255, 255, 1) !important;
     opacity: 1 !important; /* Managed by JS, but start full */
 }
+
+/* --- V37 FIX: REMOVE GHOST SPLASH --- */
+.bubble.popped::after {
+    display: none !important;
+    content: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+}
+
+.bubble:hover {
+    /* Absolute reset */
+    transform: none !important;
+    filter: none !important;
+    border-color: rgba(255, 255, 255, 0.8) !important;
+}
