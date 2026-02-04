@@ -196,83 +196,133 @@ body {
     /* IMPORTANT: Enable clicks */
     cursor: pointer;
     transition: transform 0.2s ease;
-    /* Soap bubble shine effect */
-    background: radial-gradient(circle at 25% 25%,
+    /* Realistic Soap Bubble - Thin Film Interference */
+    background: radial-gradient(130% 130% at 30% 30%,
             rgba(255, 255, 255, 0.9) 0%,
-            rgba(255, 255, 255, 0.5) 20%,
-            rgba(255, 255, 255, 0.1) 40%,
-            rgba(255, 255, 255, 0) 60%),
-        /* Iridescent colors */
-        linear-gradient(135deg,
-            rgba(255, 182, 193, 0.2) 0%,
-            rgba(255, 224, 102, 0.2) 25%,
-            rgba(168, 216, 184, 0.2) 50%,
-            rgba(160, 200, 216, 0.2) 75%,
-            rgba(200, 168, 208, 0.2) 100%);
+            /* Specular highlight */
+            rgba(255, 255, 255, 0.1) 15%,
+            /* Transparent body */
+            rgba(255, 0, 255, 0.1) 45%,
+            /* Magenta ring */
+            rgba(0, 255, 255, 0.1) 60%,
+            /* Cyan ring */
+            rgba(255, 255, 255, 0.3) 85%,
+            /* Rim reflection */
+            rgba(255, 255, 255, 0.8) 100%);
+    /* Edge */
+
     box-shadow:
-        inset 0 0 10px rgba(255, 255, 255, 0.6),
-        inset 2px 2px 15px rgba(255, 255, 255, 0.3),
-        inset -2px -2px 15px rgba(255, 182, 193, 0.2),
-        /* Pink glow */
-        0 4px 10px rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+        inset 0 0 20px rgba(255, 255, 255, 0.5),
+        0 10px 20px rgba(0, 0, 0, 0.1);
+
+    backdrop-filter: blur(1px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    /* Ensure clickability */
+    transform-origin: center;
+}
+
+.bubble::after {
+    /* Inner rainbow sheen */
+    content: '';
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    right: 5%;
+    bottom: 5%;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0) 40%,
+            rgba(255, 255, 255, 0.4) 100%);
+    pointer-events: none;
 }
 
 .bubble:hover {
-    transform: scale(1.1);
-    background: radial-gradient(circle at 25% 25%,
-            rgba(255, 255, 255, 0.95) 0%,
-            rgba(255, 255, 255, 0.6) 20%,
-            rgba(255, 255, 255, 0.2) 40%,
-            rgba(255, 255, 255, 0) 60%),
-        linear-gradient(135deg,
-            rgba(255, 182, 193, 0.4) 0%,
-            rgba(255, 224, 102, 0.4) 50%,
-            rgba(160, 200, 216, 0.4) 100%);
-    box-shadow:
-        inset 0 0 20px rgba(255, 255, 255, 0.8),
-        0 0 20px rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+    filter: brightness(1.2);
+    cursor: crosshair;
 }
 
+/* Splash Effect */
 .bubble.popped {
-    animation: pop 0.3s ease-out forwards;
+    opacity: 0;
+    transition: opacity 0.05s ease-out;
+    /* Disappear instantly */
+}
+
+.bubble.popped::after {
+    /* Override inner sheen to become splash */
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: transparent;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: splash 0.6s ease-out forwards;
+
+    /* Splash Particles simulated via box-shadow */
+    box-shadow:
+        0 -20px 0 rgba(200, 240, 255, 0.8),
+        20px -10px 0 rgba(255, 200, 240, 0.8),
+        20px 10px 0 rgba(200, 255, 240, 0.8),
+        0 20px 0 rgba(240, 200, 255, 0.8),
+        -20px 10px 0 rgba(200, 240, 255, 0.8),
+        -20px -10px 0 rgba(255, 240, 200, 0.8);
 }
 
 @keyframes float-bubble {
     0% {
-        transform: translateY(100vh) scale(0.8);
+        transform: translateY(110vh) scale(0.8) skewX(2deg);
         opacity: 0;
     }
 
-    10% {
-        opacity: 0.8;
+    5% {
+        opacity: 0.9;
     }
 
     50% {
-        transform: translateY(50vh) scale(1) translateX(20px);
+        transform: translateY(50vh) scale(1) skewX(-2deg) translateX(30px);
     }
 
     100% {
-        transform: translateY(-20vh) scale(1.2) translateX(-20px);
+        transform: translateY(-20vh) scale(1.1) skewX(2deg) translateX(-30px);
         opacity: 0;
     }
 }
 
-@keyframes pop {
+@keyframes splash {
     0% {
-        transform: scale(1);
         opacity: 1;
+        width: 0;
+        height: 0;
+        box-shadow:
+            0 0 0 rgba(255, 255, 255, 0),
+            0 0 0 rgba(255, 255, 255, 0),
+            0 0 0 rgba(255, 255, 255, 0),
+            0 0 0 rgba(255, 255, 255, 0),
+            0 0 0 rgba(255, 255, 255, 0),
+            0 0 0 rgba(255, 255, 255, 0);
     }
 
-    50% {
-        transform: scale(1.4);
+    40% {
         opacity: 0.8;
     }
 
     100% {
-        transform: scale(0);
         opacity: 0;
+        width: 100px;
+        height: 100px;
+        box-shadow:
+            0 -60px 0 rgba(255, 255, 255, 0),
+            50px -30px 0 rgba(255, 255, 255, 0),
+            50px 30px 0 rgba(255, 255, 255, 0),
+            0 60px 0 rgba(255, 255, 255, 0),
+            -50px 30px 0 rgba(255, 255, 255, 0),
+            -50px -30px 0 rgba(255, 255, 255, 0);
     }
 }
 }
