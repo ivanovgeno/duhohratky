@@ -494,9 +494,7 @@ function popBubble(bubble, container, colorClasses) {
     }, 350);
 }
 
-function initBubbles() {
-    BubbleSystem.init();
-}
+
 
 /* ====================================
    NAVIGATION
