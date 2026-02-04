@@ -160,12 +160,19 @@ function popBubble(e) {
     const bubble = e.target;
     if (bubble.classList.contains('popped')) return;
 
-    // 1. CAPTURE COORDINATES FIRST (Critical Fix for V42)
-    //    We must do this BEFORE adding 'popped' or changing styles,
-    //    otherwise dimensions or position might collapse/shift.
-    const rect = bubble.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+    // 1. CAPTURE COORDINATES FROM MOUSE (MOST RELIABLE)
+    let centerX, centerY;
+
+    // Check if event has mouse coordinates (click/mouseover usually do)
+    if (e.clientX !== undefined && e.clientY !== undefined && e.clientX !== 0 && e.clientY !== 0) {
+        centerX = e.clientX;
+        centerY = e.clientY;
+    } else {
+        // Fallback to rect if triggered programmatically or weirdly
+        const rect = bubble.getBoundingClientRect();
+        centerX = rect.left + rect.width / 2;
+        centerY = rect.top + rect.height / 2;
+    }
 
     // 2. Hide Bubble Layout
     bubble.classList.add('popped');
