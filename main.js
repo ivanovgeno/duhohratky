@@ -131,23 +131,18 @@ function initBubbles() {
     setInterval(() => {
         if (document.hidden) return;
         createBubble(container);
-    }, 800);
+    }, 1500);
 }
 
 function createBubble(container) {
     const bubble = document.createElement('div');
     bubble.classList.add('bubble');
 
-    // Random colors
-    const colors = ['pink', 'coral', 'yellow', 'mint', 'blue', 'purple'];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    bubble.classList.add(randomColor);
-
     // Random properties
-    const size = Math.random() * 60 + 20; // 20-80px
+    const size = Math.random() * 60 + 30; // 30-90px
     const left = Math.random() * 100;
-    const duration = Math.random() * 4 + 4; // 4-8s
-    const delay = Math.random() * 2;
+    const duration = Math.random() * 15 + 15; // 15-30s (Very slow)
+    const delay = Math.random() * 5;
 
     // Apply styles
     bubble.style.width = `${size}px`;
