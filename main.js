@@ -146,7 +146,7 @@ function createBubble(container) {
 
     // Interaction
     bubble.addEventListener('click', popBubble);
-    bubble.addEventListener('mouseover', popBubble); // RESTORED HOVER
+    bubble.addEventListener('mouseover', popBubble);
 
     container.appendChild(bubble);
 
@@ -186,7 +186,7 @@ function createSplash(startX, startY) {
     const container = document.getElementById('bubbles');
     if (!container) return;
 
-    const dropletCount = 30; // 30 Drops
+    const dropletCount = 30;
     const droplets = [];
 
     // Create droplets
@@ -194,22 +194,26 @@ function createSplash(startX, startY) {
         const drop = document.createElement('div');
         drop.classList.add('droplet');
 
-        // Initial state
-        const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 8 + 3;
-
-        const vx = Math.cos(angle) * speed;
-        const vy = (Math.random() * -12) - 6; // Burst UP
+        // Random properties
         const size = Math.random() * 6 + 4; // 4-10px
 
+        // Center the droplet on the burst origin
+        // (Previously was just startX/Y, which made them top-left aligned)
         drop.style.width = `${size}px`;
         drop.style.height = `${size}px`;
-        drop.style.left = `${startX}px`;
-        drop.style.top = `${startY}px`;
+        drop.style.left = `${startX - size / 2}px`;
+        drop.style.top = `${startY - size / 2}px`;
+
+        // Physics: Radial Burst
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 8 + 4; // Uniform speed in all directions
+
+        const vx = Math.cos(angle) * speed;
+        const vy = Math.sin(angle) * speed; // Burst in all directions (not just up)
 
         container.appendChild(drop);
 
-        droplets.push({ el: drop, x: startX, y: startY, vx, vy, alpha: 1 });
+        droplets.push({ el: drop, x: startX - size / 2, y: startY - size / 2, vx, vy, alpha: 1 });
     }
 
     function animate() {
