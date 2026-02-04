@@ -138,6 +138,11 @@ function createBubble(container) {
     const bubble = document.createElement('div');
     bubble.classList.add('bubble');
 
+    // Random colors
+    const colors = ['pink', 'coral', 'yellow', 'mint', 'blue', 'purple'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    bubble.classList.add(randomColor);
+
     // Random properties
     const size = Math.random() * 60 + 20; // 20-80px
     const left = Math.random() * 100;
