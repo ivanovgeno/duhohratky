@@ -146,8 +146,13 @@ function createBubble(container) {
     bubble.style.animationDuration = `${duration}s`;
     bubble.style.animationDelay = `${delay}s`;
 
-    // BOOST SATURATION: +40% (1.4) to match "super saturation" request
-    bubble.style.filter = `hue-rotate(${hue}deg) saturate(1.4) drop-shadow(0 2px 5px rgba(255, 255, 255, 0.4))`;
+    // COLOR ENHANCEMENT (V46):
+    // 1. Stronger HUE saturation (1.4 -> 1.5)
+    // 2. Colored border to define edge
+    // 3. Colored inner glow (box-shadow) to fill it with color
+    bubble.style.border = `1px solid hsl(${hue}, 80%, 60%)`;
+    bubble.style.boxShadow = `inset 0 0 15px hsl(${hue}, 80%, 65%), 0 5px 15px rgba(0,0,0,0.1)`;
+    bubble.style.filter = `hue-rotate(${hue}deg) saturate(1.5) drop-shadow(0 2px 5px rgba(255, 255, 255, 0.4))`;
 
     // Interaction
     bubble.addEventListener('click', popBubble);
