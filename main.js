@@ -1,122 +1,113 @@
-/* ====================================
-   DUHOHRATKY - JavaScript
-   Sensory Play & Montessori Website
-   ==================================== */
+
+const SEASON_CONFIG = {
+    SPRING: { theme: 'spring', startMonth: 2, endMonth: 4 }, // March - May
+    SUMMER: { theme: 'summer', startMonth: 5, endMonth: 7 }, // June - August
+    AUTUMN: { theme: 'autumn', startMonth: 8, endMonth: 10 }, // Sept - Nov
+    WINTER: { theme: 'winter', startMonth: 11, endMonth: 1 }  // Dec - Feb
+};
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Load content from admin panel first
-    loadContentFromAdmin();
-
-    // Initialize all components
-    initBubbles();
     initNavigation();
-    initScrollEffects();
-    initReservio();
-    initCounterAnimation();
     updateDynamicBadges();
+    initBubbles(); // Start bubbles
 });
 
-/* ====================================
-   ANIMATED NUMBER COUNTER
-   ==================================== */
-function initCounterAnimation() {
-    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
-    if (statNumbers.length === 0) return;
+function updateDynamicBadges() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.5
-    };
+    const cards = document.querySelectorAll('.lesson-card');
 
-    const animateCounter = (element) => {
-        const target = parseInt(element.dataset.target);
-        const suffix = element.dataset.suffix || '';
+    cards.forEach(card => {
+        const dateAttr = card.getAttribute('data-date'); // Expects YYYY-MM-DD
+        if (!dateAttr) return;
 
-        // Duration proportional to target - smaller numbers finish faster
-        // 5 -> ~800ms, 8 -> ~800ms, 20 -> ~800ms, 500 -> ~2500ms
-        const duration = Math.min(Math.max(target * 5, 800), 2500);
-        const startTime = performance.now();
+        const lessonDate = new Date(dateAttr);
+        lessonDate.setHours(0, 0, 0, 0);
 
-        // Easing function for smooth animation
-        const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+        const diffTime = lessonDate - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        const updateCounter = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const easedProgress = easeOutQuart(progress);
-            const currentValue = Math.floor(easedProgress * target);
+        let badgeText = '';
+        let badgeClass = '';
 
-            element.textContent = currentValue + suffix;
-
-            if (progress < 1) {
-                requestAnimationFrame(updateCounter);
-            } else {
-                element.textContent = target + suffix;
-            }
-        };
-
-        requestAnimationFrame(updateCounter);
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const element = entry.target;
-                if (!element.classList.contains('counted')) {
-                    element.classList.add('counted');
-                    // Start animation immediately - no delay
-                    animateCounter(element);
-                }
-            }
-        });
-    }, observerOptions);
-
-    statNumbers.forEach(stat => observer.observe(stat));
-}
-
-/* ====================================
-   LOAD CONTENT FROM ADMIN PANEL
-   ==================================== */
-function loadContentFromAdmin() {
-    const stored = localStorage.getItem('duhohratky_content');
-    if (!stored) return;
-
-    try {
-        const data = JSON.parse(stored);
-
-        // Hero Section
-        if (data.hero) {
-            updateText('.hero-badge', data.hero.badge);
-            updateText('.hero-title', `${data.hero.title} <span class="rainbow-text">${data.hero.titleHighlight}</span>`);
-            updateText('.hero-subtitle', data.hero.subtitle);
-            updateText('.hero-description', data.hero.description);
-
-            // Stats - update data-target for animation
-            const stats = document.querySelectorAll('.stat');
-            if (stats[0] && data.hero.stat1Number) {
-                const num = stats[0].querySelector('.stat-number');
-                const parsed = parseStatValue(data.hero.stat1Number);
-                num.dataset.target = parsed.number;
-                num.dataset.suffix = parsed.suffix;
-                num.querySelector('.stat-label').textContent = data.hero.stat1Label;
-            }
-            // ... (other stats logic simplified for stability)
+        if (diffDays === 0) {
+            badgeText = 'Dnes';
+            badgeClass = 'badge-today';
+        } else if (diffDays === 1) {
+            badgeText = 'Zítra';
+            badgeClass = 'badge-tomorrow';
+        } else if (diffDays > 1 && diffDays < 7) {
+            const days = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
+            badgeText = days[lessonDate.getDay()];
+            badgeClass = 'badge-upcoming';
+        } else {
+            // Default date format (e.g. 12. 10.)
+            badgeText = `${lessonDate.getDate()}. ${lessonDate.getMonth() + 1}.`;
+            badgeClass = 'badge-neutral';
         }
-    } catch (e) {
-        console.warn('Failed to load admin content', e);
-    }
+
+        // Find or create badge element
+        let badge = card.querySelector('.dynamic-badge');
+        if (!badge) {
+            badge = document.createElement('div');
+            badge.className = 'dynamic-badge';
+            const badgeContainer = card.querySelector('.card-badges');
+            if (badgeContainer) badgeContainer.prepend(badge);
+        }
+
+        badge.textContent = badgeText;
+        badge.className = `dynamic-badge ${badgeClass}`;
+    });
 }
 
-function updateText(selector, html) {
-    const el = document.querySelector(selector);
-    if (el && html) el.innerHTML = html;
+function formatCzechDate(dateStr) {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    return `${day}. ${month}.`;
 }
 
-function parseStatValue(val) {
-    if (!val) return { number: 0, suffix: '' };
-    const num = parseInt(val.replace(/\D/g, ''));
-    const suffix = val.replace(/[0-9]/g, '');
+function formatCapacity(registered, capacity) {
+    if (registered >= capacity) return 'Obsazeno';
+    return `${registered}/${capacity}`;
+}
+
+function getDifficultyLabel(difficulty) {
+    const map = {
+        'beginner': 'Začátečník',
+        'intermediate': 'Pokročilý',
+        'advanced': 'Expert'
+    };
+    return map[difficulty] || difficulty;
+}
+
+
+/* ====================================
+   FORMATTERS
+   ==================================== */
+
+function formatTime(time) {
+    if (!time) return '';
+    const [h, m] = time.split(':');
+    return `${h}:${m}`;
+}
+
+function formatPrice(price) {
+    return price ? `${price} Kč` : '0 Kč';
+}
+
+function formatTeacher(name) {
+    return name || 'Neznámý lektor';
+}
+
+function parseDuration(durationStr) {
+    // Example: "60 min" -> { number: 60, suffix: 'min' }
+    const match = durationStr.match(/(\d+)\s*(\D+)/);
+    if (!match) return { number: 0, suffix: '' };
+    const num = parseInt(match[1], 10);
+    const suffix = match[2];
     return { number: num || 0, suffix: suffix || '' };
 }
 
@@ -161,9 +152,7 @@ function createBubble(container) {
 
     // Cleanup
     setTimeout(() => {
-        if (bubble.parentElement) {
-            bubble.remove();
-        }
+        if (bubble.parentElement) bubble.remove();
     }, (duration + delay) * 1000);
 }
 
@@ -188,35 +177,56 @@ function popBubble(e) {
     }, 300);
 }
 
-function createSplash(x, y) {
+function createSplash(startX, startY) {
     const container = document.getElementById('bubbles');
     if (!container) return;
 
-    const count = 12; // Number of droplets
-    for (let i = 0; i < count; i++) {
+    const dropletCount = 18;
+    const droplets = [];
+
+    // Create droplets
+    for (let i = 0; i < dropletCount; i++) {
         const drop = document.createElement('div');
         drop.classList.add('droplet');
 
-        // Position at center of burst
-        drop.style.left = `${x}px`;
-        drop.style.top = `${y}px`;
-
-        // Random Trajectory
+        // Initial state
         const angle = Math.random() * Math.PI * 2;
-        const velocity = Math.random() * 80 + 40; // Travel 40-120px
-        const dx = Math.cos(angle) * velocity;
-        const dy = Math.sin(angle) * velocity;
+        const speed = Math.random() * 6 + 2;
 
-        drop.style.setProperty('--dx', `${dx}px`);
-        drop.style.setProperty('--dy', `${dy}px`);
+        const vx = Math.cos(angle) * speed;
+        const vy = (Math.random() * -12) - 4; // Burst UP initially (-4 to -16)
+        const size = Math.random() * 5 + 2;
+
+        drop.style.width = `${size}px`;
+        drop.style.height = `${size}px`;
+        drop.style.left = `${startX}px`;
+        drop.style.top = `${startY}px`;
 
         container.appendChild(drop);
 
-        // Cleanup
-        setTimeout(() => {
-            drop.remove();
-        }, 600);
+        droplets.push({ el: drop, x: startX, y: startY, vx, vy, alpha: 1 });
     }
+
+    function animate() {
+        let active = false;
+        droplets.forEach(d => {
+            if (d.alpha <= 0) return;
+
+            d.x += d.vx;
+            d.y += d.vy;
+            d.vy += 0.9; // Gravity
+            d.alpha -= 0.025; // Fade out
+
+            d.el.style.left = `${d.x}px`;
+            d.el.style.top = `${d.y}px`;
+            d.el.style.opacity = d.alpha;
+
+            if (d.alpha > 0) active = true;
+            else if (d.el.parentElement) d.el.remove();
+        });
+        if (active) requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
 }
 
 /* ====================================
@@ -233,8 +243,16 @@ function initNavigation() {
             navToggle.classList.toggle('active');
         });
 
-        // Close menu when clicking link
-        document.querySelectorAll('.nav-link').forEach(link => {
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            }
+        });
+
+        // Close menu on link click
+        navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
                 navToggle.classList.remove('active');
@@ -242,102 +260,12 @@ function initNavigation() {
         });
     }
 
-    // Scroll effect
+    // Header scroll effect
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-    });
-}
-
-/* ====================================
-   SCROLL REVEAL
-   ==================================== */
-function initScrollEffects() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-}
-
-/* ====================================
-   RESERVIO INTEGRATION
-   ====================================, */
-function initReservio() {
-    // Logic handled by iframe integration mainly
-    // But we can check if admin provided a custom URL
-}
-
-/* ====================================
-   DYNAMIC BADGES (FLEXIBLE)
-   ==================================== */
-function updateDynamicBadges() {
-    // Select cards with either data-day-index or data-date
-    const cards = document.querySelectorAll('.lesson-card[data-day-index], .lesson-card[data-date]');
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); // Reset time to compare dates only
-
-    cards.forEach(card => {
-        const badge = card.querySelector('.lesson-badge');
-        if (!badge) return;
-
-        let targetDate = new Date();
-        let diffDays = 0;
-
-        // 1. Try Specific Date (Priority)
-        if (card.dataset.date) {
-            targetDate = new Date(card.dataset.date);
-            targetDate.setHours(0, 0, 0, 0);
-
-            // Calculate difference in days
-            const diffTime = targetDate.getTime() - today.getTime();
-            diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-        }
-        // 2. Fallback to Day Index (Weekly schedule)
-        else if (card.dataset.dayIndex) {
-            const currentDayIndex = today.getDay(); // 0-6
-            const targetDayIndex = parseInt(card.dataset.dayIndex);
-
-            diffDays = targetDayIndex - currentDayIndex;
-            if (diffDays < 0) diffDays += 7; // Next week
-
-            targetDate.setDate(today.getDate() + diffDays);
-        }
-
-        // Generate Label & Color
-        let label = '';
-        let color = '';
-        let animation = 'none';
-
-        if (diffDays === 0) {
-            label = 'DNES!';
-            color = 'var(--gradient-rainbow)';
-            animation = 'bounce-small 2s infinite, rainbow-shift 3s infinite linear';
-        } else if (diffDays === 1) {
-            label = 'ZÍTRA';
-            color = 'var(--color-blue)';
-        } else if (diffDays === 2) {
-            label = 'POZÍTŘÍ';
-            color = 'var(--color-green)';
-        } else {
-            // Format: 24.11.
-            const d = targetDate.getDate();
-            const m = targetDate.getMonth() + 1;
-            label = `${d}.${m}.`;
-            color = 'var(--color-gray-500)';
-        }
-
-        // Apply
-        badge.textContent = label;
-        badge.style.background = color;
-        badge.style.animation = animation;
     });
 }
