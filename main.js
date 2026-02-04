@@ -877,3 +877,58 @@ bounceStyle.textContent = `
     }
 `;
 document.head.appendChild(bounceStyle);
+// ... existing code ...
+
+// --- NEW: Dynamic Badges ---
+updateDynamicBadges();
+});
+
+// ... existing code ...
+
+function updateDynamicBadges() {
+    const cards = document.querySelectorAll('.lesson-card[data-day-index]');
+    const today = new Date().getDay(); // 0 = Sunday, 1 = Monday, ... 6 = Saturday
+
+    cards.forEach(card => {
+        const targetDay = parseInt(card.dataset.dayIndex);
+        const badge = card.querySelector('.lesson-badge');
+
+        if (!badge) return;
+
+        // Calculate days until target day
+        let diff = targetDay - today;
+        if (diff < 0) diff += 7; // If target is earlier in week, it means next week
+
+        let label = '';
+        let color = '';
+
+        if (diff === 0) {
+            label = 'DNES!';
+            color = 'var(--gradient-rainbow)'; // Rainbow for today
+        } else if (diff === 1) {
+            label = 'ZÍTRA';
+            color = 'var(--color-blue)';
+        } else if (diff === 2) {
+            label = 'POZÍTŘÍ';
+            color = 'var(--color-green)';
+        } else {
+            // Get date string relative to diff
+            const date = new Date();
+            date.setDate(date.getDate() + diff);
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            label = `${day}.${month}.`;
+            color = 'var(--color-gray-500)'; // Neutral for later
+        }
+
+        badge.textContent = label;
+        if (color) badge.style.background = color;
+
+        // Special styling for Today
+        if (diff === 0) {
+            badge.style.animation = 'bounce-small 2s infinite, rainbow-shift 3s infinite linear';
+        } else {
+            badge.style.animation = 'none';
+        }
+    });
+}
