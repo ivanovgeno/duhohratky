@@ -2310,3 +2310,16 @@ section {
         opacity: 0;
     }
 }
+
+/* --- V35 GRAVITY DROPLETS --- */
+.droplet {
+    position: absolute;
+    background: rgba(220, 240, 255, 0.9) !important; /* Slightly blue water */
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+    pointer-events: none;
+    z-index: 9999;
+    /* No CSS animation, handled by JS physics */
+    animation: none !important; 
+    transition: none !important;
+}
