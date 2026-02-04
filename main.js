@@ -131,7 +131,7 @@ function initBubbles() {
     setInterval(() => {
         if (document.hidden) return;
         createBubble(container);
-    }, 1500);
+    }, 1200);
 }
 
 function createBubble(container) {
@@ -141,8 +141,9 @@ function createBubble(container) {
     // Random properties
     const size = Math.random() * 60 + 30; // 30-90px
     const left = Math.random() * 100;
-    const duration = Math.random() * 15 + 15; // 15-30s (Very slow)
+    const duration = Math.random() * 12 + 13; // 13-25s (15% faster than before)
     const delay = Math.random() * 5;
+    const hue = Math.floor(Math.random() * 360); // Unique color shift
 
     // Apply styles
     bubble.style.width = `${size}px`;
@@ -150,6 +151,7 @@ function createBubble(container) {
     bubble.style.left = `${left}%`;
     bubble.style.animationDuration = `${duration}s`;
     bubble.style.animationDelay = `${delay}s`;
+    bubble.style.filter = `hue-rotate(${hue}deg) drop-shadow(0 2px 5px rgba(255, 255, 255, 0.4))`;
 
     // Interaction
     bubble.addEventListener('click', popBubble);
