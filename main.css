@@ -648,7 +648,7 @@ body {
     -webkit-text-fill-color: transparent !important;
 
     /* Ensure animation overrides conflicting animations and property locks */
-    animation: rainbow-shift 3s infinite linear !important;
+    animation: rainbow-shift 9s infinite linear !important;
     background-size: 300% auto !important;
 }
 
