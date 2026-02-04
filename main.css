@@ -2323,3 +2323,20 @@ section {
     animation: none !important; 
     transition: none !important;
 }
+
+/* --- V36 CLEANUP & POLISH --- */
+.bubble:hover {
+    transform: none !important;
+    filter: none !important;
+    cursor: pointer !important;
+    /* Reset shadow to default, no spinning or extra glow */
+    box-shadow: 
+        inset 0 0 15px rgba(255, 255, 255, 0.7),
+        0 4px 15px rgba(0, 0, 0, 0.15) !important;
+}
+
+.droplet {
+    background: #ffffff !important; 
+    box-shadow: 0 0 8px rgba(255, 255, 255, 1) !important;
+    opacity: 1 !important; /* Managed by JS, but start full */
+}
