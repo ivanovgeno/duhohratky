@@ -146,8 +146,8 @@ function createBubble(container) {
     bubble.style.animationDuration = `${duration}s`;
     bubble.style.animationDelay = `${delay}s`;
 
-    // BOOST SATURATION: Added saturate(1.2) (+20%) to make them pop more
-    bubble.style.filter = `hue-rotate(${hue}deg) saturate(1.2) drop-shadow(0 2px 5px rgba(255, 255, 255, 0.4))`;
+    // BOOST SATURATION: +40% (1.4) to match "super saturation" request
+    bubble.style.filter = `hue-rotate(${hue}deg) saturate(1.4) drop-shadow(0 2px 5px rgba(255, 255, 255, 0.4))`;
 
     // Interaction
     bubble.addEventListener('click', popBubble);
@@ -165,7 +165,7 @@ function popBubble(e) {
     const bubble = e.target;
     if (bubble.classList.contains('popped')) return;
 
-    // 1. CAPTURE COORDINATES
+    // 1. CAPTURE COORDINATES FROM MOUSE (MOST RELIABLE)
     let centerX, centerY;
 
     if (e.clientX !== undefined && e.clientY !== undefined && e.clientX !== 0 && e.clientY !== 0) {
@@ -220,9 +220,10 @@ function createSplash(startX, startY, parentHue) {
         drop.style.left = `${startX + randomOffsetX - size / 2}px`;
         drop.style.top = `${startY + randomOffsetY - size / 2}px`;
 
-        // COLOR: Match parent bubble hue
-        drop.style.backgroundColor = `hsl(${parentHue}, 85%, 75%)`; // Pastel version of bubble
-        drop.style.boxShadow = `0 0 6px hsl(${parentHue}, 85%, 65%)`; // Glow
+        // COLOR: Match parent bubble hue - VIVID MATCH
+        // Using 90% sat and 60% lightness for strong, clean color
+        drop.style.backgroundColor = `hsl(${parentHue}, 90%, 60%)`;
+        drop.style.boxShadow = `0 0 6px hsl(${parentHue}, 90%, 50%)`; // Glow
 
         // Physics
         const angle = Math.random() * Math.PI * 2;
