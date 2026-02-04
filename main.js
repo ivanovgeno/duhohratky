@@ -146,7 +146,7 @@ function createBubble(container) {
 
     // Interaction
     bubble.addEventListener('click', popBubble);
-    bubble.addEventListener('mouseover', popBubble);
+    bubble.addEventListener('mouseover', popBubble); // RESTORED HOVER
 
     container.appendChild(bubble);
 
@@ -161,6 +161,11 @@ function popBubble(e) {
     if (bubble.classList.contains('popped')) return;
 
     bubble.classList.add('popped');
+
+    // INSTANTLY HIDE BUBBLE to prevent ghost animations
+    bubble.style.visibility = 'hidden';
+    bubble.style.opacity = '0';
+    bubble.style.pointerEvents = 'none';
 
     // Play sound (optional, muted for now)
     // const audio = new Audio('pop.mp3');
@@ -181,7 +186,7 @@ function createSplash(startX, startY) {
     const container = document.getElementById('bubbles');
     if (!container) return;
 
-    const dropletCount = 30; // UPDATED to 30
+    const dropletCount = 30; // 30 Drops
     const droplets = [];
 
     // Create droplets
@@ -191,11 +196,11 @@ function createSplash(startX, startY) {
 
         // Initial state
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 8 + 3; // UPDATED speed
+        const speed = Math.random() * 8 + 3;
 
         const vx = Math.cos(angle) * speed;
-        const vy = (Math.random() * -12) - 6; // Burst UP (-6 to -18)
-        const size = Math.random() * 6 + 4; // UPDATED size 4-10px
+        const vy = (Math.random() * -12) - 6; // Burst UP
+        const size = Math.random() * 6 + 4; // 4-10px
 
         drop.style.width = `${size}px`;
         drop.style.height = `${size}px`;
