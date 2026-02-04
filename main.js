@@ -146,7 +146,7 @@ function createBubble(container) {
 
     // Interaction
     bubble.addEventListener('click', popBubble);
-    bubble.addEventListener('mouseover', popBubble);
+    bubble.addEventListener('mouseover', popBubble); // RESTORED HOVER
 
     container.appendChild(bubble);
 
@@ -186,7 +186,7 @@ function createSplash(startX, startY) {
     const container = document.getElementById('bubbles');
     if (!container) return;
 
-    const dropletCount = 30;
+    const dropletCount = 12; // REVERTED TO SUBTLE COUNT
     const droplets = [];
 
     // Create droplets
@@ -195,25 +195,27 @@ function createSplash(startX, startY) {
         drop.classList.add('droplet');
 
         // Random properties
-        const size = Math.random() * 6 + 4; // 4-10px
+        const size = Math.random() * 3 + 2; // SMALLER: 2-5px
 
-        // Center the droplet on the burst origin
-        // (Previously was just startX/Y, which made them top-left aligned)
+        // Spawn within a small radius around center for "cloud" effect
+        const randomOffsetX = (Math.random() - 0.5) * 20;
+        const randomOffsetY = (Math.random() - 0.5) * 20;
+
         drop.style.width = `${size}px`;
         drop.style.height = `${size}px`;
-        drop.style.left = `${startX - size / 2}px`;
-        drop.style.top = `${startY - size / 2}px`;
+        drop.style.left = `${startX + randomOffsetX - size / 2}px`;
+        drop.style.top = `${startY + randomOffsetY - size / 2}px`;
 
-        // Physics: Radial Burst
+        // Physics: Gentle Radial Burst
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 8 + 4; // Uniform speed in all directions
+        const speed = Math.random() * 4 + 2; // SLOWER: 2-6
 
         const vx = Math.cos(angle) * speed;
-        const vy = Math.sin(angle) * speed; // Burst in all directions (not just up)
+        const vy = Math.sin(angle) * speed;
 
         container.appendChild(drop);
 
-        droplets.push({ el: drop, x: startX - size / 2, y: startY - size / 2, vx, vy, alpha: 1 });
+        droplets.push({ el: drop, x: startX + randomOffsetX - size / 2, y: startY + randomOffsetY - size / 2, vx, vy, alpha: 1 });
     }
 
     function animate() {
@@ -223,8 +225,8 @@ function createSplash(startX, startY) {
 
             d.x += d.vx;
             d.y += d.vy;
-            d.vy += 0.9; // Gravity
-            d.alpha -= 0.025; // Fade out
+            d.vy += 0.6; // Gentle Gravity
+            d.alpha -= 0.03; // Fade out faster
 
             d.el.style.left = `${d.x}px`;
             d.el.style.top = `${d.y}px`;
