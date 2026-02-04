@@ -177,9 +177,46 @@ function popBubble(e) {
     // const audio = new Audio('pop.mp3');
     // audio.play().catch(() => {});
 
+    // Create Splash Particles
+    const rect = bubble.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    createSplash(centerX, centerY);
+
     setTimeout(() => {
         bubble.remove();
     }, 300);
+}
+
+function createSplash(x, y) {
+    const container = document.getElementById('bubbles');
+    if (!container) return;
+
+    const count = 12; // Number of droplets
+    for (let i = 0; i < count; i++) {
+        const drop = document.createElement('div');
+        drop.classList.add('droplet');
+
+        // Position at center of burst
+        drop.style.left = `${x}px`;
+        drop.style.top = `${y}px`;
+
+        // Random Trajectory
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 80 + 40; // Travel 40-120px
+        const dx = Math.cos(angle) * velocity;
+        const dy = Math.sin(angle) * velocity;
+
+        drop.style.setProperty('--dx', `${dx}px`);
+        drop.style.setProperty('--dy', `${dy}px`);
+
+        container.appendChild(drop);
+
+        // Cleanup
+        setTimeout(() => {
+            drop.remove();
+        }, 600);
+    }
 }
 
 /* ====================================
