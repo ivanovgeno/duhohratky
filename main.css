@@ -2047,4 +2047,59 @@ section {
         opacity: 1;
         transform: translateY(0);
     }
+}/* Recent Lessons / Featured Section */
+.featured-section {
+    padding: var(--spacing-xl) 0;
+    position: relative;
+    z-index: 10;
+    margin-top: -2rem; /* Pull up closer to hero */
+}
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    justify-content: center;
+}
+
+.lesson-card {
+    border: 3px solid transparent; /* Placeholder for gradient border */
+    background: 
+        linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)) padding-box,
+        var(--gradient-rainbow) border-box; /* Rainbow border */
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lesson-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(255, 105, 180, 0.3);
+}
+
+.lesson-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--gradient-rainbow);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    animation: bounce-small 2s infinite;
+}
+
+.lesson-date {
+    display: inline-block;
+    color: var(--color-pink);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    font-family: var(--font-secondary);
+}
+
+@keyframes bounce-small {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
 }
