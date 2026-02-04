@@ -136,17 +136,22 @@ function createBubble(container) {
     const delay = Math.random() * 5;
     const hue = Math.floor(Math.random() * 360); // Unique color shift
 
+    // Store Hue for Splash Color
+    bubble.dataset.hue = hue;
+
     // Apply styles
     bubble.style.width = `${size}px`;
     bubble.style.height = `${size}px`;
     bubble.style.left = `${left}%`;
     bubble.style.animationDuration = `${duration}s`;
     bubble.style.animationDelay = `${delay}s`;
-    bubble.style.filter = `hue-rotate(${hue}deg) drop-shadow(0 2px 5px rgba(255, 255, 255, 0.4))`;
+
+    // BOOST SATURATION: Added saturate(1.2) (+20%) to make them pop more
+    bubble.style.filter = `hue-rotate(${hue}deg) saturate(1.2) drop-shadow(0 2px 5px rgba(255, 255, 255, 0.4))`;
 
     // Interaction
     bubble.addEventListener('click', popBubble);
-    bubble.addEventListener('mouseover', popBubble); // RESTORED HOVER
+    bubble.addEventListener('mouseover', popBubble);
 
     container.appendChild(bubble);
 
@@ -160,19 +165,20 @@ function popBubble(e) {
     const bubble = e.target;
     if (bubble.classList.contains('popped')) return;
 
-    // 1. CAPTURE COORDINATES FROM MOUSE (MOST RELIABLE)
+    // 1. CAPTURE COORDINATES
     let centerX, centerY;
 
-    // Check if event has mouse coordinates (click/mouseover usually do)
     if (e.clientX !== undefined && e.clientY !== undefined && e.clientX !== 0 && e.clientY !== 0) {
         centerX = e.clientX;
         centerY = e.clientY;
     } else {
-        // Fallback to rect if triggered programmatically or weirdly
         const rect = bubble.getBoundingClientRect();
         centerX = rect.left + rect.width / 2;
         centerY = rect.top + rect.height / 2;
     }
+
+    // Capture Hue for Splash
+    const hue = parseInt(bubble.dataset.hue || '0');
 
     // 2. Hide Bubble Layout
     bubble.classList.add('popped');
@@ -180,12 +186,8 @@ function popBubble(e) {
     bubble.style.opacity = '0';
     bubble.style.pointerEvents = 'none';
 
-    // Play sound (optional)
-    // const audio = new Audio('pop.mp3');
-    // audio.play().catch(() => {});
-
-    // 3. Create Splash with CAPTURED coordinates
-    createSplash(centerX, centerY);
+    // 3. Create Splash
+    createSplash(centerX, centerY, hue);
 
     // 4. Remove element later
     setTimeout(() => {
@@ -193,7 +195,7 @@ function popBubble(e) {
     }, 300);
 }
 
-function createSplash(startX, startY) {
+function createSplash(startX, startY, parentHue) {
     const container = document.getElementById('bubbles');
     if (!container) return;
 
@@ -208,17 +210,21 @@ function createSplash(startX, startY) {
         // Random properties
         const size = Math.random() * 3 + 2; // 2-5px
 
-        // Spawn within a small radius around center for "cloud" effect
+        // Offset
         const randomOffsetX = (Math.random() - 0.5) * 20;
         const randomOffsetY = (Math.random() - 0.5) * 20;
 
-        // Center on the spawn point
+        // Position
         drop.style.width = `${size}px`;
         drop.style.height = `${size}px`;
         drop.style.left = `${startX + randomOffsetX - size / 2}px`;
         drop.style.top = `${startY + randomOffsetY - size / 2}px`;
 
-        // Physics: Gentle Radial Burst
+        // COLOR: Match parent bubble hue
+        drop.style.backgroundColor = `hsl(${parentHue}, 85%, 75%)`; // Pastel version of bubble
+        drop.style.boxShadow = `0 0 6px hsl(${parentHue}, 85%, 65%)`; // Glow
+
+        // Physics
         const angle = Math.random() * Math.PI * 2;
         const speed = Math.random() * 4 + 2;
 
@@ -237,8 +243,8 @@ function createSplash(startX, startY) {
 
             d.x += d.vx;
             d.y += d.vy;
-            d.vy += 0.6; // Gentle Gravity
-            d.alpha -= 0.03; // Fade out faster
+            d.vy += 0.6; // Gravity
+            d.alpha -= 0.03; // Fade out
 
             d.el.style.left = `${d.x}px`;
             d.el.style.top = `${d.y}px`;
