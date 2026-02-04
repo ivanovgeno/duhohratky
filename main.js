@@ -181,7 +181,7 @@ function createSplash(startX, startY) {
     const container = document.getElementById('bubbles');
     if (!container) return;
 
-    const dropletCount = 18;
+    const dropletCount = 30; // UPDATED to 30
     const droplets = [];
 
     // Create droplets
@@ -191,11 +191,11 @@ function createSplash(startX, startY) {
 
         // Initial state
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 6 + 2;
+        const speed = Math.random() * 8 + 3; // UPDATED speed
 
         const vx = Math.cos(angle) * speed;
-        const vy = (Math.random() * -12) - 4; // Burst UP initially (-4 to -16)
-        const size = Math.random() * 5 + 2;
+        const vy = (Math.random() * -12) - 6; // Burst UP (-6 to -18)
+        const size = Math.random() * 6 + 4; // UPDATED size 4-10px
 
         drop.style.width = `${size}px`;
         drop.style.height = `${size}px`;
