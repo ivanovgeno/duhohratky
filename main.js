@@ -146,8 +146,7 @@ function createBubble(container) {
 
     // Interaction
     bubble.addEventListener('click', popBubble);
-    // Removed mouseover as requested
-    // bubble.addEventListener('mouseover', popBubble);
+    bubble.addEventListener('mouseover', popBubble);
 
     container.appendChild(bubble);
 

@@ -2355,3 +2355,26 @@ section {
     filter: none !important;
     border-color: rgba(255, 255, 255, 0.8) !important;
 }
+
+/* --- V38 EXORCISM: KILL ALL GHOSTS --- */
+.bubble.popped {
+    /* Stop all movement/rotation immediately */
+    animation: none !important;
+    transform: none !important;
+    
+    /* Vanish immediately, handled by droplets */
+    opacity: 0 !important;
+    transition: opacity 0s !important;
+    
+    /* Hide everything inside */
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.bubble.popped::after, 
+.bubble.popped::before {
+    display: none !important;
+    content: none !important;
+    animation: none !important;
+}
