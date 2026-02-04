@@ -160,23 +160,27 @@ function popBubble(e) {
     const bubble = e.target;
     if (bubble.classList.contains('popped')) return;
 
-    bubble.classList.add('popped');
+    // 1. CAPTURE COORDINATES FIRST (Critical Fix for V42)
+    //    We must do this BEFORE adding 'popped' or changing styles,
+    //    otherwise dimensions or position might collapse/shift.
+    const rect = bubble.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
 
-    // INSTANTLY HIDE BUBBLE to prevent ghost animations
+    // 2. Hide Bubble Layout
+    bubble.classList.add('popped');
     bubble.style.visibility = 'hidden';
     bubble.style.opacity = '0';
     bubble.style.pointerEvents = 'none';
 
-    // Play sound (optional, muted for now)
+    // Play sound (optional)
     // const audio = new Audio('pop.mp3');
     // audio.play().catch(() => {});
 
-    // Create Splash Particles
-    const rect = bubble.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+    // 3. Create Splash with CAPTURED coordinates
     createSplash(centerX, centerY);
 
+    // 4. Remove element later
     setTimeout(() => {
         bubble.remove();
     }, 300);
@@ -186,7 +190,7 @@ function createSplash(startX, startY) {
     const container = document.getElementById('bubbles');
     if (!container) return;
 
-    const dropletCount = 12; // REVERTED TO SUBTLE COUNT
+    const dropletCount = 12;
     const droplets = [];
 
     // Create droplets
@@ -195,12 +199,13 @@ function createSplash(startX, startY) {
         drop.classList.add('droplet');
 
         // Random properties
-        const size = Math.random() * 3 + 2; // SMALLER: 2-5px
+        const size = Math.random() * 3 + 2; // 2-5px
 
         // Spawn within a small radius around center for "cloud" effect
         const randomOffsetX = (Math.random() - 0.5) * 20;
         const randomOffsetY = (Math.random() - 0.5) * 20;
 
+        // Center on the spawn point
         drop.style.width = `${size}px`;
         drop.style.height = `${size}px`;
         drop.style.left = `${startX + randomOffsetX - size / 2}px`;
@@ -208,7 +213,7 @@ function createSplash(startX, startY) {
 
         // Physics: Gentle Radial Burst
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 4 + 2; // SLOWER: 2-6
+        const speed = Math.random() * 4 + 2;
 
         const vx = Math.cos(angle) * speed;
         const vy = Math.sin(angle) * speed;
