@@ -145,7 +145,7 @@ const defaultData = {
 
     // Reservio
     reservio: {
-        iframeUrl: '',
+        iframeUrl: 'https://duhohratky.reservio.com',
         iframeHeight: 600,
         phone: '+420 123 456 789'
     },
