@@ -341,202 +341,158 @@ function initReservio() {
 /* ====================================
    REALISTIC SOAP BUBBLES WITH POP
    ==================================== */
-/* ====================================
-   ATOMIC BUBBLE SYSTEM (V6)
-   ==================================== */
-const BubbleSystem = {
-    init() {
-        this.injectStyles();
-        this.createContainer();
-        this.startGeneration();
-        this.attachGlobalListeners();
-        console.log('BubbleSystem V6 Initialized 🧼');
-    },
+function initBubbles() {
+    const container = document.getElementById('bubbles');
+    if (!container) return;
 
-    injectStyles() {
-        const style = document.createElement('style');
-        style.textContent = `
-            #atomic-bubble-container {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                z-index: 999; /* Below header (1000) but above everything else */
-                overflow: hidden;
-            }
-            .atomic-bubble {
-                position: absolute;
-                border-radius: 50%;
-                opacity: 0.85;
-                pointer-events: auto; /* CRITICAL: Enables clicks */
-                cursor: pointer;
-                transition: transform 0.2s ease;
-                background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 10%, transparent 40%);
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                will-change: transform;
-                z-index: 10000; /* Force on top within container */
-            }
-            .atomic-bubble:hover {
-                transform: scale(1.15);
-                filter: brightness(1.1);
-            }
-            .atomic-bubble.popping {
-                animation: atomic-pop 0.3s ease-out forwards;
-                pointer-events: none;
-            }
-            @keyframes atomic-float {
-                0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-                10% { opacity: 0.85; }
-                90% { opacity: 0.85; }
-                100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-            }
-            @keyframes atomic-pop {
-                0% { transform: scale(1); opacity: 0.85; }
-                50% { transform: scale(1.4); opacity: 0.8; }
-                100% { transform: scale(0); opacity: 0; }
-            }
-            .atomic-splash {
-                position: fixed;
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 2000;
-                animation: atomic-splash-anim 0.5s ease-out forwards;
-            }
-            @keyframes atomic-splash-anim {
-                0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-                100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-    },
+    // Color classes for different bubble colors
+    const colorClasses = ['pink', 'coral', 'yellow', 'mint', 'blue', 'purple'];
 
-    createContainer() {
-        const container = document.createElement('div');
-        container.id = 'atomic-bubble-container';
-        document.body.prepend(container);
-        this.container = container;
-    },
+    // Create bubbles (optimized for performance: 12 bubbles)
+    for (let i = 0; i < 12; i++) {
+        createBubble(container, colorClasses);
+    }
 
-    startGeneration() {
-        // Initial set
-        for (let i = 0; i < 15; i++) {
-            this.createBubble();
+    // Continuously create new bubbles to replace popped ones
+    setInterval(() => {
+        const bubbleCount = container.querySelectorAll('.bubble:not(.popping)').length;
+        if (bubbleCount < 10) { // Optimized: max 10 bubbles
+            createBubble(container, colorClasses);
         }
-        // Continuous generation
-        setInterval(() => {
-            const count = document.querySelectorAll('.atomic-bubble:not(.popping)').length;
-            if (count < 12) {
-                this.createBubble();
-            }
-        }, 2000);
-    },
+    }, 3000); // Slower interval for better performance
+}
 
-    createBubble() {
-        const bubble = document.createElement('div');
-        bubble.classList.add('atomic-bubble');
+function createBubble(container, colorClasses) {
+    const bubble = document.createElement('div');
+    const colorClass = colorClasses[Math.floor(Math.random() * colorClasses.length)];
 
-        // Random attributes
-        const size = Math.random() * 80 + 20;
-        const left = Math.random() * 100;
-        const duration = Math.random() * 10 + 10; // 10-20s
-        const delay = Math.random() * 5;
+    // All bubbles have pop effect on hover
+    bubble.className = `bubble ${colorClass} hover-pop`;
 
-        // Colors (box-shadow trick for colors)
-        const colors = [
-            { name: 'pink', shadow: 'inset 0 0 20px rgba(232, 160, 160, 0.6), 0 0 10px rgba(232, 160, 160, 0.3)' },
-            { name: 'blue', shadow: 'inset 0 0 20px rgba(160, 200, 216, 0.6), 0 0 10px rgba(160, 200, 216, 0.3)' },
-            { name: 'yellow', shadow: 'inset 0 0 20px rgba(232, 208, 128, 0.6), 0 0 10px rgba(232, 208, 128, 0.3)' },
-            { name: 'green', shadow: 'inset 0 0 20px rgba(168, 216, 184, 0.6), 0 0 10px rgba(168, 216, 184, 0.3)' },
-            { name: 'purple', shadow: 'inset 0 0 20px rgba(200, 168, 208, 0.6), 0 0 10px rgba(200, 168, 208, 0.3)' }
-        ];
-        const color = colors[Math.floor(Math.random() * colors.length)];
+    // Varied sizes like real soap bubbles (20-100px)
+    const size = Math.random() * 80 + 20;
 
-        bubble.style.width = `${size}px`;
-        bubble.style.height = `${size}px`;
-        bubble.style.left = `${left}%`;
-        bubble.style.boxShadow = color.shadow;
-        bubble.dataset.colorName = color.name;
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    bubble.style.left = `${Math.random() * 100}%`;
+    bubble.style.animationDuration = `${Math.random() * 15 + 10}s`;
+    bubble.style.animationDelay = `${Math.random() * 5}s`;
 
-        // Animation
-        bubble.style.animation = `atomic-float ${duration}s infinite linear`;
-        bubble.style.animationDelay = `-${delay}s`; // Start mid-animation
+    // Explicitly set styles for robust interactivity
+    bubble.style.zIndex = '10000';
+    bubble.style.pointerEvents = 'auto';
 
-        this.container.appendChild(bubble);
+    // Handle the pop effect on hover for all bubbles
+    let isPopping = false;
+    bubble.addEventListener('mouseenter', () => {
+        if (isPopping || bubble.classList.contains('popping')) return;
+        isPopping = true;
 
-        // Cleanup when out of view (though animation loops, good practice to recycle)
-        // For infinite loop we don't remove, but if we wanted one-off bubbles we would.
-        // Here we keep them looping effectively.
-    },
+        // Create splash effect at bubble position
+        createBubbleSplash(bubble, container, colorClass);
 
-    attachGlobalListeners() {
-        // Global delegation for 100% click reliability
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('atomic-bubble')) {
-                this.popBubble(e.target);
-            }
-        });
-
-        document.addEventListener('mouseover', (e) => {
-            if (e.target.classList.contains('atomic-bubble')) {
-                this.popBubble(e.target);
-            }
-        });
-
-        // Touch support
-        document.addEventListener('touchstart', (e) => {
-            if (e.target.classList.contains('atomic-bubble')) {
-                e.preventDefault(); // Prevent scroll/zoom on bubble
-                this.popBubble(e.target);
-            }
-        }, { passive: false });
-    },
-
-    popBubble(bubble) {
-        if (bubble.classList.contains('popping')) return;
+        // Add popping class for animation
         bubble.classList.add('popping');
 
-        this.createSplash(bubble);
-
+        // Wait for animation, then remove and create new
         setTimeout(() => {
             bubble.remove();
-            this.createBubble(); // Replenish
-        }, 300);
-    },
+            createBubble(container, colorClasses);
+        }, 350);
+    });
 
-    createSplash(bubble) {
-        const rect = bubble.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const colorName = bubble.dataset.colorName || 'pink';
+    // Pop on click/touch
+    bubble.addEventListener('click', (e) => {
+        e.stopPropagation();
+        popBubble(bubble, container, colorClasses);
+    });
 
-        const palette = {
-            pink: '#FFB6C1', blue: '#87CEEB', yellow: '#FFD700',
-            green: '#98D8C8', purple: '#DDA0DD'
-        };
-        const color = palette[colorName];
+    bubble.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        popBubble(bubble, container, colorClasses);
+    }, { passive: false });
 
-        for (let i = 0; i < 8; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('atomic-splash');
-            const size = Math.random() * 6 + 4;
-            const angle = Math.random() * Math.PI * 2;
-            const dist = Math.random() * 60 + 30;
+    container.appendChild(bubble);
+}
 
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            particle.style.background = color;
-            particle.style.left = `${centerX}px`;
-            particle.style.top = `${centerY}px`;
-            particle.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
-            particle.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+// Create splash particles when bubble pops
+function createBubbleSplash(bubble, container, colorClass) {
+    const rect = bubble.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const bubbleSize = rect.width;
 
-            document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), 500);
-        }
+    // Color mapping for splash particles
+    const colors = {
+        pink: ['#E8A0A0', '#FFB6C1', '#FF69B4'],
+        coral: ['#E5A88A', '#FFA07A', '#FF7F50'],
+        yellow: ['#E8D080', '#FFE066', '#FFD700'],
+        mint: ['#A8D8B8', '#98D8C8', '#7FD8BE'],
+        blue: ['#A0C8D8', '#87CEEB', '#5BC0DE'],
+        purple: ['#C8A8D0', '#DDA0DD', '#BA55D3']
+    };
+
+    const splashColors = colors[colorClass] || colors.pink;
+    const particleCount = Math.min(Math.floor(bubbleSize / 12) + 3, 8); // Max 8 particles for performance
+
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'bubble-splash-particle';
+
+        // Random direction and distance
+        const angle = (Math.PI * 2 * i) / particleCount + Math.random() * 0.5;
+        const distance = bubbleSize * 0.5 + Math.random() * bubbleSize * 0.8;
+        const endX = Math.cos(angle) * distance;
+        const endY = Math.sin(angle) * distance;
+
+        // Random particle size
+        const particleSize = Math.random() * 8 + 4;
+
+        // Random color from splash colors
+        const color = splashColors[Math.floor(Math.random() * splashColors.length)];
+
+        particle.style.cssText = `
+            position: fixed;
+            left: ${centerX}px;
+            top: ${centerY}px;
+            width: ${particleSize}px;
+            height: ${particleSize}px;
+            background: ${color};
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2000;
+            box-shadow: 0 0 ${particleSize}px ${color};
+            --end-x: ${endX}px;
+            --end-y: ${endY}px;
+            animation: bubble-splash 0.5s ease-out forwards;
+        `;
+
+        document.body.appendChild(particle);
+
+        // Remove particle after animation
+        setTimeout(() => particle.remove(), 500);
     }
-};
+}
+
+function popBubble(bubble, container, colorClasses) {
+    if (bubble.classList.contains('popping')) return;
+
+    // Extract color class from bubble
+    const colorClass = ['pink', 'coral', 'yellow', 'mint', 'blue', 'purple']
+        .find(c => bubble.classList.contains(c)) || 'pink';
+
+    // Create splash effect
+    createBubbleSplash(bubble, container, colorClass);
+
+    bubble.classList.add('popping');
+
+    // Remove bubble after animation and create new one
+    setTimeout(() => {
+        bubble.remove();
+        // Create a new bubble to replace the popped one
+        createBubble(container, colorClasses);
+    }, 350);
+}
 
 function initBubbles() {
     BubbleSystem.init();

@@ -173,9 +173,164 @@ body {
 }
 
 /* ====================================
-   REALISTIC SOAP BUBBLES - REMOVED (Generováno v JS)
+   REALISTIC SOAP BUBBLES
    ==================================== */
-/* Styles injected via script.js */
+.bubbles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    /* High priority, below header */
+    overflow: hidden;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    animation: float-bubble 15s infinite ease-in-out;
+    opacity: 0.85;
+    pointer-events: auto;
+    /* IMPORTANT: Enable clicks */
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    /* Soap bubble shine effect */
+    background: radial-gradient(circle at 25% 25%,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(255, 255, 255, 0.4) 10%,
+            transparent 40%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Different colored bubbles */
+.bubble.pink {
+    box-shadow:
+        inset 0 0 20px rgba(232, 160, 160, 0.6),
+        inset 10px -10px 30px rgba(255, 200, 220, 0.4),
+        0 0 15px rgba(232, 160, 160, 0.3);
+}
+
+.bubble.coral {
+    box-shadow:
+        inset 0 0 20px rgba(229, 168, 138, 0.6),
+        inset 10px -10px 30px rgba(255, 200, 180, 0.4),
+        0 0 15px rgba(229, 168, 138, 0.3);
+}
+
+.bubble.yellow {
+    box-shadow:
+        inset 0 0 20px rgba(232, 208, 128, 0.6),
+        inset 10px -10px 30px rgba(255, 240, 180, 0.4),
+        0 0 15px rgba(232, 208, 128, 0.3);
+}
+
+.bubble.mint {
+    box-shadow:
+        inset 0 0 20px rgba(168, 216, 184, 0.6),
+        inset 10px -10px 30px rgba(200, 240, 220, 0.4),
+        0 0 15px rgba(168, 216, 184, 0.3);
+}
+
+.bubble.blue {
+    box-shadow:
+        inset 0 0 20px rgba(160, 200, 216, 0.6),
+        inset 10px -10px 30px rgba(200, 230, 255, 0.4),
+        0 0 15px rgba(160, 200, 216, 0.3);
+}
+
+.bubble.purple {
+    box-shadow:
+        inset 0 0 20px rgba(200, 168, 208, 0.6),
+        inset 10px -10px 30px rgba(230, 200, 240, 0.4),
+        0 0 15px rgba(200, 168, 208, 0.3);
+}
+
+/* Hover effect - scale up */
+.bubble:hover {
+    transform: scale(1.15);
+    filter: brightness(1.1);
+}
+
+/* Hover effect - pop variant cursor */
+.bubble.hover-pop {
+    cursor: pointer;
+}
+
+/* Pop animation (click and hover-pop) */
+.bubble.popping {
+    animation: bubble-pop 0.35s ease-out forwards !important;
+    pointer-events: none;
+}
+
+@keyframes bubble-pop {
+    0% {
+        transform: scale(1);
+        opacity: 0.85;
+        filter: brightness(1);
+    }
+
+    25% {
+        transform: scale(1.3);
+        opacity: 0.9;
+        filter: brightness(1.2);
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.7;
+        filter: brightness(1.4);
+    }
+
+    75% {
+        transform: scale(1.2);
+        opacity: 0.3;
+        filter: brightness(1.8);
+    }
+
+    100% {
+        transform: scale(0.1);
+        opacity: 0;
+        filter: brightness(2);
+    }
+}
+
+/* Splash particle animation */
+@keyframes bubble-splash {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(calc(-50% + var(--end-x)),
+                calc(-50% + var(--end-y))) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes float-bubble {
+
+    0%,
+    100% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.85;
+    }
+
+    90% {
+        opacity: 0.85;
+    }
+
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
 
 
 /* ====================================
