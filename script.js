@@ -374,10 +374,15 @@ function createBubble(container, colorClasses) {
 
     bubble.style.width = `${size}px`;
     bubble.style.height = `${size}px`;
-    bubble.style.cursor = 'pointer'; // Force cursor pointer
     bubble.style.left = `${Math.random() * 100}%`;
     bubble.style.animationDuration = `${Math.random() * 15 + 10}s`;
     bubble.style.animationDelay = `${Math.random() * 5}s`;
+
+    // FORCE STYLES FOR INTERACTIVITY
+    bubble.style.zIndex = '10000';
+    bubble.style.cursor = 'pointer';
+    bubble.style.pointerEvents = 'auto';
+    bubble.style.position = 'absolute';
 
     // Handle the pop effect on hover for all bubbles
     let isPopping = false;
