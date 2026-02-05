@@ -161,6 +161,16 @@ const defaultData = {
         ]
     },
 
+    // Lessons
+    lessons: {
+        title: 'Aktuální <span class="rainbow-text">lekce</span>',
+        lesson1: { active: true, title: 'Lekce 1', location: 'Hradec Králové', date: '', tag: 'free_spots' },
+        lesson2: { active: true, title: 'Lekce 2', location: 'Hradec Králové', date: '', tag: 'free_spots' },
+        lesson3: { active: true, title: 'Lekce 3', location: 'Hradec Králové', date: '', tag: 'free_spots' },
+        lesson4: { active: false, title: '', location: '', date: '', tag: 'free_spots' },
+        lesson5: { active: false, title: '', location: '', date: '', tag: 'free_spots' }
+    },
+
     // Settings
     settings: {
         email: 'admin@duhohratky.cz',

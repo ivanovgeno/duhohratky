@@ -22,35 +22,48 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function loadContent() {
+    console.log('--- Loading Content ---');
     let data;
 
     // 1. Try LocalStorage (Preview Mode)
-    const localData = localStorage.getItem('duhohratky_content');
-    if (localData) {
-        try {
+    try {
+        const localData = localStorage.getItem('duhohratky_content');
+        if (localData) {
             data = JSON.parse(localData);
-            console.log('Loaded content from LocalStorage (Preview Mode)');
-        } catch (e) {
-            console.error('Error parsing LocalStorage data', e);
+            console.log('Loaded from LocalStorage');
         }
+    } catch (e) {
+        console.warn('LocalStorage access failed', e);
     }
 
-    // 2. Try window.defaultContent (Production Mode / Fallback)
-    if (!data && window.defaultContent) {
-        data = window.defaultContent;
-        console.log('Loaded content from content.js (Production Mode)');
+    // 2. Base content from window.defaultContent
+    const baseContent = window.defaultContent || {};
+
+    // 3. Merge if data exists, otherwise use base
+    if (data) {
+        data = deepMerge(baseContent, data);
+    } else {
+        data = baseContent;
     }
 
-    // 3. Apply Data to DOM
-    if (data && window.defaultContent) {
-        data = deepMerge(window.defaultContent, data);
+    // 4. Final safety check
+    if (!data || Object.keys(data).length === 0) {
+        console.error('No content found anywhere!');
+        return;
+    }
+
+    // 5. Apply to DOM
+    try {
         applyContent(data);
-    } else if (data) {
-        applyContent(data);
+    } catch (e) {
+        console.error('Failed to apply content', e);
     }
 }
 
 function deepMerge(target, source) {
+    if (!source || typeof source !== 'object') return target;
+    if (!target || typeof target !== 'object') return source;
+
     const result = { ...target };
     for (const key in source) {
         if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
@@ -120,13 +133,21 @@ function applyContent(data) {
     }
 
     // Render Upcoming Themes Section
-    if (data.upcoming) {
-        renderUpcomingThemes(data.upcoming);
+    try {
+        if (data.upcoming) {
+            renderUpcomingThemes(data.upcoming);
+        }
+    } catch (e) {
+        console.error('Error rendering upcoming themes:', e);
     }
 
     // Render Lessons Section
-    if (data.lessons) {
-        renderLessons(data.lessons);
+    try {
+        if (data.lessons) {
+            renderLessons(data.lessons);
+        }
+    } catch (e) {
+        console.error('Error rendering lessons:', e);
     }
 }
 
