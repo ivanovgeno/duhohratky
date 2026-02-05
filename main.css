@@ -2262,8 +2262,6 @@ section {
     /* Floating out of card */
     /* Floating out of card */
     right: 20px;
-    background: var(--color-pink-dark) !important;
-    /* Default to solid monochrome */
     color: white;
     padding: 0.5rem 1.2rem;
     border-radius: 50px;
@@ -2271,9 +2269,37 @@ section {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 5px 15px rgba(216, 112, 112, 0.3);
     animation: float-badge 3s ease-in-out infinite;
     z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Color Categories (Modifiers) */
+
+/* Standard Date */
+.badge-date {
+    background: var(--color-pink-dark) !important;
+    box-shadow: 0 5px 15px rgba(216, 112, 112, 0.3);
+}
+
+/* Status: Free Spots - Must be GREEN */
+.badge-free {
+    background: #2e7d32 !important;
+    box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+}
+
+/* Status: Full */
+.badge-full {
+    background: #c62828 !important;
+    box-shadow: 0 5px 15px rgba(198, 40, 40, 0.3);
+}
+
+/* Status: Cancelled */
+.badge-cancelled {
+    background: #757575 !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .lesson-date {

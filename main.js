@@ -153,10 +153,10 @@ function renderLessons(lessonsData) {
                 } else if (diffDays > 1 && diffDays < 7) {
                     const days = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
                     // Use generic style (monochrome) but keep specific label
-                    badgeHtml = `<span class="lesson-badge">${days[itemDate.getDay()]}</span>`;
+                    badgeHtml = `<span class="lesson-badge badge-date">${days[itemDate.getDay()]}</span>`;
                 } else {
                     // Standard date badge (monochrome)
-                    badgeHtml = `<span class="lesson-badge">${dateLabel}</span>`;
+                    badgeHtml = `<span class="lesson-badge badge-date">${dateLabel}</span>`;
                 }
             }
 
@@ -181,11 +181,11 @@ function renderLessons(lessonsData) {
             // Status Logic (Moved to Top Badge)
             let statusBadgeHtml = '';
             if (item.tag === 'free_spots') {
-                statusBadgeHtml = `<span class="lesson-badge" style="background: #e8f5e9; color: #2e7d32; right: 20px; left: auto; box-shadow: 0 5px 15px rgba(46, 125, 50, 0.2);">✅ Volná místa</span>`;
+                statusBadgeHtml = `<span class="lesson-badge badge-free" style="right: 20px; left: auto;">✅ Volná místa</span>`;
             } else if (item.tag === 'full') {
-                statusBadgeHtml = `<span class="lesson-badge" style="background: #ffebee; color: #c62828; right: 20px; left: auto; box-shadow: 0 5px 15px rgba(198, 40, 40, 0.2);">❌ Obsazeno</span>`;
+                statusBadgeHtml = `<span class="lesson-badge badge-full" style="right: 20px; left: auto;">❌ Obsazeno</span>`;
             } else if (item.tag === 'cancelled') {
-                statusBadgeHtml = `<span class="lesson-badge" style="background: #f5f5f5; color: #666; right: 20px; left: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">⚠️ Zrušeno</span>`;
+                statusBadgeHtml = `<span class="lesson-badge badge-cancelled" style="right: 20px; left: auto;">⚠️ Zrušeno</span>`;
             }
 
             // Adjust date badge to LEFT side
