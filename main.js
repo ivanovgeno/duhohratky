@@ -198,7 +198,7 @@ function renderLessons(lessonsData) {
                     ${statusHtml}
                     ${item.price ? `<div style="margin-bottom: 0.5rem; font-weight: bold; color: #444; background: rgba(0,0,0,0.03); padding: 4px 10px; border-radius: 4px; display: inline-block;">💰 ${item.price}</div>` : ''}
                     <p style="margin-bottom: 1rem;">${item.description || ''}</p>
-                    ${item.link ? `<a href="${item.link}" class="btn nav-link nav-cta" style="width: 100%; text-align: center; margin-top: 0.5rem; justify-content: center;">Rezervovat</a>` : ''}
+                    ${item.link ? `<a href="${item.link}" class="btn btn-cta" style="width: 100%; text-align: center; margin-top: 0.5rem; justify-content: center;">Rezervovat</a>` : ''}
                 </div>
             `;
 
