@@ -190,8 +190,8 @@ function renderLessons(lessonsData) {
 
             // Adjust date badge to LEFT side
             if (badgeHtml) {
-                // Inject style override to force it left
-                badgeHtml = badgeHtml.replace('class="lesson-badge', 'class="lesson-badge" style="left: 20px; right: auto;"');
+                // Safer replacement that doesn't break classes
+                badgeHtml = badgeHtml.replace('<span ', '<span style="left: 20px; right: auto;" ');
             }
 
             card.innerHTML = `
