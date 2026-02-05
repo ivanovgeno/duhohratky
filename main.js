@@ -135,16 +135,18 @@ function applyContent(data) {
     // Render Upcoming Themes Section
     try {
         const upcomingSection = document.getElementById('upcoming');
+        console.log('Rendering upcoming. Visible:', data.upcoming?.visible);
         if (data.upcoming && data.upcoming.visible !== false) {
             if (upcomingSection) upcomingSection.style.display = 'block';
             renderUpcomingThemes(data.upcoming);
         } else {
+            console.log('Hiding upcoming section');
             if (upcomingSection) upcomingSection.style.display = 'none';
         }
     } catch (e) {
         console.error('Error rendering upcoming themes:', e);
     }
-...
+
     // Render Lessons Section
     try {
         if (data.lessons) {
