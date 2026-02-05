@@ -2260,7 +2260,6 @@ section {
     position: absolute;
     top: -15px;
     /* Floating out of card */
-    /* Floating out of card */
     right: 20px;
     color: white;
     padding: 0.5rem 1.2rem;
@@ -2269,6 +2268,7 @@ section {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     animation: float-badge 3s ease-in-out infinite;
     z-index: 2;
     display: flex;
