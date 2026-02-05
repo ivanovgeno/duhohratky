@@ -132,13 +132,17 @@ function renderLessons(lessonsData) {
             let dateLabel = '';
 
             if (item.date) {
-                const itemDate = new Date(item.date);
+                // Parse date manually to avoid UTC conversion issues with "YYYY-MM-DD"
+                const [y, m, d] = item.date.split('-').map(Number);
+                const itemDate = new Date(y, m - 1, d); // Local midnight
+
                 const today = new Date();
                 today.setHours(0, 0, 0, 0);
-                itemDate.setHours(0, 0, 0, 0);
 
+                // Diff in milliseconds
                 const diffTime = itemDate - today;
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                // Diff in days (round helpful for DST switches)
+                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 
                 dateLabel = formatCzechDate(item.date);
 
@@ -150,6 +154,23 @@ function renderLessons(lessonsData) {
                     const days = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
                     badgeHtml = `<span class="lesson-badge badge-upcoming">${days[itemDate.getDay()]}</span>`;
                 }
+            }
+
+            // Collect separate times
+            const times = [];
+            for (let t = 1; t <= 5; t++) {
+                if (item[`time${t}`] && item[`time${t}`].trim() !== '') {
+                    times.push(item[`time${t}`]);
+                }
+            }
+
+            let timesHtml = '';
+            if (times.length > 0) {
+                timesHtml = `<div class="lesson-times">`;
+                times.forEach(time => {
+                    timesHtml += `<span class="time-badge">🕒 ${time}</span>`;
+                });
+                timesHtml += `</div>`;
             }
 
             // Status Tag Logic
@@ -167,6 +188,7 @@ function renderLessons(lessonsData) {
                 <div class="card-content" style="padding-top: ${badgeHtml ? '1rem' : '1.5rem'}">
                     <span class="lesson-date" style="color: #888; font-size: 0.9rem;">${item.location || ''} ${dateLabel ? '• ' + dateLabel : ''}</span>
                     <h3 style="margin: 0.5rem 0;">${item.title || 'Bez názvu'}</h3>
+                    ${timesHtml}
                     ${statusHtml}
                     <p style="margin-bottom: 1rem;">${item.description || ''}</p>
                     ${item.link ? `<a href="${item.link}" class="btn btn-secondary btn-small">Rezervovat</a>` : ''}
