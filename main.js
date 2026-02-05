@@ -153,6 +153,9 @@ function renderLessons(lessonsData) {
                 } else if (diffDays > 1 && diffDays < 7) {
                     const days = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
                     badgeHtml = `<span class="lesson-badge badge-upcoming">${days[itemDate.getDay()]}</span>`;
+                } else {
+                    // Standard date badge
+                    badgeHtml = `<span class="lesson-badge badge-neutral">${dateLabel}</span>`;
                 }
             }
 
@@ -186,7 +189,7 @@ function renderLessons(lessonsData) {
             card.innerHTML = `
                 ${badgeHtml}
                 <div class="card-content" style="padding-top: ${badgeHtml ? '1rem' : '1.5rem'}">
-                    <span class="lesson-date" style="color: #888; font-size: 0.9rem;">${item.location || ''} ${dateLabel ? '• ' + dateLabel : ''}</span>
+                    <span class="lesson-date" style="color: #888; font-size: 0.9rem;">${item.location || ''}</span>
                     <h3 style="margin: 0.5rem 0;">${item.title || 'Bez názvu'}</h3>
                     ${timesHtml}
                     ${statusHtml}
