@@ -379,17 +379,20 @@ function initButtons() {
 
     // Export
     document.getElementById('export-btn').addEventListener('click', () => {
-        const dataStr = JSON.stringify(siteData, null, 2);
-        const blob = new Blob([dataStr], { type: 'application/json' });
+        const dataStr = JSON.stringify(siteData, null, 4);
+        // Wrap in window.defaultContent for content.js compatibility
+        const jsContent = `window.defaultContent = ${dataStr};`;
+
+        const blob = new Blob([jsContent], { type: 'application/javascript' });
         const url = URL.createObjectURL(blob);
 
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'duhohratky_backup.json';
+        a.download = 'content.js'; // Export as .js
         a.click();
 
         URL.revokeObjectURL(url);
-        showToast('Data byla exportována', 'success');
+        showToast('Data byla exportována (content.js)', 'success');
     });
 
     // Import
@@ -404,13 +407,20 @@ function initButtons() {
         const reader = new FileReader();
         reader.onload = (event) => {
             try {
-                const imported = JSON.parse(event.target.result);
+                let fileContent = event.target.result;
+                // Try to strip JS assignment if it exists (for content.js)
+                if (fileContent.includes('window.defaultContent')) {
+                    fileContent = fileContent.replace(/window\.defaultContent\s*=\s*/, '').replace(/;?\s*$/, '');
+                }
+
+                const imported = JSON.parse(fileContent);
                 siteData = deepMerge(defaultData, imported);
                 saveData();
                 populateFields();
                 showToast('Data byla importována', 'success');
             } catch (err) {
-                showToast('Chyba při importu dat', 'error');
+                console.error(err);
+                showToast('Chyba při importu dat: ' + err.message, 'error');
             }
         };
         reader.readAsText(file);

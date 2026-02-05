@@ -8,9 +8,106 @@ const SEASON_CONFIG = {
 
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
+    loadContent(); // Load dynamic content
     updateDynamicBadges();
     initBubbles(); // Start bubbles
+
+    // Listen for changes from Admin panel (real-time update)
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'duhohratky_content') {
+            console.log('Content updated from another tab');
+            loadContent();
+        }
+    });
 });
+
+async function loadContent() {
+    let data;
+
+    // 1. Try LocalStorage (Preview Mode)
+    const localData = localStorage.getItem('duhohratky_content');
+    if (localData) {
+        try {
+            data = JSON.parse(localData);
+            console.log('Loaded content from LocalStorage (Preview Mode)');
+        } catch (e) {
+            console.error('Error parsing LocalStorage data', e);
+        }
+    }
+
+    // 2. Try window.defaultContent (Production Mode / Fallback)
+    if (!data && window.defaultContent) {
+        data = window.defaultContent;
+        console.log('Loaded content from content.js (Production Mode)');
+    }
+
+    // 3. Apply Data to DOM
+    if (data) {
+        applyContent(data);
+    }
+}
+
+function applyContent(data) {
+    const elements = document.querySelectorAll('[data-content]');
+
+    elements.forEach(el => {
+        const keyPath = el.dataset.content;
+        const value = getValueByPath(data, keyPath);
+
+        if (value === undefined || value === null) return;
+
+        // Handle different element types
+        if (el.tagName === 'IMG') {
+            if (value) el.src = value;
+        } else if (el.tagName === 'A') {
+            // If it's a link, we might want to update href or text
+            // For now, let's assume if it has data-content it updates text, 
+            // unless we specify data-content-href
+            if (el.dataset.contentHref) {
+                const hrefValue = getValueByPath(data, el.dataset.contentHref);
+                if (hrefValue) el.href = hrefValue;
+            }
+            if (!el.dataset.contentNoText) {
+                el.innerText = value;
+            }
+        } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.value = value;
+        } else {
+            // Regular text elements
+            el.innerText = value;
+        }
+    });
+
+    // Special handling for specific sections if needed (like colors or background images)
+    // Activities colors
+    if (data.activities) {
+        // We might want to loop through activities to set colors if they are dynamic
+        // But for now the CSS classes handle colors based on HTML structure
+        // If we want dynamic colors we need to apply style
+        for (let i = 1; i <= 6; i++) {
+            const color = data.activities[`act${i}Color`];
+            const card = document.querySelector(`.activity-card:nth-child(${i})`);
+            if (card && color) {
+                card.dataset.color = color;
+            }
+        }
+    }
+
+    // Tips gradients
+    if (data.tips) {
+        for (let i = 1; i <= 3; i++) {
+            const color = data.tips[`tip${i}Color`];
+            const imgContainer = document.querySelector(`.tip-card[data-id="tip${i}"] .tip-image`);
+            if (imgContainer && color) {
+                imgContainer.style.background = color;
+            }
+        }
+    }
+}
+
+function getValueByPath(obj, path) {
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+}
 
 function updateDynamicBadges() {
     const today = new Date();
