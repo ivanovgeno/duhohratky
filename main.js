@@ -152,10 +152,11 @@ function renderLessons(lessonsData) {
                     badgeHtml = '<span class="lesson-badge badge-tomorrow">Zítra</span>';
                 } else if (diffDays > 1 && diffDays < 7) {
                     const days = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
-                    badgeHtml = `<span class="lesson-badge badge-upcoming">${days[itemDate.getDay()]}</span>`;
+                    // Use generic style (monochrome) but keep specific label
+                    badgeHtml = `<span class="lesson-badge">${days[itemDate.getDay()]}</span>`;
                 } else {
-                    // Standard date badge
-                    badgeHtml = `<span class="lesson-badge badge-neutral">${dateLabel}</span>`;
+                    // Standard date badge (monochrome)
+                    badgeHtml = `<span class="lesson-badge">${dateLabel}</span>`;
                 }
             }
 
