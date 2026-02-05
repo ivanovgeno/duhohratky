@@ -196,6 +196,7 @@ function renderLessons(lessonsData) {
                     <h3 style="margin: 0.5rem 0;">${item.title || 'Bez názvu'}</h3>
                     ${timesHtml}
                     ${statusHtml}
+                    ${item.price ? `<div style="margin-bottom: 0.5rem; font-weight: bold; color: #444; background: rgba(0,0,0,0.03); padding: 4px 10px; border-radius: 4px; display: inline-block;">💰 ${item.price}</div>` : ''}
                     <p style="margin-bottom: 1rem;">${item.description || ''}</p>
                     ${item.link ? `<a href="${item.link}" class="btn btn-secondary btn-small">Rezervovat</a>` : ''}
                 </div>
