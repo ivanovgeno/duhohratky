@@ -115,6 +115,7 @@ window.defaultContent = {
     },
     // Current Lessons (5 slots)
     "lessons": {
+        "title": "Aktuální <span class=\"rainbow-text\">lekce</span>",
         "lesson1": {
             "active": true,
             "date": new Date().toISOString().split('T')[0],

@@ -74,7 +74,7 @@ function applyContent(data) {
             el.value = value;
         } else {
             // Regular text elements
-            el.innerText = value;
+            el.innerHTML = value;
         }
     });
 
