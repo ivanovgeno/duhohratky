@@ -134,13 +134,17 @@ function applyContent(data) {
 
     // Render Upcoming Themes Section
     try {
-        if (data.upcoming) {
+        const upcomingSection = document.getElementById('upcoming');
+        if (data.upcoming && data.upcoming.visible !== false) {
+            if (upcomingSection) upcomingSection.style.display = 'block';
             renderUpcomingThemes(data.upcoming);
+        } else {
+            if (upcomingSection) upcomingSection.style.display = 'none';
         }
     } catch (e) {
         console.error('Error rendering upcoming themes:', e);
     }
-
+...
     // Render Lessons Section
     try {
         if (data.lessons) {
@@ -165,6 +169,9 @@ function renderUpcomingThemes(upcomingData) {
     }
 
     items.forEach(item => {
+        // Skip inactive items
+        if (item.active === false) return;
+
         const themeCard = document.createElement('div');
         themeCard.className = 'upcoming-card glass-card';
         themeCard.innerHTML = `

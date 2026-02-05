@@ -1085,6 +1085,12 @@
             <section class="editor-section hidden" id="editor-upcoming">
                 <div class="editor-card">
                     <h3>📝 Nadpis sekce</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: bold;">
+                            <input type="checkbox" data-field="upcoming.visible">
+                            Zobrazit tuto sekci na webu
+                        </label>
+                    </div>
                     <div class="form-group">
                         <label>Titul sekce</label>
                         <input type="text" data-field="upcoming.title" placeholder="Připravujeme další témata">
@@ -1096,7 +1102,13 @@
                     </div>
                 </div>
                 <div class="editor-card">
-                    <h3>🎭 Téma 1</h3>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3 style="margin:0;">🎭 Téma 1</h3>
+                        <label style="font-size: 0.9rem;">
+                            <input type="checkbox" data-field="upcoming.items.0.active"> Zobrazit
+                        </label>
+                    </div>
                     <div class="form-group">
                         <label>Ikona (emoji)</label>
                         <input type="text" data-field="upcoming.items.0.icon" placeholder="🐣">
@@ -1111,7 +1123,13 @@
                     </div>
                 </div>
                 <div class="editor-card">
-                    <h3>🚀 Téma 2</h3>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3 style="margin:0;">🚀 Téma 2</h3>
+                        <label style="font-size: 0.9rem;">
+                            <input type="checkbox" data-field="upcoming.items.1.active"> Zobrazit
+                        </label>
+                    </div>
                     <div class="form-group">
                         <label>Ikona (emoji)</label>
                         <input type="text" data-field="upcoming.items.1.icon" placeholder="🚒">
@@ -1126,7 +1144,13 @@
                     </div>
                 </div>
                 <div class="editor-card">
-                    <h3>🦕 Téma 3</h3>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3 style="margin:0;">🦕 Téma 3</h3>
+                        <label style="font-size: 0.9rem;">
+                            <input type="checkbox" data-field="upcoming.items.2.active"> Zobrazit
+                        </label>
+                    </div>
                     <div class="form-group">
                         <label>Ikona (emoji)</label>
                         <input type="text" data-field="upcoming.items.2.icon" placeholder="🦕">

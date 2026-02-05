@@ -131,20 +131,24 @@ window.defaultContent = {
     "upcoming": {
         "title": "Připravujeme další <span class=\"rainbow-text\">témata</span>",
         "description": "Na jaké další lekce se můžete v nejbližší době těšit?",
+        "visible": true,
         "items": [
             {
+                "active": true,
                 "id": "up_1",
                 "icon": "🐣",
                 "title": "Velikonoční koledování",
                 "description": "Senzorické barvení vajíček, hledání kuřátek a jarní tvoření."
             },
             {
+                "active": true,
                 "id": "up_2",
                 "icon": "🚒",
                 "title": "Malí záchranáři",
                 "description": "Objevování světa hasičů, policistů a záchranářů hravou formou."
             },
             {
+                "active": true,
                 "id": "up_3",
                 "icon": "🦕",
                 "title": "Svět dinosaurů",

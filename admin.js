@@ -154,10 +154,11 @@ const defaultData = {
     upcoming: {
         title: 'Připravujeme další témata',
         description: 'Na jaké další lekce se můžete v nejbližší době těšit?',
+        visible: true,
         items: [
-            { icon: '🐣', title: 'Téma 1', description: 'Popis tématu 1' },
-            { icon: '🚒', title: 'Téma 2', description: 'Popis tématu 2' },
-            { icon: '🦕', title: 'Téma 3', description: 'Popis tématu 3' }
+            { active: true, icon: '🐣', title: 'Téma 1', description: 'Popis tématu 1' },
+            { active: true, icon: '🚒', title: 'Téma 2', description: 'Popis tématu 2' },
+            { active: true, icon: '🦕', title: 'Téma 3', description: 'Popis tématu 3' }
         ]
     },
 
