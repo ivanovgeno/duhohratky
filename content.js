@@ -128,6 +128,30 @@ window.defaultContent = {
         "iframeHeight": "600",
         "phone": "+420 732 159 861"
     },
+    "upcoming": {
+        "title": "Připravujeme další <span class=\"rainbow-text\">témata</span>",
+        "description": "Na jaké další lekce se můžete v nejbližší době těšit?",
+        "items": [
+            {
+                "id": "up_1",
+                "icon": "🐣",
+                "title": "Velikonoční koledování",
+                "description": "Senzorické barvení vajíček, hledání kuřátek a jarní tvoření."
+            },
+            {
+                "id": "up_2",
+                "icon": "🚒",
+                "title": "Malí záchranáři",
+                "description": "Objevování světa hasičů, policistů a záchranářů hravou formou."
+            },
+            {
+                "id": "up_3",
+                "icon": "🦕",
+                "title": "Svět dinosaurů",
+                "description": "Cesta do pravěku, odrývání zkamenělin a sensory boxy s dinosaury."
+            }
+        ]
+    },
     "settings": {
         "email": "admin@duhohratky.cz",
         "seoTitle": "Duhohratky | Sensory Play & Montessori pro děti",

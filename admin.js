@@ -150,6 +150,17 @@ const defaultData = {
         phone: '+420 123 456 789'
     },
 
+    // Upcoming Themes
+    upcoming: {
+        title: 'Připravujeme další témata',
+        description: 'Na jaké další lekce se můžete v nejbližší době těšit?',
+        items: [
+            { icon: '🐣', title: 'Téma 1', description: 'Popis tématu 1' },
+            { icon: '🚒', title: 'Téma 2', description: 'Popis tématu 2' },
+            { icon: '🦕', title: 'Téma 3', description: 'Popis tématu 3' }
+        ]
+    },
+
     // Settings
     settings: {
         email: 'admin@duhohratky.cz',
@@ -273,7 +284,8 @@ function initNavigation() {
         contact: 'Kontakt',
         reservio: 'Reservio',
         settings: 'Nastavení',
-        lessons: 'Aktuální lekce'
+        lessons: 'Aktuální lekce',
+        upcoming: 'Připravované lekce' // Added 'upcoming' to titles
     };
 
     navItems.forEach(item => {

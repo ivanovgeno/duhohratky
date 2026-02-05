@@ -61,6 +61,9 @@
                 <a href="#" class="nav-item" data-section="lessons">
                     <span>⚡</span> Aktuální lekce
                 </a>
+                <a href="#" class="nav-item" data-section="upcoming">
+                    <span>✨</span> Připravujeme
+                </a>
                 <a href="#" class="nav-item" data-section="gallery">
                     <span>📸</span> Galerie
                 </a>
@@ -1074,6 +1077,67 @@
                     <div class="form-group">
                         <label>Telefon pro rychlou rezervaci</label>
                         <input type="tel" data-field="reservio.phone" placeholder="+420 123 456 789">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upcoming Themes Editor -->
+            <section class="editor-section hidden" id="editor-upcoming">
+                <div class="editor-card">
+                    <h3>📝 Nadpis sekce</h3>
+                    <div class="form-group">
+                        <label>Titul sekce</label>
+                        <input type="text" data-field="upcoming.title" placeholder="Připravujeme další témata">
+                    </div>
+                    <div class="form-group">
+                        <label>Popis sekce</label>
+                        <input type="text" data-field="upcoming.description"
+                            placeholder="Na jaké další lekce se můžete...">
+                    </div>
+                </div>
+                <div class="editor-card">
+                    <h3>🎭 Téma 1</h3>
+                    <div class="form-group">
+                        <label>Ikona (emoji)</label>
+                        <input type="text" data-field="upcoming.items.0.icon" placeholder="🐣">
+                    </div>
+                    <div class="form-group">
+                        <label>Název tématu</label>
+                        <input type="text" data-field="upcoming.items.0.title" placeholder="Téma 1">
+                    </div>
+                    <div class="form-group">
+                        <label>Popis tématu</label>
+                        <textarea data-field="upcoming.items.0.description" rows="2" placeholder="Popis..."></textarea>
+                    </div>
+                </div>
+                <div class="editor-card">
+                    <h3>🚀 Téma 2</h3>
+                    <div class="form-group">
+                        <label>Ikona (emoji)</label>
+                        <input type="text" data-field="upcoming.items.1.icon" placeholder="🚒">
+                    </div>
+                    <div class="form-group">
+                        <label>Název tématu</label>
+                        <input type="text" data-field="upcoming.items.1.title" placeholder="Téma 2">
+                    </div>
+                    <div class="form-group">
+                        <label>Popis tématu</label>
+                        <textarea data-field="upcoming.items.1.description" rows="2" placeholder="Popis..."></textarea>
+                    </div>
+                </div>
+                <div class="editor-card">
+                    <h3>🦕 Téma 3</h3>
+                    <div class="form-group">
+                        <label>Ikona (emoji)</label>
+                        <input type="text" data-field="upcoming.items.2.icon" placeholder="🦕">
+                    </div>
+                    <div class="form-group">
+                        <label>Název tématu</label>
+                        <input type="text" data-field="upcoming.items.2.title" placeholder="Téma 3">
+                    </div>
+                    <div class="form-group">
+                        <label>Popis tématu</label>
+                        <textarea data-field="upcoming.items.2.description" rows="2" placeholder="Popis..."></textarea>
                     </div>
                 </div>
             </section>
