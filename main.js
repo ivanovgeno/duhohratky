@@ -158,7 +158,13 @@ function renderUpcomingThemes(upcomingData) {
     container.innerHTML = '';
     if (!upcomingData || !upcomingData.items) return;
 
-    upcomingData.items.forEach(item => {
+    // Ensure items is an array (handle corrupt LocalStorage data)
+    let items = upcomingData.items;
+    if (!Array.isArray(items)) {
+        items = Object.values(items);
+    }
+
+    items.forEach(item => {
         const themeCard = document.createElement('div');
         themeCard.className = 'upcoming-card glass-card';
         themeCard.innerHTML = `
