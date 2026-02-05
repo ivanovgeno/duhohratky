@@ -3,33 +3,18 @@ window.defaultContent = {
         "email": "admin@duhohratky.cz",
         "password": "admin123"
     },
-    "news": {
-        "title": "Aktuálně u nás",
-        "subtitle": "Co se chystá",
-        "items": [
-            {
-                "id": "news_1707123456789",
-                "date": "2024-02-14",
-                "title": "Valentýnské tvoření",
-                "text": "Přijďte si vyrobit originální přáníčka a dárky pro své milované. Dílnička vhodná pro děti od 3 let.",
-                "tag": "free_spots"
-            }
-        ]
-    },
     "hero": {
         "badge": "✨ Kreativita & Rozvoj",
-        "title": "Vítejte v",
-        "titleHighlight": "Duhohrátkách",
-        "subtitle": "Sensory play & Montessori aktivity pro rozvoj vašich dětí",
+        "title": "Sensory play & Montessori aktivity pro rozvoj vašich dětí",
+        "titleHighlight": "",
+        "subtitle": "",
         "description": "Objevte svět hravého učení, kde se děti rozvíjejí prostřednictvím smyslových her, kreativních činností a Montessori přístupu v bezpečném a inspirujícím prostředí.",
-        "stat1Number": "500+",
+        "stat1Number": "800+",
         "stat1Label": "Šťastných dětí",
-        "stat2Number": "20+",
-        "stat2Label": "Typů aktivit",
-        "stat3Number": "8+",
-        "stat3Label": "Let praxe",
-        "stat4Number": "5⭐",
-        "stat4Label": "Hodnocení",
+        "stat2Number": "30+",
+        "stat2Label": "Uplynulých lekcí",
+        "stat3Number": "5⭐",
+        "stat3Label": "Hodnocení",
         "btn1Text": "📅 Rezervovat termín",
         "btn1Link": "#reservation",
         "btn2Text": "🎨 Prozkoumat aktivity",
@@ -38,19 +23,19 @@ window.defaultContent = {
     "about": {
         "title": "Co jsou Duhohratky?",
         "card1Icon": "🎨",
-        "card1Title": "Sensory Play",
-        "card1Text": "Smyslové hry, které rozvíjejí hmat, čich, zrak i sluch. Děti objevují textury, barvy a zvuky v bezpečném prostředí.",
+        "card1Title": "Sensorické hraní",
+        "card1Text": "Smyslové hry, které rozvíjejí hmat, čich, zrak i sluch. Děti objevují textury, barvy a zvuky v bezpečném prostředí. ",
         "card2Icon": "📚",
         "card2Title": "Montessori přístup",
         "card2Text": "Respektujeme individualitu každého dítěte. Učíme se hrou, pozorováním a vlastním tempem objevování světa.",
         "card3Icon": "🧠",
         "card3Title": "Rozvoj dovedností",
-        "card3Text": "Podpora jemné motoriky, koordinace, koncentrace a kreativního myšlení prostřednictvím zábavných aktivit.",
+        "card3Text": "Podpora jemné motoriky, koordinace, koncentrace a kreativního myšlení prostřednictvím zábavných aktivit. Každá lekce je přitom zaměřena na konkrétní téma, ve kterém se vždy dozvědí i spoustu nových informací a rozšíří svou slovní zásobu. ",
         "card4Icon": "💕",
         "card4Title": "Bezpečné prostředí",
-        "card4Text": "Všechny materiály jsou bezpečné a netoxické. Prostory jsou přizpůsobené potřebám malých objevitelů.",
-        "storyTitle": "Náš příběh",
-        "storyText": "Duhohratky vznikly z lásky k dětem a touhy vytvořit prostor, kde se mohou svobodně rozvíjet. Věříme, že každé dítě je jedinečné a zaslouží si objevovat svět vlastním způsobem. Naše aktivity jsou navrženy tak, aby podporovaly přirozenou zvídavost a kreativitu dětí."
+        "card4Text": "Materiály volíme tak, aby byly pro vaše děti bezpečné. Prostory jsou přizpůsobené potřebám malých objevitelů.",
+        "storyTitle": "Jak vznikly Duhohrátky?",
+        "storyText": "Duhohrátky vznikly z lásky k dětem a z touhy vytvořit prostor, kde se mohou svobodně rozvíjet.\nPřed několika lety jsem jako máma malé holčičky – a zároveň učitelka, která tehdy neměla mnoho možností seberealizace – hledala způsob, jak smysluplně trávit společný čas, učit se nové věci a růst spolu s ní. Narazila jsem na senzorické hraní, které bylo v té době v České republice tepve v začátcích. Do té doby jsem znala především Montessori prvky, které se mi velmi líbily, ale sensory play si mě naprosto získalo.\nZačala jsem doma s dcerkou postupně zkoušet různé aktivity a s radostí sledovala, jak ji baví a rozvíjejí. Naše malé pokusy se ujaly i na sociálních sítích a brzy o ně začaly projevovat zájem maminky z okolí. Postupně jsem proto začala pořádat lekce – nejprve v Jaroměři a Hradci Králové, později i v dalších městech, kam dnes pravidelně dojíždím.\nMezitím se naše rodina rozrostla o dalšího malého člena – druhou holčičku. Ani těhotenství a následná mateřská dovolená mě ale v tom, co dělám, nezastavily. Naopak mě utvrdily v tom, jak smysluplná tato práce je. Postupně se z Duhohrátek stal rodinný projekt, do kterého se zapojil i můj manžel, a dnes jsou tak nejen mojí srdeční záležitostí, ale i naší společnou cestou.\nMožná i vy hledáte místo, kde si se svým dítětem užijete kvalitní čas bez spěchu, bez tlaku na výkon a bez srovnávání. Místo, kde může být samo sebou, zkoumat, tvořit a objevovat svět vlastním tempem.\nPrávě takové prostředí se snažíme v Duhohrátkách vytvářet.\nVěříme, že každé dítě je jedinečné a zaslouží si respekt, podporu a bezpečný prostor pro růst. Naše aktivity podporují přirozenou zvídavost, kreativitu i radost z objevování. Zároveň chceme posilovat vztah mezi dětmi a rodiči a vytvářet chvíle, na které se nezapomíná.\nChceme, aby každé dítě odcházelo z Duhohrátek sebevědomější, zvídavější a šťastnější. A aby si rodiče odnášeli nejen fotografie, ale především pocit, že svému dítěti věnovali čas, který má skutečnou hodnotu.\nPokud cítíte, že je vám tento přístup blízký, budeme moc rádi, když se k nám přidáte.\nTěšíme se na vás na některé z našich lekcí."
     },
     "activities": {
         "title": "Co u nás zažijete?",
@@ -102,105 +87,16 @@ window.defaultContent = {
         "img6Label": "Oslavy"
     },
     "contact": {
-        "title": "Kde nás najdete?",
-        "address1": "Duhová 123",
-        "address2": "Praha 1, 110 00",
-        "phone": "+420 123 456 789",
-        "email": "info@duhohratky.cz",
+        "title": "Spojme se",
+        "address1": "",
+        "address2": "Jasenná 229, Jasenná 552 22",
+        "phone": "+420 732 159 861",
+        "email": "duhohratky@seznam.cz",
         "hours1": "Po-Pá: 9:00 - 18:00",
         "hours2": "So: 9:00 - 14:00",
-        "facebook": "",
-        "instagram": "",
+        "facebook": "https://www.facebook.com/duhohratky",
+        "instagram": "https://instagram.com/duhohratky",
         "youtube": ""
-    },
-    // Current Lessons (5 slots)
-    "lessons": {
-        "title": "Aktuální <span class=\"rainbow-text\">lekce</span>",
-        "lesson1": {
-            "active": true,
-            "date": new Date().toISOString().split('T')[0],
-            "time1": "14:00",
-            "time2": "",
-            "time3": "",
-            "time4": "",
-            "time5": "",
-            "location": "Praha",
-            "address": "",
-            "price": "",
-            "title": "Sensory Play: Vesmír 🚀",
-            "description": "Objevování galaxie pro nejmenší.",
-            "link": "#reservation",
-            "tag": "free_spots"
-        },
-        "lesson2": {
-            "active": true,
-            "date": new Date(Date.now() + 86400000).toISOString().split('T')[0], // Tomorrow
-            "time1": "10:00",
-            "time2": "16:00",
-            "time3": "",
-            "time4": "",
-            "time5": "",
-            "location": "Brno",
-            "address": "",
-            "price": "",
-            "title": "Montessori Dílna 🧩",
-            "description": "Rozvoj samostatnosti (2-4 roky).",
-            "link": "#reservation",
-            "tag": "full"
-        },
-        "lesson3": {
-            "active": true,
-            "date": "",
-            "time1": "15:30",
-            "time2": "",
-            "time3": "",
-            "time4": "",
-            "time5": "",
-            "location": "Ostrava",
-            "address": "",
-            "price": "",
-            "title": "Tvoření z přírodnin 🍂",
-            "description": "Podzimní dekorace a listování.",
-            "link": "#reservation",
-            "tag": "fake_tag"
-        },
-        "lesson4": {
-            "active": true,
-            "date": "",
-            "time1": "16:00",
-            "time2": "17:30",
-            "time3": "",
-            "time4": "",
-            "time5": "",
-            "location": "Plzeň",
-            "address": "",
-            "price": "",
-            "title": "Hudební hrátky 🎵",
-            "description": "Rytmus a tanec pro děti.",
-            "link": "#reservation",
-            "tag": "fake_tag"
-        },
-        "lesson5": {
-            "active": false,
-            "date": "",
-            "time1": "09:30",
-            "time2": "",
-            "time3": "",
-            "time4": "",
-            "time5": "",
-            "location": "Liberec",
-            "address": "",
-            "price": "",
-            "title": "Silvestrovské cvičení 🥂",
-            "description": "Speciální novoroční lekce.",
-            "link": "#reservation",
-            "tag": "fake_tag"
-        }
-    },
-    "reservio": {
-        "iframeUrl": "https://duhohratky.reservio.com",
-        "iframeHeight": 600,
-        "phone": "+420 123 456 789"
     },
     "tips": {
         "previewTitle": "Inspirace pro domácí tvoření",
@@ -227,10 +123,74 @@ window.defaultContent = {
         "tip3Age": "2+ roky",
         "tip3Color": "linear-gradient(135deg, #90EE90, #32CD32)"
     },
+    "reservio": {
+        "iframeUrl": "https://www.reservideo.com/booking/iframe/duhohratky",
+        "iframeHeight": "600",
+        "phone": "+420 732 159 861"
+    },
     "settings": {
         "email": "admin@duhohratky.cz",
         "seoTitle": "Duhohratky | Sensory Play & Montessori pro děti",
         "seoDescription": "Duhohratky - kreativní sensory play a Montessori aktivity pro děti. Rozvoj smyslů, motoriky a kreativity v bezpečném prostředí.",
         "seoKeywords": "sensory play, Montessori, děti, hry, rozvoj, kreativita, Duhohratky"
+    },
+    "lessons": {
+        "lesson1": {
+            "tag": "free_spots",
+            "date": "2026-02-05",
+            "location": "Hradec Králové",
+            "title": "<span class=\"rainbow-text\">Animované pohádky</span>",
+            "active": true,
+            "description": "Tlapková patrola, Blesk McQueen, Krteček, Ledové Království, Bing, Prasátko Peppa a další",
+            "link": "#reservation",
+            "time1": "10:00",
+            "time2": "15:00",
+            "time3": "16:30",
+            "address": "Centrům Budulínek - Průmyslová 1198",
+            "price": "250 Kč"
+        },
+        "title": "Aktuální <span class=\"rainbow-text\">lekce</span>",
+        "lesson2": {
+            "active": true,
+            "location": "Chlumec nad Cidlinou",
+            "date": "2026-02-06",
+            "title": "<span class=\"rainbow-text\">Animované pohádky</span>",
+            "link": "#reservation",
+            "tag": "free_spots",
+            "description": "Tlapková patrola, Blesk McQueen, Krteček, Ledové Království, Bing, Prasátko Peppa a další",
+            "time1": "10:00",
+            "price": "250 Kč",
+            "address": "Sokolovna - Kozelkova 266, 1. patro"
+        },
+        "lesson3": {
+            "active": true,
+            "title": "<span class=\"rainbow-text\">Animované pohádky</span>",
+            "description": "Tlapková patrola, Blesk McQueen, Krteček, Ledové Království, Bing, Prasátko Peppa a další",
+            "link": "#reservation",
+            "location": "Náchod",
+            "date": "2026-02-23",
+            "time1": "16:00",
+            "price": "250 Kč",
+            "address": "MC Hopsáček - Zelená 157",
+            "tag": "free_spots"
+        },
+        "lesson4": {
+            "active": true,
+            "title": "<span class=\"rainbow-text\">Animované pohádky</span>",
+            "description": "Tlapková patrola, Blesk McQueen, Krteček, Ledové Království, Bing, Prasátko Peppa a další",
+            "link": "#reservation",
+            "location": "Jaroměř",
+            "price": "250 Kč",
+            "tag": "free_spots"
+        },
+        "lesson5": {
+            "active": true,
+            "title": "<span class=\"rainbow-text\">Animované pohádky</span>",
+            "description": "Tlapková patrola, Blesk McQueen, Krteček, Ledové Království, Bing, Prasátko Peppa a další",
+            "link": "#reservation",
+            "location": "Jasenná",
+            "price": "250 Kč",
+            "tag": "free_spots"
+        }
     }
 };
