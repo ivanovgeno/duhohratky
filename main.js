@@ -190,8 +190,8 @@ function renderLessons(lessonsData) {
                 ${badgeHtml}
                 <div class="card-content" style="padding-top: ${badgeHtml ? '1rem' : '1.5rem'}">
                     <div style="margin-bottom: 0.5rem;">
-                        <span class="lesson-date" style="color: #888; font-size: 0.9rem; display: block; font-weight: bold;">${item.location || ''}</span>
-                        ${item.address ? `<span style="display: block; font-size: 0.8rem; color: #aaa;">${item.address}</span>` : ''}
+                        <span class="location-badge">📍 ${item.location || ''}</span>
+                        ${item.address ? `<span style="display: block; font-size: 0.8rem; color: #aaa; margin-top: 4px; margin-left: 4px;">${item.address}</span>` : ''}
                     </div>
                     <h3 style="margin: 0.5rem 0;">${item.title || 'Bez názvu'}</h3>
                     ${timesHtml}

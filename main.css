@@ -879,6 +879,28 @@ body {
     left: 100%;
 }
 
+/* Location Badge */
+.location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: white;
+    color: var(--color-pink-dark);
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 15px rgba(232, 160, 160, 0.15);
+    border: 1px solid rgba(232, 160, 160, 0.2);
+    transition: var(--transition-normal);
+}
+
+.location-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(232, 160, 160, 0.25);
+    border-color: var(--color-pink);
+}
+
 /* Hero Stats */
 .hero-stats {
     display: flex;
