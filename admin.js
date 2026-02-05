@@ -272,7 +272,8 @@ function initNavigation() {
         tips: 'Návody & Tipy',
         contact: 'Kontakt',
         reservio: 'Reservio',
-        settings: 'Nastavení'
+        settings: 'Nastavení',
+        lessons: 'Aktuální lekce'
     };
 
     navItems.forEach(item => {
@@ -305,10 +306,22 @@ function initFormHandlers() {
     inputs.forEach(input => {
         input.addEventListener('input', () => {
             const field = input.dataset.field;
-            const [section, key] = field.split('.');
+            // Handle nested paths (e.g. lessons.lesson1.title)
+            const parts = field.split('.');
 
-            if (!siteData[section]) siteData[section] = {};
-            siteData[section][key] = input.value;
+            let current = siteData;
+            for (let i = 0; i < parts.length - 1; i++) {
+                if (!current[parts[i]]) current[parts[i]] = {};
+                current = current[parts[i]];
+            }
+
+            const lastKey = parts[parts.length - 1];
+
+            if (input.type === 'checkbox') {
+                current[lastKey] = input.checked;
+            } else {
+                current[lastKey] = input.value;
+            }
         });
     });
 }
@@ -318,10 +331,20 @@ function populateFields() {
 
     inputs.forEach(input => {
         const field = input.dataset.field;
-        const [section, key] = field.split('.');
+        const parts = field.split('.');
 
-        if (siteData[section] && siteData[section][key] !== undefined) {
-            input.value = siteData[section][key];
+        let value = siteData;
+        for (const part of parts) {
+            if (value === undefined) break;
+            value = value[part];
+        }
+
+        if (value !== undefined) {
+            if (input.type === 'checkbox') {
+                input.checked = value;
+            } else {
+                input.value = value;
+            }
         }
     });
 }

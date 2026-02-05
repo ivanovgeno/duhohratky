@@ -103,6 +103,79 @@ function applyContent(data) {
             }
         }
     }
+
+    // Render Lessons Section
+    if (data.lessons) {
+        renderLessons(data.lessons);
+    }
+}
+
+function renderLessons(lessonsData) {
+    const container = document.getElementById('lessons-grid');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    if (!lessonsData) return;
+
+    // Iterate through fixed 5 slots
+    for (let i = 1; i <= 5; i++) {
+        const key = `lesson${i}`;
+        const item = lessonsData[key];
+
+        if (item && item.active) {
+            const card = document.createElement('div');
+            card.className = 'lesson-card glass-card';
+
+            // Smart Date Logic
+            let badgeHtml = '';
+            let dateLabel = '';
+
+            if (item.date) {
+                const itemDate = new Date(item.date);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                itemDate.setHours(0, 0, 0, 0);
+
+                const diffTime = itemDate - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                dateLabel = formatCzechDate(item.date);
+
+                if (diffDays === 0) {
+                    badgeHtml = '<span class="lesson-badge badge-today">Dnes</span>';
+                } else if (diffDays === 1) {
+                    badgeHtml = '<span class="lesson-badge badge-tomorrow">Zítra</span>';
+                } else if (diffDays > 1 && diffDays < 7) {
+                    const days = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
+                    badgeHtml = `<span class="lesson-badge badge-upcoming">${days[itemDate.getDay()]}</span>`;
+                }
+            }
+
+            // Status Tag Logic
+            let statusHtml = '';
+            if (item.tag === 'free_spots') {
+                statusHtml = '<span style="display:inline-block; padding: 4px 12px; border-radius: 20px; background: #e8f5e9; color: #2e7d32; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.5rem;">✅ Volná místa</span>';
+            } else if (item.tag === 'full') {
+                statusHtml = '<span style="display:inline-block; padding: 4px 12px; border-radius: 20px; background: #ffebee; color: #c62828; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.5rem;">❌ Obsazeno</span>';
+            } else if (item.tag === 'cancelled') {
+                statusHtml = '<span style="display:inline-block; padding: 4px 12px; border-radius: 20px; background: #f5f5f5; color: #666; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.5rem;">⚠️ Zrušeno</span>';
+            }
+
+            card.innerHTML = `
+                ${badgeHtml}
+                <div class="card-content" style="padding-top: ${badgeHtml ? '1rem' : '1.5rem'}">
+                    <span class="lesson-date" style="color: #888; font-size: 0.9rem;">${item.location || ''} ${dateLabel ? '• ' + dateLabel : ''}</span>
+                    <h3 style="margin: 0.5rem 0;">${item.title || 'Bez názvu'}</h3>
+                    ${statusHtml}
+                    <p style="margin-bottom: 1rem;">${item.description || ''}</p>
+                    ${item.link ? `<a href="${item.link}" class="btn btn-secondary btn-small">Rezervovat</a>` : ''}
+                </div>
+            `;
+
+            container.appendChild(card);
+        }
+    }
 }
 
 function getValueByPath(obj, path) {

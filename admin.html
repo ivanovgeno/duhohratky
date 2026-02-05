@@ -58,6 +58,9 @@
                 <a href="#" class="nav-item" data-section="activities">
                     <span>🎪</span> Aktivity
                 </a>
+                <a href="#" class="nav-item" data-section="lessons">
+                    <span>⚡</span> Aktuální lekce
+                </a>
                 <a href="#" class="nav-item" data-section="gallery">
                     <span>📸</span> Galerie
                 </a>
@@ -488,6 +491,207 @@
                     <div class="form-group">
                         <label>Věková kategorie</label>
                         <input type="text" data-field="activities.act6Age" placeholder="1-10 let">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lessons / Aktuální lekce Section Editor -->
+            <section class="editor-section hidden" id="editor-lessons">
+                <div class="editor-card">
+                    <h3>📝 Hlavní texty</h3>
+                    <div class="form-group">
+                        <label>Nadpis sekce</label>
+                        <input type="text" data-field="lessons.title" placeholder="Aktuální lekce">
+                    </div>
+                </div>
+
+                <div class="editor-card">
+                    <h3>⚡ Lekce 1</h3>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" data-field="lessons.lesson1.active"> Zobrazit tuto lekci
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Datum</label>
+                        <input type="date" data-field="lessons.lesson1.date">
+                    </div>
+                    <div class="form-group">
+                        <label>Místo</label>
+                        <input type="text" data-field="lessons.lesson1.location" placeholder="Praha">
+                    </div>
+                    <div class="form-group">
+                        <label>Nadpis</label>
+                        <input type="text" data-field="lessons.lesson1.title" placeholder="Sensory Play: Vesmír 🚀">
+                    </div>
+                    <div class="form-group">
+                        <label>Popis</label>
+                        <textarea data-field="lessons.lesson1.description" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Odkaz</label>
+                        <input type="text" data-field="lessons.lesson1.link" placeholder="#reservation">
+                    </div>
+                    <div class="form-group">
+                        <label>Stav</label>
+                        <select data-field="lessons.lesson1.tag">
+                            <option value="fake_tag">Žádný</option>
+                            <option value="free_spots">✅ Volná místa</option>
+                            <option value="full">❌ Obsazeno</option>
+                            <option value="cancelled">⚠️ Zrušeno</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="editor-card">
+                    <h3>⚡ Lekce 2</h3>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" data-field="lessons.lesson2.active"> Zobrazit tuto lekci
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Datum</label>
+                        <input type="date" data-field="lessons.lesson2.date">
+                    </div>
+                    <div class="form-group">
+                        <label>Místo</label>
+                        <input type="text" data-field="lessons.lesson2.location" placeholder="Brno">
+                    </div>
+                    <div class="form-group">
+                        <label>Nadpis</label>
+                        <input type="text" data-field="lessons.lesson2.title" placeholder="Montessori Dílna 🧩">
+                    </div>
+                    <div class="form-group">
+                        <label>Popis</label>
+                        <textarea data-field="lessons.lesson2.description" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Odkaz</label>
+                        <input type="text" data-field="lessons.lesson2.link" placeholder="#reservation">
+                    </div>
+                    <div class="form-group">
+                        <label>Stav</label>
+                        <select data-field="lessons.lesson2.tag">
+                            <option value="fake_tag">Žádný</option>
+                            <option value="free_spots">✅ Volná místa</option>
+                            <option value="full">❌ Obsazeno</option>
+                            <option value="cancelled">⚠️ Zrušeno</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="editor-card">
+                    <h3>⚡ Lekce 3</h3>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" data-field="lessons.lesson3.active"> Zobrazit tuto lekci
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Datum</label>
+                        <input type="date" data-field="lessons.lesson3.date">
+                    </div>
+                    <div class="form-group">
+                        <label>Místo</label>
+                        <input type="text" data-field="lessons.lesson3.location" placeholder="Ostrava">
+                    </div>
+                    <div class="form-group">
+                        <label>Nadpis</label>
+                        <input type="text" data-field="lessons.lesson3.title" placeholder="Tvoření z přírodnin 🍂">
+                    </div>
+                    <div class="form-group">
+                        <label>Popis</label>
+                        <textarea data-field="lessons.lesson3.description" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Odkaz</label>
+                        <input type="text" data-field="lessons.lesson3.link" placeholder="#reservation">
+                    </div>
+                    <div class="form-group">
+                        <label>Stav</label>
+                        <select data-field="lessons.lesson3.tag">
+                            <option value="fake_tag">Žádný</option>
+                            <option value="free_spots">✅ Volná místa</option>
+                            <option value="full">❌ Obsazeno</option>
+                            <option value="cancelled">⚠️ Zrušeno</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="editor-card">
+                    <h3>⚡ Lekce 4</h3>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" data-field="lessons.lesson4.active"> Zobrazit tuto lekci
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Datum</label>
+                        <input type="date" data-field="lessons.lesson4.date">
+                    </div>
+                    <div class="form-group">
+                        <label>Místo</label>
+                        <input type="text" data-field="lessons.lesson4.location" placeholder="Plzeň">
+                    </div>
+                    <div class="form-group">
+                        <label>Nadpis</label>
+                        <input type="text" data-field="lessons.lesson4.title" placeholder="Hudební hrátky 🎵">
+                    </div>
+                    <div class="form-group">
+                        <label>Popis</label>
+                        <textarea data-field="lessons.lesson4.description" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Odkaz</label>
+                        <input type="text" data-field="lessons.lesson4.link" placeholder="#reservation">
+                    </div>
+                    <div class="form-group">
+                        <label>Stav</label>
+                        <select data-field="lessons.lesson4.tag">
+                            <option value="fake_tag">Žádný</option>
+                            <option value="free_spots">✅ Volná místa</option>
+                            <option value="full">❌ Obsazeno</option>
+                            <option value="cancelled">⚠️ Zrušeno</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="editor-card">
+                    <h3>⚡ Lekce 5</h3>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" data-field="lessons.lesson5.active"> Zobrazit tuto lekci
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Datum</label>
+                        <input type="date" data-field="lessons.lesson5.date">
+                    </div>
+                    <div class="form-group">
+                        <label>Místo</label>
+                        <input type="text" data-field="lessons.lesson5.location" placeholder="Liberec">
+                    </div>
+                    <div class="form-group">
+                        <label>Nadpis</label>
+                        <input type="text" data-field="lessons.lesson5.title" placeholder="Silvestrovské cvičení 🥂">
+                    </div>
+                    <div class="form-group">
+                        <label>Popis</label>
+                        <textarea data-field="lessons.lesson5.description" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Odkaz</label>
+                        <input type="text" data-field="lessons.lesson5.link" placeholder="#reservation">
+                    </div>
+                    <div class="form-group">
+                        <label>Stav</label>
+                        <select data-field="lessons.lesson5.tag">
+                            <option value="fake_tag">Žádný</option>
+                            <option value="free_spots">✅ Volná místa</option>
+                            <option value="full">❌ Obsazeno</option>
+                            <option value="cancelled">⚠️ Zrušeno</option>
+                        </select>
                     </div>
                 </div>
             </section>

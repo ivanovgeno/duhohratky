@@ -3,6 +3,19 @@ window.defaultContent = {
         "email": "admin@duhohratky.cz",
         "password": "admin123"
     },
+    "news": {
+        "title": "Aktuálně u nás",
+        "subtitle": "Co se chystá",
+        "items": [
+            {
+                "id": "news_1707123456789",
+                "date": "2024-02-14",
+                "title": "Valentýnské tvoření",
+                "text": "Přijďte si vyrobit originální přáníčka a dárky pro své milované. Dílnička vhodná pro děti od 3 let.",
+                "tag": "free_spots"
+            }
+        ]
+    },
     "hero": {
         "badge": "✨ Kreativita & Rozvoj",
         "title": "Vítejte v",
@@ -100,6 +113,59 @@ window.defaultContent = {
         "instagram": "",
         "youtube": ""
     },
+    // Current Lessons (5 slots)
+    "lessons": {
+        "lesson1": {
+            "active": true,
+            "date": new Date().toISOString().split('T')[0],
+            "location": "Praha",
+            "title": "Sensory Play: Vesmír 🚀",
+            "description": "Objevování galaxie pro nejmenší.",
+            "link": "#reservation",
+            "tag": "free_spots"
+        },
+        "lesson2": {
+            "active": true,
+            "date": new Date(Date.now() + 86400000).toISOString().split('T')[0], // Tomorrow
+            "location": "Brno",
+            "title": "Montessori Dílna 🧩",
+            "description": "Rozvoj samostatnosti (2-4 roky).",
+            "link": "#reservation",
+            "tag": "full"
+        },
+        "lesson3": {
+            "active": true,
+            "date": "",
+            "location": "Ostrava",
+            "title": "Tvoření z přírodnin 🍂",
+            "description": "Podzimní dekorace a listování.",
+            "link": "#reservation",
+            "tag": "fake_tag"
+        },
+        "lesson4": {
+            "active": true,
+            "date": "",
+            "location": "Plzeň",
+            "title": "Hudební hrátky 🎵",
+            "description": "Rytmus a tanec pro děti.",
+            "link": "#reservation",
+            "tag": "fake_tag"
+        },
+        "lesson5": {
+            "active": false,
+            "date": "",
+            "location": "Liberec",
+            "title": "Silvestrovské cvičení 🥂",
+            "description": "Speciální novoroční lekce.",
+            "link": "#reservation",
+            "tag": "fake_tag"
+        }
+    },
+    "reservio": {
+        "iframeUrl": "https://duhohratky.reservio.com",
+        "iframeHeight": 600,
+        "phone": "+420 123 456 789"
+    },
     "tips": {
         "previewTitle": "Inspirace pro domácí tvoření",
         "previewDescription": "Vyzkoušejte naše oblíbené aktivity i doma",
@@ -124,11 +190,6 @@ window.defaultContent = {
         "tip3Time": "20 min",
         "tip3Age": "2+ roky",
         "tip3Color": "linear-gradient(135deg, #90EE90, #32CD32)"
-    },
-    "reservio": {
-        "iframeUrl": "https://duhohratky.reservio.com",
-        "iframeHeight": 600,
-        "phone": "+420 123 456 789"
     },
     "settings": {
         "email": "admin@duhohratky.cz",
