@@ -2301,15 +2301,17 @@ section {
 /* Badge Modifiers */
 .badge-today {
     background: #ff4081;
-    /* Vibrant Pink/Red - Solid */
+    /* Vibrant Pink/Red */
     box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
-    animation: pulse-badge 2s infinite;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    font-weight: 900;
+    transform-origin: center;
 }
 
 .badge-tomorrow {
-    background: #7c4dff;
-    /* Vibrant Purple - Solid */
-    box-shadow: 0 4px 15px rgba(124, 77, 255, 0.4);
+    background: #ff6d00;
+    /* Vibrant Orange - Distinct */
+    box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
 }
 
 .badge-upcoming {
@@ -2324,17 +2326,29 @@ section {
     box-shadow: none;
 }
 
-@keyframes pulse-badge {
+@keyframes heartbeat {
     0% {
-        transform: translateY(0) scale(1);
+        transform: scale(1);
     }
 
-    50% {
-        transform: translateY(-5px) scale(1.05);
+    14% {
+        transform: scale(1.15);
+    }
+
+    28% {
+        transform: scale(1);
+    }
+
+    42% {
+        transform: scale(1.15);
+    }
+
+    70% {
+        transform: scale(1);
     }
 
     100% {
-        transform: translateY(0) scale(1);
+        transform: scale(1);
     }
 }
 
