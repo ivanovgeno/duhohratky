@@ -177,25 +177,32 @@ function renderLessons(lessonsData) {
             }
 
             // Status Tag Logic
-            let statusHtml = '';
+            // Status Logic (Moved to Top Badge)
+            let statusBadgeHtml = '';
             if (item.tag === 'free_spots') {
-                statusHtml = '<span style="display:inline-block; padding: 4px 12px; border-radius: 20px; background: #e8f5e9; color: #2e7d32; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.5rem;">✅ Volná místa</span>';
+                statusBadgeHtml = `<span class="lesson-badge" style="background: #e8f5e9; color: #2e7d32; right: 20px; left: auto; box-shadow: 0 5px 15px rgba(46, 125, 50, 0.2);">✅ Volná místa</span>`;
             } else if (item.tag === 'full') {
-                statusHtml = '<span style="display:inline-block; padding: 4px 12px; border-radius: 20px; background: #ffebee; color: #c62828; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.5rem;">❌ Obsazeno</span>';
+                statusBadgeHtml = `<span class="lesson-badge" style="background: #ffebee; color: #c62828; right: 20px; left: auto; box-shadow: 0 5px 15px rgba(198, 40, 40, 0.2);">❌ Obsazeno</span>`;
             } else if (item.tag === 'cancelled') {
-                statusHtml = '<span style="display:inline-block; padding: 4px 12px; border-radius: 20px; background: #f5f5f5; color: #666; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.5rem;">⚠️ Zrušeno</span>';
+                statusBadgeHtml = `<span class="lesson-badge" style="background: #f5f5f5; color: #666; right: 20px; left: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">⚠️ Zrušeno</span>`;
+            }
+
+            // Adjust date badge to LEFT side
+            if (badgeHtml) {
+                // Inject style override to force it left
+                badgeHtml = badgeHtml.replace('class="lesson-badge', 'class="lesson-badge" style="left: 20px; right: auto;"');
             }
 
             card.innerHTML = `
                 ${badgeHtml}
-                <div class="card-content" style="padding-top: ${badgeHtml ? '1rem' : '1.5rem'}">
+                ${statusBadgeHtml}
+                <div class="card-content" style="padding-top: ${(badgeHtml || statusBadgeHtml) ? '1.5rem' : '1.5rem'}">
                     <div style="margin-bottom: 0.5rem;">
                         <span class="location-badge">📍 ${item.location || ''}</span>
                         ${item.address ? `<span style="display: block; font-size: 0.8rem; color: #aaa; margin-top: 4px; margin-left: 4px;">${item.address}</span>` : ''}
                     </div>
                     <h3 style="margin: 0.5rem 0;">${item.title || 'Bez názvu'}</h3>
                     ${timesHtml}
-                    ${statusHtml}
                     ${item.price ? `<div style="margin-bottom: 0.5rem; font-weight: bold; color: #444; background: rgba(0,0,0,0.03); padding: 4px 10px; border-radius: 4px; display: inline-block;">💰 ${item.price}</div>` : ''}
                     <p style="margin-bottom: 1rem;">${item.description || ''}</p>
                     ${item.link ? `<a href="${item.link}" class="btn btn-cta" style="width: 100%; text-align: center; margin-top: 0.5rem; justify-content: center;">Rezervovat</a>` : ''}
