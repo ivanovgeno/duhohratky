@@ -318,13 +318,17 @@ function initFormHandlers() {
     inputs.forEach(input => {
         input.addEventListener('input', () => {
             const field = input.dataset.field;
-            // Handle nested paths (e.g. lessons.lesson1.title)
             const parts = field.split('.');
 
             let current = siteData;
             for (let i = 0; i < parts.length - 1; i++) {
-                if (!current[parts[i]]) current[parts[i]] = {};
-                current = current[parts[i]];
+                const part = parts[i];
+                if (!current[part]) {
+                    // Check if next part is an index
+                    const nextPart = parts[i + 1];
+                    current[part] = !isNaN(nextPart) ? [] : {};
+                }
+                current = current[part];
             }
 
             const lastKey = parts[parts.length - 1];
@@ -346,12 +350,16 @@ function populateFields() {
         const parts = field.split('.');
 
         let value = siteData;
+        let found = true;
         for (const part of parts) {
-            if (value === undefined) break;
+            if (value === undefined || value === null) {
+                found = false;
+                break;
+            }
             value = value[part];
         }
 
-        if (value !== undefined) {
+        if (found && value !== undefined && value !== null) {
             if (input.type === 'checkbox') {
                 input.checked = value;
             } else {

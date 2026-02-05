@@ -42,9 +42,24 @@ async function loadContent() {
     }
 
     // 3. Apply Data to DOM
-    if (data) {
+    if (data && window.defaultContent) {
+        data = deepMerge(window.defaultContent, data);
+        applyContent(data);
+    } else if (data) {
         applyContent(data);
     }
+}
+
+function deepMerge(target, source) {
+    const result = { ...target };
+    for (const key in source) {
+        if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+            result[key] = deepMerge(target[key] || {}, source[key]);
+        } else {
+            result[key] = source[key];
+        }
+    }
+    return result;
 }
 
 function applyContent(data) {
