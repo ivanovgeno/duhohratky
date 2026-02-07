@@ -266,7 +266,11 @@ async function saveToGitHub(username, repo, branch, token) {
             }
         });
 
-        if (!getRes.ok) throw new Error('Chyba při čtení z GitHubu (zkontrolujte údaje)');
+        if (!getRes.ok) {
+            if (getRes.status === 401) throw new Error('Chyba 401: Neplatný Token. Zkontrolujte, že jste ho zkopíroval celý.');
+            if (getRes.status === 404) throw new Error('Chyba 404: Repozitář nenalezen. Zkontrolujte jméno uživatele a názvu repozitáře.');
+            throw new Error(`Chyba při čtení: ${getRes.status} ${getRes.statusText}`);
+        }
         const getJson = await getRes.json();
         const sha = getJson.sha;
 
@@ -291,14 +295,15 @@ async function saveToGitHub(username, repo, branch, token) {
             })
         });
 
-        if (!putRes.ok) throw new Error('Chyba při nahrávání (zkontrolujte práva tokenu)');
+        if (!putRes.ok) throw new Error(`Chyba při nahrávání: ${putRes.status} ${putRes.statusText}`);
 
         showToast('✅ Změny nahrány na GitHub!', 'success');
-        console.log('GitHub Push Success');
+        alert('🎉 Úspěch! Změny byly odeslány na GitHub.\n\nProsím vyčkejte cca 1-2 minuty, než se web aktualizuje, a pak ho obnovte.');
 
     } catch (e) {
         console.error(e);
         showToast(`❌ ${e.message}`, 'error');
+        alert(`❌ Nastala chyba:\n${e.message}\n\nZkontrolujte prosím své údaje v nastavení.`);
     } finally {
         saveBtn.innerHTML = originalText;
         saveBtn.disabled = false;
