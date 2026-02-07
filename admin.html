@@ -1206,6 +1206,28 @@
                     </div>
                 </div>
                 <div class="editor-card">
+                    <h3>🐙 GitHub Propojení</h3>
+                    <p class="hint">Nastavte pro automatické ukládání změn na web.</p>
+                    <div class="form-group">
+                        <label>GitHub Uživatelské jméno</label>
+                        <input type="text" id="gh-username" placeholder="např. ivanovgeno">
+                    </div>
+                    <div class="form-group">
+                        <label>Název Repozitáře</label>
+                        <input type="text" id="gh-repo" placeholder="např. duhohratky">
+                    </div>
+                    <div class="form-group">
+                        <label>Větev (Branch)</label>
+                        <input type="text" id="gh-branch" value="gh-pages" placeholder="gh-pages">
+                    </div>
+                    <div class="form-group">
+                        <label>Personal Access Token (PAT)</label>
+                        <input type="password" id="gh-token" placeholder="ghp_...">
+                        <small style="color: #666; display: block; margin-top: 5px;">Token musí mít oprávnění 'repo'
+                            (obsah repozitáře).</small>
+                    </div>
+                </div>
+                <div class="editor-card">
                     <h3>📤 Export / Import</h3>
                     <p class="hint">Zálohujte nebo obnovte nastavení webu.</p>
                     <div class="button-group">
@@ -1228,7 +1250,7 @@
         <span class="toast-message">Změny byly uloženy</span>
     </div>
 
-    <script src="admin.js?v=3"></script>
+    <script src="admin.js?v=4"></script>
 </body>
 
 </html>
