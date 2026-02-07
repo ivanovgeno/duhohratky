@@ -35,7 +35,7 @@ window.defaultContent = {
         "card4Title": "Bezpečné prostředí",
         "card4Text": "Materiály volíme tak, aby byly pro vaše děti bezpečné. Prostory jsou přizpůsobené potřebám malých objevitelů.",
         "storyTitle": "Jak vznikly Duhohrátky?",
-        "storyText": "Duhohrátky vznikly z lásky k dětem a z touhy vytvořit prostor, kde se mohou svobodně rozvíjet.\nPřed několika lety jsem jako máma malé holčičky – a zároveň učitelka, která tehdy neměla mnoho možností seberealizace – hledala způsob, jak smysluplně trávit společný čas, učit se nové věci a růst spolu s ní. Narazila jsem na senzorické hraní, které bylo v té době v České republice tepve v začátcích. Do té doby jsem znala především Montessori prvky, které se mi velmi líbily, ale sensory play si mě naprosto získalo.\nZačala jsem doma s dcerkou postupně zkoušet různé aktivity a s radostí sledovala, jak ji baví a rozvíjejí. Naše malé pokusy se ujaly i na sociálních sítích a brzy o ně začaly projevovat zájem maminky z okolí. Postupně jsem proto začala pořádat lekce – nejprve v Jaroměři a Hradci Králové, později i v dalších městech, kam dnes pravidelně dojíždím.\nMezitím se naše rodina rozrostla o dalšího malého člena – druhou holčičku. Ani těhotenství a následná mateřská dovolená mě ale v tom, co dělám, nezastavily. Naopak mě utvrdily v tom, jak smysluplná tato práce je. Postupně se z Duhohrátek stal rodinný projekt, do kterého se zapojil i můj manžel, a dnes jsou tak nejen mojí srdeční záležitostí, ale i naší společnou cestou.\nMožná i vy hledáte místo, kde si se svým dítětem užijete kvalitní čas bez spěchu, bez tlaku na výkon a bez srovnávání. Místo, kde může být samo sebou, zkoumat, tvořit a objevovat svět vlastním tempem.\nPrávě takové prostředí se snažíme v Duhohrátkách vytvářet.\nVěříme, že každé dítě je jedinečné a zaslouží si respekt, podporu a bezpečný prostor pro růst. Naše aktivity podporují přirozenou zvídavost, kreativitu i radost z objevování. Zároveň chceme posilovat vztah mezi dětmi a rodiči a vytvářet chvíle, na které se nezapomíná.\nChceme, aby každé dítě odcházelo z Duhohrátek sebevědomější, zvídavější a šťastnější. A aby si rodiče odnášeli nejen fotografie, ale především pocit, že svému dítěti věnovali čas, který má skutečnou hodnotu.\nPokud cítíte, že je vám tento přístup blízký, budeme moc rádi, když se k nám přidáte.\nTěšíme se na vás na některé z našich lekcí."
+        "storyText": "Duhohrátky vznikly z lásky k dětem a z touhy vytvořit prostor, kde se mohou svobodně rozvíjet.\nPřed několika lety jsem jako máma malé holčičky – a zároveň učitelka, která tehdy neměla mnoho možností seberealizace – hledala způsob, jak smysluplně trávit společný čas, učit se nové věci a růst spolu s ní. Narazila jsem na senzorické hraní, které bylo v té době v České republice teprve v začátcích. Do té doby jsem znala především Montessori prvky, které se mi velmi líbily, ale sensory play si mě naprosto získalo.\nZačala jsem doma s dcerkou postupně zkoušet různé aktivity a s radostí sledovala, jak ji baví a rozvíjejí. Naše malé pokusy se ujaly i na sociálních sítích a brzy o ně začaly projevovat zájem maminky z okolí. Postupně jsem proto začala pořádat lekce – nejprve v Jaroměři a Hradci Králové, později i v dalších městech, kam dnes pravidelně dojíždím.\nMezitím se naše rodina rozrostla o dalšího malého člena – druhou holčičku. Ani těhotenství a následná mateřská dovolená mě ale v tom, co dělám, nezastavily. Naopak mě utvrdily v tom, jak smysluplná tato práce je. Postupně se z Duhohrátek stal rodinný projekt, do kterého se zapojil i můj manžel, a dnes jsou tak nejen mojí srdeční záležitostí, ale i naší společnou cestou.\nMožná i vy hledáte místo, kde si se svým dítětem užijete kvalitní čas bez spěchu, bez tlaku na výkon a bez srovnávání. Místo, kde může být samo sebou, zkoumat, tvořit a objevovat svět vlastním tempem.\nPrávě takové prostředí se snažíme v Duhohrátkách vytvářet.\nVěříme, že každé dítě je jedinečné a zaslouží si respekt, podporu a bezpečný prostor pro růst. Naše aktivity podporují přirozenou zvídavost, kreativitu i radost z objevování. Zároveň chceme posilovat vztah mezi dětmi a rodiči a vytvářet chvíle, na které se nezapomíná.\nChceme, aby každé dítě odcházelo z Duhohrátek sebevědomější, zvídavější a šťastnější. A aby si rodiče odnášeli nejen fotografie, ale především pocit, že svému dítěti věnovali čas, který má skutečnou hodnotu.\nPokud cítíte, že je vám tento přístup blízký, budeme moc rádi, když se k nám přidáte.\nTěšíme se na vás na některé z našich lekcí."
     },
     "activities": {
         "title": "Co u nás zažijete?",
@@ -129,46 +129,38 @@ window.defaultContent = {
         "phone": "+420 732 159 861"
     },
     "upcoming": {
-        "title": "Připravujeme další <span class=\"rainbow-text\">témata</span>",
+        "title": "Připravujeme další témata",
         "description": "Na jaké další lekce se můžete v nejbližší době těšit?",
         "visible": true,
-        "items": [
-            {
+        "items": {
+            "0": {
                 "active": true,
-                "id": "up_1",
                 "icon": "🐣",
-                "title": "Velikonoční koledování",
-                "description": "Senzorické barvení vajíček, hledání kuřátek a jarní tvoření."
+                "title": "Velikonoce",
+                "description": "vejce kuře pomlázka nnnn"
             },
-            {
-                "active": true,
-                "id": "up_2",
+            "1": {
+                "active": false,
                 "icon": "🚒",
-                "title": "Malí záchranáři",
-                "description": "Objevování světa hasičů, policistů a záchranářů hravou formou."
+                "title": "Téma 2",
+                "description": "Popis tématu 2"
             },
-            {
-                "active": true,
-                "id": "up_3",
+            "2": {
+                "active": false,
                 "icon": "🦕",
-                "title": "Svět dinosaurů",
-                "description": "Cesta do pravěku, odrývání zkamenělin a sensory boxy s dinosaury."
+                "title": "Téma 3",
+                "description": "Popis tématu 3"
             }
-        ]
-    },
-    "settings": {
-        "email": "admin@duhohratky.cz",
-        "seoTitle": "Duhohratky | Sensory Play & Montessori pro děti",
-        "seoDescription": "Duhohratky - kreativní sensory play a Montessori aktivity pro děti. Rozvoj smyslů, motoriky a kreativity v bezpečném prostředí.",
-        "seoKeywords": "sensory play, Montessori, děti, hry, rozvoj, kreativita, Duhohratky"
+        }
     },
     "lessons": {
+        "title": "Aktuální <span class=\"rainbow-text\">lekce</span>",
         "lesson1": {
-            "tag": "free_spots",
-            "date": "2026-02-05",
-            "location": "Hradec Králové",
-            "title": "<span class=\"rainbow-text\">Animované pohádky</span>",
             "active": true,
+            "title": "<span class=\"rainbow-text\">Animované pohádky</span>",
+            "location": "Hradec Králové",
+            "date": "2026-02-19",
+            "tag": "free_spots",
             "description": "Tlapková patrola, Blesk McQueen, Krteček, Ledové Království, Bing, Prasátko Peppa a další",
             "link": "#reservation",
             "time1": "10:00",
@@ -177,14 +169,13 @@ window.defaultContent = {
             "address": "Centrům Budulínek - Průmyslová 1198",
             "price": "250 Kč"
         },
-        "title": "Aktuální <span class=\"rainbow-text\">lekce</span>",
         "lesson2": {
             "active": true,
-            "location": "Chlumec nad Cidlinou",
-            "date": "2026-02-06",
             "title": "<span class=\"rainbow-text\">Animované pohádky</span>",
-            "link": "#reservation",
+            "location": "Chlumec nad Cidlinou",
+            "date": "2026-02-20",
             "tag": "free_spots",
+            "link": "#reservation",
             "description": "Tlapková patrola, Blesk McQueen, Krteček, Ledové Království, Bing, Prasátko Peppa a další",
             "time1": "10:00",
             "price": "250 Kč",
@@ -193,32 +184,45 @@ window.defaultContent = {
         "lesson3": {
             "active": true,
             "title": "<span class=\"rainbow-text\">Animované pohádky</span>",
-            "description": "Tlapková patrola, Blesk McQueen, Krteček, Ledové Království, Bing, Prasátko Peppa a další",
-            "link": "#reservation",
             "location": "Náchod",
             "date": "2026-02-23",
+            "tag": "free_spots",
+            "description": "Tlapková patrola, Blesk McQueen, Krteček, Ledové Království, Bing, Prasátko Peppa a další",
+            "link": "#reservation",
             "time1": "16:00",
             "price": "250 Kč",
-            "address": "MC Hopsáček - Zelená 157",
-            "tag": "free_spots"
+            "address": "MC Hopsáček - Zelená 157"
         },
         "lesson4": {
             "active": true,
             "title": "<span class=\"rainbow-text\">Animované pohádky</span>",
+            "location": "Jaroměř",
+            "date": "2026-02-23",
+            "tag": "free_spots",
             "description": "Tlapková patrola, Blesk McQueen, Krteček, Ledové Království, Bing, Prasátko Peppa a další",
             "link": "#reservation",
-            "location": "Jaroměř",
             "price": "250 Kč",
-            "tag": "free_spots"
+            "time1": "10:00",
+            "address": "Školní 95, Josefov"
         },
         "lesson5": {
             "active": true,
             "title": "<span class=\"rainbow-text\">Animované pohádky</span>",
+            "location": "Jasenná",
+            "date": "2026-02-24",
+            "tag": "free_spots",
             "description": "Tlapková patrola, Blesk McQueen, Krteček, Ledové Království, Bing, Prasátko Peppa a další",
             "link": "#reservation",
-            "location": "Jasenná",
             "price": "250 Kč",
-            "tag": "free_spots"
+            "time1": "15:00",
+            "address": "Jasenná 229, Jasenná",
+            "time2": "16:30"
         }
+    },
+    "settings": {
+        "email": "admin@duhohratky.cz",
+        "seoTitle": "Duhohratky | Sensory Play & Montessori pro děti",
+        "seoDescription": "Duhohratky - kreativní sensory play a Montessori aktivity pro děti. Rozvoj smyslů, motoriky a kreativity v bezpečném prostředí.",
+        "seoKeywords": "sensory play, Montessori, děti, hry, rozvoj, kreativita, Duhohratky"
     }
 };
