@@ -211,99 +211,45 @@ function loadData() {
 
 function saveData() {
     localStorage.setItem('duhohratky_data', JSON.stringify(siteData));
+
+    // Also save to a format that index.html can read (for preview)
     localStorage.setItem('duhohratky_content', JSON.stringify(siteData));
 
-    // GitHub Integration
-    const ghUsername = document.getElementById('gh-username').value;
-    const ghRepo = document.getElementById('gh-repo').value;
-    const ghToken = document.getElementById('gh-token').value;
-    const ghBranch = document.getElementById('gh-branch').value || 'gh-pages';
-
-    if (ghUsername && ghRepo && ghToken) {
-        saveCredentials(); // Persist for next time
-        saveToGitHub(ghUsername, ghRepo, ghBranch, ghToken);
-    } else {
-        showToast('Změny uloženy lokálně (GitHub nenastaven)', 'success');
-    }
+    // Save to Server (PHP)
+    saveToPHP();
 }
 
-function saveCredentials() {
-    const creds = {
-        username: document.getElementById('gh-username').value,
-        repo: document.getElementById('gh-repo').value,
-        branch: document.getElementById('gh-branch').value,
-        token: document.getElementById('gh-token').value
-    };
-    localStorage.setItem('duhohratky_gh_config', JSON.stringify(creds));
-}
-
-function loadCredentials() {
-    const stored = localStorage.getItem('duhohratky_gh_config');
-    if (stored) {
-        const creds = JSON.parse(stored);
-        if (document.getElementById('gh-username')) document.getElementById('gh-username').value = creds.username || '';
-        if (document.getElementById('gh-repo')) document.getElementById('gh-repo').value = creds.repo || '';
-        if (document.getElementById('gh-branch')) document.getElementById('gh-branch').value = creds.branch || 'gh-pages';
-        if (document.getElementById('gh-token')) document.getElementById('gh-token').value = creds.token || '';
-    }
-}
-
-async function saveToGitHub(username, repo, branch, token) {
+async function saveToPHP() {
     const saveBtn = document.getElementById('save-btn');
     const originalText = saveBtn.innerHTML;
-    saveBtn.innerHTML = '⏳ Nahrávám na GitHub...';
+    saveBtn.innerHTML = '⏳ Ukládám...';
     saveBtn.disabled = true;
 
     try {
-        const path = 'content.js';
-        const url = `https://api.github.com/repos/${username}/${repo}/contents/${path}?ref=${branch}`;
-
-        // 1. Get current SHA/File info
-        const getRes = await fetch(url, {
+        const response = await fetch('save.php', {
+            method: 'POST',
             headers: {
-                'Authorization': `token ${token}`,
-                'Accept': 'application/vnd.github.v3+json'
-            }
-        });
-
-        if (!getRes.ok) {
-            if (getRes.status === 401) throw new Error('Chyba 401: Neplatný Token. Zkontrolujte, že jste ho zkopíroval celý.');
-            if (getRes.status === 404) throw new Error('Chyba 404: Repozitář nenalezen. Zkontrolujte jméno uživatele a názvu repozitáře.');
-            throw new Error(`Chyba při čtení: ${getRes.status} ${getRes.statusText}`);
-        }
-        const getJson = await getRes.json();
-        const sha = getJson.sha;
-
-        // 2. Prepare content
-        // Convert siteData back to window.defaultContent format
-        const fileContent = `window.defaultContent = ${JSON.stringify(siteData, null, 4)};`;
-        const encodedContent = btoa(unescape(encodeURIComponent(fileContent))); // UTF-8 Safe Base64
-
-        // 3. Push update
-        const putRes = await fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `token ${token}`,
-                'Accept': 'application/vnd.github.v3+json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                message: 'Update content from Admin Panel',
-                content: encodedContent,
-                sha: sha,
-                branch: branch
-            })
+            body: JSON.stringify(siteData)
         });
 
-        if (!putRes.ok) throw new Error(`Chyba při nahrávání: ${putRes.status} ${putRes.statusText}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-        showToast('✅ Změny nahrány na GitHub!', 'success');
-        alert('🎉 Úspěch! Změny byly odeslány na GitHub.\n\nProsím vyčkejte cca 1-2 minuty, než se web aktualizuje, a pak ho obnovte.');
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            showToast('✅ Změny byly uloženy na server!', 'success');
+        } else {
+            throw new Error(result.message || 'Neznámá chyba při ukládání');
+        }
 
     } catch (e) {
-        console.error(e);
-        showToast(`❌ ${e.message}`, 'error');
-        alert(`❌ Nastala chyba:\n${e.message}\n\nZkontrolujte prosím své údaje v nastavení.`);
+        console.error('Save failed:', e);
+        showToast(`❌ Chyba při ukládání: ${e.message}`, 'error');
+        alert(`❌ Nepodařilo se uložit data na server.\n\nChyba: ${e.message}\n\nZkontrolujte připojení k internetu nebo kontaktujte správce.`);
     } finally {
         saveBtn.innerHTML = originalText;
         saveBtn.disabled = false;
