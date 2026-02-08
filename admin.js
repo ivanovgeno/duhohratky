@@ -87,21 +87,8 @@ const defaultData = {
 
     // Gallery Section
     galleryTitle: 'Nahlédněte do našeho světa',
-    gallery: {
-        title: 'Nahlédněte do našeho světa', // Legacy
-        img1Url: '',
-        img1Label: 'Sensory Play',
-        img2Url: '',
-        img2Label: 'Kreativní tvoření',
-        img3Url: '',
-        img3Label: 'Montessori',
-        img4Url: '',
-        img4Label: 'Vodní hrátky',
-        img5Url: '',
-        img5Label: 'Přírodniny',
-        img6Url: '',
-        img6Label: 'Oslavy'
-    },
+    gallery: [], // Now an array for dynamic images
+
 
     // Contact Section
     contact: {
@@ -352,6 +339,12 @@ function loadData() {
         siteData = deepMerge(defaultData, siteData);
     } else {
         siteData = JSON.parse(JSON.stringify(defaultData));
+    }
+
+    // Migration: Fix gallery structure if it's the old object
+    if (siteData.gallery && !Array.isArray(siteData.gallery)) {
+        console.warn('Migrating legacy gallery structure to array.');
+        siteData.gallery = [];
     }
 }
 
