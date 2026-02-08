@@ -86,8 +86,9 @@ const defaultData = {
     },
 
     // Gallery Section
+    galleryTitle: 'Nahlédněte do našeho světa',
     gallery: {
-        title: 'Nahlédněte do našeho světa',
+        title: 'Nahlédněte do našeho světa', // Legacy
         img1Url: '',
         img1Label: 'Sensory Play',
         img2Url: '',
