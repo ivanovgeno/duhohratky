@@ -112,7 +112,7 @@
         }
     </style>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="main.css?v=99">
 </head>
 
 <body>
@@ -306,33 +306,8 @@
         </div>
     </footer>
 
-    <script src=\"script.js\" defer></script>
-    <script>
-        // Gallery Filter
-        document.addEventListener('DOMContentLoaded', () => {
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const items = document.querySelectorAll('.gallery-item-large');
-
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    // Update active button
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-
-                    const filter = btn.dataset.filter;
-
-                    items.forEach(item => {
-                        if (filter === 'all' || item.dataset.category === filter) {
-                            item.style.display = 'block';
-                            item.style.animation = 'fadeIn 0.5s ease';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                });
-            });
-        });
-    </script>
+    <script src="content.js?v=99"></script>
+    <script src="main.js?v=99"></script>
 </body>
 
 </html>
