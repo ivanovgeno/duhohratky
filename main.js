@@ -30,6 +30,7 @@ async function loadContent() {
         const localData = localStorage.getItem('duhohratky_content');
         if (localData) {
             data = JSON.parse(localData);
+            data.fromLocalStorage = true;
             console.log('Loaded from LocalStorage');
         }
     } catch (e) {
@@ -73,17 +74,21 @@ async function loadContent() {
     debugBox.style.position = 'fixed';
     debugBox.style.bottom = '10px';
     debugBox.style.left = '10px';
-    debugBox.style.background = 'rgba(0,0,0,0.8)';
-    debugBox.style.color = 'white';
-    debugBox.style.padding = '10px';
-    debugBox.style.borderRadius = '5px';
+    debugBox.style.background = 'rgba(0,0,0,0.85)';
+    debugBox.style.color = '#fff';
+    debugBox.style.padding = '12px';
+    debugBox.style.borderRadius = '8px';
     debugBox.style.zIndex = '9999';
-    debugBox.style.fontSize = '12px';
+    debugBox.style.fontSize = '13px';
+    debugBox.style.fontFamily = 'monospace';
+    debugBox.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
     debugBox.innerHTML = `
-        <strong>Debug Info: v1003 (LS Cleared)</strong><br>
-        Gallery Type: ${Array.isArray(data.gallery) ? 'Array ✅' : typeof data.gallery}<br>
-        Gallery Count: ${data.gallery ? data.gallery.length : 'N/A'}<br>
-        LS Data: ${localStorage.getItem('duhohratky_content') ? 'Yes' : 'Cleared'}
+        <strong style="color: #00ff00;">Debug v1005</strong><br>
+        Source: ${data.fromLocalStorage ? 'LocalStorage 📦' : 'Server File 🌐'}<br>
+        Gallery Type: ${Array.isArray(data.gallery) ? '<span style="color:#00ff00">Array OK</span>' : '<span style="color:red">ERROR</span>'}<br>
+        Items Count: <strong>${data.gallery ? data.gallery.length : 0}</strong><br>
+        Time: ${new Date().toLocaleTimeString()}<br>
+        <button onclick="localStorage.removeItem('duhohratky_content'); location.reload()" style="margin-top:5px; cursor:pointer; background:red; color:white; border:none; padding:5px; border-radius:3px;">RESET DATA</button>
     `;
     document.body.appendChild(debugBox);
     // End Visual Debugger
