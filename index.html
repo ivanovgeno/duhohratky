@@ -435,16 +435,12 @@
                 </div>
                 <div class="reservation-wrapper">
                     <!-- Reservio Iframe Container -->
-                    <div class="reservio-container glass-card">
-                        <div class="reservio-embed">
-                            <iframe src="https://duhohratky.reservio.com" name="reservio" frameborder="0"
-                                style="width: 100%; height: 500px; border-radius: 12px;" scrolling="no"
-                                data-content="reservio.iframeUrl">
-                                <p>Váš prohlížeč nepodporuje iframes. <a href="https://duhohratky.reservio.com"
-                                        data-content="reservio.iframeUrl"
-                                        data-content-href="reservio.iframeUrl">Rezervujte si termín zde.</a></p>
-                            </iframe>
+                    <div class="reservio-container glass-card"
+                        style="display: flex; justify-content: center; align-items: center; min-height: 200px;">
+                        <div class="reservio-button-container" data-text="Vytvořit rezervaci" data-size="large"
+                            data-color="#5690F5" data-url="https://duhohratky.reservio.com">
                         </div>
+                        <script src="https://cdn.reservio.com/widget/button-bundle.js"></script>
                     </div>
 
                     <!-- Informační panel -->
