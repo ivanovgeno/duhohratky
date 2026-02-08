@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duhohrátky | Sensory Play & Montessori pro děti</title>
+    <meta name="description"
+        content="Duhohrátky - kreativní sensory play a Montessori aktivity pro děti. Rozvoj smyslů, motoriky a kreativity v bezpečném prostředí.">
+    <meta name="keywords" content="sensory play, Montessori, děti, hry, rozvoj, kreativita, Duhohrátky">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://duhohratky.cz/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF6B9D">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Duhohrátky">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://duhohratky.cz/">
+    <meta property="og:title" content="Duhohrátky | Sensory Play & Montessori pro děti">
+    <meta property="og:description"
+        content="Kreativní sensory play a Montessori aktivity pro rozvoj dětí. Rozvoj smyslů, motoriky a kreativity v bezpečném prostředí.">
+    <meta property="og:image" content="https://duhohratky.cz/logo.png">
+    <meta property="og:locale" content="cs_CZ">
+    <meta property="og:site_name" content="Duhohrátky">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://duhohratky.cz/">
+    <meta name="twitter:title" content="Duhohrátky | Sensory Play & Montessori pro děti">
+    <meta name="twitter:description" content="Kreativní sensory play a Montessori aktivity pro rozvoj dětí.">
+    <meta name="twitter:image" content="https://duhohratky.cz/logo.png">
+
+    <!-- Schema.org LocalBusiness -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Duhohrátky",
+        "description": "Sensory Play & Montessori aktivity pro děti",
+        "url": "https://duhohratky.cz",
+        "logo": "https://duhohratky.cz/logo.png",
+        "image": "https://duhohratky.cz/logo.png",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Duhová 123",
+            "addressLocality": "Praha 1",
+            "postalCode": "110 00",
+            "addressCountry": "CZ"
+        },
+        "telephone": "+420123456789",
+        "email": "info@duhohratky.cz",
+        "openingHours": ["Mo-Fr 09:00-18:00", "Sa 09:00-14:00"],
+        "priceRange": "$$",
+        "sameAs": [
+            "https://facebook.com/duhohratky",
+            "https://instagram.com/duhohratky"
+        ]
+    }
+    </script>
+
+    <!-- Font Preloads -->
+    <link rel="preload" href="BadgerScript-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="Badger-Regular.ttf" as="font" type="font/ttf" crossorigin>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@400;500;600;700&family=Patrick+Hand&family=Fredoka:wght@400;500;600;700&display=swap&subset=latin,latin-ext"
+        rel="stylesheet">
+
+    <!-- Critical CSS - inline for faster FCP -->
+    <style>
+        /* Critical CSS - above the fold styles */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #FFF8F6 0%, #FFF5F0 50%, #FAF6F4 100%);
+            color: #4A3F3A;
+            line-height: 1.6;
+            overflow-x: hidden
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .logo-image {
+            height: 50px;
+            width: auto
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 0 4rem;
+            position: relative
+        }
+    </style>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="main.css?v=37">
+</head>
+
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Přeskočit na hlavní obsah</a>
+
+    <!-- Colorful Soap Bubbles Background -->
+    <div class="bubbles-container" id="bubbles"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#home" class="logo">
+                <img src="logo.png" alt="Duhohátky - Sensory Play & Montessori" class="logo-image" width="50"
+                    height="50">
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">Domů</a></li>
+                <li><a href="#about" class="nav-link">O nás</a></li>
+                <li><a href="#activities" class="nav-link">Aktivity</a></li>
+                <li><a href="gallery.html" class="nav-link">Galerie</a></li>
+                <li><a href="tips.html" class="nav-link">Návody & Tipy</a></li>
+                <li><a href="#reservation" class="nav-link nav-cta">Rezervace</a></li>
+                <li><a href="#contact" class="nav-link">Kontakt</a></li>
+            </ul>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <main id="main-content">
+        <section class="hero" id="home">
+            <div class="hero-content container">
+                <div class="hero-logo-large">
+                    <img src="logo.png" alt="Duhohátky logo" class="hero-logo-img" width="200" height="200">
+                </div>
+                <!-- Badge -->
+                <div class="section-badge" data-content="hero.badge" style="display:inline-block; margin-bottom: 1rem;">
+                    ✨ Kreativita & Rozvoj</div>
+
+                <h1 class="hero-subtitle">
+                    <span data-content="hero.title">Vítejte v</span>
+                    <span class="rainbow-text" data-content="hero.titleHighlight">Duhohrátkách</span>
+                </h1>
+                <h2 data-content="hero.subtitle"
+                    style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-dark);">Sensory play & Montessori
+                    aktivity pro rozvoj vašich dětí</h2>
+
+                <p class="hero-description" data-content="hero.description">
+                    Objevte svět hravého učení, kde se děti rozvíjejí prostřednictvím smyslových her,
+                    kreativních činností a Montessori přístupu v bezpečném a inspirujícím prostředí.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#reservation" class="btn btn-primary" data-content="hero.btn1Text"
+                        data-content-href="hero.btn1Link">
+                        <span>📅</span> Rezervovat termín
+                    </a>
+                    <a href="#activities" class="btn btn-secondary" data-content="hero.btn2Text"
+                        data-content-href="hero.btn2Link">
+                        <span>🎨</span> Prozkoumat aktivity
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number rainbow-text" data-target="500" data-suffix="+"
+                            data-content="hero.stat1Number">500+</span>
+                        <span class="stat-label" data-content="hero.stat1Label">Šťastných dětí</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number rainbow-text" data-target="20" data-suffix="+"
+                            data-content="hero.stat2Number">20+</span>
+                        <span class="stat-label" data-content="hero.stat2Label">Typů aktivit</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number rainbow-text" data-target="8" data-suffix="+"
+                            data-content="hero.stat3Number">8+</span>
+                        <span class="stat-label" data-content="hero.stat3Label">Let praxe</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number rainbow-text" data-target="5" data-suffix="⭐"
+                            data-content="hero.stat4Number">5⭐</span>
+                        <span class="stat-label" data-content="hero.stat4Label">Hodnocení</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Current Lessons / Featured Section -->
+        <section class="featured-section" id="lessons">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge" style="background: rgba(255,215,0,0.2); color: #BEB200;">⚡
+                        Aktuálně</span>
+                    <h2 class="section-title" data-content="lessons.title">Aktuální <span
+                            class="rainbow-text">lekce</span></h2>
+                    <p>Přidejte se k nám ještě tento týden!</p>
+                </div>
+
+                <div id="lessons-grid" class="featured-grid">
+                    <!-- Dynamic Lessons will appear here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Themes Section -->
+        <section class="upcoming-themes" id="upcoming">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">✨ Připravujeme</span>
+                    <h2 class="section-title" data-content="upcoming.title">Připravujeme další <span
+                            class="rainbow-text">témata</span></h2>
+                    <p class="section-description" data-content="upcoming.description">Na jaké další lekce se můžete v
+                        nejbližší době těšit?</p>
+                </div>
+                <div class="upcoming-grid" id="upcoming-themes-grid">
+                    <!-- Dynamic themes will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">🌟 O nás</span>
+                    <h2 class="section-title" data-content="about.title">Co jsou Duhohrátky?</h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-card glass-card">
+                        <div class="about-icon" data-content="about.card1Icon">🎨</div>
+                        <h3 data-content="about.card1Title">Sensory Play</h3>
+                        <p data-content="about.card1Text">Smyslové hry, které rozvíjejí hmat, čich, zrak i sluch. Děti
+                            objevují textury, barvy a zvuky v bezpečném prostředí.</p>
+                    </div>
+                    <div class="about-card glass-card">
+                        <div class="about-icon" data-content="about.card2Icon">📚</div>
+                        <h3 data-content="about.card2Title">Montessori přístup</h3>
+                        <p data-content="about.card2Text">Respektujeme individualitu každého dítěte. Učíme se hrou,
+                            pozorováním a vlastním tempem objevování světa.</p>
+                    </div>
+                    <div class="about-card glass-card">
+                        <div class="about-icon" data-content="about.card3Icon">🧠</div>
+                        <h3 data-content="about.card3Title">Rozvoj dovedností</h3>
+                        <p data-content="about.card3Text">Podpora jemné motoriky, koordinace, koncentrace a kreativního
+                            myšlení prostřednictvím zábavných aktivit.</p>
+                    </div>
+                    <div class="about-card glass-card">
+                        <div class="about-icon" data-content="about.card4Icon">💕</div>
+                        <h3 data-content="about.card4Title">Bezpečné prostředí</h3>
+                        <p data-content="about.card4Text">Všechny materiály jsou bezpečné a netoxické. Prostory jsou
+                            přizpůsobené potřebám malých objevitelů.</p>
+                    </div>
+                </div>
+                <div class="about-story glass-card">
+                    <div class="story-content">
+                        <h3 data-content="about.storyTitle">Náš příběh</h3>
+                        <p data-content="about.storyText">Duhohrátky vznikly z lásky k dětem a touhy vytvořit prostor,
+                            kde se mohou svobodně rozvíjet.
+                            Věříme, že každé dítě je jedinečné a zaslouží si objevovat svět vlastním způsobem. Naše
+                            aktivity
+                            jsou navrženy tak, aby podporovaly přirozenou zvídavost a kreativitu dětí.</p>
+                    </div>
+                    <div class="story-image">
+                        <div class="story-emoji">👨‍👩‍👧‍👦</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activities Section -->
+        <section class="activities" id="activities">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">🎪 Aktivity</span>
+                    <h2 class="section-title" data-content="activities.title">Co u nás zažijete?</h2>
+                    <p class="section-description" data-content="activities.description">Nabízíme širokou škálu aktivit
+                        pro děti všech věkových kategorií</p>
+                </div>
+                <div class="activities-grid">
+                    <div class="activity-card" data-color="pink">
+                        <div class="activity-icon-large" data-content="activities.act1Icon">🫧</div>
+                        <h3 data-content="activities.act1Title">Sensory Boxy</h3>
+                        <p data-content="activities.act1Text">Tematické boxy plné různých textur, materiálů a překvapení
+                            na prozkoumání.</p>
+                        <div class="activity-age" data-content="activities.act1Age">2-6 let</div>
+                    </div>
+                    <div class="activity-card" data-color="orange">
+                        <div class="activity-icon-large" data-content="activities.act2Icon">🎨</div>
+                        <h3 data-content="activities.act2Title">Kreativní tvoření</h3>
+                        <p data-content="activities.act2Text">Malování, modelování, koláže a další výtvarné techniky pro
+                            malé umělce.</p>
+                        <div class="activity-age" data-content="activities.act2Age">3-8 let</div>
+                    </div>
+                    <div class="activity-card" data-color="yellow">
+                        <div class="activity-icon-large" data-content="activities.act3Icon">💧</div>
+                        <h3 data-content="activities.act3Title">Vodní hrátky</h3>
+                        <p data-content="activities.act3Text">Experimenty s vodou, přeléváním a objevování zákonitostí
+                            tekutin.</p>
+                        <div class="activity-age" data-content="activities.act3Age">1-5 let</div>
+                    </div>
+                    <div class="activity-card" data-color="green">
+                        <div class="activity-icon-large" data-content="activities.act4Icon">🌱</div>
+                        <h3 data-content="activities.act4Title">Přírodní materiály</h3>
+                        <p data-content="activities.act4Text">Práce s pískem, kamínky, listy a dalšími přírodninami.</p>
+                        <div class="activity-age" data-content="activities.act4Age">2-7 let</div>
+                    </div>
+                    <div class="activity-card" data-color="blue">
+                        <div class="activity-icon-large" data-content="activities.act5Icon">🧩</div>
+                        <h3 data-content="activities.act5Title">Montessori pomůcky</h3>
+                        <p data-content="activities.act5Text">Vzdělávací materiály pro rozvoj logiky, matematiky a
+                            jazyka.</p>
+                        <div class="activity-age" data-content="activities.act5Age">3-8 let</div>
+                    </div>
+                    <div class="activity-card" data-color="purple">
+                        <div class="activity-icon-large" data-content="activities.act6Icon">🎂</div>
+                        <h3 data-content="activities.act6Title">Narozeninové oslavy</h3>
+                        <p data-content="activities.act6Text">Nezapomenutelné narozeniny plné her, tvoření a zábavy.</p>
+                        <div class="activity-age" data-content="activities.act6Age">1-10 let</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="gallery" id="gallery">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">📸 Galerie</span>
+                    <h2 class="section-title" data-content="gallery.title">Nahlédněte do <span
+                            class="rainbow-text">našeho světa</span></h2>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-category="sensory">
+                        <img src="watercolor_sensory.png" alt="Sensory Play" class="gallery-image" loading="lazy"
+                            width="400" height="300" decoding="async" data-content="gallery.img1Url">
+                        <div class="gallery-overlay">
+                            <span data-content="gallery.img1Label">Sensory Play</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="creative">
+                        <img src="watercolor_creative.png" alt="Kreativní tvoření" class="gallery-image" loading="lazy"
+                            width="400" height="300" decoding="async" data-content="gallery.img2Url">
+                        <div class="gallery-overlay">
+                            <span data-content="gallery.img2Label">Kreativní tvoření</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="montessori">
+                        <img src="watercolor_montessori.png" alt="Montessori" class="gallery-image" loading="lazy"
+                            width="400" height="300" decoding="async" data-content="gallery.img3Url">
+                        <div class="gallery-overlay">
+                            <span data-content="gallery.img3Label">Montessori</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="water">
+                        <img src="watercolor_water.png" alt="Vodní hrátky" class="gallery-image" loading="lazy"
+                            width="400" height="300" decoding="async" data-content="gallery.img4Url">
+                        <div class="gallery-overlay">
+                            <span data-content="gallery.img4Label">Vodní hrátky</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="nature">
+                        <img src="watercolor_nature.png" alt="Přírodniny" class="gallery-image" loading="lazy"
+                            width="400" height="300" decoding="async" data-content="gallery.img5Url">
+                        <div class="gallery-overlay">
+                            <span data-content="gallery.img5Label">Přírodniny</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="party">
+                        <img src="watercolor_party.png" alt="Oslavy" class="gallery-image" loading="lazy" width="400"
+                            height="300" decoding="async" data-content="gallery.img6Url">
+                        <div class="gallery-overlay">
+                            <span data-content="gallery.img6Label">Oslavy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reservation Section - Reservio Integration -->
+        <section class="reservation" id="reservation">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">📅 Rezervace</span>
+                    <h2 class="section-title">Zarezervujte si <span class="rainbow-text">termín</span></h2>
+                    <p class="section-description">Vyberte si aktivitu a termín, který vám vyhovuje</p>
+                </div>
+                <div class="reservation-wrapper">
+                    <!-- Reservio Iframe Container -->
+                    <div class="reservio-container glass-card"
+                        style="display: flex; justify-content: center; padding: 20px;">
+                        <iframe src="https://duhohratky.reservio.com" width="800" height="500" frameborder="0"
+                            style="max-width: 100%;">
+                            <p>Pokud se rezervační formulář nezobrazí, <a href="https://duhohratky.reservio.com"
+                                    target="_blank"
+                                    style="color: var(--color-blue); text-decoration: underline;">klikněte zde pro
+                                    rezervaci</a>.</p>
+                        </iframe>
+                    </div>
+
+                    <!-- Informační panel -->
+                    <div class="reservation-info glass-card">
+                        <h3>📍 Jak rezervovat?</h3>
+                        <div class="info-steps">
+                            <div class="info-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Vyberte službu</h4>
+                                    <p>Zvolte aktivitu, kterou chcete rezervovat</p>
+                                </div>
+                            </div>
+                            <div class="info-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Vyberte termín</h4>
+                                    <p>Podívejte se na dostupné termíny v kalendáři</p>
+                                </div>
+                            </div>
+                            <div class="info-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Potvrďte rezervaci</h4>
+                                    <p>Vyplňte kontaktní údaje a dokončete rezervaci</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-contact">
+                            <p><strong>Potřebujete pomoc?</strong></p>
+                            <a href="tel:+420123456789" class="phone-link" data-content="reservio.phone"
+                                data-content-href="reservio.phone">📞 +420 123 456 789</a>
+                            <p class="info-note">Rádi vám pomůžeme s rezervací telefonicky</p>
+                        </div>
+                        <div class="reservio-badge">
+                            <span>Powered by</span>
+                            <strong>Reservio</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Tips Preview Section -->
+        <section class="tips-preview" id="tips">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">💡 Návody & Tipy</span>
+                    <h2 class="section-title" data-content="tips.previewTitle">Inspirace pro <span
+                            class="rainbow-text">domácí tvoření</span></h2>
+                    <p class="section-description" data-content="tips.previewDescription">Vyzkoušejte naše oblíbené
+                        aktivity i doma</p>
+                </div>
+                <div class="tips-preview-grid">
+                    <article class="tip-card glass-card" data-id="tip1">
+                        <div class="tip-image" style="background: linear-gradient(135deg, #FFB6C1, #FF69B4);">
+                            <span data-content="tips.tip1Icon">🍚</span>
+                        </div>
+                        <div class="tip-content">
+                            <span class="tip-tag">Sensory Play</span>
+                            <h3 data-content="tips.tip1Title">Barevná rýže</h3>
+                            <p data-content="tips.tip1Description">Jednoduchý návod na výrobu barevné senzorické rýže.
+                            </p>
+                            <div class="tip-meta">
+                                <span data-content="tips.tip1Time">⏱️ 15 min</span>
+                                <span data-content="tips.tip1Age">👶 1+ rok</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="tip-card glass-card" data-id="tip2">
+                        <div class="tip-image" style="background: linear-gradient(135deg, #FFE066, #FFD700);">
+                            <span data-content="tips.tip2Icon">🥄</span>
+                        </div>
+                        <div class="tip-content">
+                            <span class="tip-tag">Montessori</span>
+                            <h3 data-content="tips.tip2Title">Přesýpání a přelévání</h3>
+                            <p data-content="tips.tip2Description">Aktivita pro rozvoj jemné motoriky.</p>
+                            <div class="tip-meta">
+                                <span data-content="tips.tip2Time">⏱️ 10 min</span>
+                                <span data-content="tips.tip2Age">👶 18m+</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="tip-card glass-card" data-id="tip3">
+                        <div class="tip-image" style="background: linear-gradient(135deg, #90EE90, #32CD32);">
+                            <span data-content="tips.tip3Icon">🍂</span>
+                        </div>
+                        <div class="tip-content">
+                            <span class="tip-tag">Kreativní</span>
+                            <h3 data-content="tips.tip3Title">Otisk listů</h3>
+                            <p data-content="tips.tip3Description">Krásné otisky pomocí barev a listů.</p>
+                            <div class="tip-meta">
+                                <span data-content="tips.tip3Time">⏱️ 20 min</span>
+                                <span data-content="tips.tip3Age">👶 2+ roky</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="tips-cta">
+                    <a href="tips.html" class="btn btn-secondary">
+                        <span>📚</span> Zobrazit všechny návody
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">📍 Kontakt</span>
+                    <h2 class="section-title" data-content="contact.title">Kde nás <span
+                            class="rainbow-text">najdete</span>?</h2>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-card glass-card">
+                        <div class="contact-icon">📍</div>
+                        <h3>Adresa</h3>
+                        <p><span data-content="contact.address1">Duhová 123</span><br><span
+                                data-content="contact.address2">Praha 1, 110 00</span></p>
+                    </div>
+                    <div class="contact-card glass-card">
+                        <div class="contact-icon">📞</div>
+                        <h3>Telefon</h3>
+                        <p><a href="tel:+420123456789" data-content="contact.phone"
+                                data-content-href="contact.phone">+420 123 456 789</a></p>
+                    </div>
+                    <div class="contact-card glass-card">
+                        <div class="contact-icon">📧</div>
+                        <h3>Email</h3>
+                        <p><a href="mailto:info@duhohratky.cz" data-content="contact.email"
+                                data-content-href="contact.email">info@duhohratky.cz</a></p>
+                    </div>
+                    <div class="contact-card glass-card">
+                        <div class="contact-icon">⏰</div>
+                        <h3>Otevírací doba</h3>
+                        <p><span data-content="contact.hours1">Po-Pá: 9:00 - 18:00</span><br><span
+                                data-content="contact.hours2">So: 9:00 - 14:00</span></p>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer"
+                        data-content-href="contact.facebook" data-content-no-text="true">📘</a>
+                    <a href="#" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer"
+                        data-content-href="contact.instagram" data-content-no-text="true">📷</a>
+                    <a href="#" class="social-link" aria-label="YouTube" target="_blank" rel="noopener noreferrer"
+                        data-content-href="contact.youtube" data-content-no-text="true">🎬</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#home" class="logo">
+                        <img src="logo.png" alt="Duhohátky" class="logo-image footer-logo" loading="lazy" width="60"
+                            height="60" decoding="async">
+                    </a>
+                    <p>Sensory Play & Montessori pro šťastné děti</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Navigace</h4>
+                        <a href="#home">Domů</a>
+                        <a href="#about">O nás</a>
+                        <a href="#activities">Aktivity</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Stránky</h4>
+                        <a href="gallery.html">Galerie</a>
+                        <a href="tips.html">Návody & Tipy</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Kontakt</h4>
+                        <a href="#reservation">Rezervace</a>
+                        <a href="#contact">Kontakt</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Duhohrátky. Všechna práva vyhrazena.</p>
+                <p>Vytvořeno s 💕 pro děti</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content glass-card">
+            <div class="modal-icon">🎉</div>
+            <h3>Děkujeme za rezervaci!</h3>
+            <p>Vaši rezervaci jsme přijali. Ozveme se vám do 24 hodin s potvrzením.</p>
+            <button class="btn btn-primary" id="close-modal">Rozumím</button>
+        </div>
+    </div>
+
+    <script src="content.js?v=99"></script>
+    <script src="main.js?v=99"></script>
+</body>
+
+</html>
+<!-- Cache version: 2026-02-03-v8-restored -->
