@@ -689,3 +689,16 @@ function showToast(message, type = 'success') {
         toast.classList.remove('show');
     }, 3000);
 }
+
+/* ====================================
+   INIT
+   ==================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    // Alert user about update to ensure cache is cleared
+    if (!sessionStorage.getItem('v1001_alert')) {
+        alert("🎉 Systém aktualizován (v1001). Oprava nahrávání galerie nasazena.");
+        sessionStorage.setItem('v1001_alert', 'true');
+    }
+
+    initLogin();
+});
