@@ -39,8 +39,8 @@ for REMOTE_PATH in "${PATHS[@]}"; do
     # Try to create directory (ignore error if exists)
     curl -s --ftp-ssl -u "$FTP_USER:$FTP_PASS" -Q "MKD $REMOTE_PATH" "ftp://$FTP_HOST/" > /dev/null 2>&1
 
-    # Define files to upload (HTML, JS, CSS, PHP, Images, Fonts)
-    for file in *.html *.js *.css *.php *.png *.ttf *.otf; do
+    # Define files to upload (HTML, JS, CSS, PHP, Images, Fonts, .htaccess)
+    for file in *.html *.js *.css *.php *.png *.ttf *.otf .htaccess; do
         if [ -f "$file" ]; then
             echo "   Uploading $file to $REMOTE_PATH..."
             curl -s --ftp-ssl -u "$FTP_USER:$FTP_PASS" -T "$file" "ftp://$FTP_HOST$REMOTE_PATH/"
