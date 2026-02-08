@@ -198,6 +198,8 @@ function renderUpcomingThemes(upcomingData) {
 
 function renderGalleryPage(galleryData) {
     const container = document.querySelector('.gallery-grid-large');
+    console.log('Rendering Gallery:', { containerExists: !!container, dataLength: galleryData ? galleryData.length : 0, data: galleryData });
+
     if (!container) return;
 
     // If we have dynamic gallery data, use it
