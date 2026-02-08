@@ -193,11 +193,134 @@ document.addEventListener('DOMContentLoaded', () => {
     initButtons();
     populateFields();
     loadCredentials();
+    loadGallery(); // Initialize gallery
 });
 
 /* ====================================
-   DATA MANAGEMENT
+   GALLERY MANAGEMENT
    ==================================== */
+
+function loadGallery() {
+    const list = document.getElementById('gallery-list');
+    if (!list) return;
+
+    list.innerHTML = '';
+    const gallery = siteData.gallery || [];
+
+    if (gallery.length === 0) {
+        list.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">Zatím žádné nahrané fotky. Nahrajte první!</p>';
+        return;
+    }
+
+    gallery.forEach((img, index) => {
+        const div = document.createElement('div');
+        div.className = 'gallery-admin-item';
+        // Add timestamp to prevent caching issues immediately after upload
+        const src = img.src + '?t=' + (img.timestamp || Date.now());
+
+        div.innerHTML = `
+            <div class="gallery-preview" style="background-image: url('${src}')"></div>
+            <div class="gallery-meta">
+                <span class="badge ${img.category}">${img.category}</span>
+                <button class="btn-delete" onclick="deleteGalleryImage(${index})" title="Smazat">🗑️</button>
+            </div>
+        `;
+        list.appendChild(div);
+    });
+}
+
+async function uploadGalleryImage() {
+    const input = document.getElementById('gallery-upload');
+    const categorySelect = document.getElementById('gallery-category');
+    const status = document.getElementById('upload-status');
+    const btn = document.querySelector('button[onclick="uploadGalleryImage()"]');
+
+    if (!input.files || input.files.length === 0) {
+        alert("Vyberte prosím obrázek.");
+        return;
+    }
+
+    const file = input.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+
+    // UX
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '⏳ Nahrávám...';
+    btn.disabled = true;
+    status.innerHTML = '⏳ Nahrávám a převádím na WebP...';
+    status.className = 'status-loading';
+
+    try {
+        const response = await fetch('upload.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            // Update data model
+            if (!siteData.gallery) siteData.gallery = [];
+            siteData.gallery.push({
+                src: result.path, // e.g., 'gallery/img_123.webp'
+                category: categorySelect.value,
+                timestamp: Date.now()
+            });
+
+            saveData(); // Save content.js to GitHub/Server
+            loadGallery(); // Refresh UI
+
+            status.innerHTML = '✅ Nahráno úspěšně!';
+            status.className = 'status-success';
+            input.value = ''; // Reset input
+
+            // Clear status after 3s
+            setTimeout(() => { status.innerHTML = ''; status.className = ''; }, 3000);
+        } else {
+            throw new Error(result.message);
+        }
+    } catch (e) {
+        console.error(e);
+        alert('Chyba při nahrávání: ' + e.message);
+        status.innerHTML = '❌ ' + e.message;
+        status.className = 'status-error';
+    } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }
+}
+
+async function deleteGalleryImage(index) {
+    if (!confirm('Opravdu chcete tento obrázek smazat? Tato akce je nevratná.')) return;
+
+    const img = siteData.gallery[index];
+    const filename = img.src.split('/').pop(); // Extract filename
+
+    try {
+        // 1. Delete from server
+        const response = await fetch('delete.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filename: filename })
+        });
+
+        const result = await response.json();
+
+        // 2. If deleted (or not found), remove from data
+        if (result.status === 'success' || result.message === 'File not found') {
+            siteData.gallery.splice(index, 1);
+            saveData(); // Sync with content.js
+            loadGallery(); // Update UI
+        } else {
+            alert('Chyba při mazání souboru: ' + result.message);
+        }
+
+    } catch (e) {
+        console.error(e);
+        alert('Chyba komunikace se serverem.');
+    }
+}
 function loadData() {
     const stored = localStorage.getItem('duhohratky_data');
     if (stored) {

@@ -495,3 +495,68 @@ body {
         padding: var(--spacing-sm);
     }
 }
+/* Gallery Manager */
+.gallery-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.gallery-admin-item {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-preview {
+    width: 100%;
+    aspect-ratio: 1; /* Square */
+    background-size: cover;
+    background-position: center;
+    background-color: #f8f9fa;
+}
+
+.gallery-meta {
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-top: 1px solid #eee;
+}
+
+.badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #eee;
+    color: #555;
+    text-transform: uppercase;
+}
+
+.badge.sensory { background: #FFB6C1; color: #fff; }
+.badge.montessori { background: #98D8C8; color: #fff; }
+.badge.creative { background: #FFA07A; color: #fff; }
+.badge.party { background: #DDA0DD; color: #fff; }
+
+.btn-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+    transition: transform 0.2s;
+}
+
+.btn-delete:hover {
+    transform: scale(1.2);
+}
+
+.status-loading { color: #f39c12; margin-top: 10px; font-size: 14px; }
+.status-success { color: #2ecc71; margin-top: 10px; font-size: 14px; }
+.status-error { color: #e74c3c; margin-top: 10px; font-size: 14px; }

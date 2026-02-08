@@ -3,6 +3,7 @@ window.defaultContent = {
         "email": "admin@duhohratky.cz",
         "password": "admin123"
     },
+    "gallery": [],
     "hero": {
         "badge": "✨ Kreativita & Rozvoj",
         "title": "Sensory play & Montessori aktivity pro rozvoj vašich dětí",

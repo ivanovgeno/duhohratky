@@ -155,6 +155,15 @@ function applyContent(data) {
     } catch (e) {
         console.error('Error rendering lessons:', e);
     }
+
+    // Render Gallery Page
+    try {
+        if (data.gallery) {
+            renderGalleryPage(data.gallery);
+        }
+    } catch (e) {
+        console.error('Error rendering gallery:', e);
+    }
 }
 
 function renderUpcomingThemes(upcomingData) {
@@ -184,6 +193,77 @@ function renderUpcomingThemes(upcomingData) {
             </div>
         `;
         container.appendChild(themeCard);
+    });
+}
+
+function renderGalleryPage(galleryData) {
+    const container = document.querySelector('.gallery-grid-large');
+    if (!container) return;
+
+    // If we have dynamic gallery data, use it
+    if (galleryData && galleryData.length > 0) {
+        container.innerHTML = '';
+        galleryData.forEach(img => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item-large';
+            item.dataset.category = img.category;
+            item.style.animation = 'fadeIn 0.5s ease';
+
+            // Handle timestamp for caching
+            const src = img.src.startsWith('http') ? img.src : img.src + '?t=' + (img.timestamp || Date.now());
+
+            item.innerHTML = `
+                <div class="gallery-image-container">
+                     <img src="${src}" alt="${img.category}" loading="lazy">
+                </div>
+                <div class="gallery-overlay">
+                    <span class="badge ${img.category}">${getCategoryLabel(img.category)}</span>
+                </div>
+            `;
+            container.appendChild(item);
+        });
+
+        // Re-attach filters
+        initGalleryFilters();
+    }
+}
+
+function getCategoryLabel(cat) {
+    const map = {
+        'sensory': 'Sensory Play',
+        'montessori': 'Montessori',
+        'creative': 'Kreativní',
+        'party': 'Oslavy'
+    };
+    return map[cat] || cat;
+}
+
+function initGalleryFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.gallery-item-large');
+
+    filterBtns.forEach(btn => {
+        // Remove old listeners to prevent duplicates (clone node trick or just assume strict replacement)
+        // Since we re-render, the buttons are static, so adding listener again is fine if we are careful.
+        // Better: use event delegation or verify.
+        // For simplicity: just add new listener, assume page reload concept.
+
+        btn.onclick = () => {
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.dataset.filter;
+
+            items.forEach(item => {
+                if (filter === 'all' || item.dataset.category === filter) {
+                    item.style.display = 'block';
+                    item.style.animation = 'fadeIn 0.5s ease';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        };
     });
 }
 

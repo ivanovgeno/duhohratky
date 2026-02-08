@@ -36,10 +36,11 @@ PATHS=( "/www" "/www/domains/duhohratky.cz" )
 for REMOTE_PATH in "${PATHS[@]}"; do
     echo "📂 Target: $REMOTE_PATH"
     
-    # Try to create directory (ignore error if exists)
-    curl -s --ftp-ssl -u "$FTP_USER:$FTP_PASS" -Q "MKD $REMOTE_PATH" "ftp://$FTP_HOST/" > /dev/null 2>&1
+    # Create gallery directory (and set permissions if possible)
+    curl -s --ftp-ssl -u "$FTP_USER:$FTP_PASS" -Q "MKD $REMOTE_PATH/gallery" "ftp://$FTP_HOST/" > /dev/null 2>&1
+    curl -s --ftp-ssl -u "$FTP_USER:$FTP_PASS" -Q "SITE CHMOD 755 $REMOTE_PATH/gallery" "ftp://$FTP_HOST/" > /dev/null 2>&1
 
-    # Define files to upload (HTML, JS, CSS, PHP, Images, Fonts, .htaccess)
+    # Define files to upload
     for file in *.html *.js *.css *.php *.png *.ttf *.otf .htaccess; do
         if [ -f "$file" ]; then
             echo "   Uploading $file to $REMOTE_PATH..."

@@ -1165,6 +1165,34 @@
                         <textarea data-field="upcoming.items.2.description" rows="2" placeholder="Popis..."></textarea>
                     </div>
                 </div>
+
+                <!-- Gallery Management -->
+                <div class="editor-category" style="margin-top: 40px; border-top: 2px solid #eee; padding-top: 20px;">
+                    <h2>📸 Správa Galerie</h2>
+                    <div class="editor-card">
+                        <h3>Přidat novou fotku</h3>
+                        <p class="hint">Vyberte obrázek (JPG/PNG). Automaticky se převede do WebP formátu.</p>
+                        <div class="form-group" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                            <input type="file" id="gallery-upload" accept="image/*" style="flex: 1;">
+                            <select id="gallery-category"
+                                style="padding: 8px; border-radius: 6px; border: 1px solid #ddd;">
+                                <option value="sensory">Sensory Play</option>
+                                <option value="montessori">Montessori</option>
+                                <option value="creative">Kreativní</option>
+                                <option value="party">Oslavy</option>
+                            </select>
+                            <button class="btn-primary" onclick="uploadGalleryImage()">Nahrát ⬆️</button>
+                        </div>
+                        <div id="upload-status"></div>
+                    </div>
+
+                    <div class="editor-card">
+                        <h3>Seznam obrázků</h3>
+                        <div id="gallery-list" class="gallery-admin-grid">
+                            <!-- Dynamic items will be here -->
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- Settings Section -->
