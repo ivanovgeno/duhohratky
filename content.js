@@ -72,21 +72,7 @@ window.defaultContent = {
         "act6Text": "Nezapomenutelné narozeniny plné her, tvoření a zábavy.",
         "act6Age": "1-10 let"
     },
-    "gallery": {
-        "title": "Nahlédněte do našeho světa",
-        "img1Url": "",
-        "img1Label": "Sensory Play",
-        "img2Url": "",
-        "img2Label": "Kreativní tvoření",
-        "img3Url": "",
-        "img3Label": "Montessori",
-        "img4Url": "",
-        "img4Label": "Vodní hrátky",
-        "img5Url": "",
-        "img5Label": "Přírodniny",
-        "img6Url": "",
-        "img6Label": "Oslavy"
-    },
+    "gallery": [],
     "contact": {
         "title": "Spojme se",
         "address1": "",

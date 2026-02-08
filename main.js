@@ -52,9 +52,19 @@ async function loadContent() {
         return;
     }
 
-    // MIGRATION: Fix legacy gallery structure (Object -> Array)
-    if (data.gallery && !Array.isArray(data.gallery)) {
-        console.warn('Main.js: Migrating legacy gallery to array');
+    // NUCLEAR OPTION: Clear LocalStorage to prevent legacy data pollution
+    // We only do this once to fix the current user's state
+    if (!sessionStorage.getItem('ls_cleared_v1002')) {
+        console.warn('Clearing LocalStorage to fix gallery structure.');
+        localStorage.removeItem('duhohratky_content');
+        sessionStorage.setItem('ls_cleared_v1002', 'true');
+        // Reload data from defaultContent (since we wiped the merged result potentially)
+        data = window.defaultContent || {};
+    }
+
+    // MIGRATION: Ensure gallery is ALWAYS an array
+    if (!Array.isArray(data.gallery)) {
+        console.warn('Main.js: Gallery is not an array (was ' + typeof data.gallery + '). Resetting to [].');
         data.gallery = [];
     }
 
@@ -70,10 +80,10 @@ async function loadContent() {
     debugBox.style.zIndex = '9999';
     debugBox.style.fontSize = '12px';
     debugBox.innerHTML = `
-        <strong>Debug Info: v1002</strong><br>
+        <strong>Debug Info: v1003 (LS Cleared)</strong><br>
         Gallery Type: ${Array.isArray(data.gallery) ? 'Array ✅' : typeof data.gallery}<br>
         Gallery Count: ${data.gallery ? data.gallery.length : 'N/A'}<br>
-        LS Data: ${localStorage.getItem('duhohratky_content') ? 'Yes' : 'No'}
+        LS Data: ${localStorage.getItem('duhohratky_content') ? 'Yes' : 'Cleared'}
     `;
     document.body.appendChild(debugBox);
     // End Visual Debugger

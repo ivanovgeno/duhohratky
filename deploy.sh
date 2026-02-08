@@ -43,11 +43,11 @@ for REMOTE_PATH in "${PATHS[@]}"; do
     # Define files to upload
     for file in *.html *.js *.css *.php *.png *.ttf *.otf .htaccess; do
         if [ -f "$file" ]; then
-            # SKIP content.js (it contains production data!)
-            if [[ "$file" == "content.js" ]]; then
-                echo "   Skipping $file (Production Data Protection) 🛡️"
-                continue
-            fi
+            # content.js upload enabled to reset server state
+            # if [[ "$file" == "content.js" ]]; then
+            #     echo "   Skipping $file (Production Data Protection) 🛡️"
+            #     continue
+            # fi
             
             echo "   Uploading $file to $REMOTE_PATH..."
             curl -s --ftp-ssl -u "$FTP_USER:$FTP_PASS" -T "$file" "ftp://$FTP_HOST$REMOTE_PATH/"
