@@ -218,6 +218,7 @@ function renderGalleryPage(galleryData) {
                 </div>
                 <div class="gallery-overlay">
                     <span class="badge ${img.category}">${getCategoryLabel(img.category)}</span>
+                    ${img.description ? `<h3>${img.description}</h3>` : ''}
                 </div>
             `;
             container.appendChild(item);

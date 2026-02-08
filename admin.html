@@ -1134,7 +1134,9 @@
                             <p class="hint">Vyberte obrázek (JPG/PNG). Automaticky se převede do WebP formátu.</p>
                             <div class="form-group"
                                 style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                                <input type="file" id="gallery-upload" accept="image/*" style="flex: 1;">
+                                <input type="file" id="gallery-upload" accept="image/*" multiple style="flex: 1;">
+                                <input type="text" id="gallery-description" placeholder="Popis (např. Narozeniny)"
+                                    style="flex: 1; min-width: 150px; padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
                                 <select id="gallery-category"
                                     style="padding: 8px; border-radius: 6px; border: 1px solid #ddd;">
                                     <option value="sensory">Sensory Play</option>

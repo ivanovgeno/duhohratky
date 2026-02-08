@@ -223,6 +223,7 @@ function loadGallery() {
             <div class="gallery-preview" style="background-image: url('${src}')"></div>
             <div class="gallery-meta">
                 <span class="badge ${img.category}">${img.category}</span>
+                ${img.description ? `<span class="badge" style="background:#eee; color:#333; margin-left:5px;">${img.description}</span>` : ''}
                 <button class="btn-delete" onclick="deleteGalleryImage(${index})" title="Smazat">🗑️</button>
             </div>
         `;
@@ -233,63 +234,84 @@ function loadGallery() {
 async function uploadGalleryImage() {
     const input = document.getElementById('gallery-upload');
     const categorySelect = document.getElementById('gallery-category');
+    const descriptionInput = document.getElementById('gallery-description');
     const status = document.getElementById('upload-status');
     const btn = document.querySelector('button[onclick="uploadGalleryImage()"]');
 
     if (!input.files || input.files.length === 0) {
-        alert("Vyberte prosím obrázek.");
+        alert("Vyberte prosím alespoň jeden obrázek.");
         return;
     }
-
-    const file = input.files[0];
-    const formData = new FormData();
-    formData.append('image', file);
 
     // UX
     const originalText = btn.innerHTML;
     btn.innerHTML = '⏳ Nahrávám...';
     btn.disabled = true;
-    status.innerHTML = '⏳ Nahrávám a převádím na WebP...';
     status.className = 'status-loading';
+    status.innerHTML = '⏳ Spouštím nahrávání...';
 
-    try {
-        const response = await fetch('upload.php', {
-            method: 'POST',
-            body: formData
-        });
+    let successCount = 0;
+    let failCount = 0;
 
-        const result = await response.json();
+    // Iterate through all selected files
+    for (let i = 0; i < input.files.length; i++) {
+        const file = input.files[i];
+        status.innerHTML = `⏳ Nahrávám ${i + 1}/${input.files.length}: ${file.name}...`;
 
-        if (result.status === 'success') {
-            // Update data model
-            if (!siteData.gallery) siteData.gallery = [];
-            siteData.gallery.push({
-                src: result.path, // e.g., 'gallery/img_123.webp'
-                category: categorySelect.value,
-                timestamp: Date.now()
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+            const response = await fetch('upload.php', {
+                method: 'POST',
+                body: formData
             });
 
-            saveData(); // Save content.js to GitHub/Server
-            loadGallery(); // Refresh UI
+            const result = await response.json();
 
-            status.innerHTML = '✅ Nahráno úspěšně!';
-            status.className = 'status-success';
-            input.value = ''; // Reset input
-
-            // Clear status after 3s
-            setTimeout(() => { status.innerHTML = ''; status.className = ''; }, 3000);
-        } else {
-            throw new Error(result.message);
+            if (result.status === 'success') {
+                // Update data model
+                if (!siteData.gallery) siteData.gallery = [];
+                siteData.gallery.push({
+                    src: result.path,
+                    category: categorySelect.value,
+                    description: descriptionInput.value || '', // Save description
+                    timestamp: Date.now()
+                });
+                successCount++;
+            } else {
+                console.error(`Error uploading ${file.name}: ${result.message}`);
+                failCount++;
+            }
+        } catch (e) {
+            console.error(`Error uploading ${file.name}:`, e);
+            failCount++;
         }
-    } catch (e) {
-        console.error(e);
-        alert('Chyba při nahrávání: ' + e.message);
-        status.innerHTML = '❌ ' + e.message;
-        status.className = 'status-error';
-    } finally {
-        btn.innerHTML = originalText;
-        btn.disabled = false;
     }
+
+    // Finished
+    saveData(); // Save content.js
+    loadGallery(); // Refresh UI
+
+    if (failCount === 0) {
+        status.innerHTML = `✅ Nahráno úspěšně (${successCount} souborů)!`;
+        status.className = 'status-success';
+        input.value = ''; // Reset file input
+        descriptionInput.value = ''; // Reset description (optional, but good for next batch)
+    } else {
+        status.innerHTML = `⚠️ Dokončeno: ${successCount} nahráno, ${failCount} chyb.`;
+        status.className = 'status-warning';
+    }
+
+    setTimeout(() => {
+        if (status.className.includes('status-success')) {
+            status.innerHTML = '';
+            status.className = '';
+        }
+    }, 5000);
+
+    btn.innerHTML = originalText;
+    btn.disabled = false;
 }
 
 async function deleteGalleryImage(index) {
