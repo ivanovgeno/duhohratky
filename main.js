@@ -52,11 +52,38 @@ async function loadContent() {
         return;
     }
 
+    // MIGRATION: Fix legacy gallery structure (Object -> Array)
+    if (data.gallery && !Array.isArray(data.gallery)) {
+        console.warn('Main.js: Migrating legacy gallery to array');
+        data.gallery = [];
+    }
+
+    // VISUAL DEBUGGER (Temporary)
+    const debugBox = document.createElement('div');
+    debugBox.style.position = 'fixed';
+    debugBox.style.bottom = '10px';
+    debugBox.style.left = '10px';
+    debugBox.style.background = 'rgba(0,0,0,0.8)';
+    debugBox.style.color = 'white';
+    debugBox.style.padding = '10px';
+    debugBox.style.borderRadius = '5px';
+    debugBox.style.zIndex = '9999';
+    debugBox.style.fontSize = '12px';
+    debugBox.innerHTML = `
+        <strong>Debug Info: v1002</strong><br>
+        Gallery Type: ${Array.isArray(data.gallery) ? 'Array ✅' : typeof data.gallery}<br>
+        Gallery Count: ${data.gallery ? data.gallery.length : 'N/A'}<br>
+        LS Data: ${localStorage.getItem('duhohratky_content') ? 'Yes' : 'No'}
+    `;
+    document.body.appendChild(debugBox);
+    // End Visual Debugger
+
     // 5. Apply to DOM
     try {
         applyContent(data);
     } catch (e) {
         console.error('Failed to apply content', e);
+        debugBox.innerHTML += `<br>Error: ${e.message}`;
     }
 }
 
