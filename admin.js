@@ -258,7 +258,11 @@ async function uploadGalleryImage() {
 
             if (result.status === 'success') {
                 // Update data model
-                if (!siteData.gallery) siteData.gallery = [];
+                // SAFETY CHECK: Ensure gallery is an array
+                if (!siteData.gallery || !Array.isArray(siteData.gallery)) {
+                    console.warn('Resetting gallery data structure to array.');
+                    siteData.gallery = [];
+                }
                 siteData.gallery.push({
                     src: result.path,
                     category: categorySelect.value,
@@ -408,7 +412,15 @@ function deepMerge(target, source) {
     const result = { ...target };
     for (const key in source) {
         if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
-            result[key] = deepMerge(target[key] || {}, source[key]);
+            // If target has this key and it is an array (but source is object), we should probably respect source (if it's not legacy garbage)
+            // But for our specific case: default is array, source might be legacy object.
+            // If target[key] is array and source[key] is object, we should KEEP target (empty array) or overwrite if source is valid.
+            // Simplified: only recursive merge if BOTH are objects.
+            if (target[key] && typeof target[key] === 'object' && !Array.isArray(target[key])) {
+                result[key] = deepMerge(target[key], source[key]);
+            } else {
+                result[key] = source[key];
+            }
         } else {
             result[key] = source[key];
         }
