@@ -41,1218 +41,1272 @@
         </div>
     </div>
 
-    <!-- Admin Dashboard -->
-    <span class="logo-text">Admin</span>
-    </div>
-    <nav class="sidebar-nav">
-        <a href="#" class="nav-item active" data-section="hero">
-            <span>🏠</span> Hero sekce
-        </a>
-        <a href="#" class="nav-item" data-section="about">
-            <span>ℹ️</span> O nás
-        </a>
-        <a href="#" class="nav-item" data-section="activities">
-            <span>🎪</span> Aktivity
-        </a>
-        <a href="#" class="nav-item" data-section="lessons">
-            <span>⚡</span> Aktuální lekce
-        </a>
-        <a href="#" class="nav-item" data-section="upcoming">
-            <span>✨</span> Připravujeme
-        </a>
-        <a href="#" class="nav-item" data-section="gallery">
-            <span>📸</span> Galerie
-        </a>
-        <a href="#" class="nav-item" data-section="tips">
-            <span>💡</span> Návody & Tipy
-        </a>
-        <a href="#" class="nav-item" data-section="contact">
-            <span>📍</span> Kontakt
-        </a>
-        <a href="#" class="nav-item" data-section="reservio">
-            <span>📅</span> Reservio
-        </a>
-        <a href="#" class="nav-item" data-section="settings">
-            <span>⚙️</span> Nastavení
-        </a>
-    </nav>
-    <div class="sidebar-footer">
-        <button class="btn btn-secondary btn-small" id="preview-btn">
-            <span>👁️</span> Náhled webu
-        </button>
-        <button class="btn btn-logout" id="logout-btn">
-            <span>🚪</span> Odhlásit
-        </button>
-    </div>
-    </aside>
+    <body>
+        <div class="admin-layout">
+            <div class="admin-dashboard" id="admin-dashboard">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-header">
+                        <span class="logo-icon">🌈</span>
+                        <span class="logo-text">Admin</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="#" class="nav-item active" data-section="hero">
+                            <span>🏠</span> Hero sekce
+                        </a>
+                        <a href="#" class="nav-item" data-section="about">
+                            <span>ℹ️</span> O nás
+                        </a>
+                        <a href="#" class="nav-item" data-section="activities">
+                            <span>🎪</span> Aktivity
+                        </a>
+                        <a href="#" class="nav-item" data-section="lessons">
+                            <span>⚡</span> Aktuální lekce
+                        </a>
+                        <a href="#" class="nav-item" data-section="upcoming">
+                            <span>✨</span> Připravujeme
+                        </a>
+                        <a href="#" class="nav-item" data-section="gallery">
+                            <span>📸</span> Galerie
+                        </a>
+                        <a href="#" class="nav-item" data-section="tips">
+                            <span>💡</span> Návody & Tipy
+                        </a>
+                        <a href="#" class="nav-item" data-section="contact">
+                            <span>📍</span> Kontakt
+                        </a>
+                        <a href="#" class="nav-item" data-section="reservio">
+                            <span>📅</span> Reservio
+                        </a>
+                        <a href="#" class="nav-item" data-section="settings">
+                            <span>⚙️</span> Nastavení
+                        </a>
+                    </nav>
+                    <div class="sidebar-footer">
+                        <button class="btn btn-secondary btn-small" id="preview-btn">
+                            <span>👁️</span> Náhled webu
+                        </button>
+                        <button class="btn btn-logout" id="logout-btn">
+                            <span>🚪</span> Odhlásit
+                        </button>
+                    </div>
+                </aside>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <header class="content-header">
-            <h1 id="section-title">Hero sekce</h1>
-            <div class="header-actions">
-                <button class="btn btn-secondary" id="reset-btn">
-                    <span>🔄</span> Resetovat
-                </button>
-                <button class="btn btn-primary" id="save-btn">
-                    <span>💾</span> Uložit změny
-                </button>
-            </div>
-        </header>
+                <!-- Main Content -->
+                <main class="main-content">
+                    <header class="content-header">
+                        <h1 id="section-title">Hero sekce</h1>
+                        <div class="header-actions">
+                            <button class="btn btn-secondary" id="reset-btn">
+                                <span>🔄</span> Resetovat
+                            </button>
+                            <button class="btn btn-primary" id="save-btn">
+                                <span>💾</span> Uložit změny
+                            </button>
+                        </div>
+                    </header>
 
-        <!-- Hero Section Editor -->
-        <section class="editor-section" id="editor-hero">
-            <div class="editor-card">
-                <h3>📝 Hlavní texty</h3>
-                <div class="form-group">
-                    <label>Badge text</label>
-                    <input type="text" data-field="hero.badge" placeholder="✨ Kreativita & Rozvoj">
-                </div>
-                <div class="form-group">
-                    <label>Hlavní nadpis</label>
-                    <input type="text" data-field="hero.title" placeholder="Vítejte v">
-                </div>
-                <div class="form-group">
-                    <label>Zvýrazněný text (rainbow)</label>
-                    <input type="text" data-field="hero.titleHighlight" placeholder="Duhohrátkách">
-                </div>
-                <div class="form-group">
-                    <label>Podnadpis</label>
-                    <input type="text" data-field="hero.subtitle" placeholder="Sensory play & Montessori aktivity...">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="hero.description" rows="3"
-                        placeholder="Objevte svět hravého učení..."></textarea>
-                </div>
-            </div>
-            <div class="editor-card">
-                <h3>📊 Statistiky</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Stat 1 - číslo</label>
-                        <input type="text" data-field="hero.stat1Number" placeholder="500+">
-                    </div>
-                    <div class="form-group">
-                        <label>Stat 1 - popis</label>
-                        <input type="text" data-field="hero.stat1Label" placeholder="Šťastných dětí">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Stat 2 - číslo</label>
-                        <input type="text" data-field="hero.stat2Number" placeholder="20+">
-                    </div>
-                    <div class="form-group">
-                        <label>Stat 2 - popis</label>
-                        <input type="text" data-field="hero.stat2Label" placeholder="Typů aktivit">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Stat 3 - číslo</label>
-                        <input type="text" data-field="hero.stat3Number" placeholder="8+">
-                    </div>
-                    <div class="form-group">
-                        <label>Stat 3 - popis</label>
-                        <input type="text" data-field="hero.stat3Label" placeholder="Let praxe">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Stat 4 - číslo</label>
-                        <input type="text" data-field="hero.stat4Number" placeholder="5⭐">
-                    </div>
-                    <div class="form-group">
-                        <label>Stat 4 - popis</label>
-                        <input type="text" data-field="hero.stat4Label" placeholder="Hodnocení">
-                    </div>
-                </div>
-            </div>
-            <div class="editor-card">
-                <h3>🔘 Tlačítka</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Primární tlačítko - text</label>
-                        <input type="text" data-field="hero.btn1Text" placeholder="📅 Rezervovat termín">
-                    </div>
-                    <div class="form-group">
-                        <label>Primární tlačítko - odkaz</label>
-                        <input type="text" data-field="hero.btn1Link" placeholder="#reservation">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Sekundární tlačítko - text</label>
-                        <input type="text" data-field="hero.btn2Text" placeholder="🎨 Prozkoumat aktivity">
-                    </div>
-                    <div class="form-group">
-                        <label>Sekundární tlačítko - odkaz</label>
-                        <input type="text" data-field="hero.btn2Link" placeholder="#activities">
-                    </div>
-                </div>
-            </div>
-        </section>
+                    <!-- Hero Section Editor -->
+                    <section class="editor-section" id="editor-hero">
+                        <div class="editor-card">
+                            <h3>📝 Hlavní texty</h3>
+                            <div class="form-group">
+                                <label>Badge text</label>
+                                <input type="text" data-field="hero.badge" placeholder="✨ Kreativita & Rozvoj">
+                            </div>
+                            <div class="form-group">
+                                <label>Hlavní nadpis</label>
+                                <input type="text" data-field="hero.title" placeholder="Vítejte v">
+                            </div>
+                            <div class="form-group">
+                                <label>Zvýrazněný text (rainbow)</label>
+                                <input type="text" data-field="hero.titleHighlight" placeholder="Duhohrátkách">
+                            </div>
+                            <div class="form-group">
+                                <label>Podnadpis</label>
+                                <input type="text" data-field="hero.subtitle"
+                                    placeholder="Sensory play & Montessori aktivity...">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="hero.description" rows="3"
+                                    placeholder="Objevte svět hravého učení..."></textarea>
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h3>📊 Statistiky</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Stat 1 - číslo</label>
+                                    <input type="text" data-field="hero.stat1Number" placeholder="500+">
+                                </div>
+                                <div class="form-group">
+                                    <label>Stat 1 - popis</label>
+                                    <input type="text" data-field="hero.stat1Label" placeholder="Šťastných dětí">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Stat 2 - číslo</label>
+                                    <input type="text" data-field="hero.stat2Number" placeholder="20+">
+                                </div>
+                                <div class="form-group">
+                                    <label>Stat 2 - popis</label>
+                                    <input type="text" data-field="hero.stat2Label" placeholder="Typů aktivit">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Stat 3 - číslo</label>
+                                    <input type="text" data-field="hero.stat3Number" placeholder="8+">
+                                </div>
+                                <div class="form-group">
+                                    <label>Stat 3 - popis</label>
+                                    <input type="text" data-field="hero.stat3Label" placeholder="Let praxe">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Stat 4 - číslo</label>
+                                    <input type="text" data-field="hero.stat4Number" placeholder="5⭐">
+                                </div>
+                                <div class="form-group">
+                                    <label>Stat 4 - popis</label>
+                                    <input type="text" data-field="hero.stat4Label" placeholder="Hodnocení">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h3>🔘 Tlačítka</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Primární tlačítko - text</label>
+                                    <input type="text" data-field="hero.btn1Text" placeholder="📅 Rezervovat termín">
+                                </div>
+                                <div class="form-group">
+                                    <label>Primární tlačítko - odkaz</label>
+                                    <input type="text" data-field="hero.btn1Link" placeholder="#reservation">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Sekundární tlačítko - text</label>
+                                    <input type="text" data-field="hero.btn2Text" placeholder="🎨 Prozkoumat aktivity">
+                                </div>
+                                <div class="form-group">
+                                    <label>Sekundární tlačítko - odkaz</label>
+                                    <input type="text" data-field="hero.btn2Link" placeholder="#activities">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
-        <!-- About Section Editor -->
-        <section class="editor-section hidden" id="editor-about">
-            <div class="editor-card">
-                <h3>📝 Hlavní texty</h3>
-                <div class="form-group">
-                    <label>Nadpis sekce</label>
-                    <input type="text" data-field="about.title" placeholder="Co jsou Duhohratky?">
-                </div>
-            </div>
-            <div class="editor-card">
-                <h3>🎨 Karta 1 - Sensory Play</h3>
-                <div class="form-group">
-                    <label>Ikona (emoji)</label>
-                    <input type="text" data-field="about.card1Icon" placeholder="🎨">
-                </div>
-                <div class="form-group">
-                    <label>Nadpis</label>
-                    <input type="text" data-field="about.card1Title" placeholder="Sensory Play">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="about.card1Text" rows="2"></textarea>
-                </div>
-            </div>
-            <div class="editor-card">
-                <h3>📚 Karta 2 - Montessori</h3>
-                <div class="form-group">
-                    <label>Ikona (emoji)</label>
-                    <input type="text" data-field="about.card2Icon" placeholder="📚">
-                </div>
-                <div class="form-group">
-                    <label>Nadpis</label>
-                    <input type="text" data-field="about.card2Title" placeholder="Montessori přístup">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="about.card2Text" rows="2"></textarea>
-                </div>
-            </div>
-            <div class="editor-card">
-                <h3>🧠 Karta 3 - Rozvoj</h3>
-                <div class="form-group">
-                    <label>Ikona (emoji)</label>
-                    <input type="text" data-field="about.card3Icon" placeholder="🧠">
-                </div>
-                <div class="form-group">
-                    <label>Nadpis</label>
-                    <input type="text" data-field="about.card3Title" placeholder="Rozvoj dovedností">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="about.card3Text" rows="2"></textarea>
-                </div>
-            </div>
-            <div class="editor-card">
-                <h3>💕 Karta 4 - Bezpečí</h3>
-                <div class="form-group">
-                    <label>Ikona (emoji)</label>
-                    <input type="text" data-field="about.card4Icon" placeholder="💕">
-                </div>
-                <div class="form-group">
-                    <label>Nadpis</label>
-                    <input type="text" data-field="about.card4Title" placeholder="Bezpečné prostředí">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="about.card4Text" rows="2"></textarea>
-                </div>
-            </div>
-            <div class="editor-card">
-                <h3>📖 Náš příběh</h3>
-                <div class="form-group">
-                    <label>Nadpis</label>
-                    <input type="text" data-field="about.storyTitle" placeholder="Náš příběh">
-                </div>
-                <div class="form-group">
-                    <label>Text příběhu</label>
-                    <textarea data-field="about.storyText" rows="4"></textarea>
-                </div>
-            </div>
-        </section>
+                    <!-- About Section Editor -->
+                    <section class="editor-section hidden" id="editor-about">
+                        <div class="editor-card">
+                            <h3>📝 Hlavní texty</h3>
+                            <div class="form-group">
+                                <label>Nadpis sekce</label>
+                                <input type="text" data-field="about.title" placeholder="Co jsou Duhohratky?">
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h3>🎨 Karta 1 - Sensory Play</h3>
+                            <div class="form-group">
+                                <label>Ikona (emoji)</label>
+                                <input type="text" data-field="about.card1Icon" placeholder="🎨">
+                            </div>
+                            <div class="form-group">
+                                <label>Nadpis</label>
+                                <input type="text" data-field="about.card1Title" placeholder="Sensory Play">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="about.card1Text" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h3>📚 Karta 2 - Montessori</h3>
+                            <div class="form-group">
+                                <label>Ikona (emoji)</label>
+                                <input type="text" data-field="about.card2Icon" placeholder="📚">
+                            </div>
+                            <div class="form-group">
+                                <label>Nadpis</label>
+                                <input type="text" data-field="about.card2Title" placeholder="Montessori přístup">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="about.card2Text" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h3>🧠 Karta 3 - Rozvoj</h3>
+                            <div class="form-group">
+                                <label>Ikona (emoji)</label>
+                                <input type="text" data-field="about.card3Icon" placeholder="🧠">
+                            </div>
+                            <div class="form-group">
+                                <label>Nadpis</label>
+                                <input type="text" data-field="about.card3Title" placeholder="Rozvoj dovedností">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="about.card3Text" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h3>💕 Karta 4 - Bezpečí</h3>
+                            <div class="form-group">
+                                <label>Ikona (emoji)</label>
+                                <input type="text" data-field="about.card4Icon" placeholder="💕">
+                            </div>
+                            <div class="form-group">
+                                <label>Nadpis</label>
+                                <input type="text" data-field="about.card4Title" placeholder="Bezpečné prostředí">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="about.card4Text" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h3>📖 Náš příběh</h3>
+                            <div class="form-group">
+                                <label>Nadpis</label>
+                                <input type="text" data-field="about.storyTitle" placeholder="Náš příběh">
+                            </div>
+                            <div class="form-group">
+                                <label>Text příběhu</label>
+                                <textarea data-field="about.storyText" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </section>
 
-        <!-- Activities Section Editor -->
-        <section class="editor-section hidden" id="editor-activities">
-            <div class="editor-card">
-                <h3>📝 Hlavní texty</h3>
-                <div class="form-group">
-                    <label>Nadpis sekce</label>
-                    <input type="text" data-field="activities.title" placeholder="Co u nás zažijete?">
-                </div>
-                <div class="form-group">
-                    <label>Popis sekce</label>
-                    <input type="text" data-field="activities.description"
-                        placeholder="Nabízíme širokou škálu aktivit...">
-                </div>
+                    <!-- Activities Section Editor -->
+                    <section class="editor-section hidden" id="editor-activities">
+                        <div class="editor-card">
+                            <h3>📝 Hlavní texty</h3>
+                            <div class="form-group">
+                                <label>Nadpis sekce</label>
+                                <input type="text" data-field="activities.title" placeholder="Co u nás zažijete?">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis sekce</label>
+                                <input type="text" data-field="activities.description"
+                                    placeholder="Nabízíme širokou škálu aktivit...">
+                            </div>
+                        </div>
+
+                        <!-- Activity 1 -->
+                        <div class="editor-card">
+                            <h3>🫧 Aktivita 1</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Ikona (emoji)</label>
+                                    <input type="text" data-field="activities.act1Icon" placeholder="🫧">
+                                </div>
+                                <div class="form-group">
+                                    <label>Barva (pink/orange/yellow/green/blue/purple)</label>
+                                    <select data-field="activities.act1Color">
+                                        <option value="pink">Růžová</option>
+                                        <option value="orange">Oranžová</option>
+                                        <option value="yellow">Žlutá</option>
+                                        <option value="green">Zelená</option>
+                                        <option value="blue">Modrá</option>
+                                        <option value="purple">Fialová</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Název</label>
+                                <input type="text" data-field="activities.act1Title" placeholder="Sensory Boxy">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="activities.act1Text" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Věková kategorie</label>
+                                <input type="text" data-field="activities.act1Age" placeholder="2-6 let">
+                            </div>
+                        </div>
+
+                        <!-- Activity 2 -->
+                        <div class="editor-card">
+                            <h3>🎨 Aktivita 2</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Ikona (emoji)</label>
+                                    <input type="text" data-field="activities.act2Icon" placeholder="🎨">
+                                </div>
+                                <div class="form-group">
+                                    <label>Barva</label>
+                                    <select data-field="activities.act2Color">
+                                        <option value="pink">Růžová</option>
+                                        <option value="orange" selected>Oranžová</option>
+                                        <option value="yellow">Žlutá</option>
+                                        <option value="green">Zelená</option>
+                                        <option value="blue">Modrá</option>
+                                        <option value="purple">Fialová</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Název</label>
+                                <input type="text" data-field="activities.act2Title" placeholder="Kreativní tvoření">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="activities.act2Text" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Věková kategorie</label>
+                                <input type="text" data-field="activities.act2Age" placeholder="3-8 let">
+                            </div>
+                        </div>
+
+                        <!-- Activity 3-6 (similar structure) -->
+                        <div class="editor-card">
+                            <h3>💧 Aktivita 3</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Ikona</label>
+                                    <input type="text" data-field="activities.act3Icon" placeholder="💧">
+                                </div>
+                                <div class="form-group">
+                                    <label>Barva</label>
+                                    <select data-field="activities.act3Color">
+                                        <option value="pink">Růžová</option>
+                                        <option value="orange">Oranžová</option>
+                                        <option value="yellow" selected>Žlutá</option>
+                                        <option value="green">Zelená</option>
+                                        <option value="blue">Modrá</option>
+                                        <option value="purple">Fialová</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Název</label>
+                                <input type="text" data-field="activities.act3Title" placeholder="Vodní hrátky">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="activities.act3Text" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Věková kategorie</label>
+                                <input type="text" data-field="activities.act3Age" placeholder="1-5 let">
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>🌱 Aktivita 4</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Ikona</label>
+                                    <input type="text" data-field="activities.act4Icon" placeholder="🌱">
+                                </div>
+                                <div class="form-group">
+                                    <label>Barva</label>
+                                    <select data-field="activities.act4Color">
+                                        <option value="pink">Růžová</option>
+                                        <option value="orange">Oranžová</option>
+                                        <option value="yellow">Žlutá</option>
+                                        <option value="green" selected>Zelená</option>
+                                        <option value="blue">Modrá</option>
+                                        <option value="purple">Fialová</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Název</label>
+                                <input type="text" data-field="activities.act4Title" placeholder="Přírodní materiály">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="activities.act4Text" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Věková kategorie</label>
+                                <input type="text" data-field="activities.act4Age" placeholder="2-7 let">
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>🧩 Aktivita 5</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Ikona</label>
+                                    <input type="text" data-field="activities.act5Icon" placeholder="🧩">
+                                </div>
+                                <div class="form-group">
+                                    <label>Barva</label>
+                                    <select data-field="activities.act5Color">
+                                        <option value="pink">Růžová</option>
+                                        <option value="orange">Oranžová</option>
+                                        <option value="yellow">Žlutá</option>
+                                        <option value="green">Zelená</option>
+                                        <option value="blue" selected>Modrá</option>
+                                        <option value="purple">Fialová</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Název</label>
+                                <input type="text" data-field="activities.act5Title" placeholder="Montessori pomůcky">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="activities.act5Text" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Věková kategorie</label>
+                                <input type="text" data-field="activities.act5Age" placeholder="3-8 let">
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>🎂 Aktivita 6</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Ikona</label>
+                                    <input type="text" data-field="activities.act6Icon" placeholder="🎂">
+                                </div>
+                                <div class="form-group">
+                                    <label>Barva</label>
+                                    <select data-field="activities.act6Color">
+                                        <option value="pink">Růžová</option>
+                                        <option value="orange">Oranžová</option>
+                                        <option value="yellow">Žlutá</option>
+                                        <option value="green">Zelená</option>
+                                        <option value="blue">Modrá</option>
+                                        <option value="purple" selected>Fialová</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Název</label>
+                                <input type="text" data-field="activities.act6Title" placeholder="Narozeninové oslavy">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="activities.act6Text" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Věková kategorie</label>
+                                <input type="text" data-field="activities.act6Age" placeholder="1-10 let">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Lessons / Aktuální lekce Section Editor -->
+                    <section class="editor-section hidden" id="editor-lessons">
+                        <div class="editor-card">
+                            <h3>📝 Hlavní texty</h3>
+                            <div class="form-group">
+                                <label>Nadpis sekce</label>
+                                <input type="text" data-field="lessons.title" placeholder="Aktuální lekce">
+                                <small style="color: #666; font-size: 0.8rem; display: block; margin-top: 4px;">
+                                    Pro duhový efekt použijte:
+                                    <code>&lt;span class="rainbow-text"&gt;slovo&lt;/span&gt;</code>
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>⚡ Lekce 1</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" data-field="lessons.lesson1.active"> Zobrazit tuto lekci
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Datum</label>
+                                <input type="date" data-field="lessons.lesson1.date">
+                            </div>
+                            <div class="form-group">
+                                <label>Časy lekcí</label>
+                                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                    <input type="time" data-field="lessons.lesson1.time1"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson1.time2"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson1.time3"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson1.time4"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson1.time5"
+                                        style="flex: 1; min-width: 80px;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Místo</label>
+                                <input type="text" data-field="lessons.lesson1.location" placeholder="Praha">
+                            </div>
+                            <div class="form-group">
+                                <label>Adresa</label>
+                                <input type="text" data-field="lessons.lesson1.address" placeholder="Uliční 123">
+                            </div>
+                            <div class="form-group">
+                                <label>Nadpis</label>
+                                <input type="text" data-field="lessons.lesson1.title"
+                                    placeholder="Sensory Play: Vesmír 🚀">
+                            </div>
+                            <div class="form-group">
+                                <label>Cena</label>
+                                <input type="text" data-field="lessons.lesson1.price" placeholder="250 Kč">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="lessons.lesson1.description" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Odkaz</label>
+                                <input type="text" data-field="lessons.lesson1.link" placeholder="#reservation">
+                            </div>
+                            <div class="form-group">
+                                <label>Stav</label>
+                                <select data-field="lessons.lesson1.tag">
+                                    <option value="fake_tag">Žádný</option>
+                                    <option value="free_spots">✅ Volná místa</option>
+                                    <option value="full">❌ Obsazeno</option>
+                                    <option value="cancelled">⚠️ Zrušeno</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>⚡ Lekce 2</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" data-field="lessons.lesson2.active"> Zobrazit tuto lekci
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Datum</label>
+                                <input type="date" data-field="lessons.lesson2.date">
+                            </div>
+                            <div class="form-group">
+                                <label>Časy lekcí</label>
+                                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                    <input type="time" data-field="lessons.lesson2.time1"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson2.time2"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson2.time3"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson2.time4"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson2.time5"
+                                        style="flex: 1; min-width: 80px;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Místo</label>
+                                <input type="text" data-field="lessons.lesson2.location" placeholder="Brno">
+                            </div>
+                            <div class="form-group">
+                                <label>Adresa</label>
+                                <input type="text" data-field="lessons.lesson2.address" placeholder="Uliční 123">
+                            </div>
+                            <div class="form-group">
+                                <label>Nadpis</label>
+                                <input type="text" data-field="lessons.lesson2.title" placeholder="Montessori Dílna 🧩">
+                            </div>
+                            <div class="form-group">
+                                <label>Cena</label>
+                                <input type="text" data-field="lessons.lesson2.price" placeholder="250 Kč">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="lessons.lesson2.description" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Odkaz</label>
+                                <input type="text" data-field="lessons.lesson2.link" placeholder="#reservation">
+                            </div>
+                            <div class="form-group">
+                                <label>Stav</label>
+                                <select data-field="lessons.lesson2.tag">
+                                    <option value="fake_tag">Žádný</option>
+                                    <option value="free_spots">✅ Volná místa</option>
+                                    <option value="full">❌ Obsazeno</option>
+                                    <option value="cancelled">⚠️ Zrušeno</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>⚡ Lekce 3</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" data-field="lessons.lesson3.active"> Zobrazit tuto lekci
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Datum</label>
+                                <input type="date" data-field="lessons.lesson3.date">
+                            </div>
+                            <div class="form-group">
+                                <label>Časy lekcí</label>
+                                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                    <input type="time" data-field="lessons.lesson3.time1"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson3.time2"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson3.time3"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson3.time4"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson3.time5"
+                                        style="flex: 1; min-width: 80px;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Místo</label>
+                                <input type="text" data-field="lessons.lesson3.location" placeholder="Ostrava">
+                            </div>
+                            <div class="form-group">
+                                <label>Adresa</label>
+                                <input type="text" data-field="lessons.lesson3.address" placeholder="Uliční 123">
+                            </div>
+                            <div class="form-group">
+                                <label>Nadpis</label>
+                                <input type="text" data-field="lessons.lesson3.title"
+                                    placeholder="Tvoření z přírodnin 🍂">
+                            </div>
+                            <div class="form-group">
+                                <label>Cena</label>
+                                <input type="text" data-field="lessons.lesson3.price" placeholder="250 Kč">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="lessons.lesson3.description" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Odkaz</label>
+                                <input type="text" data-field="lessons.lesson3.link" placeholder="#reservation">
+                            </div>
+                            <div class="form-group">
+                                <label>Stav</label>
+                                <select data-field="lessons.lesson3.tag">
+                                    <option value="fake_tag">Žádný</option>
+                                    <option value="free_spots">✅ Volná místa</option>
+                                    <option value="full">❌ Obsazeno</option>
+                                    <option value="cancelled">⚠️ Zrušeno</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>⚡ Lekce 4</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" data-field="lessons.lesson4.active"> Zobrazit tuto lekci
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Datum</label>
+                                <input type="date" data-field="lessons.lesson4.date">
+                            </div>
+                            <div class="form-group">
+                                <label>Časy lekcí</label>
+                                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                    <input type="time" data-field="lessons.lesson4.time1"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson4.time2"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson4.time3"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson4.time4"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson4.time5"
+                                        style="flex: 1; min-width: 80px;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Místo</label>
+                                <input type="text" data-field="lessons.lesson4.location" placeholder="Plzeň">
+                            </div>
+                            <div class="form-group">
+                                <label>Adresa</label>
+                                <input type="text" data-field="lessons.lesson4.address" placeholder="Uliční 123">
+                            </div>
+                            <div class="form-group">
+                                <label>Nadpis</label>
+                                <input type="text" data-field="lessons.lesson4.title" placeholder="Hudební hrátky 🎵">
+                            </div>
+                            <div class="form-group">
+                                <label>Cena</label>
+                                <input type="text" data-field="lessons.lesson4.price" placeholder="250 Kč">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="lessons.lesson4.description" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Odkaz</label>
+                                <input type="text" data-field="lessons.lesson4.link" placeholder="#reservation">
+                            </div>
+                            <div class="form-group">
+                                <label>Stav</label>
+                                <select data-field="lessons.lesson4.tag">
+                                    <option value="fake_tag">Žádný</option>
+                                    <option value="free_spots">✅ Volná místa</option>
+                                    <option value="full">❌ Obsazeno</option>
+                                    <option value="cancelled">⚠️ Zrušeno</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>⚡ Lekce 5</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" data-field="lessons.lesson5.active"> Zobrazit tuto lekci
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Datum</label>
+                                <input type="date" data-field="lessons.lesson5.date">
+                            </div>
+                            <div class="form-group">
+                                <label>Časy lekcí</label>
+                                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                    <input type="time" data-field="lessons.lesson5.time1"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson5.time2"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson5.time3"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson5.time4"
+                                        style="flex: 1; min-width: 80px;">
+                                    <input type="time" data-field="lessons.lesson5.time5"
+                                        style="flex: 1; min-width: 80px;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Místo</label>
+                                <input type="text" data-field="lessons.lesson5.location" placeholder="Liberec">
+                            </div>
+                            <div class="form-group">
+                                <label>Adresa</label>
+                                <input type="text" data-field="lessons.lesson5.address" placeholder="Uliční 123">
+                            </div>
+                            <div class="form-group">
+                                <label>Nadpis</label>
+                                <input type="text" data-field="lessons.lesson5.title"
+                                    placeholder="Silvestrovské cvičení 🥂">
+                            </div>
+                            <div class="form-group">
+                                <label>Cena</label>
+                                <input type="text" data-field="lessons.lesson5.price" placeholder="250 Kč">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis</label>
+                                <textarea data-field="lessons.lesson5.description" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Odkaz</label>
+                                <input type="text" data-field="lessons.lesson5.link" placeholder="#reservation">
+                            </div>
+                            <div class="form-group">
+                                <label>Stav</label>
+                                <select data-field="lessons.lesson5.tag">
+                                    <option value="fake_tag">Žádný</option>
+                                    <option value="free_spots">✅ Volná místa</option>
+                                    <option value="full">❌ Obsazeno</option>
+                                    <option value="cancelled">⚠️ Zrušeno</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Gallery Section Editor -->
+                    <section class="editor-section hidden" id="editor-gallery">
+                        <div class="editor-card">
+                            <h3>📝 Hlavní texty</h3>
+                            <div class="form-group">
+                                <label>Nadpis sekce</label>
+                                <input type="text" data-field="gallery.title" placeholder="Nahlédněte do našeho světa">
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h3>🖼️ Obrázky galerie</h3>
+                            <p class="hint">Zadejte URL obrázků nebo ponechte prázdné pro výchozí placeholder.</p>
+                            <div class="form-group">
+                                <label>Obrázek 1 - URL</label>
+                                <input type="url" data-field="gallery.img1Url"
+                                    placeholder="https://example.com/image1.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label>Obrázek 1 - Popisek</label>
+                                <input type="text" data-field="gallery.img1Label" placeholder="Sensory Play">
+                            </div>
+                            <div class="form-group">
+                                <label>Obrázek 2 - URL</label>
+                                <input type="url" data-field="gallery.img2Url"
+                                    placeholder="https://example.com/image2.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label>Obrázek 2 - Popisek</label>
+                                <input type="text" data-field="gallery.img2Label" placeholder="Kreativní tvoření">
+                            </div>
+                            <div class="form-group">
+                                <label>Obrázek 3 - URL</label>
+                                <input type="url" data-field="gallery.img3Url"
+                                    placeholder="https://example.com/image3.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label>Obrázek 3 - Popisek</label>
+                                <input type="text" data-field="gallery.img3Label" placeholder="Montessori">
+                            </div>
+                            <div class="form-group">
+                                <label>Obrázek 4 - URL</label>
+                                <input type="url" data-field="gallery.img4Url"
+                                    placeholder="https://example.com/image4.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label>Obrázek 4 - Popisek</label>
+                                <input type="text" data-field="gallery.img4Label" placeholder="Vodní hrátky">
+                            </div>
+                            <div class="form-group">
+                                <label>Obrázek 5 - URL</label>
+                                <input type="url" data-field="gallery.img5Url"
+                                    placeholder="https://example.com/image5.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label>Obrázek 5 - Popisek</label>
+                                <input type="text" data-field="gallery.img5Label" placeholder="Přírodniny">
+                            </div>
+                            <div class="form-group">
+                                <label>Obrázek 6 - URL</label>
+                                <input type="url" data-field="gallery.img6Url"
+                                    placeholder="https://example.com/image6.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label>Obrázek 6 - Popisek</label>
+                                <input type="text" data-field="gallery.img6Label" placeholder="Oslavy">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Tips Section Editor -->
+                    <section class="editor-section hidden" id="editor-tips">
+                        <div class="editor-card">
+                            <h3>📝 Hlavní texty</h3>
+                            <div class="form-group">
+                                <label>Nadpis sekce (preview)</label>
+                                <input type="text" data-field="tips.previewTitle"
+                                    placeholder="Inspirace pro domácí tvoření">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis sekce (preview)</label>
+                                <input type="text" data-field="tips.previewDescription"
+                                    placeholder="Vyzkoušejte naše oblíbené aktivity i doma">
+                            </div>
+                        </div>
+
+                        <!-- Tip 1 -->
+                        <div class="editor-card">
+                            <h3>🍚 Tip 1</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Ikona (emoji)</label>
+                                    <input type="text" data-field="tips.tip1Icon" placeholder="🍚">
+                                </div>
+                                <div class="form-group">
+                                    <label>Kategorie</label>
+                                    <select data-field="tips.tip1Category">
+                                        <option value="sensory">Sensory Play</option>
+                                        <option value="montessori">Montessori</option>
+                                        <option value="creative">Kreativní</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Název</label>
+                                <input type="text" data-field="tips.tip1Title" placeholder="Barevná rýže">
+                            </div>
+                            <div class="form-group">
+                                <label>Krátký popis</label>
+                                <input type="text" data-field="tips.tip1Description"
+                                    placeholder="Jednoduchý návod na výrobu barevné senzorické rýže.">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Čas</label>
+                                    <input type="text" data-field="tips.tip1Time" placeholder="15 min">
+                                </div>
+                                <div class="form-group">
+                                    <label>Věk</label>
+                                    <input type="text" data-field="tips.tip1Age" placeholder="1+ rok">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Barva pozadí (gradient)</label>
+                                <input type="text" data-field="tips.tip1Color"
+                                    placeholder="linear-gradient(135deg, #FFB6C1, #FF69B4)">
+                            </div>
+                        </div>
+
+                        <!-- Tip 2 -->
+                        <div class="editor-card">
+                            <h3>🥄 Tip 2</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Ikona (emoji)</label>
+                                    <input type="text" data-field="tips.tip2Icon" placeholder="🥄">
+                                </div>
+                                <div class="form-group">
+                                    <label>Kategorie</label>
+                                    <select data-field="tips.tip2Category">
+                                        <option value="sensory">Sensory Play</option>
+                                        <option value="montessori" selected>Montessori</option>
+                                        <option value="creative">Kreativní</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Název</label>
+                                <input type="text" data-field="tips.tip2Title" placeholder="Přesýpání a přelévání">
+                            </div>
+                            <div class="form-group">
+                                <label>Krátký popis</label>
+                                <input type="text" data-field="tips.tip2Description"
+                                    placeholder="Aktivita pro rozvoj jemné motoriky.">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Čas</label>
+                                    <input type="text" data-field="tips.tip2Time" placeholder="10 min">
+                                </div>
+                                <div class="form-group">
+                                    <label>Věk</label>
+                                    <input type="text" data-field="tips.tip2Age" placeholder="18m+">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Barva pozadí</label>
+                                <input type="text" data-field="tips.tip2Color"
+                                    placeholder="linear-gradient(135deg, #FFE066, #FFD700)">
+                            </div>
+                        </div>
+
+                        <!-- Tip 3 -->
+                        <div class="editor-card">
+                            <h3>🍂 Tip 3</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Ikona (emoji)</label>
+                                    <input type="text" data-field="tips.tip3Icon" placeholder="🍂">
+                                </div>
+                                <div class="form-group">
+                                    <label>Kategorie</label>
+                                    <select data-field="tips.tip3Category">
+                                        <option value="sensory">Sensory Play</option>
+                                        <option value="montessori">Montessori</option>
+                                        <option value="creative" selected>Kreativní</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Název</label>
+                                <input type="text" data-field="tips.tip3Title" placeholder="Otisk listů">
+                            </div>
+                            <div class="form-group">
+                                <label>Krátký popis</label>
+                                <input type="text" data-field="tips.tip3Description"
+                                    placeholder="Krásné otisky pomocí barev a listů.">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Čas</label>
+                                    <input type="text" data-field="tips.tip3Time" placeholder="20 min">
+                                </div>
+                                <div class="form-group">
+                                    <label>Věk</label>
+                                    <input type="text" data-field="tips.tip3Age" placeholder="2+ roky">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Barva pozadí</label>
+                                <input type="text" data-field="tips.tip3Color"
+                                    placeholder="linear-gradient(135deg, #90EE90, #32CD32)">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Contact Section Editor -->
+                    <section class="editor-section hidden" id="editor-contact">
+                        <div class="editor-card">
+                            <h3>📝 Hlavní texty</h3>
+                            <div class="form-group">
+                                <label>Nadpis sekce</label>
+                                <input type="text" data-field="contact.title" placeholder="Kde nás najdete?">
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h3>📍 Kontaktní údaje</h3>
+                            <div class="form-group">
+                                <label>Adresa - řádek 1</label>
+                                <input type="text" data-field="contact.address1" placeholder="Duhová 123">
+                            </div>
+                            <div class="form-group">
+                                <label>Adresa - řádek 2</label>
+                                <input type="text" data-field="contact.address2" placeholder="Praha 1, 110 00">
+                            </div>
+                            <div class="form-group">
+                                <label>Telefon</label>
+                                <input type="tel" data-field="contact.phone" placeholder="+420 123 456 789">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" data-field="contact.email" placeholder="info@duhohratky.cz">
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h3>⏰ Otevírací doba</h3>
+                            <div class="form-group">
+                                <label>Řádek 1</label>
+                                <input type="text" data-field="contact.hours1" placeholder="Po-Pá: 9:00 - 18:00">
+                            </div>
+                            <div class="form-group">
+                                <label>Řádek 2</label>
+                                <input type="text" data-field="contact.hours2" placeholder="So: 9:00 - 14:00">
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h3>🔗 Sociální sítě</h3>
+                            <div class="form-group">
+                                <label>Facebook URL</label>
+                                <input type="url" data-field="contact.facebook"
+                                    placeholder="https://facebook.com/duhohratky">
+                            </div>
+                            <div class="form-group">
+                                <label>Instagram URL</label>
+                                <input type="url" data-field="contact.instagram"
+                                    placeholder="https://instagram.com/duhohratky">
+                            </div>
+                            <div class="form-group">
+                                <label>YouTube URL</label>
+                                <input type="url" data-field="contact.youtube"
+                                    placeholder="https://youtube.com/duhohratky">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Reservio Section Editor -->
+                    <section class="editor-section hidden" id="editor-reservio">
+                        <div class="editor-card">
+                            <h3>📅 Reservio Integrace</h3>
+                            <p class="hint">Vložte váš Reservio iframe kód. Získáte ho v Reservio admin panelu: Promote
+                                → Get
+                                iframe</p>
+                            <div class="form-group">
+                                <label>Reservio Iframe URL</label>
+                                <input type="url" data-field="reservio.iframeUrl"
+                                    placeholder="https://www.reservio.com/booking/iframe/VAS-BUSINESS-ID">
+                            </div>
+                            <div class="form-group">
+                                <label>Výška iframe (px)</label>
+                                <input type="number" data-field="reservio.iframeHeight" placeholder="600">
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h3>📞 Kontakt pro rezervace</h3>
+                            <div class="form-group">
+                                <label>Telefon pro rychlou rezervaci</label>
+                                <input type="tel" data-field="reservio.phone" placeholder="+420 123 456 789">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Upcoming Themes Editor -->
+                    <section class="editor-section hidden" id="editor-upcoming">
+                        <div class="editor-card">
+                            <h3>📝 Nadpis sekce</h3>
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: bold;">
+                                    <input type="checkbox" data-field="upcoming.visible">
+                                    Zobrazit tuto sekci na webu
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Titul sekce</label>
+                                <input type="text" data-field="upcoming.title" placeholder="Připravujeme další témata">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis sekce</label>
+                                <input type="text" data-field="upcoming.description"
+                                    placeholder="Na jaké další lekce se můžete...">
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3 style="margin:0;">🎭 Téma 1</h3>
+                                <label style="font-size: 0.9rem;">
+                                    <input type="checkbox" data-field="upcoming.items.0.active"> Zobrazit
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Ikona (emoji)</label>
+                                <input type="text" data-field="upcoming.items.0.icon" placeholder="🐣">
+                            </div>
+                            <div class="form-group">
+                                <label>Název tématu</label>
+                                <input type="text" data-field="upcoming.items.0.title" placeholder="Téma 1">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis tématu</label>
+                                <textarea data-field="upcoming.items.0.description" rows="2"
+                                    placeholder="Popis..."></textarea>
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3 style="margin:0;">🚀 Téma 2</h3>
+                                <label style="font-size: 0.9rem;">
+                                    <input type="checkbox" data-field="upcoming.items.1.active"> Zobrazit
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Ikona (emoji)</label>
+                                <input type="text" data-field="upcoming.items.1.icon" placeholder="🚒">
+                            </div>
+                            <div class="form-group">
+                                <label>Název tématu</label>
+                                <input type="text" data-field="upcoming.items.1.title" placeholder="Téma 2">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis tématu</label>
+                                <textarea data-field="upcoming.items.1.description" rows="2"
+                                    placeholder="Popis..."></textarea>
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3 style="margin:0;">🦕 Téma 3</h3>
+                                <label style="font-size: 0.9rem;">
+                                    <input type="checkbox" data-field="upcoming.items.2.active"> Zobrazit
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Ikona (emoji)</label>
+                                <input type="text" data-field="upcoming.items.2.icon" placeholder="🦕">
+                            </div>
+                            <div class="form-group">
+                                <label>Název tématu</label>
+                                <input type="text" data-field="upcoming.items.2.title" placeholder="Téma 3">
+                            </div>
+                            <div class="form-group">
+                                <label>Popis tématu</label>
+                                <textarea data-field="upcoming.items.2.description" rows="2"
+                                    placeholder="Popis..."></textarea>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <!-- Gallery Section -->
+                    <section class="editor-section hidden" id="editor-gallery">
+                        <div class="editor-category">
+                            <h2>📸 Správa Galerie</h2>
+                            <div class="editor-card">
+                                <h3>Přidat novou fotku</h3>
+                                <p class="hint">Vyberte obrázek (JPG/PNG). Automaticky se převede do WebP formátu.</p>
+                                <div class="form-group"
+                                    style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                                    <input type="file" id="gallery-upload" accept="image/*" style="flex: 1;">
+                                    <select id="gallery-category"
+                                        style="padding: 8px; border-radius: 6px; border: 1px solid #ddd;">
+                                        <option value="sensory">Sensory Play</option>
+                                        <option value="montessori">Montessori</option>
+                                        <option value="creative">Kreativní</option>
+                                        <option value="party">Oslavy</option>
+                                    </select>
+                                    <button class="btn-primary" onclick="uploadGalleryImage()">Nahrát ⬆️</button>
+                                </div>
+                                <div id="upload-status"></div>
+                            </div>
+
+                            <div class="editor-card">
+                                <h3>Seznam obrázků</h3>
+                                <div id="gallery-list" class="gallery-admin-grid">
+                                    <!-- Dynamic items will be here -->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Settings Section -->
+                    <section class="editor-section hidden" id="editor-settings">
+                        <div class="editor-card">
+                            <h3>🔐 Přihlašovací údaje</h3>
+                            <p class="hint warning">⚠️ Změna těchto údajů ovlivní přihlášení do admin panelu.</p>
+                            <div class="form-group">
+                                <label>Admin Email</label>
+                                <input type="email" data-field="settings.email" placeholder="admin@duhohratky.cz">
+                            </div>
+                            <div class="form-group">
+                                <label>Nové heslo</label>
+                                <input type="password" id="new-password" placeholder="Zadejte nové heslo">
+                            </div>
+                            <div class="form-group">
+                                <label>Potvrdit heslo</label>
+                                <input type="password" id="confirm-password" placeholder="Potvrďte nové heslo">
+                            </div>
+                            <button class="btn btn-primary" id="change-password-btn">
+                                <span>🔑</span> Změnit heslo
+                            </button>
+                        </div>
+                        <div class="editor-card">
+                            <h3>🌐 SEO Nastavení</h3>
+                            <div class="form-group">
+                                <label>Titulek stránky</label>
+                                <input type="text" data-field="settings.seoTitle"
+                                    placeholder="Duhohratky | Sensory Play & Montessori pro děti">
+                            </div>
+                            <div class="form-group">
+                                <label>Meta popis</label>
+                                <textarea data-field="settings.seoDescription" rows="2"
+                                    placeholder="Duhohratky - kreativní sensory play a Montessori aktivity..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Klíčová slova</label>
+                                <input type="text" data-field="settings.seoKeywords"
+                                    placeholder="sensory play, Montessori, děti, hry...">
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>📤 Export / Import</h3>
+                            <p class="hint">Zálohujte nebo obnovte nastavení webu.</p>
+                            <div class="button-group">
+                                <button class="btn btn-secondary" id="export-btn">
+                                    <span>📥</span> Exportovat data
+                                </button>
+                                <button class="btn btn-secondary" id="import-btn">
+                                    <span>📤</span> Importovat data
+                                </button>
+                            </div>
+                            <input type="file" id="import-file" accept=".json" style="display: none;">
+                        </div>
+                    </section>
+                </main>
             </div>
 
-            <!-- Activity 1 -->
-            <div class="editor-card">
-                <h3>🫧 Aktivita 1</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Ikona (emoji)</label>
-                        <input type="text" data-field="activities.act1Icon" placeholder="🫧">
-                    </div>
-                    <div class="form-group">
-                        <label>Barva (pink/orange/yellow/green/blue/purple)</label>
-                        <select data-field="activities.act1Color">
-                            <option value="pink">Růžová</option>
-                            <option value="orange">Oranžová</option>
-                            <option value="yellow">Žlutá</option>
-                            <option value="green">Zelená</option>
-                            <option value="blue">Modrá</option>
-                            <option value="purple">Fialová</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Název</label>
-                    <input type="text" data-field="activities.act1Title" placeholder="Sensory Boxy">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="activities.act1Text" rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Věková kategorie</label>
-                    <input type="text" data-field="activities.act1Age" placeholder="2-6 let">
-                </div>
+            <!-- Toast Notification -->
+            <div class="toast" id="toast">
+                <span class="toast-icon">✅</span>
+                <span class="toast-message">Změny byly uloženy</span>
             </div>
 
-            <!-- Activity 2 -->
-            <div class="editor-card">
-                <h3>🎨 Aktivita 2</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Ikona (emoji)</label>
-                        <input type="text" data-field="activities.act2Icon" placeholder="🎨">
-                    </div>
-                    <div class="form-group">
-                        <label>Barva</label>
-                        <select data-field="activities.act2Color">
-                            <option value="pink">Růžová</option>
-                            <option value="orange" selected>Oranžová</option>
-                            <option value="yellow">Žlutá</option>
-                            <option value="green">Zelená</option>
-                            <option value="blue">Modrá</option>
-                            <option value="purple">Fialová</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Název</label>
-                    <input type="text" data-field="activities.act2Title" placeholder="Kreativní tvoření">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="activities.act2Text" rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Věková kategorie</label>
-                    <input type="text" data-field="activities.act2Age" placeholder="3-8 let">
-                </div>
-            </div>
-
-            <!-- Activity 3-6 (similar structure) -->
-            <div class="editor-card">
-                <h3>💧 Aktivita 3</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Ikona</label>
-                        <input type="text" data-field="activities.act3Icon" placeholder="💧">
-                    </div>
-                    <div class="form-group">
-                        <label>Barva</label>
-                        <select data-field="activities.act3Color">
-                            <option value="pink">Růžová</option>
-                            <option value="orange">Oranžová</option>
-                            <option value="yellow" selected>Žlutá</option>
-                            <option value="green">Zelená</option>
-                            <option value="blue">Modrá</option>
-                            <option value="purple">Fialová</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Název</label>
-                    <input type="text" data-field="activities.act3Title" placeholder="Vodní hrátky">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="activities.act3Text" rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Věková kategorie</label>
-                    <input type="text" data-field="activities.act3Age" placeholder="1-5 let">
-                </div>
-            </div>
-
-            <div class="editor-card">
-                <h3>🌱 Aktivita 4</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Ikona</label>
-                        <input type="text" data-field="activities.act4Icon" placeholder="🌱">
-                    </div>
-                    <div class="form-group">
-                        <label>Barva</label>
-                        <select data-field="activities.act4Color">
-                            <option value="pink">Růžová</option>
-                            <option value="orange">Oranžová</option>
-                            <option value="yellow">Žlutá</option>
-                            <option value="green" selected>Zelená</option>
-                            <option value="blue">Modrá</option>
-                            <option value="purple">Fialová</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Název</label>
-                    <input type="text" data-field="activities.act4Title" placeholder="Přírodní materiály">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="activities.act4Text" rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Věková kategorie</label>
-                    <input type="text" data-field="activities.act4Age" placeholder="2-7 let">
-                </div>
-            </div>
-
-            <div class="editor-card">
-                <h3>🧩 Aktivita 5</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Ikona</label>
-                        <input type="text" data-field="activities.act5Icon" placeholder="🧩">
-                    </div>
-                    <div class="form-group">
-                        <label>Barva</label>
-                        <select data-field="activities.act5Color">
-                            <option value="pink">Růžová</option>
-                            <option value="orange">Oranžová</option>
-                            <option value="yellow">Žlutá</option>
-                            <option value="green">Zelená</option>
-                            <option value="blue" selected>Modrá</option>
-                            <option value="purple">Fialová</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Název</label>
-                    <input type="text" data-field="activities.act5Title" placeholder="Montessori pomůcky">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="activities.act5Text" rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Věková kategorie</label>
-                    <input type="text" data-field="activities.act5Age" placeholder="3-8 let">
-                </div>
-            </div>
-
-            <div class="editor-card">
-                <h3>🎂 Aktivita 6</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Ikona</label>
-                        <input type="text" data-field="activities.act6Icon" placeholder="🎂">
-                    </div>
-                    <div class="form-group">
-                        <label>Barva</label>
-                        <select data-field="activities.act6Color">
-                            <option value="pink">Růžová</option>
-                            <option value="orange">Oranžová</option>
-                            <option value="yellow">Žlutá</option>
-                            <option value="green">Zelená</option>
-                            <option value="blue">Modrá</option>
-                            <option value="purple" selected>Fialová</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Název</label>
-                    <input type="text" data-field="activities.act6Title" placeholder="Narozeninové oslavy">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="activities.act6Text" rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Věková kategorie</label>
-                    <input type="text" data-field="activities.act6Age" placeholder="1-10 let">
-                </div>
-            </div>
-        </section>
-
-        <!-- Lessons / Aktuální lekce Section Editor -->
-        <section class="editor-section hidden" id="editor-lessons">
-            <div class="editor-card">
-                <h3>📝 Hlavní texty</h3>
-                <div class="form-group">
-                    <label>Nadpis sekce</label>
-                    <input type="text" data-field="lessons.title" placeholder="Aktuální lekce">
-                    <small style="color: #666; font-size: 0.8rem; display: block; margin-top: 4px;">
-                        Pro duhový efekt použijte:
-                        <code>&lt;span class="rainbow-text"&gt;slovo&lt;/span&gt;</code>
-                    </small>
-                </div>
-            </div>
-
-            <div class="editor-card">
-                <h3>⚡ Lekce 1</h3>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" data-field="lessons.lesson1.active"> Zobrazit tuto lekci
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Datum</label>
-                    <input type="date" data-field="lessons.lesson1.date">
-                </div>
-                <div class="form-group">
-                    <label>Časy lekcí</label>
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <input type="time" data-field="lessons.lesson1.time1" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson1.time2" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson1.time3" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson1.time4" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson1.time5" style="flex: 1; min-width: 80px;">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Místo</label>
-                    <input type="text" data-field="lessons.lesson1.location" placeholder="Praha">
-                </div>
-                <div class="form-group">
-                    <label>Adresa</label>
-                    <input type="text" data-field="lessons.lesson1.address" placeholder="Uliční 123">
-                </div>
-                <div class="form-group">
-                    <label>Nadpis</label>
-                    <input type="text" data-field="lessons.lesson1.title" placeholder="Sensory Play: Vesmír 🚀">
-                </div>
-                <div class="form-group">
-                    <label>Cena</label>
-                    <input type="text" data-field="lessons.lesson1.price" placeholder="250 Kč">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="lessons.lesson1.description" rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Odkaz</label>
-                    <input type="text" data-field="lessons.lesson1.link" placeholder="#reservation">
-                </div>
-                <div class="form-group">
-                    <label>Stav</label>
-                    <select data-field="lessons.lesson1.tag">
-                        <option value="fake_tag">Žádný</option>
-                        <option value="free_spots">✅ Volná místa</option>
-                        <option value="full">❌ Obsazeno</option>
-                        <option value="cancelled">⚠️ Zrušeno</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="editor-card">
-                <h3>⚡ Lekce 2</h3>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" data-field="lessons.lesson2.active"> Zobrazit tuto lekci
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Datum</label>
-                    <input type="date" data-field="lessons.lesson2.date">
-                </div>
-                <div class="form-group">
-                    <label>Časy lekcí</label>
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <input type="time" data-field="lessons.lesson2.time1" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson2.time2" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson2.time3" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson2.time4" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson2.time5" style="flex: 1; min-width: 80px;">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Místo</label>
-                    <input type="text" data-field="lessons.lesson2.location" placeholder="Brno">
-                </div>
-                <div class="form-group">
-                    <label>Adresa</label>
-                    <input type="text" data-field="lessons.lesson2.address" placeholder="Uliční 123">
-                </div>
-                <div class="form-group">
-                    <label>Nadpis</label>
-                    <input type="text" data-field="lessons.lesson2.title" placeholder="Montessori Dílna 🧩">
-                </div>
-                <div class="form-group">
-                    <label>Cena</label>
-                    <input type="text" data-field="lessons.lesson2.price" placeholder="250 Kč">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="lessons.lesson2.description" rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Odkaz</label>
-                    <input type="text" data-field="lessons.lesson2.link" placeholder="#reservation">
-                </div>
-                <div class="form-group">
-                    <label>Stav</label>
-                    <select data-field="lessons.lesson2.tag">
-                        <option value="fake_tag">Žádný</option>
-                        <option value="free_spots">✅ Volná místa</option>
-                        <option value="full">❌ Obsazeno</option>
-                        <option value="cancelled">⚠️ Zrušeno</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="editor-card">
-                <h3>⚡ Lekce 3</h3>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" data-field="lessons.lesson3.active"> Zobrazit tuto lekci
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Datum</label>
-                    <input type="date" data-field="lessons.lesson3.date">
-                </div>
-                <div class="form-group">
-                    <label>Časy lekcí</label>
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <input type="time" data-field="lessons.lesson3.time1" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson3.time2" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson3.time3" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson3.time4" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson3.time5" style="flex: 1; min-width: 80px;">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Místo</label>
-                    <input type="text" data-field="lessons.lesson3.location" placeholder="Ostrava">
-                </div>
-                <div class="form-group">
-                    <label>Adresa</label>
-                    <input type="text" data-field="lessons.lesson3.address" placeholder="Uliční 123">
-                </div>
-                <div class="form-group">
-                    <label>Nadpis</label>
-                    <input type="text" data-field="lessons.lesson3.title" placeholder="Tvoření z přírodnin 🍂">
-                </div>
-                <div class="form-group">
-                    <label>Cena</label>
-                    <input type="text" data-field="lessons.lesson3.price" placeholder="250 Kč">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="lessons.lesson3.description" rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Odkaz</label>
-                    <input type="text" data-field="lessons.lesson3.link" placeholder="#reservation">
-                </div>
-                <div class="form-group">
-                    <label>Stav</label>
-                    <select data-field="lessons.lesson3.tag">
-                        <option value="fake_tag">Žádný</option>
-                        <option value="free_spots">✅ Volná místa</option>
-                        <option value="full">❌ Obsazeno</option>
-                        <option value="cancelled">⚠️ Zrušeno</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="editor-card">
-                <h3>⚡ Lekce 4</h3>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" data-field="lessons.lesson4.active"> Zobrazit tuto lekci
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Datum</label>
-                    <input type="date" data-field="lessons.lesson4.date">
-                </div>
-                <div class="form-group">
-                    <label>Časy lekcí</label>
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <input type="time" data-field="lessons.lesson4.time1" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson4.time2" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson4.time3" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson4.time4" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson4.time5" style="flex: 1; min-width: 80px;">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Místo</label>
-                    <input type="text" data-field="lessons.lesson4.location" placeholder="Plzeň">
-                </div>
-                <div class="form-group">
-                    <label>Adresa</label>
-                    <input type="text" data-field="lessons.lesson4.address" placeholder="Uliční 123">
-                </div>
-                <div class="form-group">
-                    <label>Nadpis</label>
-                    <input type="text" data-field="lessons.lesson4.title" placeholder="Hudební hrátky 🎵">
-                </div>
-                <div class="form-group">
-                    <label>Cena</label>
-                    <input type="text" data-field="lessons.lesson4.price" placeholder="250 Kč">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="lessons.lesson4.description" rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Odkaz</label>
-                    <input type="text" data-field="lessons.lesson4.link" placeholder="#reservation">
-                </div>
-                <div class="form-group">
-                    <label>Stav</label>
-                    <select data-field="lessons.lesson4.tag">
-                        <option value="fake_tag">Žádný</option>
-                        <option value="free_spots">✅ Volná místa</option>
-                        <option value="full">❌ Obsazeno</option>
-                        <option value="cancelled">⚠️ Zrušeno</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="editor-card">
-                <h3>⚡ Lekce 5</h3>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" data-field="lessons.lesson5.active"> Zobrazit tuto lekci
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Datum</label>
-                    <input type="date" data-field="lessons.lesson5.date">
-                </div>
-                <div class="form-group">
-                    <label>Časy lekcí</label>
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <input type="time" data-field="lessons.lesson5.time1" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson5.time2" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson5.time3" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson5.time4" style="flex: 1; min-width: 80px;">
-                        <input type="time" data-field="lessons.lesson5.time5" style="flex: 1; min-width: 80px;">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Místo</label>
-                    <input type="text" data-field="lessons.lesson5.location" placeholder="Liberec">
-                </div>
-                <div class="form-group">
-                    <label>Adresa</label>
-                    <input type="text" data-field="lessons.lesson5.address" placeholder="Uliční 123">
-                </div>
-                <div class="form-group">
-                    <label>Nadpis</label>
-                    <input type="text" data-field="lessons.lesson5.title" placeholder="Silvestrovské cvičení 🥂">
-                </div>
-                <div class="form-group">
-                    <label>Cena</label>
-                    <input type="text" data-field="lessons.lesson5.price" placeholder="250 Kč">
-                </div>
-                <div class="form-group">
-                    <label>Popis</label>
-                    <textarea data-field="lessons.lesson5.description" rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Odkaz</label>
-                    <input type="text" data-field="lessons.lesson5.link" placeholder="#reservation">
-                </div>
-                <div class="form-group">
-                    <label>Stav</label>
-                    <select data-field="lessons.lesson5.tag">
-                        <option value="fake_tag">Žádný</option>
-                        <option value="free_spots">✅ Volná místa</option>
-                        <option value="full">❌ Obsazeno</option>
-                        <option value="cancelled">⚠️ Zrušeno</option>
-                    </select>
-                </div>
-            </div>
-        </section>
-
-        <!-- Gallery Section Editor -->
-        <section class="editor-section hidden" id="editor-gallery">
-            <div class="editor-card">
-                <h3>📝 Hlavní texty</h3>
-                <div class="form-group">
-                    <label>Nadpis sekce</label>
-                    <input type="text" data-field="gallery.title" placeholder="Nahlédněte do našeho světa">
-                </div>
-            </div>
-            <div class="editor-card">
-                <h3>🖼️ Obrázky galerie</h3>
-                <p class="hint">Zadejte URL obrázků nebo ponechte prázdné pro výchozí placeholder.</p>
-                <div class="form-group">
-                    <label>Obrázek 1 - URL</label>
-                    <input type="url" data-field="gallery.img1Url" placeholder="https://example.com/image1.jpg">
-                </div>
-                <div class="form-group">
-                    <label>Obrázek 1 - Popisek</label>
-                    <input type="text" data-field="gallery.img1Label" placeholder="Sensory Play">
-                </div>
-                <div class="form-group">
-                    <label>Obrázek 2 - URL</label>
-                    <input type="url" data-field="gallery.img2Url" placeholder="https://example.com/image2.jpg">
-                </div>
-                <div class="form-group">
-                    <label>Obrázek 2 - Popisek</label>
-                    <input type="text" data-field="gallery.img2Label" placeholder="Kreativní tvoření">
-                </div>
-                <div class="form-group">
-                    <label>Obrázek 3 - URL</label>
-                    <input type="url" data-field="gallery.img3Url" placeholder="https://example.com/image3.jpg">
-                </div>
-                <div class="form-group">
-                    <label>Obrázek 3 - Popisek</label>
-                    <input type="text" data-field="gallery.img3Label" placeholder="Montessori">
-                </div>
-                <div class="form-group">
-                    <label>Obrázek 4 - URL</label>
-                    <input type="url" data-field="gallery.img4Url" placeholder="https://example.com/image4.jpg">
-                </div>
-                <div class="form-group">
-                    <label>Obrázek 4 - Popisek</label>
-                    <input type="text" data-field="gallery.img4Label" placeholder="Vodní hrátky">
-                </div>
-                <div class="form-group">
-                    <label>Obrázek 5 - URL</label>
-                    <input type="url" data-field="gallery.img5Url" placeholder="https://example.com/image5.jpg">
-                </div>
-                <div class="form-group">
-                    <label>Obrázek 5 - Popisek</label>
-                    <input type="text" data-field="gallery.img5Label" placeholder="Přírodniny">
-                </div>
-                <div class="form-group">
-                    <label>Obrázek 6 - URL</label>
-                    <input type="url" data-field="gallery.img6Url" placeholder="https://example.com/image6.jpg">
-                </div>
-                <div class="form-group">
-                    <label>Obrázek 6 - Popisek</label>
-                    <input type="text" data-field="gallery.img6Label" placeholder="Oslavy">
-                </div>
-            </div>
-        </section>
-
-        <!-- Tips Section Editor -->
-        <section class="editor-section hidden" id="editor-tips">
-            <div class="editor-card">
-                <h3>📝 Hlavní texty</h3>
-                <div class="form-group">
-                    <label>Nadpis sekce (preview)</label>
-                    <input type="text" data-field="tips.previewTitle" placeholder="Inspirace pro domácí tvoření">
-                </div>
-                <div class="form-group">
-                    <label>Popis sekce (preview)</label>
-                    <input type="text" data-field="tips.previewDescription"
-                        placeholder="Vyzkoušejte naše oblíbené aktivity i doma">
-                </div>
-            </div>
-
-            <!-- Tip 1 -->
-            <div class="editor-card">
-                <h3>🍚 Tip 1</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Ikona (emoji)</label>
-                        <input type="text" data-field="tips.tip1Icon" placeholder="🍚">
-                    </div>
-                    <div class="form-group">
-                        <label>Kategorie</label>
-                        <select data-field="tips.tip1Category">
-                            <option value="sensory">Sensory Play</option>
-                            <option value="montessori">Montessori</option>
-                            <option value="creative">Kreativní</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Název</label>
-                    <input type="text" data-field="tips.tip1Title" placeholder="Barevná rýže">
-                </div>
-                <div class="form-group">
-                    <label>Krátký popis</label>
-                    <input type="text" data-field="tips.tip1Description"
-                        placeholder="Jednoduchý návod na výrobu barevné senzorické rýže.">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Čas</label>
-                        <input type="text" data-field="tips.tip1Time" placeholder="15 min">
-                    </div>
-                    <div class="form-group">
-                        <label>Věk</label>
-                        <input type="text" data-field="tips.tip1Age" placeholder="1+ rok">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Barva pozadí (gradient)</label>
-                    <input type="text" data-field="tips.tip1Color"
-                        placeholder="linear-gradient(135deg, #FFB6C1, #FF69B4)">
-                </div>
-            </div>
-
-            <!-- Tip 2 -->
-            <div class="editor-card">
-                <h3>🥄 Tip 2</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Ikona (emoji)</label>
-                        <input type="text" data-field="tips.tip2Icon" placeholder="🥄">
-                    </div>
-                    <div class="form-group">
-                        <label>Kategorie</label>
-                        <select data-field="tips.tip2Category">
-                            <option value="sensory">Sensory Play</option>
-                            <option value="montessori" selected>Montessori</option>
-                            <option value="creative">Kreativní</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Název</label>
-                    <input type="text" data-field="tips.tip2Title" placeholder="Přesýpání a přelévání">
-                </div>
-                <div class="form-group">
-                    <label>Krátký popis</label>
-                    <input type="text" data-field="tips.tip2Description"
-                        placeholder="Aktivita pro rozvoj jemné motoriky.">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Čas</label>
-                        <input type="text" data-field="tips.tip2Time" placeholder="10 min">
-                    </div>
-                    <div class="form-group">
-                        <label>Věk</label>
-                        <input type="text" data-field="tips.tip2Age" placeholder="18m+">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Barva pozadí</label>
-                    <input type="text" data-field="tips.tip2Color"
-                        placeholder="linear-gradient(135deg, #FFE066, #FFD700)">
-                </div>
-            </div>
-
-            <!-- Tip 3 -->
-            <div class="editor-card">
-                <h3>🍂 Tip 3</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Ikona (emoji)</label>
-                        <input type="text" data-field="tips.tip3Icon" placeholder="🍂">
-                    </div>
-                    <div class="form-group">
-                        <label>Kategorie</label>
-                        <select data-field="tips.tip3Category">
-                            <option value="sensory">Sensory Play</option>
-                            <option value="montessori">Montessori</option>
-                            <option value="creative" selected>Kreativní</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Název</label>
-                    <input type="text" data-field="tips.tip3Title" placeholder="Otisk listů">
-                </div>
-                <div class="form-group">
-                    <label>Krátký popis</label>
-                    <input type="text" data-field="tips.tip3Description"
-                        placeholder="Krásné otisky pomocí barev a listů.">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Čas</label>
-                        <input type="text" data-field="tips.tip3Time" placeholder="20 min">
-                    </div>
-                    <div class="form-group">
-                        <label>Věk</label>
-                        <input type="text" data-field="tips.tip3Age" placeholder="2+ roky">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Barva pozadí</label>
-                    <input type="text" data-field="tips.tip3Color"
-                        placeholder="linear-gradient(135deg, #90EE90, #32CD32)">
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section Editor -->
-        <section class="editor-section hidden" id="editor-contact">
-            <div class="editor-card">
-                <h3>📝 Hlavní texty</h3>
-                <div class="form-group">
-                    <label>Nadpis sekce</label>
-                    <input type="text" data-field="contact.title" placeholder="Kde nás najdete?">
-                </div>
-            </div>
-            <div class="editor-card">
-                <h3>📍 Kontaktní údaje</h3>
-                <div class="form-group">
-                    <label>Adresa - řádek 1</label>
-                    <input type="text" data-field="contact.address1" placeholder="Duhová 123">
-                </div>
-                <div class="form-group">
-                    <label>Adresa - řádek 2</label>
-                    <input type="text" data-field="contact.address2" placeholder="Praha 1, 110 00">
-                </div>
-                <div class="form-group">
-                    <label>Telefon</label>
-                    <input type="tel" data-field="contact.phone" placeholder="+420 123 456 789">
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" data-field="contact.email" placeholder="info@duhohratky.cz">
-                </div>
-            </div>
-            <div class="editor-card">
-                <h3>⏰ Otevírací doba</h3>
-                <div class="form-group">
-                    <label>Řádek 1</label>
-                    <input type="text" data-field="contact.hours1" placeholder="Po-Pá: 9:00 - 18:00">
-                </div>
-                <div class="form-group">
-                    <label>Řádek 2</label>
-                    <input type="text" data-field="contact.hours2" placeholder="So: 9:00 - 14:00">
-                </div>
-            </div>
-            <div class="editor-card">
-                <h3>🔗 Sociální sítě</h3>
-                <div class="form-group">
-                    <label>Facebook URL</label>
-                    <input type="url" data-field="contact.facebook" placeholder="https://facebook.com/duhohratky">
-                </div>
-                <div class="form-group">
-                    <label>Instagram URL</label>
-                    <input type="url" data-field="contact.instagram" placeholder="https://instagram.com/duhohratky">
-                </div>
-                <div class="form-group">
-                    <label>YouTube URL</label>
-                    <input type="url" data-field="contact.youtube" placeholder="https://youtube.com/duhohratky">
-                </div>
-            </div>
-        </section>
-
-        <!-- Reservio Section Editor -->
-        <section class="editor-section hidden" id="editor-reservio">
-            <div class="editor-card">
-                <h3>📅 Reservio Integrace</h3>
-                <p class="hint">Vložte váš Reservio iframe kód. Získáte ho v Reservio admin panelu: Promote
-                    → Get
-                    iframe</p>
-                <div class="form-group">
-                    <label>Reservio Iframe URL</label>
-                    <input type="url" data-field="reservio.iframeUrl"
-                        placeholder="https://www.reservio.com/booking/iframe/VAS-BUSINESS-ID">
-                </div>
-                <div class="form-group">
-                    <label>Výška iframe (px)</label>
-                    <input type="number" data-field="reservio.iframeHeight" placeholder="600">
-                </div>
-            </div>
-            <div class="editor-card">
-                <h3>📞 Kontakt pro rezervace</h3>
-                <div class="form-group">
-                    <label>Telefon pro rychlou rezervaci</label>
-                    <input type="tel" data-field="reservio.phone" placeholder="+420 123 456 789">
-                </div>
-            </div>
-        </section>
-
-        <!-- Upcoming Themes Editor -->
-        <section class="editor-section hidden" id="editor-upcoming">
-            <div class="editor-card">
-                <h3>📝 Nadpis sekce</h3>
-                <div style="margin-bottom: 1rem;">
-                    <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: bold;">
-                        <input type="checkbox" data-field="upcoming.visible">
-                        Zobrazit tuto sekci na webu
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Titul sekce</label>
-                    <input type="text" data-field="upcoming.title" placeholder="Připravujeme další témata">
-                </div>
-                <div class="form-group">
-                    <label>Popis sekce</label>
-                    <input type="text" data-field="upcoming.description" placeholder="Na jaké další lekce se můžete...">
-                </div>
-            </div>
-            <div class="editor-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <h3 style="margin:0;">🎭 Téma 1</h3>
-                    <label style="font-size: 0.9rem;">
-                        <input type="checkbox" data-field="upcoming.items.0.active"> Zobrazit
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Ikona (emoji)</label>
-                    <input type="text" data-field="upcoming.items.0.icon" placeholder="🐣">
-                </div>
-                <div class="form-group">
-                    <label>Název tématu</label>
-                    <input type="text" data-field="upcoming.items.0.title" placeholder="Téma 1">
-                </div>
-                <div class="form-group">
-                    <label>Popis tématu</label>
-                    <textarea data-field="upcoming.items.0.description" rows="2" placeholder="Popis..."></textarea>
-                </div>
-            </div>
-            <div class="editor-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <h3 style="margin:0;">🚀 Téma 2</h3>
-                    <label style="font-size: 0.9rem;">
-                        <input type="checkbox" data-field="upcoming.items.1.active"> Zobrazit
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Ikona (emoji)</label>
-                    <input type="text" data-field="upcoming.items.1.icon" placeholder="🚒">
-                </div>
-                <div class="form-group">
-                    <label>Název tématu</label>
-                    <input type="text" data-field="upcoming.items.1.title" placeholder="Téma 2">
-                </div>
-                <div class="form-group">
-                    <label>Popis tématu</label>
-                    <textarea data-field="upcoming.items.1.description" rows="2" placeholder="Popis..."></textarea>
-                </div>
-            </div>
-            <div class="editor-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <h3 style="margin:0;">🦕 Téma 3</h3>
-                    <label style="font-size: 0.9rem;">
-                        <input type="checkbox" data-field="upcoming.items.2.active"> Zobrazit
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Ikona (emoji)</label>
-                    <input type="text" data-field="upcoming.items.2.icon" placeholder="🦕">
-                </div>
-                <div class="form-group">
-                    <label>Název tématu</label>
-                    <input type="text" data-field="upcoming.items.2.title" placeholder="Téma 3">
-                </div>
-                <div class="form-group">
-                    <label>Popis tématu</label>
-                    <textarea data-field="upcoming.items.2.description" rows="2" placeholder="Popis..."></textarea>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Gallery Section -->
-        <section class="editor-section hidden" id="editor-gallery">
-            <div class="editor-category">
-                <h2>📸 Správa Galerie</h2>
-                <div class="editor-card">
-                    <h3>Přidat novou fotku</h3>
-                    <p class="hint">Vyberte obrázek (JPG/PNG). Automaticky se převede do WebP formátu.</p>
-                    <div class="form-group" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                        <input type="file" id="gallery-upload" accept="image/*" style="flex: 1;">
-                        <select id="gallery-category" style="padding: 8px; border-radius: 6px; border: 1px solid #ddd;">
-                            <option value="sensory">Sensory Play</option>
-                            <option value="montessori">Montessori</option>
-                            <option value="creative">Kreativní</option>
-                            <option value="party">Oslavy</option>
-                        </select>
-                        <button class="btn-primary" onclick="uploadGalleryImage()">Nahrát ⬆️</button>
-                    </div>
-                    <div id="upload-status"></div>
-                </div>
-
-                <div class="editor-card">
-                    <h3>Seznam obrázků</h3>
-                    <div id="gallery-list" class="gallery-admin-grid">
-                        <!-- Dynamic items will be here -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Settings Section -->
-        <section class="editor-section hidden" id="editor-settings">
-            <div class="editor-card">
-                <h3>🔐 Přihlašovací údaje</h3>
-                <p class="hint warning">⚠️ Změna těchto údajů ovlivní přihlášení do admin panelu.</p>
-                <div class="form-group">
-                    <label>Admin Email</label>
-                    <input type="email" data-field="settings.email" placeholder="admin@duhohratky.cz">
-                </div>
-                <div class="form-group">
-                    <label>Nové heslo</label>
-                    <input type="password" id="new-password" placeholder="Zadejte nové heslo">
-                </div>
-                <div class="form-group">
-                    <label>Potvrdit heslo</label>
-                    <input type="password" id="confirm-password" placeholder="Potvrďte nové heslo">
-                </div>
-                <button class="btn btn-primary" id="change-password-btn">
-                    <span>🔑</span> Změnit heslo
-                </button>
-            </div>
-            <div class="editor-card">
-                <h3>🌐 SEO Nastavení</h3>
-                <div class="form-group">
-                    <label>Titulek stránky</label>
-                    <input type="text" data-field="settings.seoTitle"
-                        placeholder="Duhohratky | Sensory Play & Montessori pro děti">
-                </div>
-                <div class="form-group">
-                    <label>Meta popis</label>
-                    <textarea data-field="settings.seoDescription" rows="2"
-                        placeholder="Duhohratky - kreativní sensory play a Montessori aktivity..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Klíčová slova</label>
-                    <input type="text" data-field="settings.seoKeywords"
-                        placeholder="sensory play, Montessori, děti, hry...">
-                </div>
-            </div>
-
-            <div class="editor-card">
-                <h3>📤 Export / Import</h3>
-                <p class="hint">Zálohujte nebo obnovte nastavení webu.</p>
-                <div class="button-group">
-                    <button class="btn btn-secondary" id="export-btn">
-                        <span>📥</span> Exportovat data
-                    </button>
-                    <button class="btn btn-secondary" id="import-btn">
-                        <span>📤</span> Importovat data
-                    </button>
-                </div>
-                <input type="file" id="import-file" accept=".json" style="display: none;">
-            </div>
-        </section>
-    </main>
-    </div>
-
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <span class="toast-icon">✅</span>
-        <span class="toast-message">Změny byly uloženy</span>
-    </div>
-
-    <script src="admin.js?v=99"></script>
-</body>
+            <script src="admin.js?v=99"></script>
+    </body>
 
 </html>
