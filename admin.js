@@ -173,9 +173,7 @@ const defaultData = {
 let siteData = {};
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    loadData();
-    initLogin();
+document.addEventListener('DOMContentLoaded', async () => {
     // VISUAL CONSOLE FOR ADMIN (since user cannot open devtools)
     const debugConsole = document.createElement('div');
     debugConsole.id = 'debug-console';
@@ -200,15 +198,19 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn = (...args) => { originalWarn.apply(console, args); logToScreen(args.join(' '), 'warn'); };
     console.error = (...args) => { originalError.apply(console, args); logToScreen(args.join(' '), 'error'); };
 
-    console.log('🚀 Admin Debug Console v1009 Initialized');
+    console.log('🚀 Admin v1013 Initialized');
     // End Visual Console
 
+    // CRITICAL: await loadData so siteData is populated BEFORE rendering
+    await loadData();
+
+    initLogin();
     initNavigation();
     initFormHandlers();
     initButtons();
     populateFields();
     loadCredentials();
-    loadGallery(); // Initialize gallery
+    loadGallery(); // Now safe — siteData.gallery is populated
 });
 
 /* ====================================
@@ -629,6 +631,20 @@ function initNavigation() {
         upcoming: 'Připravované lekce' // Added 'upcoming' to titles
     };
 
+    // Restore last active section from sessionStorage
+    const savedSection = sessionStorage.getItem('duhohratky_active_section');
+    if (savedSection) {
+        const savedNav = document.querySelector(`.nav-item[data-section="${savedSection}"]`);
+        if (savedNav) {
+            navItems.forEach(n => n.classList.remove('active'));
+            savedNav.classList.add('active');
+            sections.forEach(s => s.classList.add('hidden'));
+            const targetSection = document.getElementById(`editor-${savedSection}`);
+            if (targetSection) targetSection.classList.remove('hidden');
+            sectionTitle.textContent = titles[savedSection] || savedSection;
+        }
+    }
+
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
@@ -639,15 +655,15 @@ function initNavigation() {
             navItems.forEach(n => n.classList.remove('active'));
             item.classList.add('active');
 
-            // Save changes to server
-            saveData();
-
-            // Also update local storage to be safe (though saveData should handle persistence)
-            // localStorage.setItem('duhohratky_data', JSON.stringify(siteData)); -> Removed to rely on server truthions.forEach(s => s.classList.add('hidden'));
+            // Show selected section, hide others
+            sections.forEach(s => s.classList.add('hidden'));
             document.getElementById(`editor-${section}`).classList.remove('hidden');
 
             // Update title
             sectionTitle.textContent = titles[section];
+
+            // Save active section to sessionStorage for persistence across reloads
+            sessionStorage.setItem('duhohratky_active_section', section);
         });
     });
 }
