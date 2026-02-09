@@ -485,10 +485,9 @@ async function loadData() {
         siteData.gallery = [];
     }
 
-    populateFields();
-    renderGallery(); // Render gallery list
-    renderUpcomingThemesList(); // Render upcoming list
-    renderLessonsList(); // Render lessons list (5 boxes)
+    // NOTE: populateFields() and loadGallery() are called from DOMContentLoaded
+    // after loadData() completes. Do NOT call non-existent functions here —
+    // it crashes the async chain and prevents initNavigation from running.
 }
 
 function saveData() {
