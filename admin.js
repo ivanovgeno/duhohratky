@@ -269,6 +269,7 @@ async function uploadGalleryImage() {
                     description: descriptionInput.value || '', // Save description
                     timestamp: Date.now()
                 });
+                console.log('✅ Image added to local state:', siteData.gallery[siteData.gallery.length - 1]);
                 successCount++;
             } else {
                 console.error(`Error uploading ${file.name}: ${result.message}`);
@@ -281,7 +282,8 @@ async function uploadGalleryImage() {
     }
 
     // Finished
-    saveData(); // Save content.js
+    console.log('💾 Saving updated gallery to server...', siteData.gallery);
+    await saveData(); // Save content.js (await to ensure completion)
     loadGallery(); // Refresh UI
 
     if (failCount === 0) {
@@ -391,6 +393,7 @@ async function saveToPHP() {
     saveBtn.disabled = true;
 
     try {
+        console.log('📤 Sending data to save.php:', siteData);
         const response = await fetch('save.php', {
             method: 'POST',
             headers: {
