@@ -209,7 +209,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     initFormHandlers();
     initButtons();
     populateFields();
-    loadCredentials();
     loadGallery(); // Now safe — siteData.gallery is populated
 });
 
