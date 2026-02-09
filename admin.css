@@ -495,6 +495,7 @@ body {
         padding: var(--spacing-sm);
     }
 }
+
 /* Gallery Manager */
 .gallery-admin-grid {
     display: grid;
@@ -507,7 +508,7 @@ body {
     background: white;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border: 1px solid #eee;
     display: flex;
     flex-direction: column;
@@ -515,19 +516,36 @@ body {
 
 .gallery-preview {
     width: 100%;
-    aspect-ratio: 1; /* Square */
+    aspect-ratio: 1;
+    /* Square */
     background-size: cover;
     background-position: center;
     background-color: #f8f9fa;
 }
 
 .gallery-meta {
-    padding: 8px;
+    padding: 10px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 8px;
     background: #fff;
     border-top: 1px solid #eee;
+}
+
+.gallery-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.gallery-item-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 5px;
+    margin-top: 5px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 8px;
 }
 
 .badge {
@@ -539,24 +557,71 @@ body {
     text-transform: uppercase;
 }
 
-.badge.sensory { background: #FFB6C1; color: #fff; }
-.badge.montessori { background: #98D8C8; color: #fff; }
-.badge.creative { background: #FFA07A; color: #fff; }
-.badge.party { background: #DDA0DD; color: #fff; }
+.badge.sensory {
+    background: #FFB6C1;
+    color: #fff;
+}
 
-.btn-delete {
-    background: none;
-    border: none;
+.badge.montessori {
+    background: #98D8C8;
+    color: #fff;
+}
+
+.badge.creative {
+    background: #FFA07A;
+    color: #fff;
+}
+
+.badge.party {
+    background: #DDA0DD;
+    color: #fff;
+}
+
+.btn-icon {
+    flex: 1;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 16px;
+    padding: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon:hover {
+    background: #e9ecef;
+    transform: translateY(-2px);
+}
+
+.rotate-btn:hover {
+    background: #e3f2fd;
+    border-color: #2196f3;
+    color: #2196f3;
+}
+
+.delete-btn:hover {
+    background: #ffebee;
+    border-color: #ef5350;
+    color: #ef5350;
+}
+
+.status-loading {
+    color: #f39c12;
+    margin-top: 10px;
     font-size: 14px;
-    padding: 4px;
-    transition: transform 0.2s;
 }
 
-.btn-delete:hover {
-    transform: scale(1.2);
+.status-success {
+    color: #2ecc71;
+    margin-top: 10px;
+    font-size: 14px;
 }
 
-.status-loading { color: #f39c12; margin-top: 10px; font-size: 14px; }
-.status-success { color: #2ecc71; margin-top: 10px; font-size: 14px; }
-.status-error { color: #e74c3c; margin-top: 10px; font-size: 14px; }
+.status-error {
+    color: #e74c3c;
+    margin-top: 10px;
+    font-size: 14px;
+}
