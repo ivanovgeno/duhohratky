@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.warn = (...args) => { originalWarn.apply(console, args); logToScreen(args.join(' '), 'warn'); };
     console.error = (...args) => { originalError.apply(console, args); logToScreen(args.join(' '), 'error'); };
 
-    console.log('🚀 Admin v1013 Initialized');
+    console.log('🚀 Admin v1014 Initialized');
     // End Visual Console
 
     // CRITICAL: await loadData so siteData is populated BEFORE rendering
@@ -242,7 +242,7 @@ function loadGallery() {
                 <div class="gallery-item-actions">
                     <button class="btn-icon rotate-btn" onclick="rotateImage('${img.src}', 'left')" title="Otočit doleva">↩️</button>
                     <button class="btn-icon rotate-btn" onclick="rotateImage('${img.src}', 'right')" title="Otočit doprava">↪️</button>
-                    <button class="btn-icon delete-btn" onclick="deleteGalleryImage('${img.src}')" title="Smazat">🗑️</button>
+                    <button class="btn-icon delete-btn" onclick="deleteGalleryImage(${index})" title="Smazat">🗑️</button>
                 </div>
             </div>
         `;
@@ -402,8 +402,15 @@ async function uploadGalleryImage() {
 async function deleteGalleryImage(index) {
     if (!confirm('Opravdu chcete tento obrázek smazat? Tato akce je nevratná.')) return;
 
+    if (!siteData.gallery || !Array.isArray(siteData.gallery) || index < 0 || index >= siteData.gallery.length) {
+        console.error('❌ Invalid gallery index:', index);
+        alert('Chyba: Neplatný index obrázku.');
+        return;
+    }
+
     const img = siteData.gallery[index];
     const filename = img.src.split('/').pop(); // Extract filename
+    console.log('🗑️ Deleting image:', filename, 'at index:', index);
 
     try {
         // 1. Delete from server
@@ -418,14 +425,15 @@ async function deleteGalleryImage(index) {
         // 2. If deleted (or not found), remove from data
         if (result.status === 'success' || result.message === 'File not found') {
             siteData.gallery.splice(index, 1);
-            saveData(); // Sync with content.js
+            await saveData(); // Sync with content.js (await to ensure persistence)
             loadGallery(); // Update UI
+            showToast('🗑️ Obrázek smazán', 'success');
         } else {
             alert('Chyba při mazání souboru: ' + result.message);
         }
 
     } catch (e) {
-        console.error(e);
+        console.error('❌ Delete error:', e);
         alert('Chyba komunikace se serverem.');
     }
 }
@@ -489,14 +497,14 @@ async function loadData() {
     // it crashes the async chain and prevents initNavigation from running.
 }
 
-function saveData() {
+async function saveData() {
     localStorage.setItem('duhohratky_data', JSON.stringify(siteData));
 
     // Also save to a format that index.html can read (for preview)
     localStorage.setItem('duhohratky_content', JSON.stringify(siteData));
 
-    // Save to Server (PHP)
-    saveToPHP();
+    // Save to Server (PHP) — await to ensure persistence
+    await saveToPHP();
 }
 
 async function saveToPHP() {
@@ -846,15 +854,4 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
-/* ====================================
-   INIT
-   ==================================== */
-document.addEventListener('DOMContentLoaded', () => {
-    // Alert user about update to ensure cache is cleared
-    if (!sessionStorage.getItem('v1001_alert')) {
-        alert("🎉 Systém aktualizován (v1001). Oprava nahrávání galerie nasazena.");
-        sessionStorage.setItem('v1001_alert', 'true');
-    }
-
-    initLogin();
-});
+/* Duplicate DOMContentLoaded removed — all init is handled by the main listener above */
