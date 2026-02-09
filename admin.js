@@ -176,6 +176,33 @@ let siteData = {};
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
     initLogin();
+    // VISUAL CONSOLE FOR ADMIN (since user cannot open devtools)
+    const debugConsole = document.createElement('div');
+    debugConsole.id = 'debug-console';
+    debugConsole.style.cssText = 'position:fixed; bottom:0; left:0; right:0; height:150px; background:rgba(0,0,0,0.9); color:#0f0; overflow-y:scroll; font-family:monospace; font-size:12px; z-index:10000; padding:10px; pointer-events:none; opacity:0.8;';
+    document.body.appendChild(debugConsole);
+
+    const logToScreen = (msg, type = 'log') => {
+        const line = document.createElement('div');
+        line.style.borderBottom = '1px solid #333';
+        line.style.color = type === 'error' ? '#ff4444' : (type === 'warn' ? '#ffbb33' : '#00cc00');
+        line.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+        debugConsole.appendChild(line);
+        debugConsole.scrollTop = debugConsole.scrollHeight;
+    };
+
+    // Override console methods
+    const originalLog = console.log;
+    const originalWarn = console.warn;
+    const originalError = console.error;
+
+    console.log = (...args) => { originalLog.apply(console, args); logToScreen(args.join(' ')); };
+    console.warn = (...args) => { originalWarn.apply(console, args); logToScreen(args.join(' '), 'warn'); };
+    console.error = (...args) => { originalError.apply(console, args); logToScreen(args.join(' '), 'error'); };
+
+    console.log('🚀 Admin Debug Console v1009 Initialized');
+    // End Visual Console
+
     initNavigation();
     initFormHandlers();
     initButtons();
