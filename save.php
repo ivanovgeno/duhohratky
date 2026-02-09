@@ -20,7 +20,13 @@ $jsContent = "window.defaultContent = " . json_encode($data, JSON_PRETTY_PRINT |
 
 // 3. Zápis do souboru
 if (file_put_contents('content.js', $jsContent)) {
-    echo json_encode(['status' => 'success', 'message' => 'Data byla úspěšně uložena.']);
+    clearstatcache();
+    $size = filesize('content.js');
+    echo json_encode([
+        'status' => 'success',
+        'message' => 'Data byla úspěšně uložena.',
+        'size' => $size
+    ]);
 } else {
     http_response_code(500);
     echo json_encode(['status' => 'error', 'message' => 'Chyba při zápisu do souboru content.js. Zkontrolujte oprávnění (chmod 777 nebo 666).']);

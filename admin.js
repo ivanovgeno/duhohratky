@@ -436,6 +436,7 @@ async function saveToPHP() {
         const result = await response.json();
 
         if (result.status === 'success') {
+            console.log(`✅ Uloženo na server! (Velikost souboru: ${result.size} bytes)`);
             showToast('✅ Změny byly uloženy na server!', 'success');
         } else {
             throw new Error(result.message || 'Neznámá chyba při ukládání');
