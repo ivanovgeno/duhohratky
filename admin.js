@@ -335,21 +335,43 @@ async function deleteGalleryImage(index) {
         alert('Chyba komunikace se serverem.');
     }
 }
-function loadData() {
-    const stored = localStorage.getItem('duhohratky_data');
-    if (stored) {
-        siteData = JSON.parse(stored);
-        // Merge with defaults for any missing fields
-        siteData = deepMerge(defaultData, siteData);
-    } else {
-        siteData = JSON.parse(JSON.stringify(defaultData));
+async function loadData() {
+    try {
+        // 1. Fetch content.js with a unique timestamp to bypass cache
+        const response = await fetch('content.js?t=' + Date.now());
+        if (response.ok) {
+            const text = await response.text();
+            // Extract the JSON object from the string "window.defaultContent = { ... };"
+            const jsonMatch = text.match(/window\.defaultContent\s*=\s*(\{[\s\S]*\});/);
+            if (jsonMatch && jsonMatch[1]) {
+                const serverData = JSON.parse(jsonMatch[1]);
+                console.log('✅ Loaded fresh data from server (content.js)');
+
+                // Merge with defaultData to ensure structure
+                siteData = deepMerge(defaultData, serverData);
+                showToast('Načtena aktuální data ze serveru ☁️', 'success');
+            } else {
+                throw new Error('Could not parse content.js format');
+            }
+        } else {
+            throw new Error('Fetch failed');
+        }
+    } catch (e) {
+        console.warn('⚠️ Could not fetch fresh content.js, falling back to cached script.', e);
+        // Fallback to the script tag data
+        siteData = deepMerge(defaultData, window.defaultContent || {});
     }
 
-    // Migration: Fix gallery structure if it's the old object
+    // MIGRATION: Fix legacy gallery structure (Object -> Array)
     if (siteData.gallery && !Array.isArray(siteData.gallery)) {
         console.warn('Migrating legacy gallery structure to array.');
         siteData.gallery = [];
     }
+
+    populateFields();
+    renderGallery(); // Render gallery list
+    renderUpcomingThemesList(); // Render upcoming list
+    renderLessonsList(); // Render lessons list (5 boxes)
 }
 
 function saveData() {
@@ -500,8 +522,11 @@ function initNavigation() {
             navItems.forEach(n => n.classList.remove('active'));
             item.classList.add('active');
 
-            // Show section
-            sections.forEach(s => s.classList.add('hidden'));
+            // Save changes to server
+            saveData();
+
+            // Also update local storage to be safe (though saveData should handle persistence)
+            // localStorage.setItem('duhohratky_data', JSON.stringify(siteData)); -> Removed to rely on server truthions.forEach(s => s.classList.add('hidden'));
             document.getElementById(`editor-${section}`).classList.remove('hidden');
 
             // Update title
