@@ -69,36 +69,11 @@ async function loadContent() {
         data.gallery = [];
     }
 
-    // VISUAL DEBUGGER (Temporary)
-    const debugBox = document.createElement('div');
-    debugBox.style.position = 'fixed';
-    debugBox.style.bottom = '10px';
-    debugBox.style.left = '10px';
-    debugBox.style.background = 'rgba(0,0,0,0.85)';
-    debugBox.style.color = '#fff';
-    debugBox.style.padding = '12px';
-    debugBox.style.borderRadius = '8px';
-    debugBox.style.zIndex = '9999';
-    debugBox.style.fontSize = '13px';
-    debugBox.style.fontFamily = 'monospace';
-    debugBox.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
-    debugBox.innerHTML = `
-        <strong style="color: #00ff00;">Debug v1005</strong><br>
-        Source: ${data.fromLocalStorage ? 'LocalStorage 📦' : 'Server File 🌐'}<br>
-        Gallery Type: ${Array.isArray(data.gallery) ? '<span style="color:#00ff00">Array OK</span>' : '<span style="color:red">ERROR</span>'}<br>
-        Items Count: <strong>${data.gallery ? data.gallery.length : 0}</strong><br>
-        Time: ${new Date().toLocaleTimeString()}<br>
-        <button onclick="localStorage.removeItem('duhohratky_content'); location.reload()" style="margin-top:5px; cursor:pointer; background:red; color:white; border:none; padding:5px; border-radius:3px;">RESET DATA</button>
-    `;
-    document.body.appendChild(debugBox);
-    // End Visual Debugger
-
     // 5. Apply to DOM
     try {
         applyContent(data);
     } catch (e) {
         console.error('Failed to apply content', e);
-        debugBox.innerHTML += `<br>Error: ${e.message}`;
     }
 }
 
