@@ -539,13 +539,14 @@ body {
 }
 
 .gallery-item-actions {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    gap: 5px;
-    margin-top: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* Equal width for 3 buttons */
+    gap: 8px;
+    margin-top: 10px;
     border-top: 1px solid #f0f0f0;
-    padding-top: 8px;
+    padding-top: 10px;
+    width: 100%;
 }
 
 .badge {
@@ -578,17 +579,21 @@ body {
 }
 
 .btn-icon {
-    flex: 1;
     background: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    border: 1px solid #ccc;
+    /* Darker border for visibility */
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
-    padding: 6px;
-    transition: all 0.2s ease;
+    font-size: 22px;
+    /* Larger icon */
+    padding: 12px 0;
+    /* Taller button */
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s ease;
+    min-height: 44px;
+    /* Minimum touch target */
 }
 
 .btn-icon:hover {
@@ -596,10 +601,27 @@ body {
     transform: translateY(-2px);
 }
 
+.btn-icon:active {
+    transform: scale(0.95);
+    background: #e2e6ea;
+}
+
+.rotate-btn {
+    color: #007bff;
+    background: #e8f0fe;
+    border-color: #b3d7ff;
+}
+
 .rotate-btn:hover {
     background: #e3f2fd;
     border-color: #2196f3;
     color: #2196f3;
+}
+
+.delete-btn {
+    color: #dc3545;
+    background: #fbeaea;
+    border-color: #f5c6cb;
 }
 
 .delete-btn:hover {

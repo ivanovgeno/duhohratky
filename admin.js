@@ -434,20 +434,42 @@ async function loadData() {
         const response = await fetch('content.js?t=' + Date.now());
         if (response.ok) {
             const text = await response.text();
-            // Extract the JSON object from the string "window.defaultContent = { ... };"
-            const jsonMatch = text.match(/window\.defaultContent\s*=\s*(\{[\s\S]*\});/);
-            if (jsonMatch && jsonMatch[1]) {
-                const serverData = JSON.parse(jsonMatch[1]);
-                console.log('✅ Loaded fresh data from server (content.js)');
+            console.log('📄 Raw content.js length:', text.length);
+            console.log('📄 First 100 chars:', text.substring(0, 100));
 
-                // Merge with defaultData to ensure structure
-                siteData = deepMerge(defaultData, serverData);
-                showToast('Načtena aktuální data ze serveru ☁️', 'success');
+            // Extract the JSON object from the string "window.defaultContent = { ... };"
+            // MATCH BOTH: Single line and Multi-line, looser constraints
+            let jsonMatch = text.match(/window\.defaultContent\s*=\s*(\{[\s\S]*\});/);
+
+            // Fallback: Try to find the first { and the last }; if regex fails
+            if (!jsonMatch) {
+                console.warn('⚠️ Regex 1 failed, trying fallback extraction...');
+                const firstBrace = text.indexOf('{');
+                const lastBrace = text.lastIndexOf('}');
+                if (firstBrace !== -1 && lastBrace !== -1) {
+                    const potentialJson = text.substring(firstBrace, lastBrace + 1);
+                    jsonMatch = [null, potentialJson];
+                }
+            }
+
+            if (jsonMatch && jsonMatch[1]) {
+                try {
+                    const serverData = JSON.parse(jsonMatch[1]);
+                    console.log('✅ Loaded fresh data from server (content.js). Gallery items:', serverData.gallery ? serverData.gallery.length : 0);
+
+                    // Merge with defaultData to ensure structure
+                    siteData = deepMerge(defaultData, serverData);
+                    showToast(`Načteno ze serveru (${siteData.gallery ? siteData.gallery.length : 0} fotek) ☁️`, 'success');
+                } catch (parseError) {
+                    console.error('❌ JSON Parse Error:', parseError);
+                    throw new Error('Invalid JSON in content.js');
+                }
             } else {
+                console.error('❌ Could not extract JSON from content.js');
                 throw new Error('Could not parse content.js format');
             }
         } else {
-            throw new Error('Fetch failed');
+            throw new Error('Fetch failed: ' + response.status);
         }
     } catch (e) {
         console.warn('⚠️ Could not fetch fresh content.js, falling back to cached script.', e);
