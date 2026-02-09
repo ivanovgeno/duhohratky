@@ -105,7 +105,25 @@ function applyContent(data) {
                 if (hrefValue) el.href = hrefValue;
             }
             if (!el.dataset.contentNoText) {
-                el.innerText = value;
+                // Preserve child elements (e.g. emoji <span>) — only update the text node
+                const childSpan = el.querySelector('span');
+                if (childSpan) {
+                    // Find the last text node after the span and update it
+                    let textNode = null;
+                    for (let i = el.childNodes.length - 1; i >= 0; i--) {
+                        if (el.childNodes[i].nodeType === Node.TEXT_NODE && el.childNodes[i].textContent.trim()) {
+                            textNode = el.childNodes[i];
+                            break;
+                        }
+                    }
+                    if (textNode) {
+                        textNode.textContent = ' ' + value;
+                    } else {
+                        el.appendChild(document.createTextNode(' ' + value));
+                    }
+                } else {
+                    el.innerText = value;
+                }
             }
         } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
             el.value = value;
