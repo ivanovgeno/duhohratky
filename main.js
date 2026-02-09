@@ -53,15 +53,7 @@ async function loadContent() {
         return;
     }
 
-    // NUCLEAR OPTION: Clear LocalStorage to prevent legacy data pollution
-    // We only do this once to fix the current user's state
-    if (!sessionStorage.getItem('ls_cleared_v1002')) {
-        console.warn('Clearing LocalStorage to fix gallery structure.');
-        localStorage.removeItem('duhohratky_content');
-        sessionStorage.setItem('ls_cleared_v1002', 'true');
-        // Reload data from defaultContent (since we wiped the merged result potentially)
-        data = window.defaultContent || {};
-    }
+    // Legacy LocalStorage cleanup done — no longer needed
 
     // MIGRATION: Ensure gallery is ALWAYS an array
     if (!Array.isArray(data.gallery)) {
