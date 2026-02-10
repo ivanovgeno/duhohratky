@@ -791,6 +791,9 @@ body {
     cursor: pointer;
     border: none;
     transition: var(--transition-normal);
+    position: relative;
+    /* Ensure z-index works */
+    z-index: 1;
 }
 
 .btn-primary {
@@ -802,6 +805,8 @@ body {
 .btn-primary:hover {
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 10px 40px rgba(255, 182, 193, 0.5);
+    z-index: 10;
+    /* Bring to front on hover */
 }
 
 .btn-secondary {
