@@ -395,8 +395,10 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
-    background: rgba(255, 255, 255, 0.9);
+    z-index: 2000;
+    /* Increased to ensure it's always on top of bubbles (999) */
+    background: rgba(255, 255, 255, 0.95);
+    /* Slightly more opaque for better readability */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 182, 193, 0.2);
@@ -422,6 +424,9 @@ body {
     font-family: var(--font-secondary);
     font-weight: 700;
     font-size: 1.5rem;
+    position: relative;
+    z-index: 2001;
+    /* Logo on top */
 }
 
 .logo-icon {
@@ -472,6 +477,9 @@ body {
     display: flex;
     list-style: none;
     gap: var(--spacing-md);
+    position: relative;
+    z-index: 2001;
+    /* Menu items on top */
 }
 
 .nav-link {
@@ -482,27 +490,39 @@ body {
     border-radius: var(--radius-sm);
     transition: var(--transition-fast);
     position: relative;
+    display: inline-block;
+    /* Ensure transforms work */
 }
 
 .nav-link::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
+    /* Moved slightly down */
     left: 50%;
     width: 0;
     height: 3px;
     background: var(--gradient-rainbow);
     border-radius: 2px;
-    transition: var(--transition-fast);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Smoother expansion */
     transform: translateX(-50%);
+    opacity: 0;
+    /* Hidden by default */
 }
 
 .nav-link:hover::after {
-    width: 80%;
+    width: 100%;
+    /* Full width */
+    opacity: 1;
 }
 
 .nav-link:hover {
     color: var(--color-pink-dark);
+    transform: translateY(-1px);
+    /* Subtle lift */
+    background: rgba(255, 255, 255, 0.5);
+    /* Subtle background highlight */
 }
 
 .nav-link.nav-cta {
@@ -773,8 +793,13 @@ body {
     justify-content: center;
     gap: var(--spacing-md);
     flex-wrap: wrap;
+    /* Ensure wrapping on small screens */
     margin-bottom: var(--spacing-xl);
     animation: fade-up 0.8s ease 0.8s backwards;
+    width: 100%;
+    /* Ensure full width container */
+    padding: 0 var(--spacing-sm);
+    /* Add padding to prevent edge touching */
 }
 
 /* Buttons */
@@ -803,7 +828,7 @@ body {
 }
 
 .btn-primary:hover {
-    transform: translateY(-3px) scale(1.02);
+    transform: translateY(-3px) scale(1.05);
     box-shadow: 0 10px 40px rgba(255, 182, 193, 0.5);
     z-index: 10;
     /* Bring to front on hover */
@@ -820,7 +845,12 @@ body {
 .btn-secondary:hover {
     background: white;
     border-color: var(--color-pink);
-    transform: translateY(-3px);
+    transform: translateY(-3px) scale(1.05);
+    /* Matching scale and lift */
+    z-index: 10;
+    /* Ensure on top when hovered */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    /* Add depth */
 }
 
 /* CTA Button Variant (Matching Nav) */

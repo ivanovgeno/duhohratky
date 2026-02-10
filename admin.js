@@ -270,36 +270,17 @@ async function rotateImage(path, direction) {
 
             // Force refresh of the image in the data model by updating timestamp/query param
             // Find the image in siteData
+            // Update the timestamp in our local data model
             const imgIndex = siteData.gallery.findIndex(img => img.src === path);
             if (imgIndex !== -1) {
-                // If the path already has query params, remove them first to avoid stacking
-                let cleanPath = path.split('?')[0];
-
-                // We don't actually change the path in the DB (it's the same file), 
-                // but we need to trigger a re-render. 
-                // However, browsers cache images by URL. So we MIGHT need to append ?t=... 
-                // inside the render logic, OR update the source here if we want to be persistent.
-
-                // Better approach: The backend overwrites the file. 
-                // To see changes, we must add a cache buster to the DOM img src.
-                // admin.js renderGallery uses `item.src`.
-                // If we append ?t= to item.src, it will be saved to database like that.
-                // That might be okay, or it might get messy. 
-                // Safer: Just reload the gallery UI and ensure the IMG tag gets a random param.
-
-                // Actually, let's update the timestamp in the object, and make sure renderGallery uses it.
                 siteData.gallery[imgIndex].timestamp = Date.now();
-
-                // AND dirty hack: append to src so it propagates to frontend immediately without logic change there?
-                // No, let's keep src clean. We will update renderGallery to use timestamp.
+                console.log('🔄 Updated timestamp for', path);
             }
 
-            // Save changes (mainly to propagate the timestamp/cache busting if we implement it, 
-            // otherwise just re-rendering is enough for Admin, but Frontend needs to know?)
-            // Actually, for Frontend users, since the filename is the same, they might see cached old rotation until their cache expires.
-            // Ideally, we should rename the file on rotation.
-            // BUT simpler for now: just force reload in Admin.
+            // Persist changes to server (content.js) so the new timestamp is shared
+            await saveData();
 
+            // Refresh UI
             loadGallery();
         } else {
             showToast('❌ Chyba: ' + result.message, 'error');
