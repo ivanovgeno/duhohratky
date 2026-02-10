@@ -519,10 +519,6 @@ body {
 
 .nav-link:hover {
     color: var(--color-pink-dark);
-    transform: translateY(-1px);
-    /* Subtle lift */
-    background: rgba(255, 255, 255, 0.5);
-    /* Subtle background highlight */
 }
 
 .nav-link.nav-cta {
