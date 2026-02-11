@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadContent(); // Load dynamic content
     updateDynamicBadges();
     initBubbles(); // Start bubbles
+    initLightbox(); // Initialize lightbox (v45)
 
     // Listen for changes from Admin panel (real-time update)
     window.addEventListener('storage', (e) => {
@@ -801,4 +802,80 @@ function initNavigation() {
             header.classList.remove('scrolled');
         }
     });
+}
+
+/* ====================================
+   LIGHTBOX LOGIC (Added v45)
+   ==================================== */
+function initLightbox() {
+    // 1. Create DOM Elements
+    const lightbox = document.createElement('div');
+    lightbox.id = 'lightbox';
+    lightbox.className = 'lightbox';
+
+    lightbox.innerHTML = `
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Full Screen Image">
+        <div class="lightbox-caption"></div>
+    `;
+
+    document.body.appendChild(lightbox);
+
+    // 2. Event Listeners
+    const img = lightbox.querySelector('img');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+
+    // Close on background click
+    lightbox.addEventListener('click', (e) => {
+        if (e.target !== img) {
+            closeLightbox();
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+
+    // 3. Delegate Click on Gallery Items
+    // Use event delegation on document or a specific container to handle dynamic items
+    document.addEventListener('click', (e) => {
+        const item = e.target.closest('.gallery-item-large');
+        if (item) {
+            const thumb = item.querySelector('img');
+            if (thumb) {
+                // Get high-res src (remove cache bust query for cleaner URL, or keep it)
+                // Actually, keep it to ensure we get the right image
+                const fullSrc = thumb.src;
+                const caption = item.querySelector('h3')?.textContent || '';
+                openLightbox(fullSrc, caption);
+            }
+        }
+    });
+}
+
+function openLightbox(src, caption) {
+    const lightbox = document.getElementById('lightbox');
+    const img = lightbox.querySelector('img');
+    const captionEl = lightbox.querySelector('.lightbox-caption');
+
+    img.src = src;
+    captionEl.textContent = caption;
+
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+
+    // Cleanup src after transition to prevent "flash" of old image next time
+    setTimeout(() => {
+        const img = lightbox.querySelector('img');
+        if (img) img.src = '';
+    }, 300);
 }
