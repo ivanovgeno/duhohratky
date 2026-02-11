@@ -254,13 +254,53 @@ function renderGalleryPage(galleryData) {
             container.appendChild(item);
         });
 
-        // Initialize pagination for these newly created items
-        initGalleryPagination();
-    } else {
-        // 2. Fallback to Static HTML (if no dynamic data)
-        console.log('Rendering Static Gallery (fallback)');
-        initGalleryPagination();
+        container.appendChild(item);
+    });
+
+    // Initialize pagination for these newly created items
+    initGalleryPagination();
+} else {
+    // 2. CHECK LOCAL STORAGE FALLBACK (For Admin users who lost server data)
+    const localContent = localStorage.getItem('duhohratky_content');
+    if (localContent) {
+        try {
+            const parsedLocal = JSON.parse(localContent);
+            if (parsedLocal.gallery && parsedLocal.gallery.length > 0) {
+                console.log('Rendering LocalStorage Gallery (Recovery Mode, count: ' + parsedLocal.gallery.length + ')');
+                container.innerHTML = '';
+
+                parsedLocal.gallery.forEach(img => {
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item-large';
+                    item.dataset.category = img.category;
+                    item.style.animation = 'fadeIn 0.5s ease';
+
+                    const src = img.src.startsWith('http') ? img.src : img.src + '?t=' + (img.timestamp || Date.now());
+
+                    item.innerHTML = `
+                            <div class="gallery-image-container">
+                                <img src="${src}" alt="${img.category}" loading="lazy">
+                            </div>
+                            <div class="gallery-overlay">
+                                <span class="badge ${img.category}">${getCategoryLabel(img.category)}</span>
+                                ${img.description ? `<h3>${img.description}</h3>` : ''}
+                            </div>
+                        `;
+                    container.appendChild(item);
+                });
+
+                initGalleryPagination();
+                return; // Exit, success
+            }
+        } catch (e) {
+            console.error('Local storage parse error:', e);
+        }
     }
+
+    // 3. Fallback to Static HTML (if no dynamic data anywhere)
+    console.log('Rendering Static Gallery (fallback)');
+    initGalleryPagination();
+}
 }
 
 function getCategoryLabel(cat) {
