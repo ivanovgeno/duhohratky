@@ -99,9 +99,9 @@ const defaultData = {
         email: 'info@duhohratky.cz',
         hours1: 'Po-Pá: 9:00 - 18:00',
         hours2: 'So: 9:00 - 14:00',
-        facebook: '',
-        instagram: '',
-        youtube: ''
+        facebook: 'https://facebook.com/duhohratky',
+        instagram: 'https://instagram.com/duhohratky',
+        youtube: 'https://youtube.com/duhohratky'
     },
 
     // Tips Section
