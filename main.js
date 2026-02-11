@@ -841,15 +841,22 @@ function initLightbox() {
 
     // 3. Delegate Click on Gallery Items
     // Use event delegation on document or a specific container to handle dynamic items
+    // 3. Delegate Click on Gallery Items
     document.addEventListener('click', (e) => {
-        const item = e.target.closest('.gallery-item-large');
+        // Target both types of gallery items
+        const item = e.target.closest('.gallery-item-large, .gallery-item');
         if (item) {
+            console.log('Gallery item clicked:', item);
             const thumb = item.querySelector('img');
             if (thumb) {
-                // Get high-res src (remove cache bust query for cleaner URL, or keep it)
-                // Actually, keep it to ensure we get the right image
                 const fullSrc = thumb.src;
-                const caption = item.querySelector('h3')?.textContent || '';
+                // Try to find caption in h3, or span (for index.html), or alt text
+                const caption = item.querySelector('h3')?.textContent
+                    || item.querySelector('span')?.textContent
+                    || thumb.alt
+                    || '';
+
+                console.log('Opening Lightbox:', fullSrc);
                 openLightbox(fullSrc, caption);
             }
         }
