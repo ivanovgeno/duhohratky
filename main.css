@@ -1571,6 +1571,14 @@ section {
     position: relative;
     overflow: hidden;
     z-index: 1;
+    color: var(--color-purple-dark);
+    /* Icon color */
+}
+
+.social-link svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
 }
 
 .social-link::before {
