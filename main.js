@@ -293,6 +293,8 @@ function renderGalleryBatch() {
     const end = Math.min(start + galleryState.itemsPerPage, galleryState.filteredImages.length);
     const batch = galleryState.filteredImages.slice(start, end);
 
+    console.log(`Rendering batch: ${start} to ${end} (Total: ${galleryState.filteredImages.length})`);
+
     batch.forEach(img => {
         const item = document.createElement('div');
         item.className = 'gallery-item-large';
@@ -322,11 +324,16 @@ function renderGalleryBatch() {
 
     // Show/Hide Load More Button
     if (loadMoreContainer) {
+        // Force display: block if there are more items
         if (galleryState.displayedCount < galleryState.filteredImages.length) {
             loadMoreContainer.style.display = 'block';
+            console.log('Load More Button: SHOWN');
         } else {
             loadMoreContainer.style.display = 'none';
+            console.log('Load More Button: HIDDEN (All items shown)');
         }
+    } else {
+        console.error('Load More Container NOT FOUND!');
     }
 }
 
