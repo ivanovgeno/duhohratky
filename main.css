@@ -2655,23 +2655,6 @@ section {
     border-color: var(--color-pink-light);
 }
 
-/* Gallery Load More */
-.gallery-load-more {
-    margin-top: 3rem;
-    text-align: center;
-    padding-bottom: 2rem;
-}
-
-.gallery-load-more button {
-    min-width: 200px;
-    transition: all 0.3s ease;
-}
-
-.gallery-load-more button:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
 .upcoming-icon {
     font-size: 3rem;
     margin-bottom: var(--spacing-xs);

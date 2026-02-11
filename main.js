@@ -223,149 +223,85 @@ function renderUpcomingThemes(upcomingData) {
     });
 }
 
-// Gallery State
-let galleryState = {
-    allImages: [],
-    filteredImages: [],
-    displayedCount: 0,
+function renderGalleryPage(galleryData) {
+    // Legacy support: We might have data, but we prefer using the HTML items if they exist to prevent content loss.
+    // This function now acts as the initializer for the static gallery.
+    initGalleryPagination();
+}
+
+let galleryPaginationState = {
     itemsPerPage: 12,
+    currentPage: 1,
     currentFilter: 'all'
 };
 
-function renderGalleryPage(galleryData) {
-    const container = document.querySelector('.gallery-grid-large');
+function initGalleryPagination() {
+    const items = document.querySelectorAll('.gallery-item-large');
     const loadMoreBtn = document.getElementById('gallery-load-more-btn');
     const loadMoreContainer = document.getElementById('gallery-load-more-container');
 
-    console.log('Rendering Gallery:', { containerExists: !!container, dataLength: galleryData ? galleryData.length : 0 });
+    if (items.length === 0) return;
 
-    if (!container) return;
+    // Initial Filter Setup
+    initGalleryFilters();
 
-    // Save data to state
-    if (galleryData && galleryData.length > 0) {
-        galleryState.allImages = galleryData;
-    } else {
-        // Fallback: Check if there are existing items in HTML (SEO/Hardcoded)
-        const existingItems = container.querySelectorAll('.gallery-item-large');
-        if (existingItems.length > 0) {
-            console.log(`Found ${existingItems.length} hardcoded items. Converting to dynamic...`);
-            galleryState.allImages = Array.from(existingItems).map(item => {
-                const img = item.querySelector('img');
-                const badge = item.querySelector('.badge');
-                const title = item.querySelector('h3');
-                const placeholder = item.querySelector('.gallery-placeholder span'); // Emoji if currently using placeholders
+    // Show first batch
+    updateGalleryVisibility();
 
-                return {
-                    category: item.dataset.category || 'all',
-                    // Use img src if exists, otherwise placeholder styling/emoji
-                    src: img ? img.src : (placeholder ? 'placeholder' : ''),
-                    description: title ? title.textContent : '',
-                    // Helper to reconstruct placeholder if needed (not perfect but functional for simple pagination)
-                    _placeholderIcon: placeholder ? placeholder.textContent : '',
-                    _placeholderBg: item.querySelector('.gallery-placeholder')?.style.background
-                };
-            });
+    // Load More Listener
+    if (loadMoreBtn) {
+        // Clone to remove old listeners
+        const newBtn = loadMoreBtn.cloneNode(true);
+        loadMoreBtn.parentNode.replaceChild(newBtn, loadMoreBtn);
 
-            // Note: Recreating the EXACT DOM structure for placeholders might be tricky if we don't store it.
-            // But if the user has REAL images (img tags), this works perfectly. 
-            // If they have placeholders, we need to handle that in renderGalleryBatch.
-        }
-    }
-
-    if (galleryState.allImages.length > 0) {
-        // Initial filter application (resets everything)
-        applyGalleryFilter('all');
-
-        // Initialize filters UI
-        initGalleryFiltersUI();
-
-        // Load More Button Event
-        if (loadMoreBtn) {
-            // Remove old listener to prevent duplicates
-            const newBtn = loadMoreBtn.cloneNode(true);
-            loadMoreBtn.parentNode.replaceChild(newBtn, loadMoreBtn);
-
-            newBtn.addEventListener('click', () => {
-                renderGalleryBatch();
-            });
-        }
+        newBtn.addEventListener('click', () => {
+            galleryPaginationState.currentPage++;
+            updateGalleryVisibility();
+        });
     }
 }
 
-function applyGalleryFilter(filter) {
-    galleryState.currentFilter = filter;
-    galleryState.displayedCount = 0;
-
-    // Filter images
-    if (filter === 'all') {
-        galleryState.filteredImages = galleryState.allImages;
-    } else {
-        galleryState.filteredImages = galleryState.allImages.filter(img => img.category === filter);
-    }
-
-    // Clear grid
-    const container = document.querySelector('.gallery-grid-large');
-    if (container) container.innerHTML = '';
-
-    // Render first batch
-    renderGalleryBatch();
-}
-
-function renderGalleryBatch() {
-    const container = document.querySelector('.gallery-grid-large');
+function updateGalleryVisibility() {
+    const items = document.querySelectorAll('.gallery-item-large');
     const loadMoreContainer = document.getElementById('gallery-load-more-container');
 
-    if (!container) return;
+    let visibleCount = 0;
+    let totalInFilter = 0;
+    const limit = galleryPaginationState.currentPage * galleryPaginationState.itemsPerPage;
 
-    const start = galleryState.displayedCount;
-    const end = Math.min(start + galleryState.itemsPerPage, galleryState.filteredImages.length);
-    const batch = galleryState.filteredImages.slice(start, end);
+    items.forEach(item => {
+        const category = item.dataset.category;
+        const matchesFilter = galleryPaginationState.currentFilter === 'all' || category === galleryPaginationState.currentFilter;
 
-    console.log(`Rendering batch: ${start} to ${end} (Total: ${galleryState.filteredImages.length})`);
-
-    batch.forEach(img => {
-        const item = document.createElement('div');
-        item.className = 'gallery-item-large';
-        item.dataset.category = img.category;
-
-        // Staggered animation for new items
-        item.style.animation = 'fadeIn 0.5s ease backwards';
-        item.style.animationDelay = `${(galleryState.displayedCount % galleryState.itemsPerPage) * 0.05}s`;
-
-        // Handle timestamp for caching
-        const src = img.src.startsWith('http') ? img.src : img.src + '?t=' + (img.timestamp || Date.now());
-
-        item.innerHTML = `
-            <div class="gallery-image-container">
-                 <img src="${src}" alt="${img.category}" loading="lazy">
-            </div>
-            <div class="gallery-overlay">
-                <span class="badge ${img.category}">${getCategoryLabel(img.category)}</span>
-                ${img.description ? `<h3>${img.description}</h3>` : ''}
-            </div>
-        `;
-        container.appendChild(item);
+        if (matchesFilter) {
+            totalInFilter++;
+            if (visibleCount < limit) {
+                item.classList.remove('gallery-item-hidden');
+                item.style.display = 'block'; // Ensure it's visible if it was hidden by filter
+                item.style.animation = 'fadeIn 0.5s ease backwards';
+                // Stagger only new items technically, but resetting animation is fine
+                visibleCount++;
+            } else {
+                item.classList.add('gallery-item-hidden');
+                item.style.display = 'none'; // Ensure hidden
+            }
+        } else {
+            item.classList.add('gallery-item-hidden');
+            item.style.display = 'none';
+        }
     });
 
-    // Update count
-    galleryState.displayedCount = end;
-
-    // Show/Hide Load More Button
+    // Update Button Visibility
     if (loadMoreContainer) {
-        // Force display: block if there are more items
-        if (galleryState.displayedCount < galleryState.filteredImages.length) {
+        if (visibleCount < totalInFilter) {
             loadMoreContainer.style.display = 'block';
-            console.log('Load More Button: SHOWN');
         } else {
             loadMoreContainer.style.display = 'none';
-            console.log('Load More Button: HIDDEN (All items shown)');
         }
-    } else {
-        console.error('Load More Container NOT FOUND!');
     }
 }
 
-function initGalleryFiltersUI() {
+function initGalleryFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
 
     filterBtns.forEach(btn => {
@@ -374,8 +310,11 @@ function initGalleryFiltersUI() {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // Apply filter logic
-            applyGalleryFilter(btn.dataset.filter);
+            // Reset pagination
+            galleryPaginationState.currentFilter = btn.dataset.filter;
+            galleryPaginationState.currentPage = 1;
+
+            updateGalleryVisibility();
         };
     });
 }
