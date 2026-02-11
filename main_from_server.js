@@ -42,11 +42,6 @@ async function loadContent() {
 
     // 3. Merge if data exists, otherwise use base
     if (data) {
-        // SAFEGUARD: If local gallery is empty but server has data, keep server data (Recovery)
-        if ((!data.gallery || data.gallery.length === 0) && baseContent.gallery && baseContent.gallery.length > 0) {
-            console.warn('Restoring server gallery because local gallery is empty.');
-            delete data.gallery; // Remove empty array so deepMerge uses baseContent
-        }
         data = deepMerge(baseContent, data);
     } else {
         data = baseContent;
