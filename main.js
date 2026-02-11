@@ -42,11 +42,7 @@ async function loadContent() {
 
     // 3. Merge if data exists, otherwise use base
     if (data) {
-        // SAFEGUARD: If local gallery is empty but server has data, keep server data (Recovery)
-        if ((!data.gallery || data.gallery.length === 0) && baseContent.gallery && baseContent.gallery.length > 0) {
-            console.warn('Restoring server gallery because local gallery is empty.');
-            delete data.gallery; // Remove empty array so deepMerge uses baseContent
-        }
+
         data = deepMerge(baseContent, data);
     } else {
         data = baseContent;
@@ -259,30 +255,27 @@ function renderGalleryPage(galleryData) {
             container.appendChild(item);
         });
 
-        container.appendChild(item);
-    });
+        // Initialize pagination for these newly created items
+        initGalleryPagination();
+    } else {
+        // 2. CHECK LOCAL STORAGE FALLBACK (For Admin users who lost server data)
+        const localContent = localStorage.getItem('duhohratky_content');
+        if (localContent) {
+            try {
+                const parsedLocal = JSON.parse(localContent);
+                if (parsedLocal.gallery && parsedLocal.gallery.length > 0) {
+                    console.log('Rendering LocalStorage Gallery (Recovery Mode, count: ' + parsedLocal.gallery.length + ')');
+                    container.innerHTML = '';
 
-    // Initialize pagination for these newly created items
-    initGalleryPagination();
-} else {
-    // 2. CHECK LOCAL STORAGE FALLBACK (For Admin users who lost server data)
-    const localContent = localStorage.getItem('duhohratky_content');
-    if (localContent) {
-        try {
-            const parsedLocal = JSON.parse(localContent);
-            if (parsedLocal.gallery && parsedLocal.gallery.length > 0) {
-                console.log('Rendering LocalStorage Gallery (Recovery Mode, count: ' + parsedLocal.gallery.length + ')');
-                container.innerHTML = '';
+                    parsedLocal.gallery.forEach(img => {
+                        const item = document.createElement('div');
+                        item.className = 'gallery-item-large';
+                        item.dataset.category = img.category;
+                        item.style.animation = 'fadeIn 0.5s ease';
 
-                parsedLocal.gallery.forEach(img => {
-                    const item = document.createElement('div');
-                    item.className = 'gallery-item-large';
-                    item.dataset.category = img.category;
-                    item.style.animation = 'fadeIn 0.5s ease';
+                        const src = img.src.startsWith('http') ? img.src : img.src + '?t=' + (img.timestamp || Date.now());
 
-                    const src = img.src.startsWith('http') ? img.src : img.src + '?t=' + (img.timestamp || Date.now());
-
-                    item.innerHTML = `
+                        item.innerHTML = `
                             <div class="gallery-image-container">
                                 <img src="${src}" alt="${img.category}" loading="lazy">
                             </div>
@@ -291,21 +284,21 @@ function renderGalleryPage(galleryData) {
                                 ${img.description ? `<h3>${img.description}</h3>` : ''}
                             </div>
                         `;
-                    container.appendChild(item);
-                });
+                        container.appendChild(item);
+                    });
 
-                initGalleryPagination();
-                return; // Exit, success
+                    initGalleryPagination();
+                    return; // Exit, success
+                }
+            } catch (e) {
+                console.error('Local storage parse error:', e);
             }
-        } catch (e) {
-            console.error('Local storage parse error:', e);
         }
-    }
 
-    // 3. Fallback to Static HTML (if no dynamic data anywhere)
-    console.log('Rendering Static Gallery (fallback)');
-    initGalleryPagination();
-}
+        // 3. Fallback to Static HTML (if no dynamic data anywhere)
+        console.log('Rendering Static Gallery (fallback)');
+        initGalleryPagination();
+    }
 }
 
 function getCategoryLabel(cat) {
