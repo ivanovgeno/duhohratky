@@ -244,7 +244,35 @@ function renderGalleryPage(galleryData) {
     // Save data to state
     if (galleryData && galleryData.length > 0) {
         galleryState.allImages = galleryData;
+    } else {
+        // Fallback: Check if there are existing items in HTML (SEO/Hardcoded)
+        const existingItems = container.querySelectorAll('.gallery-item-large');
+        if (existingItems.length > 0) {
+            console.log(`Found ${existingItems.length} hardcoded items. Converting to dynamic...`);
+            galleryState.allImages = Array.from(existingItems).map(item => {
+                const img = item.querySelector('img');
+                const badge = item.querySelector('.badge');
+                const title = item.querySelector('h3');
+                const placeholder = item.querySelector('.gallery-placeholder span'); // Emoji if currently using placeholders
 
+                return {
+                    category: item.dataset.category || 'all',
+                    // Use img src if exists, otherwise placeholder styling/emoji
+                    src: img ? img.src : (placeholder ? 'placeholder' : ''),
+                    description: title ? title.textContent : '',
+                    // Helper to reconstruct placeholder if needed (not perfect but functional for simple pagination)
+                    _placeholderIcon: placeholder ? placeholder.textContent : '',
+                    _placeholderBg: item.querySelector('.gallery-placeholder')?.style.background
+                };
+            });
+
+            // Note: Recreating the EXACT DOM structure for placeholders might be tricky if we don't store it.
+            // But if the user has REAL images (img tags), this works perfectly. 
+            // If they have placeholders, we need to handle that in renderGalleryBatch.
+        }
+    }
+
+    if (galleryState.allImages.length > 0) {
         // Initial filter application (resets everything)
         applyGalleryFilter('all');
 
