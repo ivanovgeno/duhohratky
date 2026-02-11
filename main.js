@@ -223,76 +223,124 @@ function renderUpcomingThemes(upcomingData) {
     });
 }
 
+// Gallery State
+let galleryState = {
+    allImages: [],
+    filteredImages: [],
+    displayedCount: 0,
+    itemsPerPage: 12,
+    currentFilter: 'all'
+};
+
 function renderGalleryPage(galleryData) {
     const container = document.querySelector('.gallery-grid-large');
-    console.log('Rendering Gallery:', { containerExists: !!container, dataLength: galleryData ? galleryData.length : 0, data: galleryData });
+    const loadMoreBtn = document.getElementById('gallery-load-more-btn');
+    const loadMoreContainer = document.getElementById('gallery-load-more-container');
+
+    console.log('Rendering Gallery:', { containerExists: !!container, dataLength: galleryData ? galleryData.length : 0 });
 
     if (!container) return;
 
-    // If we have dynamic gallery data, use it
+    // Save data to state
     if (galleryData && galleryData.length > 0) {
-        container.innerHTML = '';
-        galleryData.forEach(img => {
-            const item = document.createElement('div');
-            item.className = 'gallery-item-large';
-            item.dataset.category = img.category;
-            item.style.animation = 'fadeIn 0.5s ease';
+        galleryState.allImages = galleryData;
 
-            // Handle timestamp for caching
-            const src = img.src.startsWith('http') ? img.src : img.src + '?t=' + (img.timestamp || Date.now());
+        // Initial filter application (resets everything)
+        applyGalleryFilter('all');
 
-            item.innerHTML = `
-                <div class="gallery-image-container">
-                     <img src="${src}" alt="${img.category}" loading="lazy">
-                </div>
-                <div class="gallery-overlay">
-                    <span class="badge ${img.category}">${getCategoryLabel(img.category)}</span>
-                    ${img.description ? `<h3>${img.description}</h3>` : ''}
-                </div>
-            `;
-            container.appendChild(item);
-        });
+        // Initialize filters UI
+        initGalleryFiltersUI();
 
-        // Re-attach filters
-        initGalleryFilters();
+        // Load More Button Event
+        if (loadMoreBtn) {
+            // Remove old listener to prevent duplicates
+            const newBtn = loadMoreBtn.cloneNode(true);
+            loadMoreBtn.parentNode.replaceChild(newBtn, loadMoreBtn);
+
+            newBtn.addEventListener('click', () => {
+                renderGalleryBatch();
+            });
+        }
     }
 }
 
-function getCategoryLabel(cat) {
-    const map = {
-        'sensory': 'Sensory Play',
-        'montessori': 'Montessori',
-        'creative': 'Kreativní',
-        'party': 'Oslavy'
-    };
-    return map[cat] || cat;
+function applyGalleryFilter(filter) {
+    galleryState.currentFilter = filter;
+    galleryState.displayedCount = 0;
+
+    // Filter images
+    if (filter === 'all') {
+        galleryState.filteredImages = galleryState.allImages;
+    } else {
+        galleryState.filteredImages = galleryState.allImages.filter(img => img.category === filter);
+    }
+
+    // Clear grid
+    const container = document.querySelector('.gallery-grid-large');
+    if (container) container.innerHTML = '';
+
+    // Render first batch
+    renderGalleryBatch();
 }
 
-function initGalleryFilters() {
+function renderGalleryBatch() {
+    const container = document.querySelector('.gallery-grid-large');
+    const loadMoreContainer = document.getElementById('gallery-load-more-container');
+
+    if (!container) return;
+
+    const start = galleryState.displayedCount;
+    const end = Math.min(start + galleryState.itemsPerPage, galleryState.filteredImages.length);
+    const batch = galleryState.filteredImages.slice(start, end);
+
+    batch.forEach(img => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item-large';
+        item.dataset.category = img.category;
+
+        // Staggered animation for new items
+        item.style.animation = 'fadeIn 0.5s ease backwards';
+        item.style.animationDelay = `${(galleryState.displayedCount % galleryState.itemsPerPage) * 0.05}s`;
+
+        // Handle timestamp for caching
+        const src = img.src.startsWith('http') ? img.src : img.src + '?t=' + (img.timestamp || Date.now());
+
+        item.innerHTML = `
+            <div class="gallery-image-container">
+                 <img src="${src}" alt="${img.category}" loading="lazy">
+            </div>
+            <div class="gallery-overlay">
+                <span class="badge ${img.category}">${getCategoryLabel(img.category)}</span>
+                ${img.description ? `<h3>${img.description}</h3>` : ''}
+            </div>
+        `;
+        container.appendChild(item);
+    });
+
+    // Update count
+    galleryState.displayedCount = end;
+
+    // Show/Hide Load More Button
+    if (loadMoreContainer) {
+        if (galleryState.displayedCount < galleryState.filteredImages.length) {
+            loadMoreContainer.style.display = 'block';
+        } else {
+            loadMoreContainer.style.display = 'none';
+        }
+    }
+}
+
+function initGalleryFiltersUI() {
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const items = document.querySelectorAll('.gallery-item-large');
 
     filterBtns.forEach(btn => {
-        // Remove old listeners to prevent duplicates (clone node trick or just assume strict replacement)
-        // Since we re-render, the buttons are static, so adding listener again is fine if we are careful.
-        // Better: use event delegation or verify.
-        // For simplicity: just add new listener, assume page reload concept.
-
         btn.onclick = () => {
-            // Update active button
+            // Update active visually
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            const filter = btn.dataset.filter;
-
-            items.forEach(item => {
-                if (filter === 'all' || item.dataset.category === filter) {
-                    item.style.display = 'block';
-                    item.style.animation = 'fadeIn 0.5s ease';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+            // Apply filter logic
+            applyGalleryFilter(btn.dataset.filter);
         };
     });
 }
