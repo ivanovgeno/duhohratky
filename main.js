@@ -224,9 +224,53 @@ function renderUpcomingThemes(upcomingData) {
 }
 
 function renderGalleryPage(galleryData) {
-    // Legacy support: We might have data, but we prefer using the HTML items if they exist to prevent content loss.
-    // This function now acts as the initializer for the static gallery.
-    initGalleryPagination();
+    const container = document.querySelector('.gallery-grid-large');
+    if (!container) return;
+
+    // 1. Check if we have dynamic data (from LocalStorage or content.js)
+    if (galleryData && galleryData.length > 0) {
+        console.log('Rendering Dynamic Gallery (count: ' + galleryData.length + ')');
+        container.innerHTML = ''; // Clear static placeholders
+
+        // Render items
+        galleryData.forEach(img => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item-large';
+            item.dataset.category = img.category;
+            item.style.animation = 'fadeIn 0.5s ease';
+
+            // Handle timestamp for caching
+            const src = img.src.startsWith('http') ? img.src : img.src + '?t=' + (img.timestamp || Date.now());
+
+            item.innerHTML = `
+                <div class="gallery-image-container">
+                     <img src="${src}" alt="${img.category}" loading="lazy">
+                </div>
+                <div class="gallery-overlay">
+                    <span class="badge ${img.category}">${getCategoryLabel(img.category)}</span>
+                    ${img.description ? `<h3>${img.description}</h3>` : ''}
+                </div>
+            `;
+            container.appendChild(item);
+        });
+
+        // Initialize pagination for these newly created items
+        initGalleryPagination();
+    } else {
+        // 2. Fallback to Static HTML (if no dynamic data)
+        console.log('Rendering Static Gallery (fallback)');
+        initGalleryPagination();
+    }
+}
+
+function getCategoryLabel(cat) {
+    const map = {
+        'sensory': 'Sensory Play',
+        'montessori': 'Montessori',
+        'creative': 'Kreativní',
+        'party': 'Oslavy'
+    };
+    return map[cat] || cat;
 }
 
 let galleryPaginationState = {
