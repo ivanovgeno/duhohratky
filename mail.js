@@ -1,20 +1,12 @@
 /* ====================================
-   DUHOHRÁTKY MAIL - LOGIC
+   DUHOHRÁTKY MAIL - LOGIC (REAL)
    ==================================== */
-
-// MOCK DATA
-const mockEmails = [
-    { id: 1, sender: "Tým Duhohrátky", subject: "Vítejte v novém DuhoMailu! 🌈", date: "Teď", read: false, body: "Dobrý den,<br><br>Vítejte ve své nové emailové schránce. Zde najdete všechny informace o kroužcích a aktivitách.<br><br>S pozdravem,<br>Tým Duhohrátky" },
-    { id: 2, sender: "Google", subject: "Bezpečnostní upozornění", date: "Včera", read: true, body: "Někdo se přihlásil k vašemu účtu z nového zařízení..." },
-    { id: 3, sender: "Maminka Jana", subject: "Omluvenka z kroužku", date: "10. úno", read: true, body: "Dobrý den, Anička zítra nedorazí, má rýmu." },
-    { id: 4, sender: "Newsletter", subject: "5 tipů na sensory play", date: "8. úno", read: true, body: "Zkuste doma vyrobit duhovou rýži..." }
-];
 
 // STATE
 let currentState = {
     folder: 'inbox',
-    emails: [...mockEmails],
-    user: 'admin@duhohratky.cz'
+    emails: [],
+    user: null
 };
 
 // DOM ELEMENTS
@@ -43,18 +35,42 @@ const app = {
 document.addEventListener('DOMContentLoaded', () => {
 
     // Login Handling
-    document.getElementById('login-form').addEventListener('submit', (e) => {
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = document.getElementById('login-email').value;
-        if (email) {
-            currentState.user = email;
-            document.getElementById('user-email-display').textContent = email;
+        const password = document.getElementById('login-password').value;
+        const btn = e.target.querySelector('button');
 
-            // Switch screen
-            app.screens.login.classList.add('hidden');
-            app.screens.main.classList.remove('hidden');
+        btn.textContent = 'Přihlašování...';
+        btn.disabled = true;
 
-            renderEmails();
+        try {
+            const response = await fetch('api/auth.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                currentState.user = email;
+                document.getElementById('user-email-display').textContent = email;
+
+                // Switch screen
+                app.screens.login.classList.add('hidden');
+                app.screens.main.classList.remove('hidden');
+
+                fetchEmails();
+            } else {
+                alert(result.message);
+                btn.textContent = 'Přihlásit se';
+                btn.disabled = false;
+            }
+        } catch (err) {
+            alert('Chyba připojení k serveru.');
+            btn.textContent = 'Přihlásit se';
+            btn.disabled = false;
         }
     });
 
@@ -71,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Show List View
             showView('list');
+            // Re-render (client-side filter for now, or fetch specific folder if API supported)
             renderEmails();
         });
     });
@@ -84,25 +101,47 @@ document.addEventListener('DOMContentLoaded', () => {
         app.modals.compose.classList.add('hidden');
     });
 
-    // Send Email (Simulation)
-    document.getElementById('send-email-btn').addEventListener('click', () => {
+    // Send Email
+    document.getElementById('send-email-btn').addEventListener('click', async () => {
         const to = document.getElementById('compose-to').value;
         const subject = document.getElementById('compose-subject').value;
-        const body = document.getElementById('compose-message').value;
+        const message = document.getElementById('compose-message').value;
+        const btn = document.getElementById('send-email-btn');
 
         if (!to || !subject) {
             alert('Vyplňte prosím příjemce a předmět.');
             return;
         }
 
-        // Add to "Sent" (simulated by adding to mock data with a 'sent' flag in a real app, keeping simple here)
-        showToast(`Zpráva odeslána na: ${to}`);
+        btn.textContent = 'Odesílání...';
+        btn.disabled = true;
 
-        // Reset and close
-        document.getElementById('compose-to').value = '';
-        document.getElementById('compose-subject').value = '';
-        document.getElementById('compose-message').value = '';
-        app.modals.compose.classList.add('hidden');
+        try {
+            const response = await fetch('api/send.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ to, subject, message })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                showToast(`Zpráva odeslána na: ${to}`);
+
+                // Reset and close
+                document.getElementById('compose-to').value = '';
+                document.getElementById('compose-subject').value = '';
+                document.getElementById('compose-message').value = '';
+                app.modals.compose.classList.add('hidden');
+            } else {
+                alert('Chyba odesílání: ' + result.message);
+            }
+        } catch (err) {
+            alert('Chyba připojení.');
+        } finally {
+            btn.textContent = 'Odeslat';
+            btn.disabled = false;
+        }
     });
 
     // Back Button (Detail -> List)
@@ -126,17 +165,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // FUNCTIONS
 
+async function fetchEmails() {
+    const list = app.containers.emailList;
+    list.innerHTML = '<div style="padding:20px; text-align:center;">Načítám zprávy...</div>';
+
+    try {
+        const response = await fetch('api/fetch.php');
+        const result = await response.json();
+
+        if (result.success) {
+            currentState.emails = result.data; // Store emails
+            renderEmails();
+        } else {
+            console.error(result.message);
+            list.innerHTML = '<div style="padding:20px; text-align:center; color:red;">Chyba načítání</div>';
+        }
+    } catch (err) {
+        list.innerHTML = '<div style="padding:20px; text-align:center; color:red;">Chyba připojení</div>';
+    }
+}
+
 function renderEmails() {
     const list = app.containers.emailList;
     list.innerHTML = '';
 
-    // Filter Logic (Simple simulation)
-    const folderEmails = currentState.emails.filter(email => {
-        if (currentState.folder === 'inbox') return true; // Show all for now
-        // In real app: return email.folder === currentState.folder;
-        if (currentState.folder === 'sent') return false; // Mock data is only inbox
-        return false;
-    });
+    // Filter Logic (Client-side simulation for now as fetch gets all recent)
+    const folderEmails = currentState.emails; // Currently listing all fetched (usually INBOX)
 
     if (folderEmails.length === 0) {
         list.innerHTML = '<div style="padding:20px; text-align:center; color:#999;">Žádné zprávy</div>';
@@ -148,8 +202,8 @@ function renderEmails() {
         row.className = `email-row ${email.read ? 'read' : 'unread'}`;
         row.innerHTML = `
             <div class="checkbox-col"><input type="checkbox"></div>
-            <div class="sender-col">${email.sender}</div>
-            <div class="subject-col">${email.subject}</div>
+            <div class="sender-col">${email.sender || 'Neznámý'}</div>
+            <div class="subject-col">${email.subject || '(Bez předmětu)'}</div>
             <div class="date-col">${email.date}</div>
         `;
 
