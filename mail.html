@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duhohrátky Mail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="mail.css">
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="login-container">
+        <div class="login-card">
+            <div class="login-logo">
+                <span>🌈</span>
+                <h1>Duhohrátky Mail</h1>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="login-email" placeholder="vas.email@duhohratky.cz" required>
+                </div>
+                <div class="form-group">
+                    <label>Heslo</label>
+                    <input type="password" id="login-password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-primary full-width">Přihlásit se</button>
+            </form>
+            <div class="login-footer">
+                <a href="#" id="forgot-password">Zapomněli jste heslo?</a>
+                <a href="#" id="create-account">Vytvořit účet</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP (Hidden by default) -->
+    <div id="mail-app" class="mail-app hidden">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span>🌈 DuhoMail</span>
+            </div>
+
+            <button class="btn-compose" id="btn-compose">
+                <span>✏️</span> Nová zpráva
+            </button>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-folder="inbox">
+                    <span>📥</span> Doručené <span class="badge" id="unread-count">2</span>
+                </a>
+                <a href="#" class="nav-item" data-folder="sent">
+                    <span>📤</span> Odeslané
+                </a>
+                <a href="#" class="nav-item" data-folder="drafts">
+                    <span>📝</span> Rozepsané
+                </a>
+                <a href="#" class="nav-item" data-folder="spam">
+                    <span>⚠️</span> Spam
+                </a>
+                <a href="#" class="nav-item" data-folder="trash">
+                    <span>🗑️</span> Koš
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item" id="settings-link">
+                    <span>⚙️</span> Nastavení
+                </a>
+                <a href="#" class="nav-item logout" id="logout-btn">
+                    <span>🚪</span> Odhlásit
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- TOOLBAR -->
+            <header class="toolbar">
+                <div class="search-bar">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Hledat v poště...">
+                </div>
+                <div class="user-profile">
+                    <span id="user-email-display">admin@duhohratky.cz</span>
+                    <div class="avatar">A</div>
+                </div>
+            </header>
+
+            <!-- EMAIL LIST -->
+            <div id="email-list-view" class="view-section">
+                <div class="email-list-header">
+                    <div class="checkbox-col"><input type="checkbox"></div>
+                    <div class="sender-col">Odesílatel</div>
+                    <div class="subject-col">Předmět</div>
+                    <div class="date-col">Datum</div>
+                </div>
+                <div id="email-list-container">
+                    <!-- Emails will be injected here by JS -->
+                </div>
+            </div>
+
+            <!-- EMAIL DETAIL VIEW (Hidden) -->
+            <div id="email-detail-view" class="view-section hidden">
+                <div class="email-toolbar">
+                    <button class="btn-icon" id="back-to-list">⬅️ Zpět</button>
+                    <button class="btn-icon">🗑️ Smazat</button>
+                    <button class="btn-icon">↩️ Odpovědět</button>
+                </div>
+                <div class="email-content-wrapper">
+                    <h2 id="detail-subject">Předmět zprávy</h2>
+                    <div class="detail-meta">
+                        <span class="detail-sender" id="detail-sender">Odesílatel</span>
+                        <span class="detail-date" id="detail-date">Datum</span>
+                    </div>
+                    <div class="detail-body" id="detail-body">
+                        Text zprávy...
+                    </div>
+                </div>
+            </div>
+
+            <!-- SETTINGS VIEW (Hidden) -->
+            <div id="settings-view" class="view-section hidden">
+                <h2>Nastavení</h2>
+                <div class="settings-card">
+                    <h3>Změna hesla</h3>
+                    <div class="form-group">
+                        <label>Staré heslo</label>
+                        <input type="password">
+                    </div>
+                    <div class="form-group">
+                        <label>Nové heslo</label>
+                        <input type="password">
+                    </div>
+                    <button class="btn-primary">Uložit změny</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- COMPOSE MODAL -->
+    <div id="compose-modal" class="modal hidden">
+        <div class="modal-content compose-box">
+            <div class="compose-header">
+                <h3>Nová zpráva</h3>
+                <button class="close-modal" id="close-compose">×</button>
+            </div>
+            <div class="compose-body">
+                <input type="email" placeholder="Komu" id="compose-to">
+                <input type="text" placeholder="Předmět" id="compose-subject">
+                <textarea id="compose-message" placeholder="Napište zprávu..."></textarea>
+            </div>
+            <div class="compose-footer">
+                <button class="btn-primary" id="send-email-btn">Odeslat</button>
+                <button class="btn-icon">📎</button>
+                <button class="btn-icon">🗑️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast">Zpráva odeslána</div>
+
+    <script src="mail.js"></script>
+</body>
+
+</html>

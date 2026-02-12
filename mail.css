@@ -1,0 +1,449 @@
+/* ====================================
+   DUHOHRÁTKY MAIL - STYLES
+   ==================================== */
+:root {
+    --primary: #FF69B4;
+    --primary-light: #FFB6C1;
+    --secondary: #4A90D9;
+    --dark: #2D3436;
+    --gray-100: #F8F9FA;
+    --gray-200: #E9ECEF;
+    --gray-300: #DEE2E6;
+    --white: #FFFFFF;
+    --gradient-rainbow: linear-gradient(135deg,
+            #FFB6C1 0%, #FFA07A 20%, #FFE066 40%,
+            #98D8C8 60%, #87CEEB 80%, #DDA0DD 100%);
+    --font-primary: 'Nunito', sans-serif;
+    --font-secondary: 'Quicksand', sans-serif;
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-primary);
+    background: var(--gray-100);
+    color: var(--dark);
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ====================================
+   LOGIN SCREEN
+   ==================================== */
+.login-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-rainbow);
+}
+
+.login-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-logo {
+    margin-bottom: 2rem;
+}
+
+.login-logo span {
+    font-size: 3rem;
+}
+
+.login-logo h1 {
+    font-family: var(--font-secondary);
+    font-size: 1.8rem;
+    color: var(--dark);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.btn-primary {
+    background: var(--gradient-rainbow);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+}
+
+.full-width {
+    width: 100%;
+}
+
+.login-footer {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-footer a {
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+/* ====================================
+   MAIL APP LAYOUT
+   ==================================== */
+.mail-app {
+    display: flex;
+    height: 100vh;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    background: white;
+    border-right: 1px solid var(--gray-200);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.sidebar-header {
+    font-family: var(--font-secondary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+}
+
+.btn-compose {
+    background: white;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 25px;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    transition: 0.2s;
+}
+
+.btn-compose:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    background: #fafafa;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    color: var(--dark);
+    text-decoration: none;
+    border-radius: 0 20px 20px 0;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.nav-item.active {
+    background: rgba(255, 105, 180, 0.1);
+    color: var(--primary);
+}
+
+.nav-item:hover:not(.active) {
+    background: var(--gray-100);
+}
+
+.badge {
+    background: var(--primary);
+    color: white;
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    border-top: 1px solid var(--gray-200);
+    padding-top: 1rem;
+}
+
+/* MAIN CONTENT */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
+/* TOOLBAR */
+.toolbar {
+    height: 64px;
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.search-bar {
+    background: var(--gray-100);
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 50%;
+}
+
+.search-bar input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--secondary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+/* EMAIL LIST */
+.email-list-header {
+    display: flex;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--gray-200);
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.email-row {
+    display: flex;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--gray-100);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.email-row:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    background: #fafafa;
+    z-index: 1;
+}
+
+.email-row.unread {
+    background: white;
+    font-weight: 700;
+}
+
+.email-row.read {
+    background: #f8f9fa;
+    color: #666;
+}
+
+.checkbox-col {
+    width: 40px;
+}
+
+.sender-col {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.subject-col {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.date-col {
+    width: 100px;
+    text-align: right;
+}
+
+/* EMAIL DETAIL */
+#email-detail-view {
+    padding: 2rem;
+}
+
+.email-content-wrapper {
+    background: white;
+    margin-top: 1rem;
+}
+
+.detail-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    color: #666;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.detail-body {
+    line-height: 1.6;
+}
+
+/* COMPOSE MODAL */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    pointer-events: none;
+}
+
+.compose-box {
+    width: 500px;
+    height: 600px;
+    background: white;
+    margin-right: 50px;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+}
+
+.compose-header {
+    background: var(--dark);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.compose-body {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.compose-body input {
+    padding: 8px;
+    border: none;
+    border-bottom: 1px solid #eee;
+    outline: none;
+}
+
+.compose-body textarea {
+    flex: 1;
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 10px;
+}
+
+.compose-footer {
+    padding: 1rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
+/* TOAST */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: var(--dark);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: 0.3s;
+    transform: translateY(20px);
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
