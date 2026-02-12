@@ -4,14 +4,29 @@ header("Content-Type: text/plain; charset=UTF-8");
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-echo "--- DUHOHRATKY MAIL DEBUG (EXTENDED) ---\n";
+echo "--- DUHOHRATKY MAIL DEBUG (MX LOOKUP) ---\n";
 
-$tests = [
-    ['host' => 'mail.duhohratky.cz', 'port' => 993, 'ssl' => true],
-    ['host' => 'mail.duhohratky.cz', 'port' => 143, 'ssl' => false],
-    ['host' => '127.0.0.1', 'port' => 143, 'ssl' => false],
-    ['host' => 'smtp-391870.w70.wedos.net', 'port' => 587, 'ssl' => false], // Guessing specific host
-];
+// 1. Get MX Records
+$domain = 'duhohratky.cz';
+echo "Fetching MX records for: $domain\n";
+if (getmxrr($domain, $mx_details)) {
+    echo "Found MX records:\n";
+    print_r($mx_details);
+} else {
+    echo "❌ Could not find MX records.\n";
+    $mx_details = ['wes1-imap1.wedos.net', 'mail.wedos.net', 'imap.wedos.net']; // Fallbacks
+}
+
+$tests = [];
+foreach ($mx_details as $mx_host) {
+    if (!empty($mx_host)) {
+        $tests[] = ['host' => $mx_host, 'port' => 993, 'ssl' => true];
+        $tests[] = ['host' => $mx_host, 'port' => 143, 'ssl' => false];
+    }
+}
+
+// Add verified safe fallback
+$tests[] = ['host' => 'mail.duhohratky.cz', 'port' => 993, 'ssl' => true];
 
 foreach ($tests as $test) {
     $host = $test['host'];
