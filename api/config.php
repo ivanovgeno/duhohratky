@@ -9,8 +9,9 @@ header("Content-Type: application/json; charset=UTF-8");
 session_start();
 
 // Email Server Configuration (WEDOS)
-define('IMAP_HOST', '{391870.w70.wedos.net:993/imap/ssl/novalidate-cert}INBOX'); // Adjust host as needed
-define('SMTP_HOST', '391870.w70.wedos.net');
+// "mail.duhohratky.cz" connects to the assigned mail server for the domain
+define('IMAP_HOST', '{mail.duhohratky.cz:993/imap/ssl/novalidate-cert}INBOX');
+define('SMTP_HOST', 'mail.duhohratky.cz');
 define('SMTP_PORT', 465); // SSL
 
 function jsonResponse($success, $message, $data = null)
