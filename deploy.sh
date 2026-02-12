@@ -40,7 +40,10 @@ for REMOTE_PATH in "${PATHS[@]}"; do
     curl -s --ftp-ssl -u "$FTP_USER:$FTP_PASS" -Q "MKD $REMOTE_PATH/gallery" "ftp://$FTP_HOST/" > /dev/null 2>&1
     curl -s --ftp-ssl -u "$FTP_USER:$FTP_PASS" -Q "SITE CHMOD 755 $REMOTE_PATH/gallery" "ftp://$FTP_HOST/" > /dev/null 2>&1
 
-    # Define files to upload
+    # Create api directory
+    curl -s --ftp-ssl -u "$FTP_USER:$FTP_PASS" -Q "MKD $REMOTE_PATH/api" "ftp://$FTP_HOST/" > /dev/null 2>&1
+
+    # Define files to upload (Root)
     for file in *.html *.js *.css *.php *.png *.ttf *.otf .htaccess; do
         if [ -f "$file" ]; then
             # SKIP content.js (it contains production data!)
