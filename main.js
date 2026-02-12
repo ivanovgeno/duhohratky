@@ -87,7 +87,7 @@ function deepMerge(target, source) {
 }
 
 function applyContent(data) {
-    const elements = document.querySelectorAll('[data-content]');
+    const elements = document.querySelectorAll('[data-content], [data-content-href]');
 
     elements.forEach(el => {
         const keyPath = el.dataset.content;
