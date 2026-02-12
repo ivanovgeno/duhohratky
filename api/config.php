@@ -8,11 +8,11 @@ header("Content-Type: application/json; charset=UTF-8");
 // Session start for storing credentials securely in server memory
 session_start();
 
-// Email Server Configuration (Localhost)
-// Using 127.0.0.1:143 (IMAP) and 127.0.0.1:25 (SMTP) to bypass external firewall
-define('IMAP_HOST', '{127.0.0.1:143/imap/notls}INBOX');
-define('SMTP_HOST', '127.0.0.1');
-define('SMTP_PORT', 25);
+// Email Server Configuration (Hosting Node)
+// Using direct hosting hostname which might be whitelisted
+define('IMAP_HOST', '{391870.w70.wedos.net:993/imap/ssl/novalidate-cert}INBOX');
+define('SMTP_HOST', '391870.w70.wedos.net');
+define('SMTP_PORT', 465);
 
 function jsonResponse($success, $message, $data = null)
 {
