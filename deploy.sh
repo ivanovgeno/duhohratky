@@ -56,6 +56,14 @@ for REMOTE_PATH in "${PATHS[@]}"; do
             curl -s --ftp-ssl -u "$FTP_USER:$FTP_PASS" -T "$file" "ftp://$FTP_HOST$REMOTE_PATH/"
         fi
     done
+
+    # Upload API files
+    for file in api/*.php; do
+        if [ -f "$file" ]; then
+            echo "   Uploading $file to $REMOTE_PATH/api/..."
+            curl -s --ftp-ssl -u "$FTP_USER:$FTP_PASS" -T "$file" "ftp://$FTP_HOST$REMOTE_PATH/api/"
+        fi
+    done
 done
 
 echo "✅ Deployment Complete! 🌍"
