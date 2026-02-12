@@ -4,26 +4,24 @@ header("Content-Type: text/plain; charset=UTF-8");
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-echo "--- DUHOHRATKY MAIL DEBUG (MX LOOKUP) ---\n";
+echo "--- DUHOHRATKY MAIL DEBUG (WEDOS SPECIFIC) ---\n";
 
-// 1. Get MX Records
-$domain = 'duhohratky.cz';
-echo "Fetching MX records for: $domain\n";
-if (getmxrr($domain, $mx_details)) {
-    echo "Found MX records:\n";
-    print_r($mx_details);
-} else {
-    echo "❌ Could not find MX records.\n";
-    $mx_details = ['wes1-imap1.wedos.net', 'mail.wedos.net', 'imap.wedos.net']; // Fallbacks
-}
+$tests = [
+    // Standard WEDOS global IMAP
+    ['host' => 'imap.wedos.net', 'port' => 993, 'ssl' => true],
+    ['host' => 'imap.wedos.net', 'port' => 143, 'ssl' => false],
 
-$tests = [];
-foreach ($mx_details as $mx_host) {
-    if (!empty($mx_host)) {
-        $tests[] = ['host' => $mx_host, 'port' => 993, 'ssl' => true];
-        $tests[] = ['host' => $mx_host, 'port' => 143, 'ssl' => false];
-    }
-}
+    // Internal node aliases (often allowing local access)
+    ['host' => 'wes1-imap1.wedos.net', 'port' => 993, 'ssl' => true],
+    ['host' => 'wes1-imap1.wedos.net', 'port' => 143, 'ssl' => false],
+
+    // Hosting specific node (from FTP) - retrying specific ports
+    ['host' => '391870.w70.wedos.net', 'port' => 993, 'ssl' => true],
+    ['host' => '391870.w70.wedos.net', 'port' => 143, 'ssl' => false],
+
+    // Localhost fallback
+    ['host' => 'localhost', 'port' => 143, 'ssl' => false],
+];
 
 // Add verified safe fallback
 $tests[] = ['host' => 'mail.duhohratky.cz', 'port' => 993, 'ssl' => true];
