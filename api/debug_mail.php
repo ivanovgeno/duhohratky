@@ -1,50 +1,45 @@
 <?php
 // api/debug_mail.php
-// Access this file in browser to test mail server connection: /api/debug_mail.php
-
 header("Content-Type: text/plain; charset=UTF-8");
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-echo "--- DUHOHRATKY MAIL DEBUG ---\n";
+echo "--- DUHOHRATKY MAIL DEBUG (EXTENDED) ---\n";
 
-$host = 'mail.duhohratky.cz';
-$port = 993;
-$ssl = true;
+$tests = [
+    ['host' => 'mail.duhohratky.cz', 'port' => 993, 'ssl' => true],
+    ['host' => 'mail.duhohratky.cz', 'port' => 143, 'ssl' => false],
+    ['host' => '127.0.0.1', 'port' => 143, 'ssl' => false],
+    ['host' => 'smtp-391870.w70.wedos.net', 'port' => 587, 'ssl' => false], // Guessing specific host
+];
 
-echo "Targeting Host: $host\n";
-echo "Port: $port\n";
+foreach ($tests as $test) {
+    $host = $test['host'];
+    $port = $test['port'];
+    $prefix = $test['ssl'] ? 'ssl://' : '';
+    $address = $prefix . $host;
 
-// 1. DNS Check
-$ip = gethostbyname($host);
-echo "Resolved IP: $ip\n";
+    echo "\nTesting: $address : $port\n";
 
-if ($ip == $host) {
-    echo "❌ DNS Lookup Failed. Server cannot find '$host'.\n";
-} else {
-    echo "✅ DNS Lookup OK.\n";
+    // DNS
+    $ip = gethostbyname($host);
+    echo "  IP: $ip\n";
+
+    // Socket
+    $start = microtime(true);
+    $socket = @fsockopen($address, $port, $errno, $errstr, 5);
+    $end = microtime(true);
+    $duration = round($end - $start, 3);
+
+    if ($socket) {
+        echo "  ✅ SUCCESS ($duration s)\n";
+        fclose($socket);
+    } else {
+        echo "  ❌ FAILED ($duration s) - Error $errno: $errstr\n";
+    }
 }
 
-// 2. Network Socket Check
-echo "\nTesting Socket Connection...\n";
-$timeout = 10;
-$socket = @fsockopen("ssl://$host", $port, $errno, $errstr, $timeout);
-
-if ($socket) {
-    echo "✅ Socket Connection Successful!\n";
-    fclose($socket);
-} else {
-    echo "❌ Socket Connection Failed.\n";
-    echo "Error $errno: $errstr\n";
-}
-
-// 3. IMAP Extension Check
-echo "\nChecking PHP IMAP Extension...\n";
-if (function_exists('imap_open')) {
-    echo "✅ PHP IMAP Extension is loaded.\n";
-} else {
-    echo "❌ PHP IMAP Extension is MISSING.\n";
-}
-
-echo "\n--- End Debug ---\n";
+echo "\n--- PHP INFO ---\n";
+echo "OpenSSL loaded: " . (extension_loaded('openssl') ? 'Yes' : 'No') . "\n";
+echo "IMAP loaded: " . (extension_loaded('imap') ? 'Yes' : 'No') . "\n";
 ?>
