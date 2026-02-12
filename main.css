@@ -2791,3 +2791,58 @@ section {
     font-size: 1.2rem;
     pointer-events: none;
 }
+
+/* ====================================
+   BACK TO TOP BUTTON
+   ==================================== */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: 2px solid var(--color-pink-light);
+    border-radius: 50%;
+    color: var(--color-pink);
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    z-index: 900;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--gradient-rainbow);
+    color: white;
+    border-color: transparent;
+    border-radius: var(--radius-lg);
+    width: auto;
+    padding: 0 20px;
+    gap: 10px;
+    transform: scale(1.1) translateY(-3px);
+    box-shadow:
+        0 8px 25px rgba(232, 160, 160, 0.5),
+        0 0 30px rgba(160, 200, 216, 0.4),
+        0 0 50px rgba(232, 208, 128, 0.3);
+    animation: cta-pulse 1s ease-in-out infinite;
+}
+
+.back-to-top:hover::after {
+    content: "Nahoru";
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 700;
+}
