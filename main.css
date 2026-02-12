@@ -2828,21 +2828,10 @@ section {
     background: var(--gradient-rainbow);
     color: white;
     border-color: transparent;
-    border-radius: var(--radius-lg);
-    width: auto;
-    padding: 0 20px;
-    gap: 10px;
     transform: scale(1.1) translateY(-3px);
     box-shadow:
         0 8px 25px rgba(232, 160, 160, 0.5),
         0 0 30px rgba(160, 200, 216, 0.4),
         0 0 50px rgba(232, 208, 128, 0.3);
     animation: cta-pulse 1s ease-in-out infinite;
-}
-
-.back-to-top:hover::after {
-    content: "Nahoru";
-    font-family: var(--font-primary);
-    font-size: 1rem;
-    font-weight: 700;
 }

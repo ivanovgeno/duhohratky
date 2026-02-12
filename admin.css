@@ -684,17 +684,6 @@ body {
     background: var(--gradient-rainbow);
     color: white;
     border-color: transparent;
-    border-radius: 12px;
-    width: auto;
-    padding: 0 20px;
-    gap: 10px;
     transform: scale(1.1) translateY(-3px);
     box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
-}
-
-.back-to-top:hover::after {
-    content: "Nahoru";
-    font-family: var(--font-primary);
-    font-size: 1rem;
-    font-weight: 700;
 }
