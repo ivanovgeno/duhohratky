@@ -91,109 +91,111 @@ function applyContent(data) {
 
     elements.forEach(el => {
         const keyPath = el.dataset.content;
-        const value = getValueByPath(data, keyPath);
+        let value = undefined;
 
+        // Only try to get value if keyPath exists
+        if (keyPath) {
+            value = getValueByPath(data, keyPath);
+        }
+
+        // Handle href updates independently of text content
+        if (el.dataset.contentHref) {
+            const hrefValue = getValueByPath(data, el.dataset.contentHref);
+            console.log(`Resources: Updating link ${el.dataset.contentHref} -> ${hrefValue}`);
+            if (hrefValue) el.href = hrefValue;
+        }
+
+        // If we don't have text value, we might still have done href update, so we continue
         if (value === undefined || value === null) return;
 
-        // Handle different element types
-        if (el.tagName === 'IMG') {
-            if (value) el.src = value;
-        } else if (el.tagName === 'A') {
-            // If it's a link, we might want to update href or text
-            // For now, let's assume if it has data-content it updates text, 
-            // unless we specify data-content-href
-            if (el.dataset.contentHref) {
-                const hrefValue = getValueByPath(data, el.dataset.contentHref);
-                console.log(`Resources: Updating link ${el.dataset.contentHref} -> ${hrefValue}`);
-                if (hrefValue) el.href = hrefValue;
-            }
-            if (!el.dataset.contentNoText) {
-                // Preserve child elements (e.g. emoji <span>) — only update the text node
-                const childSpan = el.querySelector('span');
-                if (childSpan) {
-                    // Find the last text node after the span and update it
-                    let textNode = null;
-                    for (let i = el.childNodes.length - 1; i >= 0; i--) {
-                        if (el.childNodes[i].nodeType === Node.TEXT_NODE && el.childNodes[i].textContent.trim()) {
-                            textNode = el.childNodes[i];
-                            break;
-                        }
+        // Handle different element types for TEXT/SRC updates
+        if (!el.dataset.contentNoText) {
+            // Preserve child elements (e.g. emoji <span>) — only update the text node
+            const childSpan = el.querySelector('span');
+            if (childSpan) {
+                // Find the last text node after the span and update it
+                let textNode = null;
+                for (let i = el.childNodes.length - 1; i >= 0; i--) {
+                    if (el.childNodes[i].nodeType === Node.TEXT_NODE && el.childNodes[i].textContent.trim()) {
+                        textNode = el.childNodes[i];
+                        break;
                     }
-                    if (textNode) {
-                        textNode.textContent = ' ' + value;
-                    } else {
-                        el.appendChild(document.createTextNode(' ' + value));
-                    }
-                } else {
-                    el.innerText = value;
                 }
-            }
-        } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-            el.value = value;
-        } else {
-            // Regular text elements
-            el.innerHTML = value;
-        }
-    });
-
-    // Special handling for specific sections if needed (like colors or background images)
-    // Activities colors
-    if (data.activities) {
-        // We might want to loop through activities to set colors if they are dynamic
-        // But for now the CSS classes handle colors based on HTML structure
-        // If we want dynamic colors we need to apply style
-        for (let i = 1; i <= 6; i++) {
-            const color = data.activities[`act${i}Color`];
-            const card = document.querySelector(`.activity-card:nth-child(${i})`);
-            if (card && color) {
-                card.dataset.color = color;
+                if (textNode) {
+                    textNode.textContent = ' ' + value;
+                } else {
+                    el.appendChild(document.createTextNode(' ' + value));
+                }
+            } else {
+                el.innerText = value;
             }
         }
+    } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.value = value;
+    } else {
+        // Regular text elements
+        el.innerHTML = value;
     }
+});
 
-    // Tips gradients
-    if (data.tips) {
-        for (let i = 1; i <= 3; i++) {
-            const color = data.tips[`tip${i}Color`];
-            const imgContainer = document.querySelector(`.tip-card[data-id="tip${i}"] .tip-image`);
-            if (imgContainer && color) {
-                imgContainer.style.background = color;
-            }
+// Special handling for specific sections if needed (like colors or background images)
+// Activities colors
+if (data.activities) {
+    // We might want to loop through activities to set colors if they are dynamic
+    // But for now the CSS classes handle colors based on HTML structure
+    // If we want dynamic colors we need to apply style
+    for (let i = 1; i <= 6; i++) {
+        const color = data.activities[`act${i}Color`];
+        const card = document.querySelector(`.activity-card:nth-child(${i})`);
+        if (card && color) {
+            card.dataset.color = color;
         }
     }
+}
 
-    // Render Upcoming Themes Section
-    try {
-        const upcomingSection = document.getElementById('upcoming');
-        console.log('Rendering upcoming. Visible:', data.upcoming?.visible);
-        if (data.upcoming && data.upcoming.visible !== false) {
-            if (upcomingSection) upcomingSection.style.display = 'block';
-            renderUpcomingThemes(data.upcoming);
-        } else {
-            console.log('Hiding upcoming section');
-            if (upcomingSection) upcomingSection.style.display = 'none';
+// Tips gradients
+if (data.tips) {
+    for (let i = 1; i <= 3; i++) {
+        const color = data.tips[`tip${i}Color`];
+        const imgContainer = document.querySelector(`.tip-card[data-id="tip${i}"] .tip-image`);
+        if (imgContainer && color) {
+            imgContainer.style.background = color;
         }
-    } catch (e) {
-        console.error('Error rendering upcoming themes:', e);
     }
+}
 
-    // Render Lessons Section
-    try {
-        if (data.lessons) {
-            renderLessons(data.lessons);
-        }
-    } catch (e) {
-        console.error('Error rendering lessons:', e);
+// Render Upcoming Themes Section
+try {
+    const upcomingSection = document.getElementById('upcoming');
+    console.log('Rendering upcoming. Visible:', data.upcoming?.visible);
+    if (data.upcoming && data.upcoming.visible !== false) {
+        if (upcomingSection) upcomingSection.style.display = 'block';
+        renderUpcomingThemes(data.upcoming);
+    } else {
+        console.log('Hiding upcoming section');
+        if (upcomingSection) upcomingSection.style.display = 'none';
     }
+} catch (e) {
+    console.error('Error rendering upcoming themes:', e);
+}
 
-    // Render Gallery Page
-    try {
-        if (data.gallery) {
-            renderGalleryPage(data.gallery);
-        }
-    } catch (e) {
-        console.error('Error rendering gallery:', e);
+// Render Lessons Section
+try {
+    if (data.lessons) {
+        renderLessons(data.lessons);
     }
+} catch (e) {
+    console.error('Error rendering lessons:', e);
+}
+
+// Render Gallery Page
+try {
+    if (data.gallery) {
+        renderGalleryPage(data.gallery);
+    }
+} catch (e) {
+    console.error('Error rendering gallery:', e);
+}
 }
 
 function renderUpcomingThemes(upcomingData) {
