@@ -104,6 +104,7 @@ function applyContent(data) {
             // unless we specify data-content-href
             if (el.dataset.contentHref) {
                 const hrefValue = getValueByPath(data, el.dataset.contentHref);
+                console.log(`Resources: Updating link ${el.dataset.contentHref} -> ${hrefValue}`);
                 if (hrefValue) el.href = hrefValue;
             }
             if (!el.dataset.contentNoText) {
