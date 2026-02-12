@@ -8,11 +8,11 @@ header("Content-Type: application/json; charset=UTF-8");
 // Session start for storing credentials securely in server memory
 session_start();
 
-// Email Server Configuration (WEDOS)
-// "mail.duhohratky.cz" connects to the assigned mail server for the domain
-define('IMAP_HOST', '{mail.duhohratky.cz:993/imap/ssl/novalidate-cert}INBOX');
-define('SMTP_HOST', 'mail.duhohratky.cz');
-define('SMTP_PORT', 465); // SSL
+// Email Server Configuration (Localhost)
+// Using 127.0.0.1:143 (IMAP) and 127.0.0.1:25 (SMTP) to bypass external firewall
+define('IMAP_HOST', '{127.0.0.1:143/imap/notls}INBOX');
+define('SMTP_HOST', '127.0.0.1');
+define('SMTP_PORT', 25);
 
 function jsonResponse($success, $message, $data = null)
 {
