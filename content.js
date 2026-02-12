@@ -16,9 +16,9 @@ window.defaultContent = {
         "stat2Label": "Uplynulých lekcí",
         "stat3Number": "5⭐",
         "stat3Label": "Hodnocení",
-        "btn1Text": "Rezervovat termín",
+        "btn1Text": "📅 Rezervovat termín",
         "btn1Link": "#reservation",
-        "btn2Text": "Prozkoumat aktivity",
+        "btn2Text": "🎨 Prozkoumat aktivity",
         "btn2Link": "#activities"
     },
     "about": {
