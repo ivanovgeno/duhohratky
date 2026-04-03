@@ -2835,3 +2835,23 @@ section {
         0 0 50px rgba(232, 208, 128, 0.3);
     animation: cta-pulse 1s ease-in-out infinite;
 }
+/* About Story Photo */
+.about-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+}
+
+.about-photo:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
+
+.story-image {
+    background: none !important; /* Remove background if it was there */
+    overflow: hidden;
+    padding: 0 !important;
+}

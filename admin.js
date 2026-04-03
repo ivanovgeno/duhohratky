@@ -46,7 +46,8 @@ const defaultData = {
         card4Title: 'Bezpečné prostředí',
         card4Text: 'Všechny materiály jsou bezpečné a netoxické. Prostory jsou přizpůsobené potřebám malých objevitelů.',
         storyTitle: 'Náš příběh',
-        storyText: 'Duhohratky vznikly z lásky k dětem a touhy vytvořit prostor, kde se mohou svobodně rozvíjet. Věříme, že každé dítě je jedinečné a zaslouží si objevovat svět vlastním způsobem. Naše aktivity jsou navrženy tak, aby podporovaly přirozenou zvídavost a kreativitu dětí.'
+        storyText: 'Duhohratky vznikly z lásky k dětem a touhy vytvořit prostor, kde se mohou svobodně rozvíjet. Věříme, že každé dítě je jedinečné a zaslouží si objevovat svět vlastním způsobem. Naše aktivity jsou navrženy tak, aby podporovaly přirozenou zvídavost a kreativitu dětí.',
+        storyPhoto: 'logo.png'
     },
 
     // Activities Section
@@ -689,6 +690,71 @@ function populateFields() {
             }
         }
     });
+
+    // Handle Image Previews
+    updateImagePreviews();
+}
+
+function updateImagePreviews() {
+    const aboutPreview = document.getElementById('about-photo-preview');
+    if (aboutPreview && siteData.about && siteData.about.storyPhoto) {
+        aboutPreview.innerHTML = `<img src="${siteData.about.storyPhoto}?t=${Date.now()}" style="width: 100%; height: 100%; object-fit: cover;">`;
+    }
+}
+
+async function uploadAboutPhoto() {
+    const input = document.getElementById('about-photo-upload');
+    const status = document.getElementById('about-photo-status');
+    const btn = document.querySelector('button[onclick="uploadAboutPhoto()"]');
+
+    if (!input.files || input.files.length === 0) {
+        alert("Vyberte prosím obrázek.");
+        return;
+    }
+
+    const file = input.files[0];
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '⏳...';
+    btn.disabled = true;
+    status.innerHTML = '⏳ Nahrávám...';
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+        const response = await fetch('upload.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            siteData.about.storyPhoto = result.path;
+            console.log('✅ Story photo updated:', result.path);
+            
+            // Save data
+            await saveData();
+            
+            // Refresh preview
+            updateImagePreviews();
+            
+            status.innerHTML = '✅ Nahráno!';
+            status.style.color = 'green';
+            input.value = '';
+        } else {
+            status.innerHTML = '❌ ' + result.message;
+            status.style.color = 'red';
+        }
+    } catch (e) {
+        console.error('Upload failed:', e);
+        status.innerHTML = '❌ Chyba nahrávání';
+        status.style.color = 'red';
+    } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        setTimeout(() => { if (status.innerHTML.includes('✅')) status.innerHTML = ''; }, 3000);
+    }
 }
 
 /* ====================================

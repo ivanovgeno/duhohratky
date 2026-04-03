@@ -280,6 +280,24 @@
                             <label>Text příběhu</label>
                             <textarea data-field="about.storyText" rows="4"></textarea>
                         </div>
+                        <div class="form-group"
+                            style="margin-top: 1.5rem; border-top: 1px solid #eee; padding-top: 1.5rem;">
+                            <label>📸 Fotka k příběhu</label>
+                            <div class="image-upload-wrapper" style="display: flex; flex-direction: column; gap: 1rem;">
+                                <div id="about-photo-preview"
+                                    style="width: 150px; height: 150px; border-radius: 10px; background: #f5f5f5; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                                    <span style="color: #999;">Náhled</span>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                    <input type="file" id="about-photo-upload" accept="image/*" style="flex: 1;">
+                                    <button type="button" class="btn btn-secondary btn-small"
+                                        onclick="uploadAboutPhoto()">
+                                        <span>☁️</span> Nahrát
+                                    </button>
+                                </div>
+                                <div id="about-photo-status"></div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
