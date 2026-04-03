@@ -1761,6 +1761,14 @@ section {
         text-align: center;
     }
 
+    .story-image {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
@@ -2835,6 +2843,7 @@ section {
         0 0 50px rgba(232, 208, 128, 0.3);
     animation: cta-pulse 1s ease-in-out infinite;
 }
+
 /* About Story Photo */
 .about-photo {
     width: 100%;
@@ -2851,7 +2860,21 @@ section {
 }
 
 .story-image {
-    background: none !important; /* Remove background if it was there */
+    background: none !important;
     overflow: hidden;
     padding: 0 !important;
+    width: 300px;
+    /* Fixed width for the image container */
+    height: 300px;
+    /* Fixed height to match */
+    flex-shrink: 0;
+}
+
+.about-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    display: block;
 }

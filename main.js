@@ -110,7 +110,8 @@ function applyContent(data) {
 
         // 4. Handle Content Updates by Tag Type
         if (el.tagName === 'IMG') {
-            el.src = value;
+            // Add timestamp to force refresh (v1.2)
+            el.src = value + (value.includes('?') ? '&' : '?') + 't=' + Date.now();
         } else if (el.tagName === 'A') {
             if (!el.dataset.contentNoText) {
                 const childSpan = el.querySelector('span');
@@ -134,7 +135,9 @@ function applyContent(data) {
         } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
             el.value = value;
         } else {
-            el.innerHTML = value;
+            // Replace newlines with <br> for better text formatting (v1.1)
+            const formattedValue = typeof value === 'string' ? value.replace(/\n/g, '<br>') : value;
+            el.innerHTML = formattedValue;
         }
     });
 
