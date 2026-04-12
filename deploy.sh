@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-FTP_HOST="391870.w70.wedos.net"
+FTP_HOST="46.28.106.57"
 FTP_USER="w391870"
 FTP_PASS="Duhohratky.124"
 FTP_PATH="/www"
