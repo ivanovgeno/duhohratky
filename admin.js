@@ -172,6 +172,7 @@ const defaultData = {
     // Legal
     legal: {
         gdpr: 'Tento web používá soubory cookies k poskytování služeb a analýze návštěvnosti. Používáním tohoto webu souhlasíte s jejich ukládáním.',
+        gdpr_full: '<h1>Ochrana osobních údajů (GDPR)</h1><p>Vaše soukromí je pro nás důležité. Zde naleznete informace o tom, jaké údaje shromažďujeme a jak s nimi nakládáme...</p>',
         vop: '<h1>Všeobecné obchodní podmínky</h1><p>Zde dopište své obchodní podmínky...</p>'
     }
 };

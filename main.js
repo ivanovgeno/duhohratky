@@ -963,8 +963,8 @@ function initLegal() {
         }
     };
 
-    if (infoBtn) infoBtn.addEventListener('click', () => openLegal('gdpr'));
-    if (openGdprBtn) openGdprBtn.addEventListener('click', (e) => { e.preventDefault(); openLegal('gdpr'); });
+    if (infoBtn) infoBtn.addEventListener('click', () => openLegal('gdpr_full'));
+    if (openGdprBtn) openGdprBtn.addEventListener('click', (e) => { e.preventDefault(); openLegal('gdpr_full'); });
     if (openVopBtn) openVopBtn.addEventListener('click', (e) => { e.preventDefault(); openLegal('vop'); });
 
     // 4. Modal Closing

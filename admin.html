@@ -1236,12 +1236,22 @@
                 <!-- Legal Section Editor -->
                 <section class="editor-section hidden" id="editor-legal">
                     <div class="editor-card">
-                        <h3>🍪 GDPR Souhlas (v banneru)</h3>
+                        <h3>🍪 GDPR Cookie Banner</h3>
                         <div class="form-group">
-                            <label>Text v banneru</label>
+                            <label>Krátký text v banneru</label>
                             <textarea data-field="legal.gdpr" rows="3" placeholder="Tento web používá soubory cookies..."></textarea>
                             <small style="color: #666; font-size: 0.8rem; display: block; margin-top: 4px;">
-                                Tento text se zobrazí v malém pruhu ve spodní části webu.
+                                Tento text se zobrazí v malém pruhu ve spodní části webu při první návštěvě.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="editor-card">
+                        <h3>🛡️ Kompletní text GDPR</h3>
+                        <div class="form-group">
+                            <label>Právní informace o ochraně údajů (může obsahovat HTML)</label>
+                            <textarea data-field="legal.gdpr_full" rows="15" placeholder="<h1>Ochrana osobních údajů</h1>..."></textarea>
+                            <small style="color: #666; font-size: 0.8rem; display: block; margin-top: 4px;">
+                                Tento text se zobrazí v modálním okně po kliknutí na "Více informací" v banneru nebo v patičce webu.
                             </small>
                         </div>
                     </div>
