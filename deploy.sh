@@ -31,7 +31,7 @@ fi
 echo "📡 Uploading to FTP ($FTP_HOST)..."
 
 # Target Paths
-PATHS=( "/www" "/www/domains/duhohratky.cz" "/www/subdom/www" )
+PATHS=( "/" "/www" "/www/domains/duhohratky.cz" "/www/subdom/www" )
 
 for REMOTE_PATH in "${PATHS[@]}"; do
     echo "📂 Target: $REMOTE_PATH"
