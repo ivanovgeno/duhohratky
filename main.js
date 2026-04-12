@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDynamicBadges();
     initBubbles(); // Start bubbles
     initLightbox(); // Initialize lightbox (v45)
+    initLegal(); // Initialize GDPR & VOP (v49)
 
     // Listen for changes from Admin panel (real-time update)
     window.addEventListener('storage', (e) => {
@@ -906,7 +907,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 backToTopBtn.classList.remove('visible');
             }
         });
-
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -915,3 +915,71 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+/* ====================================
+   LEGAL LOGIC (GDPR & VOP)
+   ==================================== */
+function initLegal() {
+    const banner = document.getElementById('gdpr-banner');
+    const acceptBtn = document.getElementById('gdpr-accept-btn');
+    const infoBtn = document.getElementById('gdpr-info-btn');
+    const openGdprBtn = document.getElementById('open-gdpr');
+    const openVopBtn = document.getElementById('open-vop');
+    const modal = document.getElementById('legal-modal');
+    const closeBtn = document.getElementById('close-legal-btn');
+    const closeXBtn = document.getElementById('close-legal-modal');
+    const modalBody = document.getElementById('legal-modal-body');
+
+    // 1. GDPR Banner Visibility
+    if (!localStorage.getItem('duhohratky_gdpr_accepted')) {
+        setTimeout(() => {
+            if (banner) banner.classList.add('active');
+        }, 1000);
+    }
+
+    // 2. Accept Action
+    if (acceptBtn && banner) {
+        acceptBtn.addEventListener('click', () => {
+            localStorage.setItem('duhohratky_gdpr_accepted', 'true');
+            banner.classList.remove('active');
+        });
+    }
+
+    // 3. Modal Opening
+    const openLegal = (type) => {
+        // We need the data. Since loadContent is async, we should ideally 
+        // read from window.defaultContent or re-fetch from LocalStorage
+        let data = window.defaultContent || {};
+        try {
+            const localData = localStorage.getItem('duhohratky_content');
+            if (localData) data = JSON.parse(localData);
+        } catch (e) {}
+
+        const content = data.legal ? data.legal[type] : '';
+        if (modalBody) {
+            modalBody.innerHTML = content || `<p>Obsah nebyl nalezen.</p>`;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    if (infoBtn) infoBtn.addEventListener('click', () => openLegal('gdpr'));
+    if (openGdprBtn) openGdprBtn.addEventListener('click', (e) => { e.preventDefault(); openLegal('gdpr'); });
+    if (openVopBtn) openVopBtn.addEventListener('click', (e) => { e.preventDefault(); openLegal('vop'); });
+
+    // 4. Modal Closing
+    const closeModal = () => {
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    };
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (closeXBtn) closeXBtn.addEventListener('click', closeModal);
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    }
+}

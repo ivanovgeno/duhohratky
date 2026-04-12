@@ -166,7 +166,13 @@ const defaultData = {
         email: 'admin@duhohratky.cz',
         seoTitle: 'Duhohratky | Sensory Play & Montessori pro děti',
         seoDescription: 'Duhohratky - kreativní sensory play a Montessori aktivity pro děti. Rozvoj smyslů, motoriky a kreativity v bezpečném prostředí.',
-        seoKeywords: 'sensory play, Montessori, děti, hry, rozvoj, kreativita, Duhohratky'
+        seoKeywords: 'sensory play, Montessori, děti, hromady, rozvoj, kreativita, Duhohratky'
+    },
+
+    // Legal
+    legal: {
+        gdpr: 'Tento web používá soubory cookies k poskytování služeb a analýze návštěvnosti. Používáním tohoto webu souhlasíte s jejich ukládáním.',
+        vop: '<h1>Všeobecné obchodní podmínky</h1><p>Zde dopište své obchodní podmínky...</p>'
     }
 };
 
@@ -591,7 +597,8 @@ function initNavigation() {
         reservio: 'Reservio',
         settings: 'Nastavení',
         lessons: 'Aktuální lekce',
-        upcoming: 'Připravované lekce' // Added 'upcoming' to titles
+        upcoming: 'Připravované lekce',
+        legal: 'Právní informace'
     };
 
     // Restore last active section from sessionStorage

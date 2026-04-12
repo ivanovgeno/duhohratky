@@ -639,6 +639,11 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 Duhohrátky. Všechna práva vyhrazena.</p>
+                <div class="footer-legal-links">
+                    <a href="#" id="open-gdpr">Ochrana údajů (GDPR)</a>
+                    <span class="separator">|</span>
+                    <a href="#" id="open-vop">Obchodní podmínky (VOP)</a>
+                </div>
                 <p>Vytvořeno s 💕 pro děti</p>
             </div>
         </div>
@@ -651,6 +656,33 @@
             <h3>Děkujeme za rezervaci!</h3>
             <p>Vaši rezervaci jsme přijali. Ozveme se vám do 24 hodin s potvrzením.</p>
             <button class="btn btn-primary" id="close-modal">Rozumím</button>
+        </div>
+    </div>
+
+    <!-- Legal Modal (GDPR / VOP) -->
+    <div class="modal" id="legal-modal">
+        <div class="modal-content glass-card legal-content">
+            <button class="modal-close" id="close-legal-modal" aria-label="Zavřít">&times;</button>
+            <div id="legal-modal-body" class="legal-text-body">
+                <!-- Data will be injected here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="close-legal-btn">Zavřít</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GDPR Cookie Banner -->
+    <div class="gdpr-banner" id="gdpr-banner">
+        <div class="container gdpr-container">
+            <div class="gdpr-content">
+                <span class="gdpr-icon">🍪</span>
+                <p id="gdpr-text" data-content="legal.gdpr">Tento web používá soubory cookies k poskytování služeb a analýze návštěvnosti. Používáním tohoto webu souhlasíte s jejich ukládáním.</p>
+            </div>
+            <div class="gdpr-actions">
+                <button class="btn btn-small btn-secondary-outline" id="gdpr-info-btn">Více informací</button>
+                <button class="btn btn-small btn-primary" id="gdpr-accept-btn">Rozumím</button>
+            </div>
         </div>
     </div>
 
