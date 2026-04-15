@@ -10,6 +10,26 @@ const defaultData = {
         email: 'admin@duhohratky.cz',
         password: 'admin123'
     },
+    navigation: {
+        home: 'Domů',
+        about: 'O nás',
+        activities: 'Aktivity',
+        gallery: 'Galerie',
+        tips: 'Návody & Tipy',
+        contact: 'Kontakt',
+        reservation: 'Rezervace'
+    },
+    badges: {
+        upcoming: '✨ Připravujeme',
+        about: '🌟 O nás',
+        activities: '🎪 Aktivity',
+        videos: '🎥 Videa',
+        reservation: '📅 Rezervace',
+        tips: '💡 Návody & Tipy',
+        contact: '📍 Kontakt',
+        gallery: '📸 Galerie',
+        legal: '⚖️ Právní informace'
+    },
 
     // Hero Section
     hero: {
@@ -707,7 +727,8 @@ function initNavigation() {
         settings: 'Nastavení',
         lessons: 'Aktuální lekce',
         upcoming: 'Připravované lekce',
-        legal: 'Právní informace'
+        legal: 'Právní informace',
+        'navigation-badges': 'Navigace & Badges'
     };
 
     // Restore last active section from sessionStorage

@@ -3,6 +3,26 @@ window.defaultContent = {
         "email": "admin@duhohratky.cz",
         "password": "admin123"
     },
+    "navigation": {
+        "home": "Domů",
+        "about": "O nás",
+        "activities": "Aktivity",
+        "gallery": "Galerie",
+        "tips": "Návody & Tipy",
+        "contact": "Kontakt",
+        "reservation": "Rezervace"
+    },
+    "badges": {
+        "upcoming": "✨ Připravujeme",
+        "about": "🌟 O nás",
+        "activities": "🎪 Aktivity",
+        "videos": "🎥 Videa",
+        "reservation": "📅 Rezervace",
+        "tips": "💡 Návody & Tipy",
+        "contact": "📍 Kontakt",
+        "gallery": "📸 Galerie",
+        "legal": "⚖️ Právní informace"
+    },
     "gallery": [],
     "hero": {
         "badge": "✨ Kreativita & Rozvoj",

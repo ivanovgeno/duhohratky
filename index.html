@@ -161,13 +161,13 @@
                     height="50">
             </a>
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home" class="nav-link">Domů</a></li>
-                <li><a href="#about" class="nav-link">O nás</a></li>
-                <li><a href="#activities" class="nav-link">Aktivity</a></li>
-                <li><a href="/galerie" class="nav-link">Galerie</a></li>
-                <li><a href="#tips" class="nav-link">Návody & Tipy</a></li>
-                <li><a href="#reservation" class="nav-link nav-cta">Rezervace</a></li>
-                <li><a href="#contact" class="nav-link">Kontakt</a></li>
+                <li><a href="#home" class="nav-link" data-content="navigation.home">Domů</a></li>
+                <li><a href="#about" class="nav-link" data-content="navigation.about">O nás</a></li>
+                <li><a href="#activities" class="nav-link" data-content="navigation.activities">Aktivity</a></li>
+                <li><a href="/galerie" class="nav-link" data-content="navigation.gallery">Galerie</a></li>
+                <li><a href="#tips" class="nav-link" data-content="navigation.tips">Návody & Tipy</a></li>
+                <li><a href="#reservation" class="nav-link nav-cta" data-content="navigation.reservation">Rezervace</a></li>
+                <li><a href="#contact" class="nav-link" data-content="navigation.contact">Kontakt</a></li>
             </ul>
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
                 <span></span>
@@ -239,7 +239,7 @@
         <section class="featured-section" id="lessons">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-badge" style="background: rgba(255,215,0,0.2); color: #BEB200;">⚡
+                    <span class="section-badge" data-content="badges.upcoming" style="background: rgba(255,215,0,0.2); color: #BEB200;">⚡
                         Aktuálně</span>
                     <h2 class="section-title" data-content="lessons.title">Aktuální <span
                             class="rainbow-text">lekce</span></h2>
@@ -256,7 +256,7 @@
         <section class="upcoming-themes" id="upcoming">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-badge">✨ Připravujeme</span>
+                    <span class="section-badge" data-content="badges.upcoming">✨ Připravujeme</span>
                     <h2 class="section-title" data-content="upcoming.title">Připravujeme další <span
                             class="rainbow-text">témata</span></h2>
                     <p class="section-description" data-content="upcoming.description">Na jaké další lekce se můžete v
@@ -272,7 +272,7 @@
         <section class="about" id="about">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-badge">🌟 O nás</span>
+                    <span class="section-badge" data-content="badges.about">🌟 O nás</span>
                     <h2 class="section-title" data-content="about.title">Co jsou Duhohrátky?</h2>
                 </div>
                 <div class="about-grid">
@@ -321,7 +321,7 @@
         <section class="activities" id="activities">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-badge">🎪 Aktivity</span>
+                    <span class="section-badge" data-content="badges.activities">🎪 Aktivity</span>
                     <h2 class="section-title" data-content="activities.title">Co u nás zažijete?</h2>
                     <p class="section-description" data-content="activities.description">Nabízíme širokou škálu aktivit
                         pro děti všech věkových kategorií</p>
@@ -375,7 +375,7 @@
         <section class="videos" id="videos">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-badge">🎥 Videa</span>
+                    <span class="section-badge" data-content="badges.videos">🎥 Videa</span>
                     <h2 class="section-title" id="videos-title">Videa z <span class="rainbow-text">našich lekcí</span></h2>
                     <p class="section-subtitle" id="videos-subtitle">Podívejte se na video ukázky z našich uplynulých témat</p>
                 </div>
@@ -418,7 +418,7 @@
         <section class="reservation" id="reservation">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-badge">📅 Rezervace</span>
+                    <span class="section-badge" data-content="badges.reservation">📅 Rezervace</span>
                     <h2 class="section-title">Zarezervujte si <span class="rainbow-text">termín</span></h2>
                     <p class="section-description">Vyberte si aktivitu a termín, který vám vyhovuje</p>
                 </div>
@@ -481,7 +481,7 @@
         <section class="tips-preview" id="tips">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-badge">💡 Návody & Tipy</span>
+                    <span class="section-badge" data-content="badges.tips">💡 Návody & Tipy</span>
                     <h2 class="section-title" data-content="tips.previewTitle">Inspirace pro <span
                             class="rainbow-text">domácí tvoření</span></h2>
                     <p class="section-description" data-content="tips.previewDescription">Vyzkoušejte naše oblíbené
@@ -544,7 +544,7 @@
         <section class="contact" id="contact">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-badge">📍 Kontakt</span>
+                    <span class="section-badge" data-content="badges.contact">📍 Kontakt</span>
                     <h2 class="section-title" data-content="contact.title">Kde nás <span
                             class="rainbow-text">najdete</span>?</h2>
                 </div>
@@ -610,19 +610,19 @@
                 <div class="footer-links">
                     <div class="footer-col">
                         <h4>Navigace</h4>
-                        <a href="#home">Domů</a>
-                        <a href="#about">O nás</a>
-                        <a href="#activities">Aktivity</a>
+                        <a href="#home" data-content="navigation.home">Domů</a>
+                        <a href="#about" data-content="navigation.about">O nás</a>
+                        <a href="#activities" data-content="navigation.activities">Aktivity</a>
                     </div>
                     <div class="footer-col">
                         <h4>Stránky</h4>
-                        <a href="/galerie">Galerie</a>
-                        <a href="/tips">Návody & Tipy</a>
+                        <a href="/galerie" data-content="navigation.gallery">Galerie</a>
+                        <a href="/tips" data-content="navigation.tips">Návody & Tipy</a>
                     </div>
                     <div class="footer-col">
                         <h4>Kontakt</h4>
-                        <a href="#reservation">Rezervace</a>
-                        <a href="#contact">Kontakt</a>
+                        <a href="#reservation" data-content="navigation.reservation">Rezervace</a>
+                        <a href="#contact" data-content="navigation.contact">Kontakt</a>
                     </div>
                 </div>
             </div>
