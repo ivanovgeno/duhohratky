@@ -192,6 +192,7 @@ let siteData = {};
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
     // VISUAL CONSOLE REMOVED (Production Mode)
+    checkProtocol();
 
     // CRITICAL: await loadData so siteData is populated BEFORE rendering
     await loadData();
@@ -201,8 +202,69 @@ document.addEventListener('DOMContentLoaded', async () => {
     initFormHandlers();
     initButtons();
     populateFields();
+    initVideoPreviews(); // New: real-time YouTube ID preview
     loadGallery(); // Now safe — siteData.gallery is populated
 });
+
+function checkProtocol() {
+    if (window.location.protocol === 'file:') {
+        const warning = document.getElementById('protocol-warning');
+        if (warning) warning.style.display = 'block';
+        console.warn('⚠️ Admin running on file:// protocol. Saving will fail.');
+    }
+}
+
+function initVideoPreviews() {
+    console.log('🎬 Initializing Video Previews...');
+    const videoInputs = document.querySelectorAll('[data-field^="videos.v"][data-field$=".url"]');
+    
+    videoInputs.forEach(input => {
+        // Initial check
+        updateSingleVideoPreview(input);
+        
+        // Update on input
+        input.addEventListener('input', () => updateSingleVideoPreview(input));
+    });
+}
+
+function updateSingleVideoPreview(input) {
+    const field = input.dataset.field; // e.g. "videos.v1.url"
+    const videoKey = field.split('.')[1]; // e.g. "v1"
+    const previewEl = document.getElementById(`${videoKey}-id-preview`);
+    
+    if (!previewEl) return;
+    
+    const url = input.value;
+    const videoId = extractVideoId(url);
+    
+    if (videoId) {
+        previewEl.innerHTML = `✅ Rozpoznáno ID: <span style="color: #2ed573; font-weight: bold;">${videoId}</span>`;
+    } else if (url && url.trim() !== '') {
+        previewEl.innerHTML = `❌ <span style="color: #ff4757;">Neplatný YouTube odkaz</span>`;
+    } else {
+        previewEl.innerHTML = '';
+    }
+}
+
+function extractVideoId(url) {
+    if (!url) return null;
+    try {
+        url = url.trim();
+        if (url.includes('youtube.com/shorts/')) return url.split('/shorts/')[1].split(/[?#]/)[0];
+        if (url.includes('youtube.com/live/')) return url.split('/live/')[1].split(/[?#]/)[0];
+        if (url.includes('youtube.com/embed/')) return url.split('/embed/')[1].split(/[?#]/)[0];
+        if (url.includes('youtube.com/watch')) {
+            const urlObj = new URL(url);
+            return urlObj.searchParams.get('v');
+        }
+        if (url.includes('youtu.be/')) return url.split('/').pop().split(/[?#]/)[0];
+        const idRegex = /^[a-zA-Z0-9_-]{11}$/;
+        if (idRegex.test(url)) return url;
+    } catch (e) {
+        console.error('Error parsing video URL:', e);
+    }
+    return null;
+}
 
 /* ====================================
    GALLERY MANAGEMENT
@@ -471,6 +533,9 @@ async function loadData() {
 }
 
 async function saveData() {
+    // CRITICAL: Sync data from UI elements right before saving
+    syncDataFromUI();
+
     localStorage.setItem('duhohratky_data', JSON.stringify(siteData));
 
     // Also save to a format that index.html can read (for preview)
@@ -478,6 +543,34 @@ async function saveData() {
 
     // Save to Server (PHP) — await to ensure persistence
     await saveToPHP();
+}
+
+function syncDataFromUI() {
+    console.log('🔄 Syncing UI data to siteData object...');
+    const inputs = document.querySelectorAll('[data-field]');
+    
+    inputs.forEach(input => {
+        const field = input.dataset.field;
+        const parts = field.split('.');
+        
+        let current = siteData;
+        for (let i = 0; i < parts.length - 1; i++) {
+            const part = parts[i];
+            if (!current[part]) {
+                const nextPart = parts[i + 1];
+                current[part] = !isNaN(nextPart) ? [] : {};
+            }
+            current = current[part];
+        }
+        
+        const lastKey = parts[parts.length - 1];
+        if (input.type === 'checkbox') {
+            current[lastKey] = input.checked;
+        } else {
+            current[lastKey] = input.value;
+        }
+    });
+    console.log('✅ UI Sync complete.');
 }
 
 async function saveToPHP() {
@@ -488,6 +581,16 @@ async function saveToPHP() {
 
     try {
         console.log('📤 Sending data to save.php:', siteData);
+        
+        // Protocol check - fetch will fail on file:// protocol
+        if (window.location.protocol === 'file:') {
+            showToast('✨ Změny uloženy pro lokální Náhled webu.', 'success');
+            console.info('💾 Data saved to localStorage. Server save skipped due to file:// protocol.');
+            saveBtn.innerHTML = originalText;
+            saveBtn.disabled = false;
+            return;
+        }
+
         const response = await fetch('save.php', {
             method: 'POST',
             headers: {
@@ -529,18 +632,13 @@ function resetData() {
 }
 
 function deepMerge(target, source) {
+    if (!source || typeof source !== 'object') return target;
+    if (!target || typeof target !== 'object') return source;
+
     const result = { ...target };
     for (const key in source) {
         if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
-            // If target has this key and it is an array (but source is object), we should probably respect source (if it's not legacy garbage)
-            // But for our specific case: default is array, source might be legacy object.
-            // If target[key] is array and source[key] is object, we should KEEP target (empty array) or overwrite if source is valid.
-            // Simplified: only recursive merge if BOTH are objects.
-            if (target[key] && typeof target[key] === 'object' && !Array.isArray(target[key])) {
-                result[key] = deepMerge(target[key], source[key]);
-            } else {
-                result[key] = source[key];
-            }
+            result[key] = deepMerge(target[key] || {}, source[key]);
         } else {
             result[key] = source[key];
         }

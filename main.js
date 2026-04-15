@@ -1062,21 +1062,38 @@ function extractVideoId(url) {
     if (!url) return null;
     
     try {
-        // Already an embed URL
-        if (url.includes('youtube.com/embed/')) {
-            return url.split('/embed/')[1].split('?')[0];
+        // Remove whitespace
+        url = url.trim();
+
+        // 1. YouTube Shorts support
+        if (url.includes('youtube.com/shorts/')) {
+            return url.split('/shorts/')[1].split(/[?#]/)[0];
         }
-        // Standard URL: youtube.com/watch?v=ID
+        
+        // 2. YouTube Live support
+        if (url.includes('youtube.com/live/')) {
+            return url.split('/live/')[1].split(/[?#]/)[0];
+        }
+
+        // 3. Already an embed URL
+        if (url.includes('youtube.com/embed/')) {
+            return url.split('/embed/')[1].split(/[?#]/)[0];
+        }
+
+        // 4. Standard URL: youtube.com/watch?v=ID
         if (url.includes('youtube.com/watch')) {
             const urlObj = new URL(url);
             return urlObj.searchParams.get('v');
         }
-        // Shortened URL: youtu.be/ID
+
+        // 5. Shortened URL: youtu.be/ID
         if (url.includes('youtu.be/')) {
-            return url.split('/').pop().split('?')[0];
+            return url.split('/').pop().split(/[?#]/)[0];
         }
-        // Direct ID (11 characters, no dots or slashes)
-        if (url.length === 11 && !url.includes('/') && !url.includes('.')) {
+
+        // 6. Direct ID (11 characters, alphanumeric + - and _)
+        const idRegex = /^[a-zA-Z0-9_-]{11}$/;
+        if (idRegex.test(url)) {
             return url;
         }
     } catch (e) {

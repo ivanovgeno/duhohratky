@@ -6,7 +6,7 @@ USER="w391870"
 PASS="Duhohratky.2026"
 REMOTE_PATH="/www/"
 
-FILES=("index.html" "main.js" "admin.js" "save.php" "fix_permissions.php")
+FILES=("index.html" "main.js" "main.css" "admin.html" "admin.js" "save.php" "fix_permissions.php")
 
 echo "⏳ Spouštím nahrávání na $HOST..."
 
