@@ -1,0 +1,210 @@
+import os
+
+TEMPLATE = """<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{TITLE} | Duhohrátky</title>
+    <meta name="theme-color" content="#FF6B9D">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css?v=500">
+    <style>
+        .legal-page-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(255, 107, 157, 0.1);
+            color: #4A3F3A;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        .legal-page-content h1, .legal-page-content h2, .legal-page-content h3 {
+            color: var(--color-primary, #FF6B9D);
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+            font-family: 'Fredoka', 'Quicksand', sans-serif;
+        }
+        .legal-page-content h2 { font-size: 1.5rem; }
+        .legal-page-content p { margin-bottom: 1.2rem; }
+        .legal-page-content ul { padding-left: 1.5rem; margin-bottom: 1.2rem; }
+        .legal-page-content li { margin-bottom: 0.5rem; }
+        .highlight-fill { background-color: #FFE4E1; padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: bold; color: #D81B60; }
+    </style>
+</head>
+<body>
+    <div class="bubbles-container" id="bubbles"></div>
+    <header class="header" id="header" style="background: rgba(255, 255, 255, 0.95);">
+        <nav class="nav container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Duhohrátky" class="logo-image" width="50" height="50">
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Domů</a></li>
+                <li><a href="index.html#about" class="nav-link">O nás</a></li>
+                <li><a href="index.html#activities" class="nav-link">Aktivity</a></li>
+                <li><a href="gallery.html" class="nav-link">Galerie</a></li>
+                <li><a href="index.html#reservation" class="nav-link nav-cta">Rezervace</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero" style="padding-top: 10rem; min-height: 30vh; display: flex; align-items: center; justify-content: center; text-align: center;">
+            <div class="container">
+                <span class="section-badge">⚖️ Právní informace</span>
+                <h1 class="page-title">{TITLE}</h1>
+            </div>
+        </section>
+
+        <section class="gallery-page" style="padding-top: 0; padding-bottom: 6rem;">
+            <div class="container">
+                <div class="legal-page-content glass-card" id="legal-content">
+{CONTENT}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <img src="logo.png" alt="Duhohrátky" class="logo-image footer-logo" loading="lazy" width="60"
+                            height="60" decoding="async">
+                    </a>
+                    <p>Sensory Play & Montessori pro šťastné děti</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Navigace</h4>
+                        <a href="index.html">Domů</a>
+                        <a href="index.html#about">O nás</a>
+                        <a href="index.html#activities">Aktivity</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Stránky</h4>
+                        <a href="gallery.html">Galerie</a>
+                        <a href="tips.html">Návody & Tipy</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Kontakt</h4>
+                        <a href="index.html#reservation">Rezervace</a>
+                        <a href="index.html#contact">Kontakt</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Duhohrátky. Všechna práva vyhrazena.</p>
+                <div class="footer-legal-links">
+                    <a href="gdpr.html">Ochrana údajů (GDPR)</a>
+                    <span class="separator">|</span>
+                    <a href="vop.html">Obchodní podmínky (VOP)</a>
+                    <span class="separator">|</span>
+                    <a href="marketing.html">Marketingový souhlas</a>
+                </div>
+                <p>Vytvořeno s 💕 pro děti</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GDPR Cookie Banner -->
+    <div class="gdpr-banner" id="gdpr-banner">
+        <div class="container gdpr-container">
+            <div class="gdpr-content">
+                <span class="gdpr-icon">🍪</span>
+                <p id="gdpr-text">Tento web používá soubory cookies k poskytování služeb a analýze návštěvnosti. Používáním tohoto webu souhlasíte s jejich ukládáním.</p>
+            </div>
+            <div class="gdpr-actions">
+                <button class="btn btn-small btn-secondary-outline" id="gdpr-info-btn" onclick="window.location.href='gdpr.html'">Více informací</button>
+                <button class="btn btn-small btn-secondary-outline" id="gdpr-reject-btn">Odmítnout</button>
+                <button class="btn btn-small btn-primary" id="gdpr-accept-btn">Rozumím</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="content.js?v=500"></script>
+    <script src="main.js?v=500"></script>
+</body>
+</html>
+"""
+
+GDPR_TEXT = """
+                <h2>1. Úvodní ustanovení</h2>
+                <p>Společnost/Podnikatel <span class="highlight-fill">[VAŠE JMÉNO / NÁZEV FIRMY]</span>, IČO: <span class="highlight-fill">[VAŠE IČO]</span>, se sídlem <span class="highlight-fill">[VAŠE ADRESA]</span> (dále jen "Správce"), zpracovává Vaše osobní údaje v souladu s nařízením Evropského parlamentu a Rady (EU) 2016/679 (GDPR).</p>
+
+                <h2>2. Jaké údaje zpracováváme a proč</h2>
+                <p>Pro účely poskytování našich služeb (přihlášky na lekce Duhohrátek) o Vás zpracováváme:</p>
+                <ul>
+                    <li><strong>Jméno a příjmení (rodiče i dítěte)</strong> – pro identifikaci a evidenci na lekcích.</li>
+                    <li><strong>E-mailovou adresu a telefonní číslo</strong> – pro komunikaci ohledně rezervací, změn termínů a zaslání potvrzení.</li>
+                </ul>
+
+                <h2>3. Doba uchování a přístup k údajům</h2>
+                <p>Vaše osobní údaje ukládáme pouze na nezbytně nutnou dobu (po dobu trvání Vašich návštěv lekcí a zákonných archivačních lhůt). K údajům má přístup pouze Správce a případně nezbytní zpracovatelé (poskytovatel rezervačního systému).</p>
+
+                <h2>4. Vaše práva</h2>
+                <p>Podle GDPR máte mimo jiné právo:</p>
+                <ul>
+                    <li>Požadovat informaci, jaké Vaše osobní údaje zpracováváme.</li>
+                    <li>Vyžádat si výpis těchto údajů a nechat je aktualizovat či opravit.</li>
+                    <li>Požadovat výmaz těchto osobních údajů.</li>
+                    <li>V případě pochybností o dodržování povinností se obrátit na nás přes email <span class="highlight-fill">[VÁŠ E-MAIL]</span> nebo na Úřad pro ochranu osobních údajů.</li>
+                </ul>
+"""
+
+VOP_TEXT = """
+                <h2>1. Základní ustanovení</h2>
+                <p>Tyto všeobecné obchodní podmínky (dále jen "VOP") upravují vztahy mezi poskytovatelem služeb <span class="highlight-fill">[VAŠE JMÉNO / NÁZEV FIRMY]</span>, IČO: <span class="highlight-fill">[VAŠE IČO]</span> (dále jen "Poskytovatel") a klienty účastnícími se lekcí Duhohrátek.</p>
+
+                <h2>2. Přihlašování a Rezervace</h2>
+                <p>Přihlašování na lekce probíhá primárně přes online rezervační systém na našem webu. Rezervace je platná až po potvrzení ze strany Poskytovatele a zaplacení kurzovného (pokud není sjednáno jinak). Kapacita každé lekce je omezená.</p>
+
+                <h2>3. Platební podmínky a Storno</h2>
+                <p>Cena za lekce je uvedena v aktuálním ceníku. V případě zrušení lekce ze strany klienta méně než <span class="highlight-fill">[X HODIN]</span> předem propadá poplatek poskytovateli. Je však možné za sebe zajistit náhradníka. Pokud lekci zruší Poskytovatel z důvodu nemoci či jiných kapacitních problémů, nabídne náhradní termín nebo vrátí peníze.</p>
+
+                <h2>4. Pravidla na lekcích</h2>
+                <ul>
+                    <li>Rodič (nebo určený doprovod) po celou dobu lekce <strong>zodpovídá</strong> za své dítě.</li>
+                    <li>Ačkoliv používáme netoxické a bezpečné materiály, je zásadní dávat pozor, aby děti nevdechly drobné části.</li>
+                    <li>Prosíme o ohleduplnost k ostatním dětem a dodržování základních hygienických pravidel. V případě nachlazení dítěte prosím zrušte rezervaci.</li>
+                </ul>
+
+                <h2>5. Závěrečná ustanovení</h2>
+                <p>Poskytovatel si vyhrazuje právo VOP kdykoliv změnit. O případné změně budou klienti informováni. Tyto podmínky platí od <span class="highlight-fill">[AKTUÁLNÍ DATUM]</span>.</p>
+"""
+
+MARKETING_TEXT = """
+                <h2>Marketingový souhlas a Zpracování fotografií</h2>
+                <p>Zaškrtnutím tohoto souhlasu dobrovolně udělujete souhlas společnosti/podnikateli <span class="highlight-fill">[VAŠE JMÉNO / NÁZEV FIRMY]</span> se zpracováním osobních údajů za účelem marketingu.</p>
+
+                <h2>1. Zasílání novinek (Newsletter)</h2>
+                <p>Souhlasíte se zpracováním Vaší e-mailové adresy pro účely zasílání informací o nových lekcích, termínech, speciálních akcích a tipech pro domácí tvoření. Tento souhlas můžete kdykoliv odvolat kliknutím na příslušný odkaz v emailu nebo napsáním na <span class="highlight-fill">[VÁŠ E-MAIL]</span>.</p>
+
+                <h2>2. Pořizování a použití fotografií</h2>
+                <p>Na některých lekcích či akcích Duhohrátek mohou být pořizovány fotografie a krátká videa. Pokud v rezervačním formuláři nebo na místě udělíte explicitní souhlas, mohou být tyto materiály (na kterých můžete být zachyceni vy nebo Vaše dítě) publikovány za účelem prezentace našich služeb na:</p>
+                <ul>
+                    <li>Našem oficiálním Facebooku a Instagramu.</li>
+                    <li>Těchto webových stránkách v sekci Galerie.</li>
+                </ul>
+                <p>Vždy se snažíme fotografie dělat tak, aby plně respektovaly soukromí dětí. Tento souhlas s focením můžete kdykoliv bez následků odvolat nebo požádat o stažení konkrétní fotky ze sociálních sítí.</p>
+"""
+
+files = {
+    "gdpr.html": {"TITLE": "Ochrana osobních údajů (GDPR)", "CONTENT": GDPR_TEXT},
+    "vop.html": {"TITLE": "Všeobecné obchodní podmínky (VOP)", "CONTENT": VOP_TEXT},
+    "marketing.html": {"TITLE": "Marketingový souhlas", "CONTENT": MARKETING_TEXT},
+}
+
+for filename, info in files.items():
+    content = TEMPLATE.replace("{TITLE}", info["TITLE"]).replace("{CONTENT}", info["CONTENT"])
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write(content)
+    print(f"Generated unified {filename}")

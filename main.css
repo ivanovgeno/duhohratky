@@ -799,6 +799,24 @@ body {
 }
 
 /* Buttons */
+.btn-small {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.9rem;
+    border-radius: var(--radius-md);
+}
+
+.btn-secondary-outline {
+    background: transparent;
+    color: var(--color-dark);
+    border: 2px solid rgba(255, 107, 157, 0.5); /* Pinkish outline */
+}
+
+.btn-secondary-outline:hover {
+    background: rgba(255, 107, 157, 0.1);
+    color: var(--color-pink);
+    transform: translateY(-2px);
+}
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -1247,37 +1265,150 @@ section {
 }
 
 /* ====================================
-   GALLERY SECTION
+   VIDEOS SECTION
    ==================================== */
-.gallery {
-    background: radial-gradient(circle at 0% 0%, rgba(135, 206, 235, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 100% 100%, rgba(221, 160, 221, 0.3) 0%, transparent 50%);
+.videos {
+    padding: var(--spacing-2xl) 0;
     position: relative;
+    background: linear-gradient(135deg, rgba(255, 182, 193, 0.05) 0%, rgba(135, 206, 235, 0.05) 100%);
 }
 
-.gallery-grid {
+.video-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-md);
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
 }
 
-.gallery-item {
-    aspect-ratio: 1;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
+/* Rainbow border wrapper */
+.video-card {
     position: relative;
-    cursor: pointer;
-    transition: var(--transition-normal);
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+    box-shadow: var(--shadow-md);
+    /* Rainbow border via background + inner clip */
+    background: var(--gradient-rainbow);
+    padding: 3px;
 }
 
-.gallery-placeholder {
+.video-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(232, 160, 160, 0.3), 0 8px 20px rgba(168, 216, 184, 0.2);
+}
+
+.video-card-inner {
+    background: white;
+    border-radius: calc(var(--radius-2xl) - 3px);
+    overflow: hidden;
+}
+
+/* Thumbnail container with 16:9 aspect ratio */
+.video-embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    background: #1a1a2e;
+    cursor: pointer;
+}
+
+/* YouTube Thumbnail Image */
+.video-embed-container .video-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.4s ease;
+}
+
+.video-card:hover .video-thumbnail {
+    transform: scale(1.08);
+    filter: brightness(0.8);
+}
+
+/* Play Button Overlay */
+.video-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--gradient-rainbow);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 4rem;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, opacity 0.3s ease;
+    z-index: 2;
+    box-shadow: 0 4px 20px rgba(232, 160, 160, 0.5);
 }
+
+.video-play-btn::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 12px 0 12px 22px;
+    border-color: transparent transparent transparent white;
+    margin-left: 4px;
+}
+
+.video-play-btn:hover {
+    transform: translate(-50%, -50%) scale(1.15);
+    box-shadow: 0 8px 30px rgba(232, 160, 160, 0.7);
+}
+
+/* When card is hovered, pulse the play button */
+.video-card:hover .video-play-btn {
+    animation: playPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes playPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Active state — hide thumbnail & play btn, show iframe */
+.video-embed-container.playing .video-thumbnail,
+.video-embed-container.playing .video-play-btn {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.video-embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.video-embed-container.playing iframe {
+    opacity: 1;
+}
+
+/* Video Title */
+.video-title {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-family: var(--font-secondary);
+    font-size: 1.15rem;
+    color: var(--color-dark);
+    text-align: center;
+    background: white;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
 
 .gallery-image {
     width: 100%;
@@ -1826,6 +1957,10 @@ section {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .footer-bottom {
         flex-direction: column;
         text-align: center;
@@ -1849,6 +1984,10 @@ section {
     }
 
     .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .video-grid {
         grid-template-columns: 1fr;
     }
 
@@ -2881,16 +3020,16 @@ section {
 /* GDPR Banner */
 .gdpr-banner {
     position: fixed;
-    bottom: -100px;
+    bottom: -200px;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
-    z-index: 9999;
-    padding: 1.25rem 0;
-    transition: bottom 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    border-top: 1px solid rgba(255, 107, 157, 0.2);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 -15px 40px rgba(0,0,0,0.1);
+    z-index: 10000;
+    padding: 1.5rem 0;
+    transition: bottom 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    border-top: 2px solid var(--color-pink);
 }
 
 .gdpr-banner.active {
@@ -2901,7 +3040,36 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .gdpr-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .gdpr-actions {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .gdpr-actions .btn {
+        width: auto !important;
+        flex: 1 1 auto;
+        min-width: 100px;
+        font-size: 0.8rem !important;
+        padding: 8px 12px !important;
+        justify-content: center;
+    }
+    
+    .gdpr-actions .btn-primary {
+        flex: 2 1 auto; /* Make Rozumím slightly wider */
+    }
 }
 
 .gdpr-content {
@@ -2926,6 +3094,14 @@ section {
     display: flex;
     gap: 0.75rem;
     flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gdpr-actions .btn {
+    width: auto !important;
+    flex: 1 1 auto; /* Let them size naturally but flexibly */
+    min-width: 120px;
 }
 
 /* Legal Footer Links */

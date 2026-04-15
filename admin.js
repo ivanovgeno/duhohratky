@@ -161,6 +161,15 @@ const defaultData = {
         lesson5: { active: false, title: '', location: '', date: '', tag: 'free_spots' }
     },
 
+    // Video Section (Home Page Preview)
+    videos: {
+        title: 'Videa z <span class="rainbow-text">našich lekcí</span>',
+        subtitle: 'Podívejte se na video ukázky z našich uplynulých témat',
+        v1: { title: 'Duhová laboratoř', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },
+        v2: { title: 'Zatmění v písku', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },
+        v3: { title: 'Vodní svět', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }
+    },
+
     // Settings
     settings: {
         email: 'admin@duhohratky.cz',
@@ -593,6 +602,7 @@ function initNavigation() {
         about: 'O nás',
         activities: 'Aktivity',
         gallery: 'Galerie',
+        videos: 'Videa z lekcí',
         tips: 'Návody & Tipy',
         contact: 'Kontakt',
         reservio: 'Reservio',

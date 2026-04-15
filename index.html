@@ -141,7 +141,7 @@
         }
     </style>
 
-    <link rel="stylesheet" href="main.css?v=110">
+    <link rel="stylesheet" href="main.css?v=501">
     <link rel="stylesheet" href="admin.css?v=110">
 </head>
 
@@ -373,54 +373,42 @@
         </section>
 
 
-        <section class="gallery" id="gallery">
+        <section class="videos" id="videos">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-badge">📸 Galerie</span>
-                    <h2 class="section-title" data-content="gallery.title">Nahlédněte do <span
-                            class="rainbow-text">našeho světa</span></h2>
+                    <span class="section-badge">🎥 Videa</span>
+                    <h2 class="section-title" id="videos-title">Videa z <span class="rainbow-text">našich lekcí</span></h2>
+                    <p class="section-subtitle" id="videos-subtitle">Podívejte se na video ukázky z našich uplynulých témat</p>
                 </div>
-                <div class="gallery-grid">
-                    <div class="gallery-item" data-category="sensory">
-                        <img src="watercolor_sensory.png" alt="Sensory Play" class="gallery-image" loading="lazy"
-                            width="400" height="300" decoding="async" data-content="gallery.img1Url">
-                        <div class="gallery-overlay">
-                            <span data-content="gallery.img1Label">Sensory Play</span>
+                <div class="video-grid" id="video-grid">
+                    <!-- Video 1 -->
+                    <div class="video-card">
+                        <div class="video-card-inner">
+                            <div class="video-embed-container" id="video-v1-container" data-video-key="v1">
+                                <img class="video-thumbnail" id="video-v1-thumb" src="" alt="Video náhled">
+                                <div class="video-play-btn"></div>
+                            </div>
+                            <h3 class="video-title" id="video-v1-title">Duhová laboratoř</h3>
                         </div>
                     </div>
-                    <div class="gallery-item" data-category="creative">
-                        <img src="watercolor_creative.png" alt="Kreativní tvoření" class="gallery-image" loading="lazy"
-                            width="400" height="300" decoding="async" data-content="gallery.img2Url">
-                        <div class="gallery-overlay">
-                            <span data-content="gallery.img2Label">Kreativní tvoření</span>
+                    <!-- Video 2 -->
+                    <div class="video-card">
+                        <div class="video-card-inner">
+                            <div class="video-embed-container" id="video-v2-container" data-video-key="v2">
+                                <img class="video-thumbnail" id="video-v2-thumb" src="" alt="Video náhled">
+                                <div class="video-play-btn"></div>
+                            </div>
+                            <h3 class="video-title" id="video-v2-title">Zatmění v písku</h3>
                         </div>
                     </div>
-                    <div class="gallery-item" data-category="montessori">
-                        <img src="watercolor_montessori.png" alt="Montessori" class="gallery-image" loading="lazy"
-                            width="400" height="300" decoding="async" data-content="gallery.img3Url">
-                        <div class="gallery-overlay">
-                            <span data-content="gallery.img3Label">Montessori</span>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-category="water">
-                        <img src="watercolor_water.png" alt="Vodní hrátky" class="gallery-image" loading="lazy"
-                            width="400" height="300" decoding="async" data-content="gallery.img4Url">
-                        <div class="gallery-overlay">
-                            <span data-content="gallery.img4Label">Vodní hrátky</span>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-category="nature">
-                        <img src="watercolor_nature.png" alt="Přírodniny" class="gallery-image" loading="lazy"
-                            width="400" height="300" decoding="async" data-content="gallery.img5Url">
-                        <div class="gallery-overlay">
-                            <span data-content="gallery.img5Label">Přírodniny</span>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-category="party">
-                        <img src="watercolor_party.png" alt="Oslavy" class="gallery-image" loading="lazy" width="400"
-                            height="300" decoding="async" data-content="gallery.img6Url">
-                        <div class="gallery-overlay">
-                            <span data-content="gallery.img6Label">Oslavy</span>
+                    <!-- Video 3 -->
+                    <div class="video-card">
+                        <div class="video-card-inner">
+                            <div class="video-embed-container" id="video-v3-container" data-video-key="v3">
+                                <img class="video-thumbnail" id="video-v3-thumb" src="" alt="Video náhled">
+                                <div class="video-play-btn"></div>
+                            </div>
+                            <h3 class="video-title" id="video-v3-title">Vodní svět</h3>
                         </div>
                     </div>
                 </div>
@@ -642,11 +630,11 @@
             <div class="footer-bottom">
                 <p>&copy; 2024 Duhohrátky. Všechna práva vyhrazena.</p>
                 <div class="footer-legal-links">
-                    <a href="#" id="open-gdpr">Ochrana údajů (GDPR)</a>
+                    <a href="gdpr.html">Ochrana údajů (GDPR)</a>
                     <span class="separator">|</span>
-                    <a href="#" id="open-vop">Obchodní podmínky (VOP)</a>
+                    <a href="vop.html">Obchodní podmínky (VOP)</a>
                     <span class="separator">|</span>
-                    <a href="#" id="open-marketing">Marketingový souhlas</a>
+                    <a href="marketing.html">Marketingový souhlas</a>
                 </div>
                 <p>Vytvořeno s 💕 pro děti</p>
             </div>
@@ -684,14 +672,15 @@
                 <p id="gdpr-text" data-content="legal.gdpr">Tento web používá soubory cookies k poskytování služeb a analýze návštěvnosti. Používáním tohoto webu souhlasíte s jejich ukládáním.</p>
             </div>
             <div class="gdpr-actions">
-                <button class="btn btn-small btn-secondary-outline" id="gdpr-info-btn">Více informací</button>
+                <button class="btn btn-small btn-secondary-outline" id="gdpr-info-btn" onclick="window.location.href='gdpr.html'">Více informací</button>
+                <button class="btn btn-small btn-secondary-outline" id="gdpr-reject-btn">Odmítnout</button>
                 <button class="btn btn-small btn-primary" id="gdpr-accept-btn">Rozumím</button>
             </div>
         </div>
     </div>
 
-    <script src="content.js?v=110"></script>
-    <script src="main.js?v=110"></script>
+    <script src="content.js?v=501"></script>
+    <script src="main.js?v=501"></script>
 </body>
 
 </html>

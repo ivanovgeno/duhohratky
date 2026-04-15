@@ -189,13 +189,13 @@ function applyContent(data) {
         console.error('Error rendering lessons:', e);
     }
 
-    // Render Gallery Page
+    // Render Videos Section
     try {
-        if (data.gallery) {
-            renderGalleryPage(data.gallery);
+        if (data.videos) {
+            renderVideos(data.videos);
         }
     } catch (e) {
-        console.error('Error rendering gallery:', e);
+        console.error('Error rendering videos:', e);
     }
 }
 
@@ -935,36 +935,27 @@ function initLegal() {
         }, 1000);
     }
 
-    // 2. Accept Action
-    if (acceptBtn && banner) {
-        acceptBtn.addEventListener('click', () => {
-            localStorage.setItem('duhohratky_gdpr_accepted', 'true');
+    // 2. Accept & Reject Actions
+    const handleDismiss = (val) => {
+        console.log('GDPR dismissed with:', val);
+        localStorage.setItem('duhohratky_gdpr_accepted', val);
+        if (banner) {
             banner.classList.remove('active');
-        });
-    }
-
-    // 3. Modal Opening
-    const openLegal = (type) => {
-        // We need the data. Since loadContent is async, we should ideally 
-        // read from window.defaultContent or re-fetch from LocalStorage
-        let data = window.defaultContent || {};
-        try {
-            const localData = localStorage.getItem('duhohratky_content');
-            if (localData) data = JSON.parse(localData);
-        } catch (e) {}
-
-        const content = data.legal ? data.legal[type] : '';
-        if (modalBody) {
-            modalBody.innerHTML = content || `<p>Obsah nebyl nalezen.</p>`;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            // Hard hide after animation
+            setTimeout(() => { banner.style.display = 'none'; }, 800);
         }
     };
 
-    if (infoBtn) infoBtn.addEventListener('click', () => openLegal('gdpr_full'));
-    if (openGdprBtn) openGdprBtn.addEventListener('click', (e) => { e.preventDefault(); openLegal('gdpr_full'); });
-    if (openVopBtn) openVopBtn.addEventListener('click', (e) => { e.preventDefault(); openLegal('vop'); });
-    if (openMarketingBtn) openMarketingBtn.addEventListener('click', (e) => { e.preventDefault(); openLegal('marketing'); });
+    if (acceptBtn) acceptBtn.onclick = () => handleDismiss('true');
+    const rejectBtn = document.getElementById('gdpr-reject-btn');
+    if (rejectBtn) rejectBtn.onclick = () => handleDismiss('false');
+
+    // 3. Info Page Redirect
+    if (infoBtn) {
+        infoBtn.addEventListener('click', () => {
+            window.location.href = 'gdpr.html';
+        });
+    }
 
     // 4. Modal Closing
     const closeModal = () => {
@@ -982,3 +973,117 @@ function initLegal() {
         });
     }
 }
+
+/* ====================================
+   VIDEO RENDERING
+   ==================================== */
+function renderVideos(videoData) {
+    if (!videoData) return;
+
+    console.log('--- Rendering Videos ---');
+
+    // 1. Update Section Header
+    const titleEl = document.getElementById('videos-title');
+    const subtitleEl = document.getElementById('videos-subtitle');
+    
+    if (titleEl && videoData.title) titleEl.innerHTML = videoData.title;
+    if (subtitleEl && videoData.subtitle) subtitleEl.textContent = videoData.subtitle;
+
+    // 2. Render each video (thumbnail + play button)
+    ['v1', 'v2', 'v3'].forEach(vidKey => {
+        const vid = videoData[vidKey];
+        if (!vid || !vid.url) return;
+
+        const videoId = extractVideoId(vid.url);
+        if (!videoId) return;
+
+        const vidTitleEl = document.getElementById(`video-${vidKey}-title`);
+        const thumbEl = document.getElementById(`video-${vidKey}-thumb`);
+        const containerEl = document.getElementById(`video-${vidKey}-container`);
+
+        // Set title
+        if (vidTitleEl && vid.title) vidTitleEl.textContent = vid.title;
+
+        // Set YouTube thumbnail (hqdefault for reliable HD)
+        if (thumbEl) {
+            thumbEl.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+            thumbEl.onerror = function() {
+                this.src = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+            };
+        }
+
+        // Store video ID for click handler
+        if (containerEl) {
+            containerEl.dataset.videoId = videoId;
+            containerEl.dataset.videoTitle = vid.title || 'Video';
+        }
+    });
+
+    // 3. Attach click-to-play handlers
+    initVideoPlayers();
+}
+
+function initVideoPlayers() {
+    const containers = document.querySelectorAll('.video-embed-container[data-video-id]');
+    
+    containers.forEach(container => {
+        const playBtn = container.querySelector('.video-play-btn');
+        
+        const handlePlay = () => {
+            const videoId = container.dataset.videoId;
+            const title = container.dataset.videoTitle || 'Video';
+            
+            // Don't re-add iframe if already playing
+            if (container.classList.contains('playing')) return;
+
+            // Create and insert iframe with autoplay
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+            iframe.title = title;
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.allowFullscreen = true;
+            container.appendChild(iframe);
+
+            // Trigger playing state (hides thumbnail + play btn, shows iframe)
+            container.classList.add('playing');
+        };
+
+        // Click on play button or thumbnail to play
+        if (playBtn) playBtn.addEventListener('click', handlePlay);
+        container.addEventListener('click', (e) => {
+            if (e.target === container || e.target.classList.contains('video-thumbnail')) {
+                handlePlay();
+            }
+        });
+    });
+}
+
+function extractVideoId(url) {
+    if (!url) return null;
+    
+    try {
+        // Already an embed URL
+        if (url.includes('youtube.com/embed/')) {
+            return url.split('/embed/')[1].split('?')[0];
+        }
+        // Standard URL: youtube.com/watch?v=ID
+        if (url.includes('youtube.com/watch')) {
+            const urlObj = new URL(url);
+            return urlObj.searchParams.get('v');
+        }
+        // Shortened URL: youtu.be/ID
+        if (url.includes('youtu.be/')) {
+            return url.split('/').pop().split('?')[0];
+        }
+        // Direct ID (11 characters, no dots or slashes)
+        if (url.length === 11 && !url.includes('/') && !url.includes('.')) {
+            return url;
+        }
+    } catch (e) {
+        console.error('Error parsing video URL:', e);
+    }
+
+    return null;
+}
+
+

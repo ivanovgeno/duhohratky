@@ -70,6 +70,9 @@
                     <a href="#" class="nav-item" data-section="gallery">
                         <span>📸</span> Galerie
                     </a>
+                    <a href="#" class="nav-item" data-section="videos">
+                        <span>🎥</span> Videa z lekcí
+                    </a>
                     <a href="#" class="nav-item" data-section="tips">
                         <span>💡</span> Návody & Tipy
                     </a>
@@ -1176,6 +1179,57 @@
                             <div id="gallery-list" class="gallery-admin-grid">
                                 <!-- Dynamic items will be here -->
                             </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Video Section Editor -->
+                <section class="editor-section hidden" id="editor-videos">
+                    <div class="editor-card">
+                        <h3>📝 Hlavní texty</h3>
+                        <div class="form-group">
+                            <label>Nadpis sekce</label>
+                            <input type="text" data-field="videos.title" placeholder="Nahlédněte do našich lekcí">
+                        </div>
+                        <div class="form-group">
+                            <label>Podnadpis</label>
+                            <input type="text" data-field="videos.subtitle" placeholder="Podívejte se na video ukázky...">
+                        </div>
+                    </div>
+
+                    <div class="editor-card">
+                        <h3>🎥 Video 1</h3>
+                        <div class="form-group">
+                            <label>Název videa</label>
+                            <input type="text" data-field="videos.v1.title" placeholder="Duhová laboratoř">
+                        </div>
+                        <div class="form-group">
+                            <label>YouTube URL / ID</label>
+                            <input type="text" data-field="videos.v1.url" placeholder="https://www.youtube.com/watch?v=...">
+                        </div>
+                    </div>
+
+                    <div class="editor-card">
+                        <h3>🎥 Video 2</h3>
+                        <div class="form-group">
+                            <label>Název videa</label>
+                            <input type="text" data-field="videos.v2.title" placeholder="Zatmění v písku">
+                        </div>
+                        <div class="form-group">
+                            <label>YouTube URL / ID</label>
+                            <input type="text" data-field="videos.v2.url" placeholder="https://www.youtube.com/watch?v=...">
+                        </div>
+                    </div>
+
+                    <div class="editor-card">
+                        <h3>🎥 Video 3</h3>
+                        <div class="form-group">
+                            <label>Název videa</label>
+                            <input type="text" data-field="videos.v3.title" placeholder="Vodní svět">
+                        </div>
+                        <div class="form-group">
+                            <label>YouTube URL / ID</label>
+                            <input type="text" data-field="videos.v3.url" placeholder="https://www.youtube.com/watch?v=...">
                         </div>
                     </div>
                 </section>
