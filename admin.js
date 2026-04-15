@@ -28,7 +28,8 @@ const defaultData = {
         tips: '💡 Návody & Tipy',
         contact: '📍 Kontakt',
         gallery: '📸 Galerie',
-        legal: '⚖️ Právní informace'
+        legal: '⚖️ Právní informace',
+        faq: '❓ FAQ'
     },
 
     // Hero Section
@@ -191,6 +192,30 @@ const defaultData = {
     },
 
     // Settings
+    faq: {
+        title: 'Často kladené <span class="rainbow-text">otázky</span>',
+        description: 'Vše, co potřebujete vědět o našich lekcích, vybavení a rezervacích.',
+        items: [
+            {
+                question: 'Pro koho jsou lekce určeny?',
+                answer: 'Naše lekce jsou navrženy pro děti od 1 do 10 let. Aktivity vždy přizpůsobujeme věku a dovednostem dětí v dané skupině.'
+            },
+            {
+                question: 'Co si máme vzít s sebou?',
+                answer: 'Doporučujeme pohodlné oblečení, které se může ušpinit (používáme sice vypratelná barviva, ale jistota je jistota). Náhradní ponožky nebo přezůvky se také hodí.'
+            }
+        ]
+    },
+    contactForm: {
+        title: 'Napište <span class="rainbow-text">nám</span>',
+        description: 'Máte dotaz nebo speciální přání? Neváhejte nás kontaktovat prostřednictvím formuláře.',
+        nameLabel: 'Jméno a příjmení',
+        emailLabel: 'E-mailová adresa',
+        phoneLabel: 'Telefonní číslo (nepovinné)',
+        messageLabel: 'Vaše zpráva',
+        btnText: 'Odeslat zprávu',
+        successMessage: 'Děkujeme! Vaše zpráva byla úspěšně odeslána. Ozveme se vám co nejdříve.'
+    },
     settings: {
         email: 'admin@duhohratky.cz',
         seoTitle: 'Duhohratky | Sensory Play & Montessori pro děti',
@@ -222,6 +247,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initNavigation();
     initFormHandlers();
     initButtons();
+    initFAQEditor(); // New
     populateFields();
     initVideoPreviews(); // New: real-time YouTube ID preview
     loadGallery(); // Now safe — siteData.gallery is populated
@@ -729,7 +755,9 @@ function initNavigation() {
         lessons: 'Aktuální lekce',
         upcoming: 'Připravované lekce',
         legal: 'Právní informace',
-        'navigation-badges': 'Navigace & Badges'
+        'navigation-badges': 'Navigace & Badges',
+        faq: 'Často kladené otázky (FAQ)',
+        'contact-form': 'Kontaktní formulář'
     };
 
     // Restore last active section from sessionStorage
@@ -831,6 +859,7 @@ function populateFields() {
 
     // Handle Image Previews
     updateImagePreviews();
+    renderFAQEditorList(); // New
 }
 
 function updateImagePreviews() {
@@ -1038,3 +1067,70 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+/* ====================================
+   FAQ EDITOR
+   ==================================== */
+function initFAQEditor() {
+    console.log('❓ Initializing FAQ Editor...');
+    const addBtn = document.getElementById('add-faq-item');
+    if (addBtn) {
+        addBtn.onclick = () => {
+            if (!siteData.faq) siteData.faq = { title: '', description: '', items: [] };
+            if (!siteData.faq.items) siteData.faq.items = [];
+            
+            siteData.faq.items.push({
+                question: 'Nová otázka',
+                answer: 'Odpověď na novou otázku'
+            });
+            renderFAQEditorList();
+            showToast('✅ Otázka byla přidána');
+        };
+    }
+}
+
+function renderFAQEditorList() {
+    const list = document.getElementById('faq-items-editor-list');
+    if (!list) return;
+
+    if (!siteData.faq || !siteData.faq.items) {
+        siteData.faq = siteData.faq || {};
+        siteData.faq.items = siteData.faq.items || [];
+    }
+
+    list.innerHTML = '';
+
+    siteData.faq.items.forEach((item, index) => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'edit-item-card';
+        itemEl.innerHTML = `
+            <div class="edit-item-controls">
+                <span class="item-index">Otázka #${index + 1}</span>
+                <button class="btn btn-danger btn-small" onclick="deleteFAQItem(${index})">
+                    <span>🗑️</span> Smazat
+                </button>
+            </div>
+            <div class="form-group">
+                <label>Otázka</label>
+                <input type="text" value="${item.question}" onchange="updateFAQItem(${index}, 'question', this.value)">
+            </div>
+            <div class="form-group">
+                <label>Odpověď</label>
+                <textarea rows="3" onchange="updateFAQItem(${index}, 'answer', this.value)">${item.answer}</textarea>
+            </div>
+        `;
+        list.appendChild(itemEl);
+    });
+}
+
+window.updateFAQItem = (index, field, value) => {
+    siteData.faq.items[index][field] = value;
+};
+
+window.deleteFAQItem = (index) => {
+    if (confirm('Opravdu chcete tuto otázku smazat?')) {
+        siteData.faq.items.splice(index, 1);
+        renderFAQEditorList();
+        showToast('🗑️ Otázka smazána');
+    }
+};

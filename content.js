@@ -21,7 +21,8 @@ window.defaultContent = {
         "tips": "💡 Návody & Tipy",
         "contact": "📍 Kontakt",
         "gallery": "📸 Galerie",
-        "legal": "⚖️ Právní informace"
+        "legal": "⚖️ Právní informace",
+        "faq": "❓ FAQ"
     },
     "gallery": [],
     "hero": {
@@ -247,6 +248,34 @@ window.defaultContent = {
         "gdpr_full": "<h1>Ochrana osobních údajů (GDPR)</h1><p>Vaše soukromí je pro nás důležité. Zde naleznete informace o tom, jaké údaje shromažďujeme a jak s nimi nakládáme...</p>",
         "vop": "<h1>Všeobecné obchodní podmínky</h1><p>Zde dopište své obchodní podmínky...</p>",
         "marketing": "<h1>Marketingový souhlas</h1><p>Zde dopište pravidla pro marketing a zpracování fotografií...</p>"
+    },
+    "faq": {
+        "title": "Často kladené <span class=\"rainbow-text\">otázky</span>",
+        "description": "Vše, co potřebujete vědět o našich lekcích, vybavení a rezervacích.",
+        "items": [
+            {
+                "question": "Pro koho jsou lekce určeny?",
+                "answer": "Naše lekce jsou navrženy pro děti od 1 do 10 let. Aktivity vždy přizpůsobujeme věku a dovednostem dětí v dané skupině."
+            },
+            {
+                "question": "Co si máme vzít s sebou?",
+                "answer": "Doporučujeme pohodlné oblečení, které se může ušpinit (používáme sice vypratelná barviva, ale jistota je jistota). Náhradní ponožky nebo přezůvky se také hodí."
+            },
+            {
+                "question": "Jak funguje stornování rezervace?",
+                "answer": "Rezervaci můžete zrušit nebo přesunout nejpozději 24 hodin před začátkem lekce prostřednictvím rezervačního systému nebo SMS."
+            }
+        ]
+    },
+    "contactForm": {
+        "title": "Napište <span class=\"rainbow-text\">nám</span>",
+        "description": "Máte dotaz nebo speciální přání? Neváhejte nás kontaktovat prostřednictvím formuláře.",
+        "nameLabel": "Jméno a příjmení",
+        "emailLabel": "E-mailová adresa",
+        "phoneLabel": "Telefonní číslo (nepovinné)",
+        "messageLabel": "Vaše zpráva",
+        "btnText": "Odeslat zprávu",
+        "successMessage": "Děkujeme! Vaše zpráva byla úspěšně odeslána. Ozveme se vám co nejdříve."
     },
     "settings": {
         "email": "admin@duhohratky.cz",

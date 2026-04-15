@@ -88,6 +88,12 @@
                     <a href="#" class="nav-item" data-section="navigation-badges">
                         <span>🧭</span> Navigace & Badges
                     </a>
+                    <a href="#" class="nav-item" data-section="faq">
+                        <span>❓</span> FAQ (Dotazy)
+                    </a>
+                    <a href="#" class="nav-item" data-section="contact-form">
+                        <span>📧</span> Kontaktní formulář
+                    </a>
                     <a href="#" class="nav-item" data-section="settings">
                         <span>⚙️</span> Nastavení
                     </a>
@@ -1428,6 +1434,92 @@
                         <div class="form-group">
                             <label>Právní informace</label>
                             <input type="text" data-field="badges.legal" placeholder="⚖️ Právní informace">
+                        </div>
+                        <div class="form-group">
+                            <label>FAQ</label>
+                            <input type="text" data-field="badges.faq" placeholder="❓ FAQ">
+                        </div>
+                    </div>
+                </section>
+                <!-- FAQ Section Editor -->
+                <section class="editor-section hidden" id="editor-faq">
+                    <div class="editor-header">
+                        <h2>❓ Často kladené otázky (FAQ)</h2>
+                        <p>Spravujte otázky a odpovědi pro návštěvníky webu.</p>
+                    </div>
+                    <div class="editor-card">
+                        <h3>Základní informace</h3>
+                        <div class="form-group">
+                            <label>Hlavní nadpis sekce</label>
+                            <input type="text" data-field="faq.title" placeholder="Často kladené otázky">
+                        </div>
+                        <div class="form-group">
+                            <label>Podnadpis sekce</label>
+                            <textarea data-field="faq.description" rows="2" placeholder="Vše, co potřebujete vědět..."></textarea>
+                        </div>
+                    </div>
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <h3>Seznam otázek</h3>
+                            <button class="btn btn-secondary btn-small" id="add-faq-item">
+                                <span>➕</span> Přidat novou otázku
+                            </button>
+                        </div>
+                        <div id="faq-items-editor-list" class="items-editor-grid">
+                            <!-- FAQ items will be rendered here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Form Section Editor -->
+                <section class="editor-section hidden" id="editor-contact-form">
+                    <div class="editor-header">
+                        <h2>📧 Kontaktní formulář</h2>
+                        <p>Nastavte texty a popisky pro váš kontaktní formulář.</p>
+                    </div>
+                    <div class="editor-card">
+                        <h3>Texty nad formulářem</h3>
+                        <div class="form-group">
+                            <label>Hlavní nadpis</label>
+                            <input type="text" data-field="contactForm.title" placeholder="Napište nám">
+                        </div>
+                        <div class="form-group">
+                            <label>Podnadpis</label>
+                            <textarea data-field="contactForm.description" rows="2" placeholder="Máte dotaz nebo speciální přání?"></textarea>
+                        </div>
+                    </div>
+                    <div class="editor-card">
+                        <h3>Popisky polí (Labels)</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Jméno a příjmení</label>
+                                <input type="text" data-field="contactForm.nameLabel" placeholder="Jméno a příjmení">
+                            </div>
+                            <div class="form-group">
+                                <label>E-mailová adresa</label>
+                                <input type="text" data-field="contactForm.emailLabel" placeholder="E-mailová adresa">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Telefonní číslo</label>
+                                <input type="text" data-field="contactForm.phoneLabel" placeholder="Telefonní číslo">
+                            </div>
+                            <div class="form-group">
+                                <label>Vaše zpráva</label>
+                                <input type="text" data-field="contactForm.messageLabel" placeholder="Vaše zpráva">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="editor-card">
+                        <h3>Akce a zprávy</h3>
+                        <div class="form-group">
+                            <label>Text tlačítka pro odeslání</label>
+                            <input type="text" data-field="contactForm.btnText" placeholder="Odeslat zprávu">
+                        </div>
+                        <div class="form-group">
+                            <label>Zpráva po úspěšném odeslání</label>
+                            <textarea data-field="contactForm.successMessage" rows="3" placeholder="Děkujeme! Vaše zpráva byla úspěšně odeslána."></textarea>
                         </div>
                     </div>
                 </section>

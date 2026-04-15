@@ -540,6 +540,20 @@
             </div>
         </section>
 
+        <!-- FAQ Section -->
+        <section class="faq" id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge" data-content="badges.faq">❓ FAQ</span>
+                    <h2 class="section-title" data-content="faq.title">Často kladené <span class="rainbow-text">otázky</span></h2>
+                    <p class="section-description" data-content="faq.description">Vše, co potřebujete vědět o našich lekcích, vybavení a rezervacích.</p>
+                </div>
+                <div class="faq-container" id="faq-list">
+                    <!-- FAQ items will be rendered here dynamically -->
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section class="contact" id="contact">
             <div class="container">
@@ -574,6 +588,43 @@
                                 data-content="contact.hours2">So: 9:00 - 14:00</span></p>
                     </div>
                 </div>
+
+                <div class="contact-form-container">
+                    <div class="contact-form-card glass-card">
+                        <div class="contact-form-header">
+                            <h3 data-content="contactForm.title">Napište <span class="rainbow-text">nám</span></h3>
+                            <p data-content="contactForm.description">Máte dotaz nebo speciální přání? Neváhejte nás kontaktovat prostřednictvím formuláře.</p>
+                        </div>
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cf-name" data-content="contactForm.nameLabel">Jméno a příjmení</label>
+                                    <input type="text" id="cf-name" name="name" required placeholder="Vaše jméno">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cf-email" data-content="contactForm.emailLabel">E-mailová adresa</label>
+                                    <input type="email" id="cf-email" name="email" required placeholder="vas@email.cz">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cf-phone" data-content="contactForm.phoneLabel">Telefonní číslo (nepovinné)</label>
+                                <input type="tel" id="cf-phone" name="phone" placeholder="+420 ...">
+                            </div>
+                            <div class="form-group">
+                                <label for="cf-message" data-content="contactForm.messageLabel">Vaše zpráva</label>
+                                <textarea id="cf-message" name="message" rows="5" required placeholder="Jak vám můžeme pomoci?"></textarea>
+                            </div>
+                            <div class="form-submit">
+                                <button type="submit" class="btn btn-primary" id="cf-submit-btn">
+                                    <span data-content="contactForm.btnText">Odeslat zprávu</span>
+                                    <span class="btn-loader hidden">⏳</span>
+                                </button>
+                            </div>
+                            <div id="cf-status" class="form-status hidden"></div>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="social-links">
                     <a href="#" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer"
                         data-content-href="contact.facebook" data-content-no-text="true">

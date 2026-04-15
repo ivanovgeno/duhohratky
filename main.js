@@ -64,6 +64,8 @@ async function loadContent() {
     // 5. Apply to DOM
     try {
         applyContent(data);
+        renderFAQ(data);          // New: render FAQ list
+        initContactForm(data);    // New: setup contact form
     } catch (e) {
         console.error('Failed to apply content', e);
     }
@@ -1113,3 +1115,106 @@ function extractVideoId(url) {
 }
 
 
+
+/* --- FAQ & CONTACT FORM LOGIC --- */
+
+function renderFAQ(data) {
+    const faqList = document.getElementById('faq-list');
+    if (!faqList) return;
+
+    const items = data.faq?.items || [];
+    if (items.length === 0) {
+        faqList.innerHTML = '<p style="text-align: center; color: var(--color-gray-500);">Žádné otázky nebyly nalezeny.</p>';
+        return;
+    }
+
+    faqList.innerHTML = '';
+    items.forEach((item, index) => {
+        const faqItem = document.createElement('div');
+        faqItem.className = 'faq-item';
+        faqItem.innerHTML = `
+            <button class="faq-question" aria-expanded="false">
+                <span>${item.question}</span>
+                <span class="faq-icon">↓</span>
+            </button>
+            <div class="faq-answer">
+                <p>${item.answer}</p>
+            </div>
+        `;
+
+        const questionBtn = faqItem.querySelector('.faq-question');
+        questionBtn.addEventListener('click', () => {
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all others
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.remove('active');
+                el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            });
+
+            // Toggle current
+            if (!isActive) {
+                faqItem.classList.add('active');
+                questionBtn.setAttribute('aria-expanded', 'true');
+            }
+        });
+
+        faqList.appendChild(faqItem);
+    });
+}
+
+function initContactForm(data) {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    // Remove existing listener if any to avoid duplicates
+    const newForm = form.cloneNode(true);
+    form.parentNode.replaceChild(newForm, form);
+
+    newForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const submitBtn = newForm.querySelector('#cf-submit-btn');
+        const statusEl = newForm.querySelector('#cf-status');
+        const loader = newForm.querySelector('.btn-loader');
+        const successMsg = data.contactForm?.successMessage || 'Děkujeme! Zpráva byla odeslána.';
+
+        // UI Feedback
+        submitBtn.disabled = true;
+        loader.classList.remove('hidden');
+        statusEl.classList.add('hidden');
+
+        const formData = new FormData(newForm);
+        
+        try {
+            const response = await fetch('api/contact.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            let result;
+            try {
+                result = await response.json();
+            } catch (e) {
+                result = { success: false, error: 'Chyba serveru.' };
+            }
+
+            if (result.success) {
+                statusEl.textContent = successMsg;
+                statusEl.className = 'form-status success';
+                statusEl.classList.remove('hidden');
+                newForm.reset();
+            } else {
+                throw new Error(result.error || 'Nastala chyba při odesílání.');
+            }
+        } catch (error) {
+            console.error('Contact form error:', error);
+            statusEl.textContent = error.message || 'Nepodařilo se odeslat zprávu. Zkuste to prosím později.';
+            statusEl.className = 'form-status error';
+            statusEl.classList.remove('hidden');
+        } finally {
+            submitBtn.disabled = false;
+            loader.classList.add('hidden');
+        }
+    });
+}
