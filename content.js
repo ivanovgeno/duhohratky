@@ -73,7 +73,6 @@ window.defaultContent = {
         "act6Text": "Nezapomenutelné narozeniny plné her, tvoření a zábavy.",
         "act6Age": "1-10 let"
     },
-    "gallery": [],
     "contact": {
         "title": "Spojme se",
         "address1": "",
@@ -210,9 +209,18 @@ window.defaultContent = {
     "videos": {
         "title": "Videa z <span class=\"rainbow-text\">našich lekcí</span>",
         "subtitle": "Podívejte se na video ukázky z našich uplynulých témat",
-        "v1": { "title": "Duhová laboratoř", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-        "v2": { "title": "Zatmění v písku", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-        "v3": { "title": "Vodní svět", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+        "v1": {
+            "title": "Duhová laboratoř",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        },
+        "v2": {
+            "title": "Zatmění v písku",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        },
+        "v3": {
+            "title": "Vodní svět",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        }
     },
     "settings": {
         "email": "admin@duhohratky.cz",
