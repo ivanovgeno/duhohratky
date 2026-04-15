@@ -1,5 +1,4 @@
 RewriteEngine On
-RewriteBase /
 
 # 1. Externally redirect direct requests for index.html to /
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/ [NC]
