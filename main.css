@@ -1308,8 +1308,8 @@ section {
 
 .video-embed-container {
     position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
+    aspect-ratio: 9 / 16;
+    height: auto;
     overflow: hidden;
     background: #1a1a2e;
     cursor: pointer;
