@@ -197,6 +197,15 @@ function applyContent(data) {
     } catch (e) {
         console.error('Error rendering videos:', e);
     }
+
+    // Render Gallery Page if on that page
+    try {
+        if (data.gallery && document.querySelector('.gallery-grid-large')) {
+            renderGalleryPage(data.gallery);
+        }
+    } catch (e) {
+        console.error('Error rendering gallery page:', e);
+    }
 }
 
 function renderUpcomingThemes(upcomingData) {
