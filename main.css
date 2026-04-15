@@ -1282,7 +1282,7 @@ section {
 /* Rainbow border wrapper */
 .video-card {
     position: relative;
-    border-radius: 60px;
+    border-radius: 80px;
     overflow: hidden;
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
     box-shadow: var(--shadow-md);
@@ -1298,10 +1298,12 @@ section {
 
 .video-card-inner {
     background: white;
-    border-radius: 77px;
+    border-radius: 77px; /* Slightly less than 80px to fit inside border */
     overflow: hidden;
     position: relative;
     z-index: 1;
+    isolation: isolate; /* Fixes iframe clipping in Safari */
+    transform: translateZ(0); /* Hardware acceleration for smooth rounding */
 }
 
 .video-embed-container {
@@ -1393,6 +1395,7 @@ section {
     z-index: 3;
     opacity: 0;
     transition: opacity 0.3s ease;
+    border-radius: 77px 77px 0 0; /* Match container rounding */
 }
 
 .video-embed-container.playing iframe {

@@ -141,13 +141,12 @@
         }
     </style>
 
-    <link rel="stylesheet" href="main.css?v=501">
-    <link rel="stylesheet" href="admin.css?v=110">
+    <link rel="stylesheet" href="main.css?v=503">
+    <link rel="stylesheet" href="admin.css?v=111">
 </head>
 
 <body>
-    <script src="content.js?v=110"></script>
-    <script src="main.js?v=110"></script>
+    <!-- Removed premature script loading -->
     <!-- Skip Link for Accessibility -->
     <a href="#main-content" class="skip-link">Přeskočit na hlavní obsah</a>
 
@@ -679,8 +678,8 @@
         </div>
     </div>
 
-    <script src="content.js?v=400"></script>
-    <script src="main.js?v=400"></script>
+    <script src="content_from_server.js?v=1003" onerror="this.src='content.js?v=1003'"></script>
+    <script src="main.js?v=1003"></script>
 </body>
 
 </html>

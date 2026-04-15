@@ -4,7 +4,7 @@
 HOST="391870.w70.wedos.net"
 USER="w391870"
 PASS="Duhohratky.2026"
-REMOTE_PATH="/www/"
+REMOTE_PATH="/www/domains/duhohratky.cz/"
 
 FILES=("index.html" "main.js" "main.css" "admin.html" "admin.js" "save.php" "fix_permissions.php")
 
