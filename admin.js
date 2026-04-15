@@ -197,12 +197,44 @@ const defaultData = {
         description: 'Vše, co potřebujete vědět o našich lekcích, vybavení a rezervacích.',
         items: [
             {
-                question: 'Pro koho jsou lekce určeny?',
-                answer: 'Naše lekce jsou navrženy pro děti od 1 do 10 let. Aktivity vždy přizpůsobujeme věku a dovednostem dětí v dané skupině.'
+                question: 'Co jsou to "Duhohrátky"?',
+                answer: 'Jsou to lekce plné smyslového hraní (sensory play), kde děti objevují svět pomocí hmatu, čichu, zraku i sluchu v bezpečném a podnětném prostředí.'
             },
             {
-                question: 'Co si máme vzít s sebou?',
-                answer: 'Doporučujeme pohodlné oblečení, které se může ušpinit (používáme sice vypratelná barviva, ale jistota je jistota). Náhradní ponožky nebo přezůvky se také hodí.'
+                question: 'Pro jak staré děti jsou vaše lekce určeny?',
+                answer: 'Naše aktivity jsou primárně navrženy pro děti od 1 do 10 let, ale rádi přivítáme i mladší či starší sourozence.'
+            },
+            {
+                question: 'Může se moje dítě na lekci ušpinit?',
+                answer: 'Ano, a to je součást zábavy! Doporučujeme oblečení, u kterého vám nebude líto, když na něm zůstane trocha barvy nebo písku.'
+            },
+            {
+                question: 'Jsou materiály, které používáte, bezpečné?',
+                answer: 'Naprostá většina našich materiálů je "food-grade" (jedlá) nebo netoxická a bezpečná pro děti. Přesto doporučujeme dohled rodičů.'
+            },
+            {
+                question: 'Jak dlouho trvá jedna lekce?',
+                answer: 'Standardní lekce trvá 60 až 90 minut, v závislosti na konkrétním tématu a energii dětí.'
+            },
+            {
+                question: 'Musím se na lekci předem registrovat?',
+                answer: 'Ano, kvůli omezené kapacitě a přípravě čerstvých materiálů je nutná rezervace předem přes náš systém.'
+            },
+            {
+                question: 'Pořádáte i soukromé narozeninové oslavy?',
+                answer: 'Určitě! Rádi pro vás připravíme oslavu na míru s tématem, které má vaše dítě nejraději.'
+            },
+            {
+                question: 'Můžu si u vás zakoupit materiály pro domácí hraní?',
+                answer: 'Ano, v sekci "Návody & Tipy" najdete inspiraci a brzy plánujeme i prodej hotových sensory boxů.'
+            },
+            {
+                question: 'Kde vaše lekce probíhají?',
+                answer: 'Aktuálně nás najdete na několika místech. Přesné adresy jsou vždy uvedeny u konkrétního termínu v rezervaci.'
+            },
+            {
+                question: 'Jaká je cena za jednu lekci?',
+                answer: 'Cena se pohybuje kolem 250-350 Kč za dítě v závislosti na náročnosti připravených materiálů. Doprovod dospělého je zdarma.'
             }
         ]
     },
