@@ -34,21 +34,10 @@ def deploy():
         items = ftp.nlst()
         print(f"[DEBUG] Contents of current directory: {items}")
         
-        # Smat routing logic based on Wedos folder structure
-        target_path = ""
-        if "domains" in items:
-            print("[DEBUG] Found 'domains' folder. Entering domains/duhohratky.cz ...")
-            ftp.cwd("domains")
-            if "duhohratky.cz" in ftp.nlst():
-                ftp.cwd("duhohratky.cz")
-            target_path = ftp.pwd()
-        elif "www" in items:
-            print("[DEBUG] Found 'www' folder. Entering www/domains/duhohratky.cz ...")
-            ftp.cwd("www/domains/duhohratky.cz")
-            target_path = ftp.pwd()
-        else:
-            print("[DEBUG] Assumed we are directly in the target directory (chrooted).")
-            target_path = pwd
+        # Based on research, the primary domain is served directly from the FTP root.
+        # Deploying to 'domains/duhohratky.cz' was causing updates to be ignored.
+        print(f"[DEBUG] Deploying directly to ROOT as research showed domains subfolder is NOT used for this primary domain.")
+        target_path = pwd
             
         print(f"[DEBUG] Ready to upload to: {target_path}")
         
