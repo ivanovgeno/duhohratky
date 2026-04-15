@@ -19,7 +19,7 @@ class FTP_TLS_Reuse(ftplib.FTP_TLS):
 def deploy():
     files = [
         "index.html", "main.js", "admin.html", "admin.css", "main.css", 
-        "admin.js", "content.js", "gallery.html", "gdpr.html", "vop.html", "marketing.html",
+        "admin.js", "content.js", "galerie.html", "gdpr.html", "vop.html", "marketing.html",
         "logo.png", "tips.html", ".htaccess"
     ]
     print(f"Connecting to {FTP_HOST} as {FTP_USER}...")
