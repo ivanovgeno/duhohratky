@@ -1185,6 +1185,10 @@ function initContactForm(data) {
         statusEl.classList.add('hidden');
 
         const formData = new FormData(newForm);
+        // Important: Add the recipient email from configuration
+        if (data.contactForm?.recipientEmail) {
+            formData.append('recipient', data.contactForm.recipientEmail);
+        }
         
         try {
             const response = await fetch('api/contact.php', {

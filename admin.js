@@ -246,7 +246,8 @@ const defaultData = {
         phoneLabel: 'Telefonní číslo (nepovinné)',
         messageLabel: 'Vaše zpráva',
         btnText: 'Odeslat zprávu',
-        successMessage: 'Děkujeme! Vaše zpráva byla úspěšně odeslána. Ozveme se vám co nejdříve.'
+        successMessage: 'Děkujeme! Vaše zpráva byla úspěšně odeslána. Ozveme se vám co nejdříve.',
+        recipientEmail: 'info@duhohratky.cz'
     },
     settings: {
         email: 'admin@duhohratky.cz',
@@ -1119,6 +1120,7 @@ function initFAQEditor() {
             showToast('✅ Otázka byla přidána');
         };
     }
+    renderFAQEditorList(); // Render existing items on init
 }
 
 function renderFAQEditorList() {

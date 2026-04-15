@@ -18,6 +18,20 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
+// Get recipient from POST (set in main.js from config)
+$recipient = $_POST['recipient'] ?? 'info@duhohratky.cz';
+
+// Prepare email
+$subject = "Nová zpráva z webu Duhohrátky: $name";
+$email_content = "Jméno: $name\n";
+$email_content .= "Email: $email\n";
+$email_content .= "Telefon: $phone\n\n";
+$email_content .= "Zpráva:\n$message\n";
+
+$headers = "From: web@duhohratky.cz\r\n";
+$headers .= "Reply-To: $email\r\n";
+$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
 // Log submission
 $log_dir = __DIR__ . '/logs';
 if (!is_dir($log_dir)) {
@@ -25,9 +39,11 @@ if (!is_dir($log_dir)) {
 }
 
 $log_file = $log_dir . '/contact_submissions.txt';
-$log_entry = date('Y-m-d H:i:s') . " | Name: $name | Email: $email | Phone: $phone | Message: $message\n";
+$log_entry = date('Y-m-d H:i:s') . " | To: $recipient | Name: $name | Email: $email | Message: $message\n";
 file_put_contents($log_file, $log_entry, FILE_APPEND);
 
-// We simulate sending success
-// On WEDOS, mail() usually works if configured, but we keep it simple for now
-echo json_encode(['success' => true]);
+// Attempt to send
+$mail_success = mail($recipient, $subject, $email_content, $headers);
+
+echo json_encode(['success' => $mail_success]);
+?>
