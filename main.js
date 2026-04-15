@@ -62,12 +62,30 @@ async function loadContent() {
     }
 
     // 5. Apply to DOM
+    console.log('--- Applying content to DOM ---');
+    
+    // Apply general content
     try {
         applyContent(data);
-        renderFAQ(data);          // New: render FAQ list
-        initContactForm(data);    // New: setup contact form
+        console.log('✅ applyContent successful');
     } catch (e) {
-        console.error('Failed to apply content', e);
+        console.error('❌ Failed to applyContent', e);
+    }
+
+    // Render FAQ
+    try {
+        renderFAQ(data);
+        console.log('✅ renderFAQ successful');
+    } catch (e) {
+        console.error('❌ Failed to renderFAQ', e);
+    }
+
+    // Initialize Contact Form
+    try {
+        initContactForm(data);
+        console.log('✅ initContactForm successful');
+    } catch (e) {
+        console.error('❌ Failed to initContactForm', e);
     }
 }
 
