@@ -10,7 +10,7 @@ $data = json_decode($input, true);
 
 if (!$data) {
     http_response_code(400);
-    echo json_encode(['status' => 'error', 'message' => 'Žádná data nebyla přijata.']);
+    echo json_encode(['status' => 'error', 'message' => 'Žádná data nebyla přijata nebo neplatný JSON.']);
     exit;
 }
 
@@ -19,16 +19,31 @@ if (!$data) {
 $jsContent = "window.defaultContent = " . json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . ";";
 
 // 3. Zápis do souboru
-if (file_put_contents('content.js', $jsContent)) {
-    clearstatcache();
-    $size = filesize('content.js');
+$file = 'content.js';
+
+if (!is_writable('.') && !file_exists($file)) {
+    echo json_encode(['status' => 'error', 'message' => 'Adresář není zapisovatelný.']);
+    exit;
+}
+
+if (file_put_contents($file, $jsContent)) {
+    if (function_exists('clearstatcache')) {
+        clearstatcache();
+    }
+    $size = filesize($file);
     echo json_encode([
         'status' => 'success',
         'message' => 'Data byla úspěšně uložena.',
-        'size' => $size
+        'size' => $size,
+        'file' => realpath($file)
     ]);
 } else {
+    $error = error_get_last();
     http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => 'Chyba při zápisu do souboru content.js. Zkontrolujte oprávnění (chmod 777 nebo 666).']);
+    echo json_encode([
+        'status' => 'error', 
+        'message' => 'Chyba při zápisu do souboru content.js.',
+        'php_error' => $error ? $error['message'] : 'Neznámá chyba přístupu'
+    ]);
 }
 ?>

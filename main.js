@@ -27,26 +27,23 @@ async function loadContent() {
     console.log('--- Loading Content ---');
     let data;
 
-    // 1. Try LocalStorage (Preview Mode)
+    // 1. Base content from window.defaultContent (SERVER DATA - MASTER)
+    const baseContent = window.defaultContent || {};
+
+    // 2. Try LocalStorage (PREVIEW/FALLBACK ONLY)
     try {
         const localData = localStorage.getItem('duhohratky_content');
         if (localData) {
-            data = JSON.parse(localData);
+            const parsedLocal = JSON.parse(localData);
+            // Only merge if we actually have server data, otherwise use local as fallback
+            data = deepMerge(baseContent, parsedLocal);
             data.fromLocalStorage = true;
-            console.log('Loaded from LocalStorage');
+            console.log('Loaded with LocalStorage merge');
+        } else {
+            data = baseContent;
         }
     } catch (e) {
         console.warn('LocalStorage access failed', e);
-    }
-
-    // 2. Base content from window.defaultContent
-    const baseContent = window.defaultContent || {};
-
-    // 3. Merge if data exists, otherwise use base
-    if (data) {
-
-        data = deepMerge(baseContent, data);
-    } else {
         data = baseContent;
     }
 
@@ -925,6 +922,7 @@ function initLegal() {
     const infoBtn = document.getElementById('gdpr-info-btn');
     const openGdprBtn = document.getElementById('open-gdpr');
     const openVopBtn = document.getElementById('open-vop');
+    const openMarketingBtn = document.getElementById('open-marketing');
     const modal = document.getElementById('legal-modal');
     const closeBtn = document.getElementById('close-legal-btn');
     const closeXBtn = document.getElementById('close-legal-modal');
@@ -966,6 +964,7 @@ function initLegal() {
     if (infoBtn) infoBtn.addEventListener('click', () => openLegal('gdpr_full'));
     if (openGdprBtn) openGdprBtn.addEventListener('click', (e) => { e.preventDefault(); openLegal('gdpr_full'); });
     if (openVopBtn) openVopBtn.addEventListener('click', (e) => { e.preventDefault(); openLegal('vop'); });
+    if (openMarketingBtn) openMarketingBtn.addEventListener('click', (e) => { e.preventDefault(); openLegal('marketing'); });
 
     // 4. Modal Closing
     const closeModal = () => {
