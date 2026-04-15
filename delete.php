@@ -15,7 +15,7 @@ if (!isset($data['filename'])) {
 }
 
 $filename = basename($data['filename']); // Security: basename() prevents directory traversal
-$path = 'gallery/' . $filename;
+$path = 'uploads/' . $filename;
 
 if (!file_exists($path)) {
     echo json_encode(['status' => 'error', 'message' => 'File not found.']);
